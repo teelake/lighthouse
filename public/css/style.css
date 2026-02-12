@@ -19,7 +19,8 @@
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; padding-left: 56px; font-family: var(--font-sans); font-size: 17px; line-height: 1.65; color: var(--color-dark); background: var(--color-bg); -webkit-font-smoothing: antialiased; }
+html { overflow-x: hidden; }
+body { margin: 0; padding-left: 56px; font-family: var(--font-sans); font-size: 17px; line-height: 1.65; color: var(--color-dark); background: var(--color-bg); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
 /* Social sidebar - Believers House fixed left */
 .social-sidebar { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 50; display: flex; flex-direction: column; gap: 1rem; padding: 1rem 0.75rem; background: var(--color-dark); border-radius: 0 8px 8px 0; }
@@ -98,19 +99,27 @@ body { margin: 0; padding-left: 56px; font-family: var(--font-sans); font-size: 
 
 /* Map */
 .map-section { background: #f0f0f0; }
-.map-container { width: 100%; }
-.map-container iframe { display: block; }
+.map-container { width: 100%; overflow: hidden; }
+.map-container iframe { display: block; max-width: 100%; }
 
 .btn-sm { padding: 0.5rem 1rem; font-size: 0.9rem; }
 
-/* Buttons */
-.btn { display: inline-block; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: var(--transition); border: 2px solid transparent; }
-.btn-primary { background: var(--color-primary); color: var(--color-dark); }
+/* Buttons - Believers House style */
+.btn { display: inline-flex; align-items: stretch; padding: 0; border-radius: 4px; font-weight: 600; text-decoration: none; transition: var(--transition); border: none; overflow: hidden; }
+/* WATCH LIVE: white bg + dark text, gold accent with arrow */
+.btn-watch { background: #fff; color: var(--color-dark); }
+.btn-watch .btn-text { padding: 0.75rem 1.25rem; }
+.btn-watch .btn-arrow { background: var(--color-primary); color: var(--color-dark); padding: 0.75rem 1rem; display: flex; align-items: center; }
+.btn-watch:hover { opacity: 0.95; }
+.btn-watch:hover .btn-arrow { background: var(--color-primary-light); }
+/* GIVE HERE: dark bg, gold border, gold text */
+.btn-accent { background: transparent; color: var(--color-primary); border: 2px solid var(--color-primary); padding: 0.75rem 1.5rem; }
+.btn-accent:hover { background: rgba(201,162,39,0.1); color: var(--color-primary-light); border-color: var(--color-primary-light); }
+/* Standard primary (gold fill) - for SEE EVENTS, Sign Up, etc. */
+.btn-primary { background: var(--color-primary); color: var(--color-dark); padding: 0.75rem 1.5rem; }
 .btn-primary:hover { background: var(--color-primary-light); transform: translateY(-1px); box-shadow: var(--shadow-hover); }
-.btn-outline { background: transparent; color: #fff; border-color: var(--color-primary); }
+.btn-outline { background: transparent; color: #fff; border: 2px solid var(--color-primary); padding: 0.75rem 1.5rem; }
 .btn-outline:hover { background: rgba(201,162,39,0.2); }
-.btn-accent { background: var(--color-primary); color: var(--color-dark); border: 2px solid var(--color-primary); }
-.btn-accent:hover { background: var(--color-primary-light); border-color: var(--color-primary-light); transform: translateY(-1px); box-shadow: var(--shadow-hover); }
 
 /* Section - Believers House style */
 .section { padding: 4rem 0; }
@@ -182,10 +191,10 @@ body { margin: 0; padding-left: 56px; font-family: var(--font-sans); font-size: 
 .newsletter-form input[type="text"], .newsletter-form input[type="tel"] { flex: 1 1 120px; }
 
 /* Main content */
-.main-content { min-height: 50vh; }
+.main-content { min-height: 50vh; overflow-x: hidden; }
 
 /* Footer - Believers House multi-column */
-.site-footer { background: var(--color-dark); color: #fff; padding: 4rem 1.5rem 2rem; }
+.site-footer { background: var(--color-dark); color: #fff; padding: 4rem 1.5rem 2rem; overflow-x: hidden; }
 .footer-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 2fr; grid-template-rows: auto auto; gap: 2rem 3rem; align-items: start; }
 .footer-brand .logo { display: inline-flex; }
 .footer-brand .logo img { height: 48px; filter: brightness(1.05); }

@@ -26,7 +26,10 @@ $part2 = ($headlineParts[2] ?? '') . ' ' . ($headlineParts[3] ?? '');
             <span>A relevant WORD</span>
         </div>
         <div class="hero-ctas">
-            <a href="<?= $baseUrl ?>/media" class="btn btn-primary">WATCH LIVE</a>
+            <a href="<?= $baseUrl ?>/media" class="btn btn-watch">
+                <span class="btn-text">WATCH LIVE</span>
+                <span class="btn-arrow">→</span>
+            </a>
             <a href="<?= $baseUrl ?>/giving" class="btn btn-accent">GIVE HERE</a>
         </div>
     </div>
