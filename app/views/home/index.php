@@ -9,18 +9,31 @@ $footerCta = $sections['footer_cta'] ?? null;
 $coreValues = $sections['core_values'] ?? null;
 ?>
 
-<!-- Hero -->
+<!-- Hero - Believers House style -->
 <section class="hero">
-    <div class="hero-bg" style="background: linear-gradient(135deg, #1a5f4a 0%, #0f172a 100%);"></div>
+    <div class="hero-bg" style="background: linear-gradient(135deg, rgba(26,95,74,0.92) 0%, rgba(15,23,42,0.9) 100%);"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
         <h1 class="hero-headline"><?= htmlspecialchars($hero['content'] ?? 'Raising Lights That Transform Nations') ?></h1>
-        <p class="hero-subheadline"><?= htmlspecialchars($subheadline['content'] ?? 'A Christ-centered, Spirit-empowered ministry equipping believers for life, leadership, and global impact.') ?></p>
+        <div class="hero-pillars">
+            <span>A warm WELCOME</span>
+            <span>An atmosphere of WORSHIP</span>
+            <span>A relevant WORD</span>
+        </div>
         <div class="hero-ctas">
             <a href="<?= $baseUrl ?>/media" class="btn btn-primary">Watch Live</a>
+            <a href="<?= $baseUrl ?>/giving" class="btn btn-accent">Give Here</a>
             <a href="<?= $baseUrl ?>/media" class="btn btn-outline">Explore Teachings</a>
-            <a href="<?= $baseUrl ?>/giving" class="btn btn-accent">Partner With Us</a>
         </div>
+    </div>
+</section>
+
+<!-- New Here - prominent like Believers House -->
+<section class="new-here-banner">
+    <div class="container">
+        <h2>New Here?</h2>
+        <p>Start your journey. We'd love to connect with you.</p>
+        <a href="<?= $baseUrl ?>/im-new" class="btn btn-start">Start Here</a>
     </div>
 </section>
 
@@ -31,19 +44,22 @@ $coreValues = $sections['core_values'] ?? null;
 </section>
 <?php endif; ?>
 
-<!-- Who We Are -->
+<!-- ABOUT us - Believers House style -->
 <section class="section who-we-are">
     <div class="container">
-        <h2 class="section-title">Who We Are</h2>
+        <h2 class="section-title">ABOUT us</h2>
         <p class="section-lead"><?= nl2br(htmlspecialchars($whoWeAre['content'] ?? '')) ?></p>
         <a href="<?= $baseUrl ?>/about" class="btn btn-primary">Learn More</a>
     </div>
 </section>
 
-<!-- Service Times -->
+<!-- REGULAR EVENTS - Believers House style -->
 <section class="section service-times">
     <div class="container">
-        <h2 class="section-title">Service Times</h2>
+        <div class="section-header">
+            <h2 class="section-title">REGULAR EVENTS</h2>
+            <a href="<?= $baseUrl ?>/events" class="btn btn-primary">See Events</a>
+        </div>
         <div class="service-grid">
             <div class="service-card">
                 <h3>Sunday — Catalysis</h3>
@@ -83,12 +99,23 @@ $coreValues = $sections['core_values'] ?? null;
     </div>
 </section>
 
-<!-- What's Happening / Events -->
+<!-- Testimonial - Believers House style -->
+<?php if (!empty($testimonials)): ?>
+<section class="section testimonial-section">
+    <div class="container">
+        <?php $t = $testimonials[0]; ?>
+        <blockquote class="testimonial-quote">"<?= htmlspecialchars($t['quote']) ?>"</blockquote>
+        <cite class="testimonial-author">— <?= htmlspecialchars($t['author_name']) ?></cite>
+    </div>
+</section>
+<?php endif; ?>
+
+<!-- What's Happening -->
 <section class="section events-preview">
     <div class="container">
         <div class="section-header">
             <h2 class="section-title">What's Happening</h2>
-            <a href="<?= $baseUrl ?>/events" class="btn btn-outline">View Events</a>
+            <a href="<?= $baseUrl ?>/events" class="btn btn-primary">See Events</a>
         </div>
         <div class="events-grid">
             <?php foreach (array_slice($events ?? [], 0, 3) as $event): ?>
@@ -109,12 +136,17 @@ $coreValues = $sections['core_values'] ?? null;
     </div>
 </section>
 
-<!-- New Here CTA -->
-<section class="section new-here">
+<!-- Newsletter - Believers House style -->
+<section class="section newsletter-section">
     <div class="container">
-        <h2>New Here?</h2>
-        <p>Start your journey. We'd love to connect with you.</p>
-        <a href="<?= $baseUrl ?>/im-new" class="btn btn-accent">Start Here</a>
+        <h2 class="section-title">Subscribe to Our Mailing List</h2>
+        <form class="newsletter-form" action="<?= $baseUrl ?>/newsletter/subscribe" method="post">
+            <input type="email" name="email" placeholder="Enter your email here" required>
+            <input type="text" name="first_name" placeholder="First name">
+            <input type="text" name="last_name" placeholder="Last name">
+            <input type="tel" name="phone" placeholder="Phone">
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
     </div>
 </section>
 

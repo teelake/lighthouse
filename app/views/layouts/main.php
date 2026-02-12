@@ -14,10 +14,12 @@
     <header class="site-header">
         <div class="header-inner">
             <a href="<?= rtrim(BASE_URL, '/') ?>/" class="logo">
-                <?php if (file_exists(PUBLIC_PATH . '/images/logo.png')): ?>
-                <img src="<?= rtrim(BASE_URL, '/') ?>/public/images/logo.png" alt="Lighthouse Global Church">
+                <?php
+                $logoPath = file_exists(PUBLIC_PATH . '/images/lighthouse-logo.png') ? '/public/images/lighthouse-logo.png' : (file_exists(PUBLIC_PATH . '/images/logo.png') ? '/public/images/logo.png' : null);
+                if ($logoPath): ?>
+                <img src="<?= rtrim(BASE_URL, '/') . $logoPath ?>" alt="Lighthouse Global Church">
                 <?php else: ?>
-                <span style="font-size: 1.5rem; font-weight: 700; color: var(--color-primary);">LIGHTHOUSE GLOBAL CHURCH</span>
+                <span class="logo-text">LIGHTHOUSE GLOBAL CHURCH</span>
                 <?php endif; ?>
             </a>
             <button class="nav-toggle" aria-label="Menu" type="button">

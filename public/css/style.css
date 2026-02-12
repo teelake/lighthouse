@@ -16,10 +16,12 @@
 * { box-sizing: border-box; }
 body { margin: 0; font-family: var(--font-sans); font-size: 16px; line-height: 1.6; color: var(--color-dark); background: var(--color-bg); }
 
-/* Header */
-.site-header { position: sticky; top: 0; z-index: 100; background: #fff; box-shadow: var(--shadow); }
-.header-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; min-height: 72px; }
-.logo img { height: 48px; width: auto; }
+/* Header - Believers House style */
+.site-header { position: sticky; top: 0; z-index: 100; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.header-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; min-height: 70px; }
+.logo { display: flex; align-items: center; text-decoration: none; }
+.logo img { height: 52px; width: auto; max-width: 180px; object-fit: contain; }
+.logo-text { font-size: 1.1rem; font-weight: 700; color: var(--color-primary); letter-spacing: 0.02em; }
 .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
 .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--color-dark); margin: 5px 0; }
 .main-nav ul { display: flex; align-items: center; gap: 0.5rem; list-style: none; margin: 0; padding: 0; }
@@ -41,13 +43,14 @@ body { margin: 0; font-family: var(--font-sans); font-size: 16px; line-height: 1
     .main-nav .give-cta { margin-top: 0.5rem; }
 }
 
-/* Hero */
-.hero { position: relative; min-height: 85vh; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
+/* Hero - Believers House style */
+.hero { position: relative; min-height: 90vh; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
 .hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
-.hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(26,95,74,0.85) 0%, rgba(15,23,42,0.8) 100%); }
-.hero-content { position: relative; z-index: 1; max-width: 800px; padding: 2rem; }
-.hero-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; color: #fff; margin: 0 0 1rem; line-height: 1.2; }
-.hero-subheadline { font-size: clamp(1.1rem, 2vw, 1.35rem); color: rgba(255,255,255,0.95); margin: 0 0 2rem; }
+.hero-overlay { position: absolute; inset: 0; }
+.hero-content { position: relative; z-index: 1; max-width: 900px; padding: 2rem; }
+.hero-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; color: #fff; margin: 0 0 0.5rem; line-height: 1.15; letter-spacing: -0.02em; }
+.hero-pillars { font-size: clamp(0.95rem, 1.5vw, 1.15rem); color: rgba(255,255,255,0.95); margin: 1rem 0 2rem; line-height: 1.8; letter-spacing: 0.05em; }
+.hero-pillars span { display: block; }
 .hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
 
 /* Buttons */
@@ -59,23 +62,24 @@ body { margin: 0; font-family: var(--font-sans); font-size: 16px; line-height: 1
 .btn-accent { background: #fff; color: var(--color-primary); }
 .btn-accent:hover { background: rgba(255,255,255,0.95); transform: translateY(-1px); }
 
-/* Section */
+/* Section - Believers House style */
 .section { padding: 4rem 0; }
 .container { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
-.section-title { font-family: var(--font-display); font-size: 2rem; color: var(--color-dark); margin: 0 0 1rem; }
+.section-title { font-family: var(--font-sans); font-size: 1.5rem; font-weight: 600; color: var(--color-dark); margin: 0 0 1rem; letter-spacing: 0.08em; }
 .section-lead { font-size: 1.1rem; color: var(--color-muted); max-width: 700px; margin-bottom: 1.5rem; }
 .section-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
 
-/* Scripture Banner */
-.scripture-banner { background: var(--color-primary); color: #fff; padding: 2rem; text-align: center; }
-.scripture-banner blockquote { margin: 0; font-size: 1.2rem; font-style: italic; max-width: 800px; margin-left: auto; margin-right: auto; }
+/* Scripture Banner - Believers House style */
+.scripture-banner { background: var(--color-primary); color: #fff; padding: 2rem 1.5rem; text-align: center; }
+.scripture-banner blockquote { margin: 0; font-size: 1.15rem; font-style: italic; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.6; }
 
-/* Who We Are */
+/* Who We Are / ABOUT us */
 .who-we-are { background: #fff; }
-.who-we-are .section-title { color: var(--color-primary); }
+.who-we-are .section-title { color: var(--color-primary); text-transform: uppercase; }
 
-/* Service Times */
+/* REGULAR EVENTS / Service Times */
 .service-times { background: var(--color-bg); }
+.service-times .section-title { text-transform: uppercase; }
 .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
 .service-card { background: #fff; padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow); }
 .service-card h3 { margin: 0 0 0.5rem; color: var(--color-primary); font-size: 1.25rem; }
@@ -101,11 +105,24 @@ body { margin: 0; font-family: var(--font-sans); font-size: 16px; line-height: 1
 .event-card .link:hover { text-decoration: underline; }
 .no-events { color: var(--color-muted); margin-bottom: 1rem; }
 
-/* New Here */
-.new-here { background: var(--color-primary); color: #fff; text-align: center; }
-.new-here h2 { margin: 0 0 0.5rem; font-size: 1.75rem; }
-.new-here p { margin: 0 0 1rem; opacity: 0.9; }
-.new-here .btn-accent { background: var(--color-accent); color: var(--color-dark); }
+/* New Here banner - Believers House style */
+.new-here-banner { background: #f8f9fa; padding: 2.5rem 1.5rem; text-align: center; border-bottom: 1px solid #e9ecef; }
+.new-here-banner h2 { margin: 0 0 0.25rem; font-size: 1.5rem; color: var(--color-dark); }
+.new-here-banner p { margin: 0 0 1rem; color: var(--color-muted); }
+.btn-start { background: var(--color-primary) !important; color: #fff !important; padding: 0.6rem 1.5rem; }
+.btn-start:hover { background: var(--color-primary-light) !important; color: #fff !important; }
+
+/* Testimonial */
+.testimonial-section { background: #fff; text-align: center; }
+.testimonial-quote { font-size: 1.35rem; font-style: italic; color: var(--color-dark); max-width: 700px; margin: 0 auto 0.5rem; line-height: 1.6; }
+.testimonial-author { font-size: 1rem; color: var(--color-muted); font-style: normal; }
+
+/* Newsletter */
+.newsletter-section { background: #f1f5f9; }
+.newsletter-form { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; max-width: 600px; margin: 0 auto; }
+.newsletter-form input { padding: 0.65rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem; }
+.newsletter-form input[type="email"] { flex: 1 1 200px; }
+.newsletter-form input[type="text"], .newsletter-form input[type="tel"] { flex: 1 1 120px; }
 
 /* Main content */
 .main-content { min-height: 50vh; }
