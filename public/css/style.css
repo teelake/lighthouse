@@ -1,47 +1,49 @@
-/* Lighthouse Global Church - Believers House inspired palette */
+/* Lighthouse Global Church - Gold primary (logo), Believers House layout */
 :root {
-    /* Believers House colors - warm burgundy, gold accent */
-    --color-primary: #722F37;
-    --color-primary-light: #8B3A3A;
-    --color-primary-dark: #5A242B;
-    --color-accent: #C9A227;
-    --color-accent-light: #E0B84A;
-    --color-dark: #2C1810;
-    --color-muted: #6B5B54;
-    --color-bg: #FAFAF9;
+    /* Gold from logo - primary brand color */
+    --color-primary: #C9A227;
+    --color-primary-light: #E0B84A;
+    --color-primary-dark: #A67C00;
+    --color-gold-soft: rgba(201,162,39,0.12);
+    --color-gold-bg: rgba(201,162,39,0.08);
+    --color-dark: #1a1a1a;
+    --color-dark-soft: #2d2d2d;
+    --color-muted: #5a5a5a;
+    --color-bg: #fafafa;
     --color-bg-warm: #FFFEF9;
     --font-sans: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-display: 'Cormorant Garamond', Georgia, serif;
     --radius: 10px;
-    --shadow: 0 2px 16px rgba(44,24,16,0.08);
-    --shadow-hover: 0 6px 24px rgba(44,24,16,0.12);
+    --shadow: 0 2px 16px rgba(0,0,0,0.06);
+    --shadow-hover: 0 6px 24px rgba(0,0,0,0.1);
     --transition: 0.25s ease;
 }
 
 * { box-sizing: border-box; }
 body { margin: 0; font-family: var(--font-sans); font-size: 17px; line-height: 1.65; color: var(--color-dark); background: var(--color-bg); -webkit-font-smoothing: antialiased; }
 
-/* Header - Believers House style */
-.site-header { position: sticky; top: 0; z-index: 100; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-.header-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; min-height: 70px; }
+/* Header - Believers House: dark header, gold nav links */
+.site-header { position: sticky; top: 0; z-index: 100; background: var(--color-dark); box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+.header-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; min-height: 72px; }
 .logo { display: flex; align-items: center; text-decoration: none; }
-.logo img { height: 52px; width: auto; max-width: 180px; object-fit: contain; }
+.logo img { height: 52px; width: auto; max-width: 180px; object-fit: contain; filter: brightness(1.05); }
 .logo-text { font-size: 1.1rem; font-weight: 700; color: var(--color-primary); letter-spacing: 0.02em; }
 .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
-.nav-toggle span { display: block; width: 24px; height: 2px; background: var(--color-dark); margin: 5px 0; }
+.nav-toggle span { display: block; width: 24px; height: 2px; background: var(--color-primary); margin: 5px 0; }
 .main-nav ul { display: flex; align-items: center; gap: 0.5rem; list-style: none; margin: 0; padding: 0; }
-.main-nav a { text-decoration: none; color: var(--color-dark); padding: 0.5rem 0.75rem; font-weight: 500; font-size: 0.975rem; letter-spacing: 0.02em; }
-.main-nav a:hover { color: var(--color-primary); }
+.main-nav a { text-decoration: none; color: var(--color-primary); padding: 0.5rem 0.75rem; font-weight: 500; font-size: 0.975rem; letter-spacing: 0.02em; }
+.main-nav a:hover { color: var(--color-primary-light); }
 .main-nav .has-dropdown { position: relative; }
 .main-nav .has-dropdown:hover .dropdown { opacity: 1; visibility: visible; }
-.main-nav .dropdown { position: absolute; top: 100%; left: 0; min-width: 180px; background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); opacity: 0; visibility: hidden; transition: var(--transition); padding: 0.5rem 0; list-style: none; margin: 0; }
-.main-nav .dropdown a { display: block; padding: 0.6rem 1rem; }
-.btn-give { background: var(--color-accent) !important; color: var(--color-dark) !important; border-radius: 8px; font-weight: 600; }
-.btn-give:hover { filter: brightness(1.05); color: var(--color-dark) !important; }
+.main-nav .dropdown { position: absolute; top: 100%; left: 0; min-width: 180px; background: var(--color-dark); border-radius: var(--radius); box-shadow: var(--shadow-hover); opacity: 0; visibility: hidden; transition: var(--transition); padding: 0.5rem 0; list-style: none; margin: 0; }
+.main-nav .dropdown a { display: block; padding: 0.6rem 1rem; color: var(--color-primary) !important; }
+.main-nav .dropdown a:hover { color: var(--color-primary-light) !important; background: rgba(201,162,39,0.1); }
+.btn-give { background: var(--color-primary) !important; color: var(--color-dark) !important; border-radius: 8px; font-weight: 600; }
+.btn-give:hover { background: var(--color-primary-light) !important; color: var(--color-dark) !important; }
 
 @media (max-width: 900px) {
     .nav-toggle { display: block; }
-    .main-nav { position: absolute; top: 72px; left: 0; right: 0; background: #fff; padding: 1rem; display: none; box-shadow: var(--shadow); }
+    .main-nav { position: absolute; top: 72px; left: 0; right: 0; background: var(--color-dark); padding: 1rem; display: none; box-shadow: var(--shadow-hover); }
     .main-nav.active { display: block; }
     .main-nav ul { flex-direction: column; align-items: stretch; }
     .main-nav .dropdown { position: static; opacity: 1; visibility: visible; box-shadow: none; padding-left: 1rem; }
@@ -60,12 +62,12 @@ body { margin: 0; font-family: var(--font-sans); font-size: 17px; line-height: 1
 
 /* Buttons */
 .btn { display: inline-block; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: var(--transition); border: 2px solid transparent; }
-.btn-primary { background: var(--color-accent); color: var(--color-dark); }
-.btn-primary:hover { background: var(--color-accent-light); transform: translateY(-1px); box-shadow: var(--shadow-hover); }
-.btn-outline { background: transparent; color: #fff; border-color: rgba(255,255,255,0.85); }
-.btn-outline:hover { background: rgba(255,255,255,0.12); }
-.btn-accent { background: #fff; color: var(--color-primary); }
-.btn-accent:hover { background: #fff; transform: translateY(-1px); box-shadow: var(--shadow-hover); }
+.btn-primary { background: var(--color-primary); color: var(--color-dark); }
+.btn-primary:hover { background: var(--color-primary-light); transform: translateY(-1px); box-shadow: var(--shadow-hover); }
+.btn-outline { background: transparent; color: #fff; border-color: var(--color-primary); }
+.btn-outline:hover { background: rgba(201,162,39,0.2); }
+.btn-accent { background: var(--color-primary); color: var(--color-dark); border: 2px solid var(--color-primary); }
+.btn-accent:hover { background: var(--color-primary-light); border-color: var(--color-primary-light); transform: translateY(-1px); box-shadow: var(--shadow-hover); }
 
 /* Section - Believers House style */
 .section { padding: 4rem 0; }
@@ -74,58 +76,65 @@ body { margin: 0; font-family: var(--font-sans); font-size: 17px; line-height: 1
 .section-lead { font-size: 1.1rem; line-height: 1.75; color: var(--color-muted); max-width: 680px; margin-bottom: 1.5rem; }
 .section-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
 
-/* Scripture Banner - Believers House style */
-.scripture-banner { background: var(--color-primary); color: #fff; padding: 2rem 1.5rem; text-align: center; }
+/* Scripture Banner - dark bg, gold accent */
+.scripture-banner { background: var(--color-dark); color: #fff; padding: 2rem 1.5rem; text-align: center; }
 .scripture-banner blockquote { margin: 0; font-size: 1.15rem; font-style: italic; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+.scripture-banner blockquote::before { content: '"'; color: var(--color-primary); }
 
-/* Who We Are / ABOUT us */
+/* Who We Are / ABOUT us - gold headings */
 .who-we-are { background: #fff; }
 .who-we-are .section-title { color: var(--color-primary); text-transform: uppercase; }
 
-/* REGULAR EVENTS / Service Times */
-.service-times { background: var(--color-bg); }
-.service-times .section-title { text-transform: uppercase; }
+/* REGULAR EVENTS / Service Times - Believers House: dark section, gold cards */
+.service-times { background: var(--color-dark); padding: 4rem 0; }
+.service-times .section-title { color: var(--color-primary); text-transform: uppercase; }
+.service-times .btn-primary { color: var(--color-dark); }
 .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-.service-card { background: var(--color-bg-warm); padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid rgba(114,47,55,0.08); }
+.service-card { background: var(--color-gold-soft); padding: 2rem; border-radius: var(--radius); border: 2px solid rgba(201,162,39,0.35); }
 .service-card h3 { margin: 0 0 0.5rem; color: var(--color-primary); font-size: 1.25rem; }
-.service-card .time { font-weight: 600; color: var(--color-dark); margin: 0 0 0.5rem; }
-.service-card .desc { margin: 0; color: var(--color-muted); font-size: 0.95rem; }
+.service-card .time { font-weight: 600; color: var(--color-primary-light); margin: 0 0 0.5rem; }
+.service-card .desc { margin: 0; color: rgba(255,255,255,0.9); font-size: 0.95rem; }
 
-/* Core Values */
+/* Core Values - gold borders */
 .core-values { background: #fff; }
 .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
 .value-card { text-align: center; padding: 2rem 1rem; border: 2px solid var(--color-primary); border-radius: var(--radius); transition: var(--transition); background: var(--color-bg-warm); }
 .value-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); border-color: var(--color-primary-light); }
-.value-icon { color: var(--color-accent); font-size: 1.5rem; margin-bottom: 0.5rem; }
+.value-icon { color: var(--color-primary); font-size: 1.5rem; margin-bottom: 0.5rem; }
 .value-card h3 { margin: 0 0 0.5rem; color: var(--color-primary); font-size: 1.2rem; }
 .value-card p { margin: 0; color: var(--color-muted); font-size: 0.95rem; }
 
-/* Events Preview */
-.events-preview { background: var(--color-bg); }
+/* Events Preview - dark section, gold-tinted cards like Believers House */
+.events-preview { background: var(--color-dark); padding: 4rem 0; }
+.events-preview .section-title { color: var(--color-primary); text-transform: uppercase; }
+.events-preview .btn-primary { color: var(--color-dark); }
 .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-.event-card { background: var(--color-bg-warm); padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid rgba(114,47,55,0.06); }
-.event-card h3 { margin: 0 0 0.5rem; color: var(--color-dark); }
-.event-card .date { font-weight: 600; color: var(--color-primary); font-size: 0.9rem; margin: 0 0 0.5rem; }
+.event-card { background: var(--color-gold-soft); padding: 1.5rem; border-radius: var(--radius); border: 2px solid rgba(201,162,39,0.3); }
+.event-card h3 { margin: 0 0 0.5rem; color: var(--color-primary); }
+.event-card .date { font-weight: 600; color: var(--color-primary-light); font-size: 0.9rem; margin: 0 0 0.5rem; }
+.event-card p { color: rgba(255,255,255,0.9); }
 .event-card .link { color: var(--color-primary); font-weight: 600; text-decoration: none; }
 .event-card .link:hover { text-decoration: underline; }
-.no-events { color: var(--color-muted); margin-bottom: 1rem; }
+.no-events { color: rgba(255,255,255,0.8); margin-bottom: 1rem; }
 
 /* New Here banner - Believers House style */
-.new-here-banner { background: var(--color-bg-warm); padding: 2.5rem 1.5rem; text-align: center; border-bottom: 1px solid rgba(114,47,55,0.12); }
+.new-here-banner { background: var(--color-bg-warm); padding: 2.5rem 1.5rem; text-align: center; border-bottom: 1px solid var(--color-gold-bg); }
 .new-here-banner h2 { margin: 0 0 0.25rem; font-size: 1.5rem; color: var(--color-dark); }
 .new-here-banner p { margin: 0 0 1rem; color: var(--color-muted); }
 .btn-start { background: var(--color-primary) !important; color: #fff !important; padding: 0.65rem 1.75rem; }
 .btn-start:hover { background: var(--color-primary-dark) !important; color: #fff !important; }
 
-/* Testimonial */
-.testimonial-section { background: #fff; text-align: center; }
-.testimonial-quote { font-family: var(--font-display); font-size: 1.5rem; font-style: italic; font-weight: 500; color: var(--color-dark); max-width: 720px; margin: 0 auto 0.5rem; line-height: 1.65; }
-.testimonial-author { font-family: var(--font-sans); font-size: 1rem; color: var(--color-muted); font-style: normal; font-weight: 500; }
+/* Testimonial - Believers House: dark overlay, white quote, gold attribution */
+.testimonial-section { background: var(--color-dark); text-align: center; padding: 4rem 0; }
+.testimonial-quote { font-family: var(--font-display); font-size: 1.5rem; font-style: italic; font-weight: 500; color: #fff; max-width: 720px; margin: 0 auto 0.5rem; line-height: 1.65; }
+.testimonial-author { font-family: var(--font-sans); font-size: 1rem; color: var(--color-primary); font-style: normal; font-weight: 500; }
 
-/* Newsletter */
-.newsletter-section { background: rgba(114,47,55,0.06); }
+/* Newsletter - gold-tinted like Believers House mailing list */
+.newsletter-section { background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-dark-soft) 100%); color: #fff; }
+.newsletter-section .section-title { color: var(--color-primary); }
 .newsletter-form { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; max-width: 600px; margin: 0 auto; }
-.newsletter-form input { padding: 0.65rem 1rem; border: 1px solid rgba(114,47,55,0.2); border-radius: 6px; font-size: 0.95rem; font-family: var(--font-sans); }
+.newsletter-form input { padding: 0.65rem 1rem; border: 2px solid rgba(201,162,39,0.4); border-radius: 6px; font-size: 0.95rem; font-family: var(--font-sans); background: rgba(255,255,255,0.05); color: #fff; }
+.newsletter-form input::placeholder { color: rgba(255,255,255,0.5); }
 .newsletter-form input[type="email"] { flex: 1 1 200px; }
 .newsletter-form input[type="text"], .newsletter-form input[type="tel"] { flex: 1 1 120px; }
 
@@ -133,7 +142,7 @@ body { margin: 0; font-family: var(--font-sans); font-size: 17px; line-height: 1
 .main-content { min-height: 50vh; }
 
 /* Footer */
-.site-footer { background: var(--color-primary-dark); color: #fff; padding: 3rem 1.5rem; text-align: center; }
+.site-footer { background: var(--color-dark); color: #fff; padding: 3rem 1.5rem; text-align: center; }
 .footer-inner { max-width: 1120px; margin: 0 auto; }
 .footer-cta { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem; letter-spacing: 0.02em; }
 .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem; }
