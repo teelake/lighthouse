@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+use App\Core\Controller;
 use App\Models\Ministry;
 
 class MinistryController extends Controller

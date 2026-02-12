@@ -1,6 +1,8 @@
 <?php
 namespace App\Controllers;
 
+use App\Core\Controller;
+
 class NewsletterController extends Controller
 {
     public function subscribe()

@@ -1,6 +1,8 @@
 <?php
 namespace App\Controllers;
 
+use App\Core\Controller;
+
 class VisitorController extends Controller
 {
     public function register()

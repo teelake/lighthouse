@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+use App\Core\Controller;
 use App\Models\SmallGroup;
 
 class SmallGroupController extends Controller

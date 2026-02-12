@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+use App\Core\Controller;
 use App\Models\ContentSection;
 use App\Models\Event;
 use App\Models\Setting;

@@ -1,6 +1,8 @@
 <?php
 namespace App\Controllers;
 
+use App\Core\Controller;
+
 class PrayerController extends Controller
 {
     public function index()
