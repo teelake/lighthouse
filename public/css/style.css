@@ -1,0 +1,120 @@
+/* Lighthouse Global Church - Youth-focused, modern design */
+:root {
+    --color-primary: #1a5f4a;
+    --color-primary-light: #2d8f73;
+    --color-accent: #e8b923;
+    --color-dark: #0f172a;
+    --color-muted: #64748b;
+    --color-bg: #f8fafc;
+    --font-sans: 'Outfit', system-ui, sans-serif;
+    --font-display: 'Playfair Display', serif;
+    --radius: 12px;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --transition: 0.2s ease;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--font-sans); font-size: 16px; line-height: 1.6; color: var(--color-dark); background: var(--color-bg); }
+
+/* Header */
+.site-header { position: sticky; top: 0; z-index: 100; background: #fff; box-shadow: var(--shadow); }
+.header-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; min-height: 72px; }
+.logo img { height: 48px; width: auto; }
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+.nav-toggle span { display: block; width: 24px; height: 2px; background: var(--color-dark); margin: 5px 0; }
+.main-nav ul { display: flex; align-items: center; gap: 0.5rem; list-style: none; margin: 0; padding: 0; }
+.main-nav a { text-decoration: none; color: var(--color-dark); padding: 0.5rem 0.75rem; font-weight: 500; font-size: 0.95rem; }
+.main-nav a:hover { color: var(--color-primary); }
+.main-nav .has-dropdown { position: relative; }
+.main-nav .has-dropdown:hover .dropdown { opacity: 1; visibility: visible; }
+.main-nav .dropdown { position: absolute; top: 100%; left: 0; min-width: 180px; background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); opacity: 0; visibility: hidden; transition: var(--transition); padding: 0.5rem 0; list-style: none; margin: 0; }
+.main-nav .dropdown a { display: block; padding: 0.6rem 1rem; }
+.btn-give { background: var(--color-accent) !important; color: var(--color-dark) !important; border-radius: 8px; font-weight: 600; }
+.btn-give:hover { filter: brightness(1.05); color: var(--color-dark) !important; }
+
+@media (max-width: 900px) {
+    .nav-toggle { display: block; }
+    .main-nav { position: absolute; top: 72px; left: 0; right: 0; background: #fff; padding: 1rem; display: none; box-shadow: var(--shadow); }
+    .main-nav.active { display: block; }
+    .main-nav ul { flex-direction: column; align-items: stretch; }
+    .main-nav .dropdown { position: static; opacity: 1; visibility: visible; box-shadow: none; padding-left: 1rem; }
+    .main-nav .give-cta { margin-top: 0.5rem; }
+}
+
+/* Hero */
+.hero { position: relative; min-height: 85vh; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(26,95,74,0.85) 0%, rgba(15,23,42,0.8) 100%); }
+.hero-content { position: relative; z-index: 1; max-width: 800px; padding: 2rem; }
+.hero-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; color: #fff; margin: 0 0 1rem; line-height: 1.2; }
+.hero-subheadline { font-size: clamp(1.1rem, 2vw, 1.35rem); color: rgba(255,255,255,0.95); margin: 0 0 2rem; }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+
+/* Buttons */
+.btn { display: inline-block; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: var(--transition); border: 2px solid transparent; }
+.btn-primary { background: var(--color-accent); color: var(--color-dark); }
+.btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.btn-outline { background: transparent; color: #fff; border-color: rgba(255,255,255,0.8); }
+.btn-outline:hover { background: rgba(255,255,255,0.15); }
+.btn-accent { background: #fff; color: var(--color-primary); }
+.btn-accent:hover { background: rgba(255,255,255,0.95); transform: translateY(-1px); }
+
+/* Section */
+.section { padding: 4rem 0; }
+.container { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
+.section-title { font-family: var(--font-display); font-size: 2rem; color: var(--color-dark); margin: 0 0 1rem; }
+.section-lead { font-size: 1.1rem; color: var(--color-muted); max-width: 700px; margin-bottom: 1.5rem; }
+.section-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
+
+/* Scripture Banner */
+.scripture-banner { background: var(--color-primary); color: #fff; padding: 2rem; text-align: center; }
+.scripture-banner blockquote { margin: 0; font-size: 1.2rem; font-style: italic; max-width: 800px; margin-left: auto; margin-right: auto; }
+
+/* Who We Are */
+.who-we-are { background: #fff; }
+.who-we-are .section-title { color: var(--color-primary); }
+
+/* Service Times */
+.service-times { background: var(--color-bg); }
+.service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+.service-card { background: #fff; padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow); }
+.service-card h3 { margin: 0 0 0.5rem; color: var(--color-primary); font-size: 1.25rem; }
+.service-card .time { font-weight: 600; color: var(--color-dark); margin: 0 0 0.5rem; }
+.service-card .desc { margin: 0; color: var(--color-muted); font-size: 0.95rem; }
+
+/* Core Values */
+.core-values { background: #fff; }
+.values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+.value-card { text-align: center; padding: 2rem 1rem; border: 2px solid var(--color-primary); border-radius: var(--radius); transition: var(--transition); }
+.value-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.value-icon { color: var(--color-accent); font-size: 1.5rem; margin-bottom: 0.5rem; }
+.value-card h3 { margin: 0 0 0.5rem; color: var(--color-primary); font-size: 1.2rem; }
+.value-card p { margin: 0; color: var(--color-muted); font-size: 0.95rem; }
+
+/* Events Preview */
+.events-preview { background: var(--color-bg); }
+.events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+.event-card { background: #fff; padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); }
+.event-card h3 { margin: 0 0 0.5rem; color: var(--color-dark); }
+.event-card .date { font-weight: 600; color: var(--color-primary); font-size: 0.9rem; margin: 0 0 0.5rem; }
+.event-card .link { color: var(--color-primary); font-weight: 600; text-decoration: none; }
+.event-card .link:hover { text-decoration: underline; }
+.no-events { color: var(--color-muted); margin-bottom: 1rem; }
+
+/* New Here */
+.new-here { background: var(--color-primary); color: #fff; text-align: center; }
+.new-here h2 { margin: 0 0 0.5rem; font-size: 1.75rem; }
+.new-here p { margin: 0 0 1rem; opacity: 0.9; }
+.new-here .btn-accent { background: var(--color-accent); color: var(--color-dark); }
+
+/* Main content */
+.main-content { min-height: 50vh; }
+
+/* Footer */
+.site-footer { background: var(--color-dark); color: #fff; padding: 3rem 1.5rem; text-align: center; }
+.footer-inner { max-width: 1120px; margin: 0 auto; }
+.footer-cta { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; }
+.footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem; }
+.footer-links a { color: rgba(255,255,255,0.8); text-decoration: none; }
+.footer-links a:hover { color: #fff; }
+.copyright { font-size: 0.875rem; color: rgba(255,255,255,0.6); margin: 0; }

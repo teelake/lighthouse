@@ -1,0 +1,8 @@
+/vendor/
+/node_modules/
+/public/uploads/*
+!/public/uploads/.gitkeep
+php-error.log
+.env
+app/config/database.local.php
+composer.lock

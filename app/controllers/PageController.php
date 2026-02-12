@@ -1,0 +1,55 @@
+<?php
+namespace App\Controllers;
+
+use App\Models\ContentSection;
+use App\Models\Setting;
+use App\Models\Faq;
+
+class PageController extends Controller
+{
+    public function about()
+    {
+        $sections = (new ContentSection())->getAllKeyed();
+        $this->render('pages/about', [
+            'sections' => $sections,
+            'pageTitle' => 'About Us - Lighthouse Global Church',
+        ]);
+    }
+
+    public function leadership()
+    {
+        $this->render('pages/leadership', ['pageTitle' => 'Our Leadership - Lighthouse Global Church']);
+    }
+
+    public function services()
+    {
+        $this->render('pages/services', ['pageTitle' => 'Our Gatherings - Lighthouse Global Church']);
+    }
+
+    public function membership()
+    {
+        $this->render('pages/membership', ['pageTitle' => 'Membership & Training - Lighthouse Global Church']);
+    }
+
+    public function contact()
+    {
+        $setting = new Setting();
+        $this->render('pages/contact', [
+            'pageTitle' => 'Contact Us - Lighthouse Global Church',
+            'address' => $setting->get('site_address', '980 Parkland Drive, Holiday Inn & Suites, Halifax, NS, Canada'),
+            'phone' => $setting->get('site_phone', '902-240-2087'),
+            'email' => $setting->get('site_email', 'info@thelighthouseglobal.org'),
+        ]);
+    }
+
+    public function faq()
+    {
+        $faqs = (new Faq())->findAll([], 'sort_order ASC');
+        $this->render('pages/faq', ['pageTitle' => 'FAQ - Lighthouse Global Church', 'faqs' => $faqs]);
+    }
+
+    public function imNew()
+    {
+        $this->render('pages/im-new', ['pageTitle' => 'I\'m New - Lighthouse Global Church']);
+    }
+}

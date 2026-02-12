@@ -1,0 +1,13 @@
+<?php
+ob_start();
+$baseUrl = rtrim(BASE_URL, '/');
+?>
+<section class="section">
+    <div class="container">
+        <h1><?= htmlspecialchars($job['title']) ?></h1>
+        <p><?= htmlspecialchars($job['type']) ?></p>
+        <p><?= nl2br(htmlspecialchars($job['description'] ?? '')) ?></p>
+        <a href="<?= $baseUrl ?>/jobs">← All Jobs</a>
+    </div>
+</section>
+<?php $content = ob_get_clean(); require APP_PATH . '/views/layouts/main.php'; ?>
