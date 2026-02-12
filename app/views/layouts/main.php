@@ -35,52 +35,75 @@
             <nav class="main-nav">
                 <ul>
                     <li><a href="<?= rtrim(BASE_URL, '/') ?>/">Home</a></li>
-                    <li class="has-dropdown">
-                        <a href="<?= rtrim(BASE_URL, '/') ?>/about">About</a>
-                        <ul class="dropdown">
-                            <li><a href="<?= rtrim(BASE_URL, '/') ?>/about">About Us</a></li>
-                            <li><a href="<?= rtrim(BASE_URL, '/') ?>/leadership">Leadership</a></li>
-                            <li><a href="<?= rtrim(BASE_URL, '/') ?>/faq">FAQ</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="<?= rtrim(BASE_URL, '/') ?>/services">Services</a></li>
+                    <li><a href="<?= rtrim(BASE_URL, '/') ?>/events">Events</a></li>
+                    <li class="give-cta"><a href="<?= rtrim(BASE_URL, '/') ?>/giving" class="btn-give">Give</a></li>
                     <li class="has-dropdown">
                         <a href="<?= rtrim(BASE_URL, '/') ?>/im-new">Connect</a>
                         <ul class="dropdown">
                             <li><a href="<?= rtrim(BASE_URL, '/') ?>/im-new">I'm New</a></li>
                             <li><a href="<?= rtrim(BASE_URL, '/') ?>/ministries">Ministries</a></li>
                             <li><a href="<?= rtrim(BASE_URL, '/') ?>/small-groups">Small Groups</a></li>
-                            <li><a href="<?= rtrim(BASE_URL, '/') ?>/membership">Membership</a></li>
-                        </ul>
-                    </li>
-                    <li class="has-dropdown">
-                        <a href="<?= rtrim(BASE_URL, '/') ?>/services">Services & Events</a>
-                        <ul class="dropdown">
-                            <li><a href="<?= rtrim(BASE_URL, '/') ?>/services">Our Gatherings</a></li>
-                            <li><a href="<?= rtrim(BASE_URL, '/') ?>/events">Events</a></li>
                         </ul>
                     </li>
                     <li><a href="<?= rtrim(BASE_URL, '/') ?>/media">Media</a></li>
-                    <li><a href="<?= rtrim(BASE_URL, '/') ?>/prayer">Prayer</a></li>
-                    <li><a href="<?= rtrim(BASE_URL, '/') ?>/jobs">Jobs</a></li>
-                    <li><a href="<?= rtrim(BASE_URL, '/') ?>/contact">Contact</a></li>
-                    <li class="give-cta"><a href="<?= rtrim(BASE_URL, '/') ?>/giving" class="btn-give">Give</a></li>
+                    <li class="has-dropdown">
+                        <a href="<?= rtrim(BASE_URL, '/') ?>/about">About</a>
+                        <ul class="dropdown">
+                            <li><a href="<?= rtrim(BASE_URL, '/') ?>/about">About Us</a></li>
+                            <li><a href="<?= rtrim(BASE_URL, '/') ?>/leadership">Leadership</a></li>
+                            <li><a href="<?= rtrim(BASE_URL, '/') ?>/contact">Contact</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
         </div>
     </header>
-    <main class="main-content" style="margin-left: 56px;">
+    <main class="main-content">
         <?php echo $content ?? ''; ?>
     </main>
-    <footer class="site-footer">
+    <footer class="site-footer bh-footer">
         <div class="footer-inner">
-            <div class="footer-cta"><?= htmlspecialchars($footerCta ?? 'Join us. Grow with us. Shine with us.', ENT_QUOTES, 'UTF-8') ?></div>
-            <div class="footer-links">
-                <a href="<?= rtrim(BASE_URL, '/') ?>/about">About</a>
-                <a href="<?= rtrim(BASE_URL, '/') ?>/contact">Contact</a>
-                <a href="<?= rtrim(BASE_URL, '/') ?>/giving">Give</a>
-                <a href="<?= rtrim(BASE_URL, '/') ?>/im-new">I'm New</a>
+            <div class="footer-brand">
+                <a href="<?= rtrim(BASE_URL, '/') ?>/" class="logo">
+                    <?php
+                    $logoPath = file_exists(PUBLIC_PATH . '/images/lighthouse-logo.png') ? '/public/images/lighthouse-logo.png' : (file_exists(PUBLIC_PATH . '/images/logo.png') ? '/public/images/logo.png' : null);
+                    if ($logoPath): ?>
+                    <img src="<?= rtrim(BASE_URL, '/') . $logoPath ?>" alt="Lighthouse Global Church">
+                    <?php else: ?>
+                    <span class="logo-text">LIGHTHOUSE GLOBAL CHURCH</span>
+                    <?php endif; ?>
+                </a>
+                <p class="footer-tagline"><?= htmlspecialchars($footerCta ?? 'Join us. Grow with us. Shine with us.', ENT_QUOTES, 'UTF-8') ?></p>
+                <p class="copyright">&copy; <?= date('Y') ?> Lighthouse Global Church</p>
             </div>
-            <p class="copyright">&copy; <?= date('Y') ?> Lighthouse Global Church. Raising Lights. Transforming Nations.</p>
+            <div class="footer-nav">
+                <div class="footer-col">
+                    <h4>TERMS & POLICY</h4>
+                    <a href="<?= rtrim(BASE_URL, '/') ?>/contact">Privacy</a>
+                    <a href="<?= rtrim(BASE_URL, '/') ?>/contact">Terms</a>
+                </div>
+                <div class="footer-col">
+                    <h4>MINISTRIES</h4>
+                    <a href="<?= rtrim(BASE_URL, '/') ?>/ministries">Ministries</a>
+                    <a href="<?= rtrim(BASE_URL, '/') ?>/small-groups">Small Groups</a>
+                </div>
+                <div class="footer-col">
+                    <h4>NEW VISITORS</h4>
+                    <a href="<?= rtrim(BASE_URL, '/') ?>/im-new">I'm New</a>
+                    <a href="<?= rtrim(BASE_URL, '/') ?>/services">Services</a>
+                </div>
+                <div class="footer-col">
+                    <h4>ABOUT</h4>
+                    <a href="<?= rtrim(BASE_URL, '/') ?>/about">About Us</a>
+                    <a href="<?= rtrim(BASE_URL, '/') ?>/leadership">Leadership</a>
+                </div>
+            </div>
+            <div class="footer-cta-buttons">
+                <a href="<?= rtrim(BASE_URL, '/') ?>/giving" class="btn btn-primary">GIVE NOW</a>
+                <a href="<?= rtrim(BASE_URL, '/') ?>/contact" class="btn btn-outline btn-footer">CONTACT US</a>
+                <a href="<?= rtrim(BASE_URL, '/') ?>/contact" class="btn btn-outline btn-footer">GET DIRECTIONS</a>
+            </div>
         </div>
     </footer>
     <script src="<?= rtrim(BASE_URL, '/') ?>/public/js/main.js"></script>
