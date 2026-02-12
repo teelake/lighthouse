@@ -1,8 +1,8 @@
 -- Lighthouse Global Church - Database Schema
 -- Run this to create the database and tables
 
-CREATE DATABASE IF NOT EXISTS lighthouse_church CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE lighthouse_church;
+CREATE DATABASE IF NOT EXISTS thelwcwm_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE thelwcwm_db;
 
 -- Admin users
 CREATE TABLE users (
