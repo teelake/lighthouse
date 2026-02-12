@@ -1,20 +1,25 @@
-/* Lighthouse Global Church - Youth-focused, modern design */
+/* Lighthouse Global Church - Believers House inspired palette */
 :root {
-    --color-primary: #1a5f4a;
-    --color-primary-light: #2d8f73;
-    --color-accent: #e8b923;
-    --color-dark: #0f172a;
-    --color-muted: #64748b;
-    --color-bg: #f8fafc;
-    --font-sans: 'Outfit', system-ui, sans-serif;
-    --font-display: 'Playfair Display', serif;
-    --radius: 12px;
-    --shadow: 0 4px 20px rgba(0,0,0,0.08);
-    --transition: 0.2s ease;
+    /* Believers House colors - warm burgundy, gold accent */
+    --color-primary: #722F37;
+    --color-primary-light: #8B3A3A;
+    --color-primary-dark: #5A242B;
+    --color-accent: #C9A227;
+    --color-accent-light: #E0B84A;
+    --color-dark: #2C1810;
+    --color-muted: #6B5B54;
+    --color-bg: #FAFAF9;
+    --color-bg-warm: #FFFEF9;
+    --font-sans: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --radius: 10px;
+    --shadow: 0 2px 16px rgba(44,24,16,0.08);
+    --shadow-hover: 0 6px 24px rgba(44,24,16,0.12);
+    --transition: 0.25s ease;
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; font-family: var(--font-sans); font-size: 16px; line-height: 1.6; color: var(--color-dark); background: var(--color-bg); }
+body { margin: 0; font-family: var(--font-sans); font-size: 17px; line-height: 1.65; color: var(--color-dark); background: var(--color-bg); -webkit-font-smoothing: antialiased; }
 
 /* Header - Believers House style */
 .site-header { position: sticky; top: 0; z-index: 100; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
@@ -25,7 +30,7 @@ body { margin: 0; font-family: var(--font-sans); font-size: 16px; line-height: 1
 .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
 .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--color-dark); margin: 5px 0; }
 .main-nav ul { display: flex; align-items: center; gap: 0.5rem; list-style: none; margin: 0; padding: 0; }
-.main-nav a { text-decoration: none; color: var(--color-dark); padding: 0.5rem 0.75rem; font-weight: 500; font-size: 0.95rem; }
+.main-nav a { text-decoration: none; color: var(--color-dark); padding: 0.5rem 0.75rem; font-weight: 500; font-size: 0.975rem; letter-spacing: 0.02em; }
 .main-nav a:hover { color: var(--color-primary); }
 .main-nav .has-dropdown { position: relative; }
 .main-nav .has-dropdown:hover .dropdown { opacity: 1; visibility: visible; }
@@ -48,25 +53,25 @@ body { margin: 0; font-family: var(--font-sans); font-size: 16px; line-height: 1
 .hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
 .hero-overlay { position: absolute; inset: 0; }
 .hero-content { position: relative; z-index: 1; max-width: 900px; padding: 2rem; }
-.hero-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; color: #fff; margin: 0 0 0.5rem; line-height: 1.15; letter-spacing: -0.02em; }
-.hero-pillars { font-size: clamp(0.95rem, 1.5vw, 1.15rem); color: rgba(255,255,255,0.95); margin: 1rem 0 2rem; line-height: 1.8; letter-spacing: 0.05em; }
+.hero-headline { font-family: var(--font-display); font-size: clamp(2.75rem, 6vw, 4.5rem); font-weight: 600; color: #fff; margin: 0 0 0.5rem; line-height: 1.2; letter-spacing: 0.01em; }
+.hero-pillars { font-family: var(--font-sans); font-size: clamp(1rem, 1.5vw, 1.2rem); font-weight: 500; color: rgba(255,255,255,0.95); margin: 1.25rem 0 2rem; line-height: 1.9; letter-spacing: 0.04em; }
 .hero-pillars span { display: block; }
 .hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
 
 /* Buttons */
 .btn { display: inline-block; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: var(--transition); border: 2px solid transparent; }
 .btn-primary { background: var(--color-accent); color: var(--color-dark); }
-.btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
-.btn-outline { background: transparent; color: #fff; border-color: rgba(255,255,255,0.8); }
-.btn-outline:hover { background: rgba(255,255,255,0.15); }
+.btn-primary:hover { background: var(--color-accent-light); transform: translateY(-1px); box-shadow: var(--shadow-hover); }
+.btn-outline { background: transparent; color: #fff; border-color: rgba(255,255,255,0.85); }
+.btn-outline:hover { background: rgba(255,255,255,0.12); }
 .btn-accent { background: #fff; color: var(--color-primary); }
-.btn-accent:hover { background: rgba(255,255,255,0.95); transform: translateY(-1px); }
+.btn-accent:hover { background: #fff; transform: translateY(-1px); box-shadow: var(--shadow-hover); }
 
 /* Section - Believers House style */
 .section { padding: 4rem 0; }
 .container { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
-.section-title { font-family: var(--font-sans); font-size: 1.5rem; font-weight: 600; color: var(--color-dark); margin: 0 0 1rem; letter-spacing: 0.08em; }
-.section-lead { font-size: 1.1rem; color: var(--color-muted); max-width: 700px; margin-bottom: 1.5rem; }
+.section-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--color-dark); margin: 0 0 1rem; letter-spacing: 0.08em; }
+.section-lead { font-size: 1.1rem; line-height: 1.75; color: var(--color-muted); max-width: 680px; margin-bottom: 1.5rem; }
 .section-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
 
 /* Scripture Banner - Believers House style */
@@ -81,7 +86,7 @@ body { margin: 0; font-family: var(--font-sans); font-size: 16px; line-height: 1
 .service-times { background: var(--color-bg); }
 .service-times .section-title { text-transform: uppercase; }
 .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-.service-card { background: #fff; padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow); }
+.service-card { background: var(--color-bg-warm); padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid rgba(114,47,55,0.08); }
 .service-card h3 { margin: 0 0 0.5rem; color: var(--color-primary); font-size: 1.25rem; }
 .service-card .time { font-weight: 600; color: var(--color-dark); margin: 0 0 0.5rem; }
 .service-card .desc { margin: 0; color: var(--color-muted); font-size: 0.95rem; }
@@ -89,8 +94,8 @@ body { margin: 0; font-family: var(--font-sans); font-size: 16px; line-height: 1
 /* Core Values */
 .core-values { background: #fff; }
 .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-.value-card { text-align: center; padding: 2rem 1rem; border: 2px solid var(--color-primary); border-radius: var(--radius); transition: var(--transition); }
-.value-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.value-card { text-align: center; padding: 2rem 1rem; border: 2px solid var(--color-primary); border-radius: var(--radius); transition: var(--transition); background: var(--color-bg-warm); }
+.value-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); border-color: var(--color-primary-light); }
 .value-icon { color: var(--color-accent); font-size: 1.5rem; margin-bottom: 0.5rem; }
 .value-card h3 { margin: 0 0 0.5rem; color: var(--color-primary); font-size: 1.2rem; }
 .value-card p { margin: 0; color: var(--color-muted); font-size: 0.95rem; }
@@ -98,7 +103,7 @@ body { margin: 0; font-family: var(--font-sans); font-size: 16px; line-height: 1
 /* Events Preview */
 .events-preview { background: var(--color-bg); }
 .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-.event-card { background: #fff; padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); }
+.event-card { background: var(--color-bg-warm); padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid rgba(114,47,55,0.06); }
 .event-card h3 { margin: 0 0 0.5rem; color: var(--color-dark); }
 .event-card .date { font-weight: 600; color: var(--color-primary); font-size: 0.9rem; margin: 0 0 0.5rem; }
 .event-card .link { color: var(--color-primary); font-weight: 600; text-decoration: none; }
@@ -106,21 +111,21 @@ body { margin: 0; font-family: var(--font-sans); font-size: 16px; line-height: 1
 .no-events { color: var(--color-muted); margin-bottom: 1rem; }
 
 /* New Here banner - Believers House style */
-.new-here-banner { background: #f8f9fa; padding: 2.5rem 1.5rem; text-align: center; border-bottom: 1px solid #e9ecef; }
+.new-here-banner { background: var(--color-bg-warm); padding: 2.5rem 1.5rem; text-align: center; border-bottom: 1px solid rgba(114,47,55,0.12); }
 .new-here-banner h2 { margin: 0 0 0.25rem; font-size: 1.5rem; color: var(--color-dark); }
 .new-here-banner p { margin: 0 0 1rem; color: var(--color-muted); }
-.btn-start { background: var(--color-primary) !important; color: #fff !important; padding: 0.6rem 1.5rem; }
-.btn-start:hover { background: var(--color-primary-light) !important; color: #fff !important; }
+.btn-start { background: var(--color-primary) !important; color: #fff !important; padding: 0.65rem 1.75rem; }
+.btn-start:hover { background: var(--color-primary-dark) !important; color: #fff !important; }
 
 /* Testimonial */
 .testimonial-section { background: #fff; text-align: center; }
-.testimonial-quote { font-size: 1.35rem; font-style: italic; color: var(--color-dark); max-width: 700px; margin: 0 auto 0.5rem; line-height: 1.6; }
-.testimonial-author { font-size: 1rem; color: var(--color-muted); font-style: normal; }
+.testimonial-quote { font-family: var(--font-display); font-size: 1.5rem; font-style: italic; font-weight: 500; color: var(--color-dark); max-width: 720px; margin: 0 auto 0.5rem; line-height: 1.65; }
+.testimonial-author { font-family: var(--font-sans); font-size: 1rem; color: var(--color-muted); font-style: normal; font-weight: 500; }
 
 /* Newsletter */
-.newsletter-section { background: #f1f5f9; }
+.newsletter-section { background: rgba(114,47,55,0.06); }
 .newsletter-form { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; max-width: 600px; margin: 0 auto; }
-.newsletter-form input { padding: 0.65rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem; }
+.newsletter-form input { padding: 0.65rem 1rem; border: 1px solid rgba(114,47,55,0.2); border-radius: 6px; font-size: 0.95rem; font-family: var(--font-sans); }
 .newsletter-form input[type="email"] { flex: 1 1 200px; }
 .newsletter-form input[type="text"], .newsletter-form input[type="tel"] { flex: 1 1 120px; }
 
@@ -128,9 +133,9 @@ body { margin: 0; font-family: var(--font-sans); font-size: 16px; line-height: 1
 .main-content { min-height: 50vh; }
 
 /* Footer */
-.site-footer { background: var(--color-dark); color: #fff; padding: 3rem 1.5rem; text-align: center; }
+.site-footer { background: var(--color-primary-dark); color: #fff; padding: 3rem 1.5rem; text-align: center; }
 .footer-inner { max-width: 1120px; margin: 0 auto; }
-.footer-cta { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; }
+.footer-cta { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem; letter-spacing: 0.02em; }
 .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem; }
 .footer-links a { color: rgba(255,255,255,0.8); text-decoration: none; }
 .footer-links a:hover { color: #fff; }

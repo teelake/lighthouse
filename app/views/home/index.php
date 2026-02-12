@@ -11,7 +11,7 @@ $coreValues = $sections['core_values'] ?? null;
 
 <!-- Hero - Believers House style -->
 <section class="hero">
-    <div class="hero-bg" style="background: linear-gradient(135deg, rgba(26,95,74,0.92) 0%, rgba(15,23,42,0.9) 100%);"></div>
+    <div class="hero-bg" style="background: linear-gradient(135deg, rgba(114,47,55,0.92) 0%, rgba(44,24,16,0.93) 100%);"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
         <h1 class="hero-headline"><?= htmlspecialchars($hero['content'] ?? 'Raising Lights That Transform Nations') ?></h1>

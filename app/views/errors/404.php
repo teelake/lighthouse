@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 - Page Not Found | Lighthouse Global Church</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; }
-        body { margin: 0; font-family: 'Outfit', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #f8fafc; text-align: center; padding: 2rem; }
-        h1 { font-size: 6rem; color: #1a5f4a; margin: 0; }
-        p { color: #64748b; font-size: 1.2rem; margin: 1rem 0; }
-        a { color: #1a5f4a; font-weight: 600; }
+        body { margin: 0; font-family: 'Source Sans 3', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #FAFAF9; text-align: center; padding: 2rem; }
+        h1 { font-size: 6rem; color: #722F37; margin: 0; }
+        p { color: #6B5B54; font-size: 1.2rem; margin: 1rem 0; }
+        a { color: #722F37; font-weight: 600; }
     </style>
 </head>
 <body>
