@@ -26,10 +26,7 @@ $part2 = ($headlineParts[2] ?? '') . ' ' . ($headlineParts[3] ?? '');
             <span>A relevant WORD</span>
         </div>
         <div class="hero-ctas">
-            <a href="<?= $baseUrl ?>/media" class="btn btn-watch">
-                <span class="btn-text">WATCH LIVE</span>
-                <span class="btn-arrow">→</span>
-            </a>
+            <a href="<?= $baseUrl ?>/media" class="btn btn-watch">WATCH LIVE</a>
             <a href="<?= $baseUrl ?>/giving" class="btn btn-accent">GIVE HERE</a>
         </div>
     </div>
@@ -41,7 +38,7 @@ $part2 = ($headlineParts[2] ?? '') . ' ' . ($headlineParts[3] ?? '');
     <div class="welcome-overlay"></div>
     <div class="welcome-content">
         <h2 class="welcome-title">New Here?</h2>
-        <a href="<?= $baseUrl ?>/im-new" class="btn btn-start">Start Here</a>
+        <a href="<?= $baseUrl ?>/im-new" class="btn btn-watch">Start Here</a>
     </div>
 </section>
 
@@ -57,7 +54,7 @@ $part2 = ($headlineParts[2] ?? '') . ' ' . ($headlineParts[3] ?? '');
     <div class="about-text">
         <h2 class="section-title">ABOUT us</h2>
         <p><?= nl2br(htmlspecialchars($whoWeAre['content'] ?? 'The Lighthouse Global Ministry is a Spirit-led ministry commissioned to raise men and women who shine with Christ\'s light—bringing transformation to lives, communities, cultures, and nations.')) ?></p>
-        <a href="<?= $baseUrl ?>/about" class="btn btn-primary">Learn More</a>
+        <a href="<?= $baseUrl ?>/about" class="btn btn-watch">Learn More</a>
     </div>
     <div class="about-image">
         <img src="https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?w=800" alt="Community">
@@ -69,20 +66,20 @@ $part2 = ($headlineParts[2] ?? '') . ' ' . ($headlineParts[3] ?? '');
     <div class="container">
         <div class="section-header">
             <h2 class="section-title">REGULAR EVENTS</h2>
-            <a href="<?= $baseUrl ?>/events" class="btn btn-primary">SEE EVENTS</a>
+            <a href="<?= $baseUrl ?>/events" class="btn btn-watch">SEE EVENTS</a>
         </div>
         <div class="service-grid">
             <div class="service-card">
                 <h3>Sunday — Catalysis</h3>
                 <p class="time"><?= htmlspecialchars($serviceTimes['sunday'] ?? '10:00 AM') ?></p>
                 <p class="desc">A catalytic worship experience designed to ignite faith, release clarity, and activate purpose.</p>
-                <a href="<?= $baseUrl ?>/services" class="btn btn-primary btn-sm">DETAILS</a>
+                <a href="<?= $baseUrl ?>/services" class="btn btn-accent btn-sm">DETAILS</a>
             </div>
             <div class="service-card">
                 <h3>Thursday — The Summit</h3>
                 <p class="time"><?= htmlspecialchars($serviceTimes['thursday'] ?? '6:00 PM') ?></p>
                 <p class="desc">Elevation | Encounter | Empowerment. A midweek teaching and prayer gathering.</p>
-                <a href="<?= $baseUrl ?>/services" class="btn btn-primary btn-sm">DETAILS</a>
+                <a href="<?= $baseUrl ?>/services" class="btn btn-accent btn-sm">DETAILS</a>
             </div>
         </div>
     </div>
@@ -93,7 +90,7 @@ $part2 = ($headlineParts[2] ?? '') . ' ' . ($headlineParts[3] ?? '');
     <div class="container">
         <div class="section-header">
             <h2 class="section-title">PHOTOS</h2>
-            <a href="<?= $baseUrl ?>/media" class="btn btn-primary">MORE</a>
+            <a href="<?= $baseUrl ?>/media" class="btn btn-watch">MORE</a>
         </div>
         <div class="photos-grid">
             <div class="photo-item photo-tall"><img src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=600" alt=""></div>
@@ -133,11 +130,9 @@ $part2 = ($headlineParts[2] ?? '') . ' ' . ($headlineParts[3] ?? '');
     <div class="container">
         <h2 class="section-title">Subscribe to Our Mailing List</h2>
         <form class="newsletter-form" action="<?= $baseUrl ?>/newsletter/subscribe" method="post">
-            <input type="email" name="email" placeholder="Enter your email here" required>
-            <input type="text" name="first_name" placeholder="First name">
-            <input type="text" name="last_name" placeholder="Last name">
-            <input type="tel" name="phone" placeholder="Phone">
-            <button type="submit" class="btn btn-primary">Sign Up</button>
+            <input type="text" name="name" placeholder="Your name" required>
+            <input type="email" name="email" placeholder="Your email" required>
+            <button type="submit" class="btn btn-watch">Sign Up</button>
         </form>
     </div>
 </section>

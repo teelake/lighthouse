@@ -100,9 +100,9 @@
                 </div>
             </div>
             <div class="footer-cta-buttons">
-                <a href="<?= rtrim(BASE_URL, '/') ?>/giving" class="btn btn-primary">GIVE NOW</a>
-                <a href="<?= rtrim(BASE_URL, '/') ?>/contact" class="btn btn-outline btn-footer">CONTACT US</a>
-                <a href="<?= rtrim(BASE_URL, '/') ?>/contact" class="btn btn-outline btn-footer">GET DIRECTIONS</a>
+                <a href="<?= rtrim(BASE_URL, '/') ?>/giving" class="btn btn-watch">GIVE NOW</a>
+                <a href="<?= rtrim(BASE_URL, '/') ?>/contact" class="btn btn-accent">CONTACT US</a>
+                <a href="<?= rtrim(BASE_URL, '/') ?>/contact" class="btn btn-accent">GET DIRECTIONS</a>
             </div>
         </div>
     </footer>
