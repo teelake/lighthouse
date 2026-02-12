@@ -11,24 +11,33 @@ $part1 = ($headlineParts[0] ?? '') . ' ' . ($headlineParts[1] ?? '');
 $part2 = ($headlineParts[2] ?? '') . ' ' . ($headlineParts[3] ?? '');
 ?>
 
-<!-- 1. Hero - Believers House: full-bleed image, overlay, split headline -->
-<section class="hero bh-hero">
-    <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1920'); background-size: cover; background-position: center;"></div>
-    <div class="hero-overlay" style="background: linear-gradient(135deg, rgba(10,10,10,0.75) 0%, rgba(0,0,0,0.85) 100%);"></div>
-    <div class="hero-content">
-        <h1 class="hero-headline bh-headline">
-            <span class="bh-headline-line"><?= htmlspecialchars($part1) ?></span>
-            <span class="bh-headline-line"><?= htmlspecialchars($part2) ?></span>
-        </h1>
-        <div class="hero-pillars">
-            <span>A warm WELCOME</span>
-            <span>An atmosphere of WORSHIP</span>
-            <span>A relevant WORD</span>
+<!-- 1. Hero - Believers House asymmetric: text left, logo right -->
+<section class="hero">
+    <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1920');"></div>
+    <div class="hero-overlay" style="background: linear-gradient(90deg, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.5) 50%, rgba(0,0,0,0.4) 100%);"></div>
+    <div class="hero-inner">
+        <div class="hero-content">
+            <h1 class="hero-headline bh-headline">
+                <span class="bh-headline-line"><?= htmlspecialchars($part1) ?></span>
+                <span class="bh-headline-line"><?= htmlspecialchars($part2) ?></span>
+            </h1>
+            <div class="hero-pillars">
+                <span>A warm WELCOME</span>
+                <span>An atmosphere of WORSHIP</span>
+                <span>A relevant WORD</span>
+            </div>
+            <div class="hero-ctas">
+                <a href="<?= $baseUrl ?>/media" class="btn btn-watch">WATCH LIVE</a>
+                <a href="<?= $baseUrl ?>/giving" class="btn btn-accent">GIVE HERE</a>
+            </div>
         </div>
-        <div class="hero-ctas">
-            <a href="<?= $baseUrl ?>/media" class="btn btn-watch">WATCH LIVE</a>
-            <a href="<?= $baseUrl ?>/giving" class="btn btn-accent">GIVE HERE</a>
+        <?php
+        $heroLogo = file_exists(PUBLIC_PATH . '/images/lighthouse-logo.png') ? '/public/images/lighthouse-logo.png' : (file_exists(PUBLIC_PATH . '/images/logo.png') ? '/public/images/logo.png' : null);
+        if ($heroLogo): ?>
+        <div class="hero-logo">
+            <img src="<?= rtrim(BASE_URL, '/') . $heroLogo ?>" alt="Lighthouse Global Church">
         </div>
+        <?php endif; ?>
     </div>
 </section>
 
@@ -66,20 +75,20 @@ $part2 = ($headlineParts[2] ?? '') . ' ' . ($headlineParts[3] ?? '');
     <div class="container">
         <div class="section-header">
             <h2 class="section-title">REGULAR EVENTS</h2>
-            <a href="<?= $baseUrl ?>/events" class="btn btn-watch">SEE EVENTS</a>
+            <a href="<?= $baseUrl ?>/events" class="btn btn-watch">SEE ALL</a>
         </div>
         <div class="service-grid">
             <div class="service-card">
                 <h3>Sunday — Catalysis</h3>
                 <p class="time"><?= htmlspecialchars($serviceTimes['sunday'] ?? '10:00 AM') ?></p>
                 <p class="desc">A catalytic worship experience designed to ignite faith, release clarity, and activate purpose.</p>
-                <a href="<?= $baseUrl ?>/services" class="btn btn-accent btn-sm">DETAILS</a>
+                <a href="<?= $baseUrl ?>/services" class="btn btn-primary btn-sm">JOIN</a>
             </div>
             <div class="service-card">
                 <h3>Thursday — The Summit</h3>
                 <p class="time"><?= htmlspecialchars($serviceTimes['thursday'] ?? '6:00 PM') ?></p>
                 <p class="desc">Elevation | Encounter | Empowerment. A midweek teaching and prayer gathering.</p>
-                <a href="<?= $baseUrl ?>/services" class="btn btn-accent btn-sm">DETAILS</a>
+                <a href="<?= $baseUrl ?>/services" class="btn btn-primary btn-sm">JOIN</a>
             </div>
         </div>
     </div>
@@ -93,9 +102,8 @@ $part2 = ($headlineParts[2] ?? '') . ' ' . ($headlineParts[3] ?? '');
             <a href="<?= $baseUrl ?>/media" class="btn btn-watch">MORE</a>
         </div>
         <div class="photos-grid">
-            <div class="photo-item photo-tall"><img src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=600" alt=""></div>
-            <div class="photo-item photo-wide"><img src="https://images.unsplash.com/photo-1420161900862-9a86fa1f5c79?w=900" alt=""></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600" alt=""></div>
+            <div class="photo-item"><img src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=600" alt="Church"></div>
+            <div class="photo-item"><img src="https://images.unsplash.com/photo-1420161900862-9a86fa1f5c79?w=1200" alt="Worship"></div>
         </div>
     </div>
 </section>
@@ -107,6 +115,7 @@ $part2 = ($headlineParts[2] ?? '') . ' ' . ($headlineParts[3] ?? '');
         <?php $t = $testimonials[0]; ?>
         <blockquote class="testimonial-quote">"<?= htmlspecialchars($t['quote']) ?>"</blockquote>
         <cite class="testimonial-author">— <?= htmlspecialchars($t['author_name']) ?></cite>
+        <div class="testimonial-dots"><span class="active"></span><span></span><span></span></div>
     </div>
 </section>
 <?php else: ?>
@@ -114,6 +123,7 @@ $part2 = ($headlineParts[2] ?? '') . ' ' . ($headlineParts[3] ?? '');
     <div class="container">
         <blockquote class="testimonial-quote">"Lighthouse is more like a family and not just a place of worship. Since I started attending, I've been shown nothing but love."</blockquote>
         <cite class="testimonial-author">— A LIGHTHOUSE BELIEVER</cite>
+        <div class="testimonial-dots"><span class="active"></span><span></span><span></span></div>
     </div>
 </section>
 <?php endif; ?>

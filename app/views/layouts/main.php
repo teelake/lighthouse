@@ -35,7 +35,14 @@
             <nav class="main-nav">
                 <ul>
                     <li><a href="<?= rtrim(BASE_URL, '/') ?>/">Home</a></li>
-                    <li><a href="<?= rtrim(BASE_URL, '/') ?>/services">Services</a></li>
+                    <li class="has-dropdown">
+                        <a href="<?= rtrim(BASE_URL, '/') ?>/about">About</a>
+                        <ul class="dropdown">
+                            <li><a href="<?= rtrim(BASE_URL, '/') ?>/about">About Us</a></li>
+                            <li><a href="<?= rtrim(BASE_URL, '/') ?>/leadership">Leadership</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="<?= rtrim(BASE_URL, '/') ?>/ministries">Ministries</a></li>
                     <li><a href="<?= rtrim(BASE_URL, '/') ?>/events">Events</a></li>
                     <li class="give-cta"><a href="<?= rtrim(BASE_URL, '/') ?>/giving" class="btn-give">Give</a></li>
                     <li class="has-dropdown">
@@ -47,14 +54,7 @@
                         </ul>
                     </li>
                     <li><a href="<?= rtrim(BASE_URL, '/') ?>/media">Media</a></li>
-                    <li class="has-dropdown">
-                        <a href="<?= rtrim(BASE_URL, '/') ?>/about">About</a>
-                        <ul class="dropdown">
-                            <li><a href="<?= rtrim(BASE_URL, '/') ?>/about">About Us</a></li>
-                            <li><a href="<?= rtrim(BASE_URL, '/') ?>/leadership">Leadership</a></li>
-                            <li><a href="<?= rtrim(BASE_URL, '/') ?>/contact">Contact</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="<?= rtrim(BASE_URL, '/') ?>/contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -75,34 +75,33 @@
                     <?php endif; ?>
                 </a>
                 <p class="footer-tagline"><?= htmlspecialchars($footerCta ?? 'Join us. Grow with us. Shine with us.', ENT_QUOTES, 'UTF-8') ?></p>
-                <p class="copyright">&copy; <?= date('Y') ?> Lighthouse Global Church</p>
+                <p class="copyright">&copy; <?= date('Y') ?> Lighthouse Global Church. All Rights Reserved.</p>
+                <a href="<?= rtrim(BASE_URL, '/') ?>/prayer" class="btn btn-outline btn-prayer">REQUEST PRAYER</a>
             </div>
             <div class="footer-nav">
                 <div class="footer-col">
-                    <h4>TERMS & POLICY</h4>
-                    <a href="<?= rtrim(BASE_URL, '/') ?>/contact">Privacy</a>
-                    <a href="<?= rtrim(BASE_URL, '/') ?>/contact">Terms</a>
-                </div>
-                <div class="footer-col">
-                    <h4>MINISTRIES</h4>
-                    <a href="<?= rtrim(BASE_URL, '/') ?>/ministries">Ministries</a>
-                    <a href="<?= rtrim(BASE_URL, '/') ?>/small-groups">Small Groups</a>
-                </div>
-                <div class="footer-col">
-                    <h4>NEW VISITORS</h4>
-                    <a href="<?= rtrim(BASE_URL, '/') ?>/im-new">I'm New</a>
-                    <a href="<?= rtrim(BASE_URL, '/') ?>/services">Services</a>
-                </div>
-                <div class="footer-col">
-                    <h4>ABOUT</h4>
+                    <h4>QUICK LINKS</h4>
                     <a href="<?= rtrim(BASE_URL, '/') ?>/about">About Us</a>
-                    <a href="<?= rtrim(BASE_URL, '/') ?>/leadership">Leadership</a>
+                    <a href="<?= rtrim(BASE_URL, '/') ?>/ministries">Ministries</a>
+                    <a href="<?= rtrim(BASE_URL, '/') ?>/events">Events</a>
+                    <a href="<?= rtrim(BASE_URL, '/') ?>/giving">Giving</a>
+                    <a href="<?= rtrim(BASE_URL, '/') ?>/contact">Contact Us</a>
+                </div>
+                <div class="footer-col">
+                    <h4>CONNECT</h4>
+                    <a href="<?= rtrim(BASE_URL, '/') ?>/im-new">I'm New</a>
+                    <a href="<?= rtrim(BASE_URL, '/') ?>/small-groups">Small Groups</a>
+                    <a href="<?= rtrim(BASE_URL, '/') ?>/media">Media</a>
+                </div>
+                <div class="footer-col">
+                    <h4>CONTACT</h4>
+                    <a href="<?= rtrim(BASE_URL, '/') ?>/contact">Get Directions</a>
+                    <a href="<?= rtrim(BASE_URL, '/') ?>/contact">Email Us</a>
                 </div>
             </div>
             <div class="footer-cta-buttons">
                 <a href="<?= rtrim(BASE_URL, '/') ?>/giving" class="btn btn-watch">GIVE NOW</a>
                 <a href="<?= rtrim(BASE_URL, '/') ?>/contact" class="btn btn-accent">CONTACT US</a>
-                <a href="<?= rtrim(BASE_URL, '/') ?>/contact" class="btn btn-accent">GET DIRECTIONS</a>
             </div>
         </div>
     </footer>
