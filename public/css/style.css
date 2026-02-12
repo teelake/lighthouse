@@ -36,7 +36,7 @@ body { margin: 0; padding-left: 56px; font-family: var(--font-sans); font-size: 
 .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
 .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--color-primary); margin: 5px 0; }
 .main-nav ul { display: flex; align-items: center; gap: 0.5rem; list-style: none; margin: 0; padding: 0; }
-.main-nav a { text-decoration: none; color: var(--color-primary); padding: 0.5rem 0.75rem; font-weight: 500; font-size: 0.975rem; letter-spacing: 0.02em; }
+.main-nav a { text-decoration: none; color: var(--color-primary); padding: 0.5rem 0.75rem; font-weight: 500; font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase; }
 .main-nav a:hover { color: var(--color-primary-light); }
 .main-nav .has-dropdown { position: relative; }
 .main-nav .has-dropdown:hover .dropdown { opacity: 1; visibility: visible; }
@@ -173,7 +173,7 @@ body { margin: 0; padding-left: 56px; font-family: var(--font-sans); font-size: 
 .testimonial-author { font-family: var(--font-sans); font-size: 1rem; color: var(--color-primary); font-style: normal; font-weight: 500; }
 
 /* Newsletter - gold-tinted like Believers House mailing list */
-.newsletter-section { background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-dark-soft) 100%); color: #fff; }
+.newsletter-section { background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-dark-soft) 100%); color: #fff; padding: 4rem 0; }
 .newsletter-section .section-title { color: var(--color-primary); }
 .newsletter-form { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; max-width: 600px; margin: 0 auto; }
 .newsletter-form input { padding: 0.65rem 1rem; border: 2px solid rgba(201,162,39,0.4); border-radius: 6px; font-size: 0.95rem; font-family: var(--font-sans); background: rgba(255,255,255,0.05); color: #fff; }
