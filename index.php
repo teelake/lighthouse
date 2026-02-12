@@ -7,8 +7,15 @@
  * @package LighthouseGlobal
  */
 
-// Detect environment
-$env = getenv('APP_ENV') ?: ($_ENV['APP_ENV'] ?? 'production');
+// Define constants first
+define('ROOT_PATH', __DIR__);
+define('APP_PATH', ROOT_PATH . '/app');
+define('PUBLIC_PATH', ROOT_PATH . '/public');
+define('UPLOAD_PATH', ROOT_PATH . '/public/uploads');
+
+// Detect environment - DEBUG file enables error display for troubleshooting
+$isDebug = file_exists(ROOT_PATH . '/DEBUG');
+$env = $isDebug ? 'development' : (getenv('APP_ENV') ?: ($_ENV['APP_ENV'] ?? 'production'));
 define('APP_ENV', $env);
 
 error_reporting(E_ALL);
@@ -16,17 +23,11 @@ ini_set('display_errors', APP_ENV === 'development' ? 1 : 0);
 ini_set('display_startup_errors', APP_ENV === 'development' ? 1 : 0);
 ini_set('log_errors', 1);
 
-// Define constants
-define('ROOT_PATH', __DIR__);
-define('APP_PATH', ROOT_PATH . '/app');
-define('PUBLIC_PATH', ROOT_PATH . '/public');
-define('UPLOAD_PATH', ROOT_PATH . '/public/uploads');
-
+// Error log in root - always write here
 $errorLogFile = ROOT_PATH . '/php-error.log';
 ini_set('error_log', $errorLogFile);
-
 if (!file_exists($errorLogFile)) {
-    @touch($errorLogFile);
+    @file_put_contents($errorLogFile, '');
     @chmod($errorLogFile, 0664);
 }
 
@@ -67,6 +68,21 @@ define('BASE_URL', $protocol . '://' . $host . ($basePath !== '/' ? $basePath : 
 // Autoloader
 require_once APP_PATH . '/core/Autoloader.php';
 \App\Core\Autoloader::register();
+
+// Check database config exists (gitignored - must be created on server)
+if (!file_exists(APP_PATH . '/config/database.local.php')) {
+    http_response_code(500);
+    $msg = '<h1>Setup Required</h1><p>Database configuration not found. Create <code>app/config/database.local.php</code> with your credentials.</p>';
+    $msg .= '<p>Copy <code>app/config/database.example.php</code> and update host, dbname, username, password.</p>';
+    $msg .= '<p><a href="https://github.com/teelake/lighthouse#setup">See README</a></p>';
+    die($msg);
+}
+
+// Check database config (gitignored - must be created on server)
+if (!file_exists(APP_PATH . '/config/database.local.php')) {
+    http_response_code(500);
+    die('<h1>Setup Required</h1><p>Create app/config/database.local.php with your DB credentials. Copy from database.example.php</p>');
+}
 
 // Load config
 require_once APP_PATH . '/config/config.php';

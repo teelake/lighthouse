@@ -43,8 +43,14 @@ class Application
     {
         $code = is_int($e->getCode()) && $e->getCode() >= 100 && $e->getCode() < 600 ? $e->getCode() : 500;
         http_response_code($code);
+
+        // Always log to php-error.log
+        $logFile = ROOT_PATH . '/php-error.log';
+        $msg = sprintf("[%s] %s: %s\nFile: %s:%d\n%s\n", date('Y-m-d H:i:s'), get_class($e), $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString());
+        @file_put_contents($logFile, $msg, FILE_APPEND | LOCK_EX);
+
         if (APP_ENV === 'development') {
-            echo "<h1>Error {$code}</h1><p>{$e->getMessage()}</p><pre>{$e->getTraceAsString()}</pre>";
+            echo "<h1>Error {$code}</h1><p>" . htmlspecialchars($e->getMessage()) . "</p><pre>" . htmlspecialchars($e->getTraceAsString()) . "</pre>";
         } else {
             if ($code === 404 && file_exists(APP_PATH . '/views/errors/404.php')) {
                 require APP_PATH . '/views/errors/404.php';

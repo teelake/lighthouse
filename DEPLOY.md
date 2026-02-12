@@ -62,6 +62,14 @@ On server, pull and ensure your web root includes the lighthouse folder.
 
 ---
 
+## Subdirectory deploy (e.g. public_html/new/)
+See **SUBDIRECTORY_SETUP.md**. Key steps:
+1. Edit `public/.htaccess`: change `RewriteBase /` to `RewriteBase /new/public/`
+2. **Create** `app/config/database.local.php` on server (copy from database.example.php, add your credentials)
+3. To see errors: create empty file `DEBUG` in project root, then delete after fixing
+
+---
+
 ## Files to NEVER commit
 - `app/config/database.local.php` (contains passwords)
 - `public/uploads/*` (user uploads)
