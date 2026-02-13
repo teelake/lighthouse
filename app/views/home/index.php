@@ -199,16 +199,17 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
     <div class="container newsletter-showcase">
         <div class="newsletter-copy">
             <p class="newsletter-eyebrow">Our Newsletter</p>
-            <h2 class="newsletter-title">Get Daily Scripture in Your Inbox</h2>
-            <p class="newsletter-note">A nightly brief of resources and encouragement from our ministry team.</p>
+            <h2 class="newsletter-title">Get Ministry Updates in Your Inbox</h2>
+            <p class="newsletter-note">Receive event updates, teachings, community highlights, and important church announcements.</p>
             <form class="newsletter-form newsletter-inline" action="<?= $baseUrl ?>/newsletter/subscribe" method="post">
+                <input type="text" name="name" placeholder="full name..." autocomplete="name" required>
                 <input type="email" name="email" placeholder="email address..." required>
-                <button type="submit" class="newsletter-submit">Subscribe</button>
+                <button type="submit" class="newsletter-submit">Join Newsletter</button>
             </form>
         </div>
         <div class="newsletter-visual" aria-hidden="true">
             <div class="newsletter-device">
-                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200" alt="">
+                <img src="https://images.unsplash.com/photo-1487014679447-9f8336841d58?w=1200" alt="">
             </div>
         </div>
     </div>
