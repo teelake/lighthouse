@@ -1,11 +1,11 @@
 /* Lighthouse Global Church - Unique design: sharp, modern, youthful, vibrant */
 :root {
-    --color-primary: #ffef6c;
-    --color-primary-light: #fff9a3;
-    --color-primary-dark: #e5d84d;
+    --color-primary: #ffe100;
+    --color-primary-light: #ffea33;
+    --color-primary-dark: #e5ca00;
     --color-torch-red: #B22222;
-    --color-gold-soft: rgba(255,239,108,0.1);
-    --color-gold-bg: rgba(255,239,108,0.06);
+    --color-gold-soft: rgba(255,225,0,0.1);
+    --color-gold-bg: rgba(255,225,0,0.06);
     --color-dark: #1a1a1a;
     --color-dark-soft: #2d2d2d;
     --color-muted: #5c5c5c;
@@ -23,7 +23,7 @@
     --shadow-hover: 0 8px 32px rgba(26,26,26,0.1);
     --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
-    --beam-gold: rgba(255, 239, 108, 0.18);
+    --beam-gold: rgba(255, 225, 0, 0.18);
     --beam-blue: rgba(64, 167, 255, 0.14);
 }
 
@@ -39,7 +39,7 @@ body::before {
     pointer-events: none;
     z-index: -1;
     background:
-        radial-gradient(900px 320px at 10% 0%, rgba(255,239,108,0.06), transparent 70%),
+        radial-gradient(900px 320px at 10% 0%, rgba(255,225,0,0.06), transparent 70%),
         radial-gradient(760px 260px at 90% 12%, rgba(64,167,255,0.05), transparent 70%);
 }
 
@@ -131,7 +131,7 @@ body::before {
     mix-blend-mode: screen;
 }
 .hero::after {
-    background: radial-gradient(700px 260px at 50% 100%, rgba(255,239,108,0.12), transparent 72%);
+    background: radial-gradient(700px 260px at 50% 100%, rgba(255,225,0,0.12), transparent 72%);
 }
 .hero-inner { position: relative; z-index: 1; width: 100%; max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
 .hero-centered .hero-content { text-align: center; }
@@ -157,7 +157,7 @@ body::before {
 .section-sub { font-size: 1.1rem; color: var(--color-muted); margin: -0.5rem 0 2rem; }
 .gather-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
 .gather-card { background: #fff; padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow); border: 2px solid transparent; transition: var(--transition); }
-.gather-card:hover { border-color: var(--color-primary); box-shadow: 0 16px 48px rgba(255,239,108,0.18); transform: translateY(-8px); }
+.gather-card:hover { border-color: var(--color-primary); box-shadow: 0 16px 48px rgba(255,225,0,0.18); transform: translateY(-8px); }
 .gather-day { display: block; font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; color: var(--color-primary); margin-bottom: 0.25rem; }
 .gather-time { font-size: 1.5rem; font-weight: 700; color: var(--color-dark); }
 .gather-desc { margin: 0.5rem 0; color: var(--color-muted); font-size: 0.95rem; }
@@ -165,7 +165,7 @@ body::before {
 .gather-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
 /* New Here - warm strip */
-.new-here-section { background: #fff; padding: 3rem 0; border-top: 1px solid rgba(255,239,108,0.15); }
+.new-here-section { background: #fff; padding: 3rem 0; border-top: 1px solid rgba(255,225,0,0.15); }
 .new-here-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
 /* Recent Sermons - BLOG-style cards */
 .recent-sermons-section { background: #fff; padding: 4rem 0; }
@@ -269,7 +269,7 @@ body::before {
 .events-section .section-title { color: var(--color-dark); }
 .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
 .event-card-modern { background: var(--color-bg-warm); padding: 2rem; border-radius: var(--radius); border: 2px solid transparent; transition: var(--transition); }
-.event-card-modern:hover { border-color: var(--color-primary); box-shadow: 0 12px 40px rgba(255,239,108,0.12); transform: translateY(-4px); }
+.event-card-modern:hover { border-color: var(--color-primary); box-shadow: 0 12px 40px rgba(255,225,0,0.12); transform: translateY(-4px); }
 .event-card-modern h3 { margin: 0 0 0.25rem; font-size: 1.2rem; color: var(--color-dark); }
 .event-card-modern .event-time { font-weight: 600; color: var(--color-primary); font-size: 0.9rem; margin-bottom: 0.5rem; }
 .event-card-modern p { margin: 0 0 1rem; color: var(--color-muted); font-size: 0.95rem; }
@@ -383,7 +383,7 @@ body::before {
 .newsletter-inline input[type="email"]:focus-visible {
     outline: 3px solid rgba(255,255,255,0.55);
     outline-offset: 1px;
-    box-shadow: 0 0 0 3px rgba(255,239,108,0.35);
+    box-shadow: 0 0 0 3px rgba(255,225,0,0.35);
 }
 .newsletter-inline.is-invalid input:invalid {
     box-shadow: inset 0 0 0 2px rgba(178,34,34,0.9);
@@ -405,7 +405,7 @@ body::before {
 .newsletter-submit:hover {
     filter: brightness(1.03);
     transform: translateY(-1px);
-    box-shadow: 0 10px 24px rgba(255,239,108,0.35);
+    box-shadow: 0 10px 24px rgba(255,225,0,0.35);
 }
 .newsletter-submit:disabled {
     opacity: 0.75;
@@ -492,12 +492,12 @@ body::before {
 .btn-watch:hover::after { background: var(--color-primary-light); }
 /* GIVE HERE / outline: dark bg, gold border, gold text */
 .btn-accent { background: transparent; color: var(--color-primary); border: 2px solid var(--color-primary); padding: 0.75rem 1.5rem; }
-.btn-accent:hover { background: rgba(255,239,108,0.15); color: var(--color-primary-light); border-color: var(--color-primary-light); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,239,108,0.2); }
+.btn-accent:hover { background: rgba(255,225,0,0.15); color: var(--color-primary-light); border-color: var(--color-primary-light); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,225,0,0.2); }
 /* Primary gold fill - DETAILS, etc. */
 .btn-primary { background: var(--color-primary); color: var(--color-dark); padding: 0.75rem 1.5rem; }
-.btn-primary:hover { background: var(--color-primary-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,239,108,0.35); }
+.btn-primary:hover { background: var(--color-primary-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,225,0,0.35); }
 .btn-outline { background: transparent; color: #fff; border: 2px solid var(--color-primary); padding: 0.75rem 1.5rem; }
-.btn-outline:hover { background: rgba(255,239,108,0.2); }
+.btn-outline:hover { background: rgba(255,225,0,0.2); }
 
 /* Scroll-in animations - sections animate when they enter viewport */
 .section { width: 100%; padding: 4rem 0; }
@@ -517,7 +517,7 @@ body::before {
     right: 0;
     height: 1px;
     top: -1px;
-    background: linear-gradient(90deg, transparent, rgba(255,239,108,0.65), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,225,0,0.65), transparent);
 }
 .section-title-bar .section-title-bar-inner { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
 .section-title-bar .section-title { margin: 0; }
@@ -551,7 +551,7 @@ body::before {
 .service-times { background: var(--color-dark); padding: 4rem 0; }
 .service-times .section-title { color: var(--color-primary); letter-spacing: 0.12em; }
 .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-.service-card { background: linear-gradient(135deg, rgba(255,239,108,0.18) 0%, rgba(255,239,108,0.08) 100%); padding: 2rem; border-radius: var(--radius); border: 1px solid rgba(255,239,108,0.4); display: flex; flex-direction: column; align-items: flex-start; }
+.service-card { background: linear-gradient(135deg, rgba(255,225,0,0.18) 0%, rgba(255,225,0,0.08) 100%); padding: 2rem; border-radius: var(--radius); border: 1px solid rgba(255,225,0,0.4); display: flex; flex-direction: column; align-items: flex-start; }
 .service-card h3 { margin: 0 0 0.5rem; color: #fff; font-size: 1.2rem; font-weight: 600; letter-spacing: 0.02em; }
 .service-card .time { font-weight: 600; color: var(--color-primary-light); margin: 0 0 0.5rem; font-size: 0.9rem; }
 .service-card .desc { margin: 0 0 1.25rem; color: rgba(255,255,255,0.88); font-size: 0.95rem; flex: 1; line-height: 1.6; }
@@ -570,7 +570,7 @@ body::before {
 .events-preview { background: var(--color-dark); padding: 4rem 0; }
 .events-preview .section-title { color: var(--color-primary); text-transform: uppercase; }
 .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-.event-card { background: var(--color-gold-soft); padding: 1.5rem; border-radius: var(--radius); border: 2px solid rgba(255,239,108,0.3); }
+.event-card { background: var(--color-gold-soft); padding: 1.5rem; border-radius: var(--radius); border: 2px solid rgba(255,225,0,0.3); }
 .event-card h3 { margin: 0 0 0.5rem; color: var(--color-primary); }
 .event-card .date { font-weight: 600; color: var(--color-primary-light); font-size: 0.9rem; margin: 0 0 0.5rem; }
 .event-card p { color: rgba(255,255,255,0.9); }
@@ -631,7 +631,7 @@ body::before {
 }
 .brand-card {
     background: #fff;
-    border: 1px solid rgba(255,239,108,0.2);
+    border: 1px solid rgba(255,225,0,0.2);
     border-radius: var(--radius);
     padding: 1.25rem;
     box-shadow: var(--shadow);
@@ -640,7 +640,7 @@ body::before {
 .brand-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 14px 34px rgba(26,26,26,0.12);
-    border-color: rgba(255,239,108,0.45);
+    border-color: rgba(255,225,0,0.45);
 }
 .brand-card h3 {
     margin: 0 0 0.45rem;

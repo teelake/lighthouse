@@ -8,9 +8,9 @@
     <style>
         * { box-sizing: border-box; }
         body { margin: 0; font-family: 'Source Sans 3', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #FAFAF9; text-align: center; padding: 2rem; }
-        h1 { font-size: 6rem; color: #ffef6c; margin: 0; }
+        h1 { font-size: 6rem; color: #ffe100; margin: 0; }
         p { color: #5a5a5a; font-size: 1.2rem; margin: 1rem 0; }
-        a { color: #ffef6c; font-weight: 600; }
+        a { color: #ffe100; font-weight: 600; }
     </style>
 </head>
 <body>

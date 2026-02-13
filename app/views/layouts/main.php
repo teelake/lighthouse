@@ -15,10 +15,6 @@
     <button type="button" class="scroll-to-top" aria-label="Scroll to top" title="Back to top">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
     </button>
-    <div class="scroll-indicator" role="button" tabindex="0" aria-label="Scroll down">
-        <span>SCROLL</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-    </div>
     <header class="site-header" id="site-header">
         <div class="header-inner">
             <a href="<?= rtrim(BASE_URL, '/') ?>/" class="logo">
