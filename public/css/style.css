@@ -98,6 +98,7 @@ body { margin: 0; padding: 0; width: 100%; min-width: 100%; font-family: var(--f
 
 /* Gather With Us - HOP-inspired service times */
 .gather-section { background: var(--color-bg-warm); padding: 5rem 0; }
+.gather-section .section-title-bar { border-color: var(--color-dark); background: rgba(255,251,245,0.9); }
 .gather-section .section-title { color: var(--color-dark); }
 .section-sub { font-size: 1.1rem; color: var(--color-muted); margin: -0.5rem 0 2rem; }
 .gather-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
@@ -112,7 +113,7 @@ body { margin: 0; padding: 0; width: 100%; min-width: 100%; font-family: var(--f
 /* New Here - warm strip */
 .new-here-section { background: #fff; padding: 3rem 0; border-top: 1px solid rgba(201,162,39,0.15); }
 .new-here-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
-.new-here-text h2 { margin: 0 0 0.25rem; font-size: 1.5rem; color: var(--color-dark); }
+.new-here-section .section-title-bar { border-color: var(--color-dark); background: var(--color-bg-warm); }
 .new-here-text p { margin: 0; color: var(--color-muted); }
 
 /* We Raise Lights - our unique branded section */
@@ -132,6 +133,7 @@ body { margin: 0; padding: 0; width: 100%; min-width: 100%; font-family: var(--f
 
 /* What's On - events */
 .events-section { background: #fff; padding: 4rem 0; }
+.events-section .section-title-bar { border-color: var(--color-dark); background: var(--color-bg-warm); }
 .events-section .section-title { color: var(--color-dark); }
 .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
 .event-card-modern { background: var(--color-bg-warm); padding: 2rem; border-radius: var(--radius); border: 2px solid transparent; transition: var(--transition); }
@@ -144,6 +146,7 @@ body { margin: 0; padding: 0; width: 100%; min-width: 100%; font-family: var(--f
 
 /* Moments - gallery */
 .moments-section { background: var(--color-bg); padding: 4rem 0; }
+.moments-section .section-title-bar { border-color: var(--color-dark); background: rgba(250,250,250,0.95); }
 .moments-section .section-title { color: var(--color-dark); }
 .moments-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 1rem; margin-top: 2rem; min-height: 350px; }
 .moment-item { border-radius: var(--radius); overflow: hidden; }
@@ -157,6 +160,7 @@ body { margin: 0; padding: 0; width: 100%; min-width: 100%; font-family: var(--f
 
 /* Stay Connected - newsletter */
 .stay-connected-section { background: var(--color-torch-red); color: #fff; padding: 4rem 0; }
+.stay-connected-section .section-title-bar { border-color: rgba(255,255,255,0.6); background: rgba(0,0,0,0.15); }
 .stay-connected-section .section-title { color: #fff; }
 .stay-connected-section .section-sub { color: rgba(255,255,255,0.9); }
 .stay-connected-section .newsletter-form { max-width: 500px; margin: 0 auto; }
@@ -186,10 +190,12 @@ body { margin: 0; padding: 0; width: 100%; min-width: 100%; font-family: var(--f
 .btn-outline { background: transparent; color: #fff; border: 2px solid var(--color-primary); padding: 0.75rem 1.5rem; }
 .btn-outline:hover { background: rgba(201,162,39,0.2); }
 
-/* Section - Believers House style */
+/* Section - big titles with top/bottom border lines */
 .section { width: 100%; padding: 4rem 0; }
 .container { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
-.section-title { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: var(--color-dark); margin: 0 0 0.5rem; letter-spacing: -0.02em; }
+.section-title-bar { margin: 0 -1.5rem 2rem; padding: 1rem 1.5rem; border-top: 2px solid var(--color-dark); border-bottom: 2px solid var(--color-dark); background: var(--color-bg-warm); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.section-title-bar .section-title { margin: 0; }
+.section-title { font-family: var(--font-heading); font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: var(--color-dark); letter-spacing: 0.08em; text-transform: uppercase; }
 .section-lead { font-size: 1.1rem; line-height: 1.75; color: var(--color-muted); max-width: 680px; margin-bottom: 1.5rem; }
 .section-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
 

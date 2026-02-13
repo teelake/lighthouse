@@ -32,7 +32,9 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 <!-- 2. Gather With Us - HOP-inspired: clear service times, Join Online + Plan Visit -->
 <section class="section gather-section">
     <div class="container">
-        <h2 class="section-title">Gather With Us</h2>
+        <div class="section-title-bar">
+            <h2 class="section-title">Gather With Us</h2>
+        </div>
         <p class="section-sub">Join us in person or online</p>
         <div class="gather-grid">
             <div class="gather-card">
@@ -63,7 +65,9 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 <section class="section new-here-section">
     <div class="container new-here-inner">
         <div class="new-here-text">
-            <h2>New Here?</h2>
+            <div class="section-title-bar">
+                <h2 class="section-title">New Here?</h2>
+            </div>
             <p>Start your journey. We'd love to connect with you.</p>
         </div>
         <a href="<?= $baseUrl ?>/im-new" class="btn btn-watch">Start Here</a>
@@ -95,7 +99,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 <!-- 5. What's On - events -->
 <section class="section events-section">
     <div class="container">
-        <div class="section-header">
+        <div class="section-title-bar">
             <h2 class="section-title">What's On</h2>
             <a href="<?= $baseUrl ?>/events" class="btn btn-accent btn-sm">View All Events</a>
         </div>
@@ -119,7 +123,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 <!-- 6. Moments - gallery -->
 <section class="section moments-section">
     <div class="container">
-        <div class="section-header">
+        <div class="section-title-bar">
             <h2 class="section-title">Moments</h2>
             <a href="<?= $baseUrl ?>/media" class="btn btn-accent btn-sm">See More</a>
         </div>
@@ -158,7 +162,9 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 <!-- 9. Stay Connected - newsletter -->
 <section class="section stay-connected-section">
     <div class="container">
-        <h2 class="section-title">Stay Connected</h2>
+        <div class="section-title-bar">
+            <h2 class="section-title">Stay Connected</h2>
+        </div>
         <p class="section-sub">Subscribe for updates and inspiration</p>
         <form class="newsletter-form" action="<?= $baseUrl ?>/newsletter/subscribe" method="post">
             <input type="text" name="name" placeholder="Your name" required>
