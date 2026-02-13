@@ -220,4 +220,65 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+    // Newsletter inline UX states (validation + success/error feedback)
+    var newsletterForm = document.querySelector('.js-newsletter-form');
+    if (newsletterForm) {
+        var newsletterStatus = document.querySelector('.newsletter-status');
+        var newsletterSubmit = newsletterForm.querySelector('.newsletter-submit');
+
+        function setNewsletterStatus(message, state) {
+            if (!newsletterStatus) return;
+            newsletterStatus.textContent = message || '';
+            newsletterStatus.classList.remove('success', 'error');
+            if (state === 'success' || state === 'error') {
+                newsletterStatus.classList.add(state);
+            }
+        }
+
+        newsletterForm.addEventListener('input', function() {
+            if (newsletterForm.classList.contains('is-invalid')) {
+                newsletterForm.classList.remove('is-invalid');
+            }
+        });
+
+        newsletterForm.addEventListener('submit', async function(e) {
+            if (!newsletterForm.checkValidity()) {
+                e.preventDefault();
+                newsletterForm.classList.add('is-invalid');
+                setNewsletterStatus('Please enter your full name and a valid email address.', 'error');
+                return;
+            }
+
+            e.preventDefault();
+            if (newsletterSubmit) {
+                newsletterSubmit.disabled = true;
+                newsletterSubmit.textContent = 'Submitting...';
+            }
+            setNewsletterStatus('Submitting your subscription...', '');
+
+            try {
+                var response = await fetch(newsletterForm.action, {
+                    method: 'POST',
+                    body: new FormData(newsletterForm),
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                });
+
+                if (!response.ok) throw new Error('Submit failed');
+
+                newsletterForm.reset();
+                newsletterForm.classList.remove('is-invalid');
+                setNewsletterStatus("You're in! Check your inbox for updates.", 'success');
+            } catch (err) {
+                setNewsletterStatus('Could not submit automatically. Redirecting to secure submit...', '');
+                newsletterForm.submit();
+                return;
+            } finally {
+                if (newsletterSubmit) {
+                    newsletterSubmit.disabled = false;
+                    newsletterSubmit.textContent = 'Join Newsletter';
+                }
+            }
+        });
+    }
 });
