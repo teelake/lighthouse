@@ -78,7 +78,7 @@ $mediaTypeLabel = function ($t) {
 };
 ?>
 
-<!-- 3. Recent Sermons - BLOG-style cards with image, pill tag, title overlay -->
+<!-- 3. Recent Sermons - youth-centric media cards with play overlay -->
 <section class="section recent-sermons-section" data-animate>
     <div class="section-title-bar">
         <div class="section-title-bar-inner">
@@ -90,9 +90,12 @@ $mediaTypeLabel = function ($t) {
         <?php if (!empty($latestMedia)): ?>
         <div class="sermon-cards">
             <?php foreach ($latestMedia as $item): ?>
-            <a href="<?= $baseUrl ?>/media/<?= htmlspecialchars($item['slug']) ?>" class="sermon-card">
+            <a href="<?= $baseUrl ?>/media/<?= htmlspecialchars($item['slug']) ?>" class="sermon-card" aria-label="Watch: <?= htmlspecialchars($item['title']) ?>">
                 <div class="sermon-card-img" style="background-image: url('<?= htmlspecialchars($mediaThumb($item)) ?>');">
                     <span class="sermon-card-tag"><?= htmlspecialchars($mediaTypeLabel($item['media_type'] ?? 'video')) ?></span>
+                    <span class="sermon-card-play" aria-hidden="true">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    </span>
                     <div class="sermon-card-overlay">
                         <h3 class="sermon-card-title"><?= htmlspecialchars($item['title']) ?></h3>
                         <p class="sermon-card-desc"><?= htmlspecialchars(mb_strimwidth($item['description'] ?? '', 0, 120, '…')) ?></p>
@@ -110,9 +113,12 @@ $mediaTypeLabel = function ($t) {
         ?>
         <div class="sermon-cards">
             <?php foreach ($demoCards as $demo): ?>
-            <a href="<?= $baseUrl ?>/media" class="sermon-card">
+            <a href="<?= $baseUrl ?>/media" class="sermon-card" aria-label="Watch: <?= htmlspecialchars($demo['title']) ?>">
                 <div class="sermon-card-img" style="background-image: url('<?= htmlspecialchars($demo['img']) ?>');">
                     <span class="sermon-card-tag"><?= htmlspecialchars($demo['tag']) ?></span>
+                    <span class="sermon-card-play" aria-hidden="true">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    </span>
                     <div class="sermon-card-overlay">
                         <h3 class="sermon-card-title"><?= htmlspecialchars($demo['title']) ?></h3>
                         <p class="sermon-card-desc"><?= htmlspecialchars($demo['desc']) ?></p>
