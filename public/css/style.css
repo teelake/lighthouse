@@ -186,6 +186,71 @@ body::before {
 }
 @media (max-width: 768px) { .hero-pillars { gap: 0.75rem; } }
 
+/* Glimpse - bento-style image collage (hero → gather bridge) */
+.glimpse-section { background: var(--color-dark); padding: 0; overflow: hidden; }
+.glimpse-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 200px;
+    gap: 0.5rem;
+    padding: 0.5rem 0 4rem;
+}
+.glimpse-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+}
+.glimpse-section.animate-in .glimpse-item { opacity: 1; transform: translateY(0); }
+.glimpse-section.animate-in .glimpse-item:nth-child(1) { transition-delay: 0.05s; }
+.glimpse-section.animate-in .glimpse-item:nth-child(2) { transition-delay: 0.12s; }
+.glimpse-section.animate-in .glimpse-item:nth-child(3) { transition-delay: 0.19s; }
+.glimpse-section.animate-in .glimpse-item:nth-child(4) { transition-delay: 0.26s; }
+.glimpse-section.animate-in .glimpse-item:nth-child(5) { transition-delay: 0.33s; }
+.glimpse-item--wide { grid-column: span 2; }
+.glimpse-item--tall { grid-row: span 2; }
+.glimpse-img {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s var(--ease-out-expo);
+}
+.glimpse-item:hover .glimpse-img { transform: scale(1.08); }
+.glimpse-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.7) 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 1.25rem;
+    opacity: 0.85;
+    transition: opacity 0.35s ease;
+}
+.glimpse-item:hover .glimpse-overlay { opacity: 1; }
+.glimpse-label {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 0.35rem 0.75rem;
+    background: rgba(255,225,0,0.25);
+    border-radius: 6px;
+    backdrop-filter: blur(4px);
+}
+@media (max-width: 900px) {
+    .glimpse-grid { grid-template-columns: repeat(2, 1fr); }
+    .glimpse-item--wide { grid-column: span 2; }
+    .glimpse-item--tall { grid-row: span 1; }
+}
+@media (max-width: 600px) {
+    .glimpse-grid { grid-auto-rows: 160px; gap: 0.4rem; padding-bottom: 3rem; }
+}
+
 /* Gather With Us - HOP-inspired service times */
 .gather-section { background: var(--color-bg-warm); padding: 5rem 0; }
 .gather-section .section-title-bar { border-color: var(--color-dark); background: rgba(255,251,245,0.9); }

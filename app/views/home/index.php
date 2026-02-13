@@ -29,6 +29,42 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
     </div>
 </section>
 
+<!-- 1.5. Glimpse - image collage with effects & animations (hero → gather bridge) -->
+<section class="glimpse-section" data-animate>
+    <div class="glimpse-grid container">
+        <div class="glimpse-item glimpse-item--wide">
+            <div class="glimpse-img" style="background-image: url('https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=900');"></div>
+            <div class="glimpse-overlay">
+                <span class="glimpse-label">Worship</span>
+            </div>
+        </div>
+        <div class="glimpse-item">
+            <div class="glimpse-img" style="background-image: url('https://images.unsplash.com/photo-1420161900862-9a86fa1f5c79?w=600');"></div>
+            <div class="glimpse-overlay">
+                <span class="glimpse-label">Community</span>
+            </div>
+        </div>
+        <div class="glimpse-item glimpse-item--tall">
+            <div class="glimpse-img" style="background-image: url('https://images.unsplash.com/photo-1507692049790-de58290a4334?w=600');"></div>
+            <div class="glimpse-overlay">
+                <span class="glimpse-label">Gather</span>
+            </div>
+        </div>
+        <div class="glimpse-item glimpse-item--wide">
+            <div class="glimpse-img" style="background-image: url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=900');"></div>
+            <div class="glimpse-overlay">
+                <span class="glimpse-label">Ministry</span>
+            </div>
+        </div>
+        <div class="glimpse-item">
+            <div class="glimpse-img" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600');"></div>
+            <div class="glimpse-overlay">
+                <span class="glimpse-label">Connect</span>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- 2. Gather With Us - HOP-inspired: clear service times, Join Online + Plan Visit -->
 <section class="section gather-section" data-animate>
     <div class="section-title-bar">
