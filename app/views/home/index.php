@@ -126,7 +126,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
     </div>
 </section>
 
-<!-- 6. Moments - carousel gallery -->
+<!-- 6. Moments - grid layout carousel (original 1fr + 1.5fr, scrollable) -->
 <section class="section moments-section" data-animate>
     <div class="section-title-bar">
         <div class="section-title-bar-inner">
@@ -135,20 +135,33 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
         </div>
     </div>
     <div class="container container-fluid">
-        <div class="moments-carousel">
-            <button type="button" class="carousel-btn carousel-prev" aria-label="Previous slide">
+        <div class="moments-carousel" data-moments-carousel>
+            <button type="button" class="carousel-btn carousel-prev" aria-label="Previous">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
             </button>
-            <button type="button" class="carousel-btn carousel-next" aria-label="Next slide">
+            <button type="button" class="carousel-btn carousel-next" aria-label="Next">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
             </button>
             <div class="carousel-track-wrap">
                 <div class="carousel-track">
-                    <div class="carousel-slide"><div class="moment-slide"><img src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=800" alt="Worship"></div></div>
-                    <div class="carousel-slide"><div class="moment-slide"><img src="https://images.unsplash.com/photo-1420161900862-9a86fa1f5c79?w=800" alt="Community"></div></div>
-                    <div class="carousel-slide"><div class="moment-slide"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800" alt="Gathering"></div></div>
-                    <div class="carousel-slide"><div class="moment-slide"><img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=800" alt="Ministry"></div></div>
-                    <div class="carousel-slide"><div class="moment-slide"><img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800" alt="Church"></div></div>
+                    <div class="carousel-slide">
+                        <div class="moments-grid">
+                            <div class="moment-item"><img src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=600" alt="Worship"></div>
+                            <div class="moment-item moment-wide"><img src="https://images.unsplash.com/photo-1420161900862-9a86fa1f5c79?w=1200" alt="Community"></div>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="moments-grid">
+                            <div class="moment-item"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600" alt="Gathering"></div>
+                            <div class="moment-item moment-wide"><img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=1200" alt="Ministry"></div>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="moments-grid">
+                            <div class="moment-item"><img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600" alt="Church"></div>
+                            <div class="moment-item moment-wide"><img src="https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1200" alt="Worship service"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="carousel-dots" role="tablist" aria-label="Carousel navigation"></div>

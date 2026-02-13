@@ -55,12 +55,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Throttled scroll handler
     let ticking = false;
+    var scrollProgress = document.querySelector('.scroll-progress');
     function onScroll() {
         if (!ticking) {
             requestAnimationFrame(function() {
                 updateHeaderState();
                 if (scrollToTop) scrollToTop.classList.toggle('visible', window.scrollY > 400);
                 if (scrollIndicator) scrollIndicator.classList.toggle('hidden', window.scrollY > 400);
+                if (scrollProgress) {
+                    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                    var pct = docHeight > 0 ? Math.min(100, (window.scrollY / docHeight) * 100) : 0;
+                    scrollProgress.style.transform = 'scaleX(' + (pct / 100) + ')';
+                    scrollProgress.setAttribute('aria-valuenow', Math.round(pct));
+                }
                 ticking = false;
             });
             ticking = true;
@@ -135,5 +142,15 @@ document.addEventListener('DOMContentLoaded', function() {
         carousel.addEventListener('mouseenter', function() { clearInterval(autoPlayTimer); });
         carousel.addEventListener('mouseleave', startAutoPlay);
         startAutoPlay();
+        // Touch swipe for mobile
+        let touchStartX = 0, touchEndX = 0;
+        carousel.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        carousel.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            var diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) { diff > 0 ? nextSlide() : prevSlide(); }
+        }, { passive: true });
     }
 });
