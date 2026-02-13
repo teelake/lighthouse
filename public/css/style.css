@@ -3,6 +3,8 @@
     --color-primary: #ffe100;
     --color-primary-light: #ffea33;
     --color-primary-dark: #e5ca00;
+    /* Higher-contrast gold for text/borders on light backgrounds (WCAG AA) */
+    --color-primary-on-light: #9a7b00;
     --color-torch-red: #B22222;
     --color-gold-soft: rgba(255,225,0,0.1);
     --color-gold-bg: rgba(255,225,0,0.06);
@@ -73,14 +75,14 @@ body::before {
 .header-social a:hover { color: var(--color-primary); }
 .header-social svg { display: block; }
 .site-header.header-scrolled .header-social a { color: var(--color-muted); }
-.site-header.header-scrolled .header-social a:hover { color: var(--color-primary); }
+.site-header.header-scrolled .header-social a:hover { color: var(--color-primary-on-light); }
 .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
 .nav-toggle span { display: block; width: 24px; height: 2px; background: #fff; margin: 5px 0; }
 .main-nav ul { display: flex; align-items: center; gap: 0.5rem; list-style: none; margin: 0; padding: 0; }
 .main-nav a { text-decoration: none; color: #fff; padding: 0.5rem 0.75rem; font-weight: 500; font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.35s ease; }
 .main-nav a:hover { color: var(--color-primary); }
 .site-header.header-scrolled .main-nav a { color: var(--color-dark); }
-.site-header.header-scrolled .main-nav a:hover { color: var(--color-primary); }
+.site-header.header-scrolled .main-nav a:hover { color: var(--color-primary-on-light); }
 .main-nav .has-dropdown { position: relative; }
 .main-nav .has-dropdown:hover .dropdown { opacity: 1; visibility: visible; }
 .main-nav .dropdown { position: absolute; top: 100%; left: 0; min-width: 180px; background: #000; border-radius: var(--radius); box-shadow: var(--shadow-hover); opacity: 0; visibility: hidden; transition: var(--transition); padding: 0.5rem 0; list-style: none; margin: 0; }
@@ -158,10 +160,10 @@ body::before {
 .gather-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
 .gather-card { background: #fff; padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow); border: 2px solid transparent; transition: var(--transition); }
 .gather-card:hover { border-color: var(--color-primary); box-shadow: 0 16px 48px rgba(255,225,0,0.18); transform: translateY(-8px); }
-.gather-day { display: block; font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; color: var(--color-primary); margin-bottom: 0.25rem; }
+.gather-day { display: block; font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; color: var(--color-primary-on-light); margin-bottom: 0.25rem; }
 .gather-time { font-size: 1.5rem; font-weight: 700; color: var(--color-dark); }
 .gather-desc { margin: 0.5rem 0; color: var(--color-muted); font-size: 0.95rem; }
-.gather-loc { font-size: 0.85rem; color: var(--color-primary); font-weight: 600; margin-bottom: 1rem; display: block; }
+.gather-loc { font-size: 0.85rem; color: var(--color-primary-on-light); font-weight: 600; margin-bottom: 1rem; display: block; }
 .gather-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
 /* New Here - warm strip */
@@ -302,9 +304,9 @@ body::before {
 .event-card-modern { background: var(--color-bg-warm); padding: 2rem; border-radius: var(--radius); border: 2px solid transparent; transition: var(--transition); }
 .event-card-modern:hover { border-color: var(--color-primary); box-shadow: 0 12px 40px rgba(255,225,0,0.12); transform: translateY(-4px); }
 .event-card-modern h3 { margin: 0 0 0.25rem; font-size: 1.2rem; color: var(--color-dark); }
-.event-card-modern .event-time { font-weight: 600; color: var(--color-primary); font-size: 0.9rem; margin-bottom: 0.5rem; }
+.event-card-modern .event-time { font-weight: 600; color: var(--color-primary-on-light); font-size: 0.9rem; margin-bottom: 0.5rem; }
 .event-card-modern p { margin: 0 0 1rem; color: var(--color-muted); font-size: 0.95rem; }
-.link-arrow { font-weight: 600; color: var(--color-primary); text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; transition: var(--transition); }
+.link-arrow { font-weight: 600; color: var(--color-primary-on-light); text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; transition: var(--transition); }
 .link-arrow:hover { color: var(--color-primary-dark); gap: 0.6rem; }
 
 /* Moments - original grid layout (1fr + 1.5fr) in scrollable carousel */
@@ -638,6 +640,16 @@ body::before {
 .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
 .container-fluid { width: 100%; max-width: none; padding: 0 2rem; }
 .section-title-bar { position: relative; width: 100%; margin: 0 0 2rem; padding: 1rem 0; border-top: 2px solid var(--color-dark); border-bottom: 2px solid var(--color-dark); background: var(--color-bg-warm); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+/* Accent buttons in section bars - use high-contrast gold on light backgrounds */
+.section-title-bar .btn-accent {
+    color: var(--color-primary-on-light);
+    border-color: var(--color-primary-on-light);
+}
+.section-title-bar .btn-accent:hover {
+    background: rgba(154,123,0,0.1);
+    color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+}
 .section-title-bar::before {
     content: '';
     position: absolute;
@@ -688,10 +700,10 @@ body::before {
 /* Core Values - gold borders */
 .core-values { background: #fff; }
 .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-.value-card { text-align: center; padding: 2rem 1rem; border: 2px solid var(--color-primary); border-radius: var(--radius); transition: var(--transition); background: var(--color-bg-warm); }
-.value-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); border-color: var(--color-primary-light); }
-.value-icon { color: var(--color-primary); font-size: 1.5rem; margin-bottom: 0.5rem; }
-.value-card h3 { margin: 0 0 0.5rem; color: var(--color-primary); font-size: 1.2rem; }
+.value-card { text-align: center; padding: 2rem 1rem; border: 2px solid var(--color-primary-on-light); border-radius: var(--radius); transition: var(--transition); background: var(--color-bg-warm); }
+.value-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); border-color: var(--color-primary-dark); }
+.value-icon { color: var(--color-primary-on-light); font-size: 1.5rem; margin-bottom: 0.5rem; }
+.value-card h3 { margin: 0 0 0.5rem; color: var(--color-primary-on-light); font-size: 1.2rem; }
 .value-card p { margin: 0; color: var(--color-muted); font-size: 0.95rem; }
 
 /* Events Preview - dark section, gold-tinted cards like Believers House */
@@ -740,7 +752,7 @@ body::before {
     font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--color-primary);
+    color: var(--color-primary-on-light);
 }
 .media-sub {
     margin: 0 0 2rem;
@@ -864,12 +876,12 @@ body::before {
     gap: 0.3rem;
     margin-top: 2rem;
     font-weight: 600;
-    color: var(--color-primary-dark);
+    color: var(--color-primary-on-light);
     text-decoration: none;
     transition: var(--transition);
 }
 .media-back:hover {
-    color: var(--color-primary);
+    color: var(--color-primary-dark);
     transform: translateX(-2px);
 }
 
@@ -883,8 +895,8 @@ body::before {
     font-weight: 800;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    background: var(--color-gold-bg);
-    color: var(--color-primary-dark);
+    background: rgba(154,123,0,0.12);
+    color: var(--color-primary-on-light);
     border-radius: 6px;
     margin-bottom: 1rem;
 }
@@ -930,7 +942,7 @@ body::before {
     letter-spacing: 0.14em;
     text-transform: uppercase;
     font-weight: 700;
-    color: var(--color-primary-dark);
+    color: var(--color-primary-on-light);
 }
 .brand-sub {
     margin: 0 0 0.5rem;
@@ -986,12 +998,12 @@ body::before {
     gap: 0.3rem;
     margin-top: 0.5rem;
     font-weight: 600;
-    color: var(--color-primary-dark);
+    color: var(--color-primary-on-light);
     text-decoration: none;
     transition: var(--transition);
 }
 .brand-back:hover {
-    color: var(--color-primary);
+    color: var(--color-primary-dark);
     transform: translateX(-2px);
 }
 
