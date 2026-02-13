@@ -29,9 +29,10 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
     </div>
 </section>
 
-<!-- 1.5. Glimpse - dual-row scrolling cards (top→left, bottom→right) like House of Praise Our Expressions -->
-<section class="glimpse-section">
-    <div class="glimpse-row glimpse-row--left" aria-hidden="true">
+<!-- 1.5. Glimpse - dual-row scrolling cards (top→left, bottom→right). Position: immediately after hero is optimal—visual bridge before primary CTA (Gather). -->
+<section class="glimpse-section" aria-label="Our expressions">
+    <h2 class="sr-only">Our Expressions</h2>
+    <div class="glimpse-row glimpse-row--left">
         <div class="glimpse-track">
             <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Worship</span></div></div>
             <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1420161900862-9a86fa1f5c79?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Community</span></div></div>
@@ -45,7 +46,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
             <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Connect</span></div></div>
         </div>
     </div>
-    <div class="glimpse-row glimpse-row--right" aria-hidden="true">
+    <div class="glimpse-row glimpse-row--right">
         <div class="glimpse-track">
             <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Faith</span></div></div>
             <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Word</span></div></div>
@@ -299,7 +300,7 @@ $mediaTypeLabel = function ($t) {
 <!-- 9. Map -->
 <section class="map-section" data-animate>
     <div class="map-container">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2836.7857583703526!2d-63.6770046!3d44.68315439999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4b5a215128cb02df%3A0xf44bdaa2f32e4a51!2sThe%20LightHouse%20Global%20Ministries!5e0!3m2!1sen!2sng!4v1770960686185!5m2!1sen!2sng" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2836.7857583703526!2d-63.6770046!3d44.68315439999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4b5a215128cb02df%3A0xf44bdaa2f32e4a51!2sThe%20LightHouse%20Global%20Ministries!5e0!3m2!1sen!2sng!4v1770960686185!5m2!1sen!2sng" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lighthouse Global Church location map"></iframe>
     </div>
 </section>
 

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="<?= rtrim(BASE_URL, '/') ?>/public/css/style.css">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="scroll-progress" role="progressbar" aria-label="Scroll progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
     <button type="button" class="scroll-to-top" aria-label="Scroll to top" title="Back to top">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
@@ -62,7 +63,7 @@
             </nav>
         </div>
     </header>
-    <main class="main-content">
+    <main class="main-content" id="main-content">
         <?php echo $content ?? ''; ?>
     </main>
     <footer class="site-footer bh-footer">
