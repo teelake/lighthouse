@@ -242,10 +242,8 @@ body::before {
     color: rgba(255,255,255,0.9);
     line-height: 1.5;
 }
-.sermon-cards-placeholder .sermon-card { max-width: 400px; margin: 0 auto; }
 @media (max-width: 900px) {
     .sermon-cards { grid-template-columns: 1fr; }
-    .sermon-cards-placeholder .sermon-card { max-width: 100%; }
 }
 
 /* We Raise Lights - our unique branded section */

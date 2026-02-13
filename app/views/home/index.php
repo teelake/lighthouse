@@ -101,17 +101,25 @@ $mediaTypeLabel = function ($t) {
             </a>
             <?php endforeach; ?>
         </div>
-        <?php else: ?>
-        <div class="sermon-cards sermon-cards-placeholder">
+        <?php else:
+        $demoCards = [
+            ['img' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600', 'tag' => 'Ministry', 'title' => 'What To Do When You Feel Burned Out', 'desc' => 'Service is the overflow of discipleship. It seeks to extend God\'s grace and mercy to others for His glory and not our own.'],
+            ['img' => 'https://images.unsplash.com/photo-1507692049790-de58290a4334?w=600', 'tag' => 'Teaching', 'title' => 'Raising Lights That Transform Nations', 'desc' => 'Discover how to shine with Christ\'s light—bringing transformation to lives, communities, and cultures.'],
+            ['img' => 'https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=600', 'tag' => 'Sermon', 'title' => 'Catalysis — Worship That Ignites Faith', 'desc' => 'Join us for a catalytic worship experience designed to ignite faith and draw you deeper into God\'s presence.'],
+        ];
+        ?>
+        <div class="sermon-cards">
+            <?php foreach ($demoCards as $demo): ?>
             <a href="<?= $baseUrl ?>/media" class="sermon-card">
-                <div class="sermon-card-img" style="background-image: url('https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=600');">
-                    <span class="sermon-card-tag">Video</span>
+                <div class="sermon-card-img" style="background-image: url('<?= htmlspecialchars($demo['img']) ?>');">
+                    <span class="sermon-card-tag"><?= htmlspecialchars($demo['tag']) ?></span>
                     <div class="sermon-card-overlay">
-                        <h3 class="sermon-card-title">Explore Our Media</h3>
-                        <p class="sermon-card-desc">Watch sermons, teachings, and more.</p>
+                        <h3 class="sermon-card-title"><?= htmlspecialchars($demo['title']) ?></h3>
+                        <p class="sermon-card-desc"><?= htmlspecialchars($demo['desc']) ?></p>
                     </div>
                 </div>
             </a>
+            <?php endforeach; ?>
         </div>
         <?php endif; ?>
     </div>
