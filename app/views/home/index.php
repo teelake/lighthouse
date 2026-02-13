@@ -63,18 +63,57 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
     </div>
 </section>
 
-<!-- 3. New Here - warm welcome strip -->
-<section class="section new-here-section" data-animate>
+<?php
+// Helper: media thumbnail from item (thumbnail field, YouTube embed, or fallback)
+$mediaThumb = function ($item) {
+    if (!empty($item['thumbnail'])) return $item['thumbnail'];
+    $url = $item['embed_url'] ?? '';
+    if (!empty($url) && preg_match('/(?:v=|\/embed\/|\/v\/|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $url, $m)) {
+        return 'https://img.youtube.com/vi/' . $m[1] . '/maxresdefault.jpg';
+    }
+    return 'https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=600';
+};
+$mediaTypeLabel = function ($t) {
+    return ucfirst($t);
+};
+?>
+
+<!-- 3. Recent Sermons - BLOG-style cards with image, pill tag, title overlay -->
+<section class="section recent-sermons-section" data-animate>
     <div class="section-title-bar">
         <div class="section-title-bar-inner">
-            <h2 class="section-title">New Here?</h2>
+            <h2 class="section-title">Recent Sermons</h2>
+            <a href="<?= $baseUrl ?>/media" class="btn btn-accent btn-sm">Watch All</a>
         </div>
     </div>
-    <div class="container new-here-inner">
-        <div class="new-here-text">
-            <p>Start your journey. We'd love to connect with you.</p>
+    <div class="container">
+        <?php if (!empty($latestMedia)): ?>
+        <div class="sermon-cards">
+            <?php foreach ($latestMedia as $item): ?>
+            <a href="<?= $baseUrl ?>/media/<?= htmlspecialchars($item['slug']) ?>" class="sermon-card">
+                <div class="sermon-card-img" style="background-image: url('<?= htmlspecialchars($mediaThumb($item)) ?>');">
+                    <span class="sermon-card-tag"><?= htmlspecialchars($mediaTypeLabel($item['media_type'] ?? 'video')) ?></span>
+                    <div class="sermon-card-overlay">
+                        <h3 class="sermon-card-title"><?= htmlspecialchars($item['title']) ?></h3>
+                        <p class="sermon-card-desc"><?= htmlspecialchars(mb_strimwidth($item['description'] ?? '', 0, 120, '…')) ?></p>
+                    </div>
+                </div>
+            </a>
+            <?php endforeach; ?>
         </div>
-        <a href="<?= $baseUrl ?>/im-new" class="btn btn-watch">Start Here</a>
+        <?php else: ?>
+        <div class="sermon-cards sermon-cards-placeholder">
+            <a href="<?= $baseUrl ?>/media" class="sermon-card">
+                <div class="sermon-card-img" style="background-image: url('https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=600');">
+                    <span class="sermon-card-tag">Video</span>
+                    <div class="sermon-card-overlay">
+                        <h3 class="sermon-card-title">Explore Our Media</h3>
+                        <p class="sermon-card-desc">Watch sermons, teachings, and more.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <?php endif; ?>
     </div>
 </section>
 
