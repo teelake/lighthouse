@@ -1,22 +1,24 @@
-/* Lighthouse Global Church - Believers House 100% mirror, gold primary */
+/* Lighthouse Global Church - Unique design: sharp, modern, youthful, vibrant */
 :root {
     --color-primary: #C9A227;
     --color-primary-light: #E0B84A;
     --color-primary-dark: #A67C00;
     --color-torch-red: #B22222;
-    --color-gold-soft: rgba(201,162,39,0.12);
-    --color-gold-bg: rgba(201,162,39,0.08);
-    --color-dark: #0a0a0a;
-    --color-dark-soft: #1a1a1a;
-    --color-muted: #6b6b6b;
-    --color-bg: #f5f5f5;
-    --color-bg-warm: #FFFEF9;
-    --font-sans: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-heading: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
-    --radius: 6px;
-    --shadow: 0 2px 16px rgba(0,0,0,0.06);
-    --shadow-hover: 0 6px 24px rgba(0,0,0,0.1);
-    --transition: 0.25s ease;
+    --color-gold-soft: rgba(201,162,39,0.1);
+    --color-gold-bg: rgba(201,162,39,0.06);
+    --color-dark: #1a1a1a;
+    --color-dark-soft: #2d2d2d;
+    --color-muted: #5c5c5c;
+    --color-bg: #fafafa;
+    --color-bg-warm: #FFFBF5;
+    --color-light: #fff;
+    --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 4px 20px rgba(26,26,26,0.06);
+    --shadow-hover: 0 8px 32px rgba(26,26,26,0.1);
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * { box-sizing: border-box; }
@@ -64,50 +66,85 @@ body { margin: 0; padding-left: 56px; font-family: var(--font-sans); font-size: 
     .main-nav .give-cta { margin-top: 0.5rem; }
 }
 
-/* Hero - Believers House asymmetric: text left, logo right */
-.hero { position: relative; min-height: 95vh; display: flex; align-items: center; overflow: hidden; }
+/* Hero - Lighthouse unique: centered, bold, warm */
+.hero { position: relative; min-height: 92vh; display: flex; align-items: center; overflow: hidden; }
 .hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
 .hero-overlay { position: absolute; inset: 0; }
-.hero-inner { position: relative; z-index: 1; width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 3rem; }
-.hero-content { flex: 1 1 55%; text-align: left; }
-.hero-headline { font-family: var(--font-heading); font-size: clamp(2.25rem, 5.5vw, 4.25rem); font-weight: 800; color: #fff; margin: 0 0 0.5rem; line-height: 1.05; letter-spacing: 0.02em; text-transform: uppercase; }
-.bh-headline { display: flex; flex-direction: column; gap: 0.1em; }
-.bh-headline-line { display: block; }
-.hero-pillars { font-family: var(--font-sans); font-size: clamp(0.95rem, 1.2vw, 1.1rem); font-weight: 500; color: rgba(255,255,255,0.92); margin: 1.25rem 0 1.75rem; line-height: 1.8; letter-spacing: 0.05em; }
-.hero-pillars span { display: block; }
-.hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; }
-.hero-logo { flex: 0 0 auto; max-width: 180px; opacity: 0.95; }
-.hero-logo img { width: 100%; height: auto; filter: brightness(0) invert(1); }
-@media (max-width: 768px) {
-    .hero-inner { flex-direction: column; justify-content: center; text-align: center; }
-    .hero-content { text-align: center; }
-    .hero-ctas { justify-content: center; }
-    .hero-logo { display: none; }
-}
+.hero-inner { position: relative; z-index: 1; width: 100%; max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+.hero-centered .hero-content { text-align: center; }
+.hero-tagline { font-size: 0.95rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-primary); margin: 0 0 0.75rem; font-weight: 600; }
+.hero-headline { font-family: var(--font-heading); font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 700; color: #fff; margin: 0 0 1rem; line-height: 1.15; letter-spacing: -0.02em; }
+.hero-pillars { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin: 1.5rem 0 2rem; font-size: 1rem; font-weight: 600; color: rgba(255,255,255,0.9); }
+.hero-pillars span { padding: 0.35rem 1rem; background: rgba(255,255,255,0.1); border-radius: 50px; }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+@media (max-width: 768px) { .hero-pillars { gap: 0.75rem; } }
 
-/* Welcome banner - Believers House full-width image */
-.welcome-banner { position: relative; min-height: 50vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.welcome-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
-.welcome-overlay { position: absolute; inset: 0; background: rgba(10,10,10,0.45); }
-.welcome-content { position: relative; z-index: 1; text-align: center; padding: 2rem; }
-.welcome-title { font-family: var(--font-heading); font-size: clamp(1.9rem, 4vw, 2.75rem); font-weight: 700; color: #fff; margin: 0 0 1.5rem; letter-spacing: 0.1em; text-transform: uppercase; }
+/* Gather With Us - HOP-inspired service times */
+.gather-section { background: var(--color-bg-warm); padding: 5rem 0; }
+.gather-section .section-title { color: var(--color-dark); }
+.section-sub { font-size: 1.1rem; color: var(--color-muted); margin: -0.5rem 0 2rem; }
+.gather-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+.gather-card { background: #fff; padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow); border: 2px solid transparent; transition: var(--transition); }
+.gather-card:hover { border-color: var(--color-gold-bg); box-shadow: var(--shadow-hover); }
+.gather-day { display: block; font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; color: var(--color-primary); margin-bottom: 0.25rem; }
+.gather-time { font-size: 1.5rem; font-weight: 700; color: var(--color-dark); }
+.gather-desc { margin: 0.5rem 0; color: var(--color-muted); font-size: 0.95rem; }
+.gather-loc { font-size: 0.85rem; color: var(--color-primary); font-weight: 600; margin-bottom: 1rem; display: block; }
+.gather-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
-/* About split - Believers House: left dark text, right accent panel + image */
-.about-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 420px; }
-.about-text { background: var(--color-dark); color: #fff; padding: 4rem 3rem; display: flex; flex-direction: column; justify-content: center; }
-.about-text .section-title { color: var(--color-primary); text-transform: uppercase; font-family: var(--font-heading); letter-spacing: 0.12em; font-size: 1.25rem; margin-bottom: 1.25rem; }
-.about-text p { color: rgba(255,255,255,0.9); margin: 0 0 1.5rem; line-height: 1.75; font-size: 1rem; }
-.about-image { background: linear-gradient(135deg, rgba(201,162,39,0.15) 0%, rgba(166,124,0,0.25) 100%); }
-.about-image img { width: 100%; height: 100%; object-fit: cover; }
-@media (max-width: 768px) { .about-split { grid-template-columns: 1fr; } .about-image { min-height: 280px; } }
+/* New Here - warm strip */
+.new-here-section { background: #fff; padding: 3rem 0; border-top: 1px solid rgba(201,162,39,0.15); }
+.new-here-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+.new-here-text h2 { margin: 0 0 0.25rem; font-size: 1.5rem; color: var(--color-dark); }
+.new-here-text p { margin: 0; color: var(--color-muted); }
 
-/* PHOTOS section - Believers House: tall left, wide right */
-.photos-section { background: var(--color-dark); padding: 4rem 0; }
-.photos-section .section-title { color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.12em; }
-.photos-grid { display: grid; grid-template-columns: 1fr 1.8fr; grid-template-rows: 1fr; gap: 0.75rem; margin-top: 2rem; min-height: 400px; }
-.photo-item { overflow: hidden; }
-.photo-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
-@media (max-width: 768px) { .photos-grid { grid-template-columns: 1fr; min-height: 300px; } }
+/* We Raise Lights - our unique branded section */
+.lights-section { background: linear-gradient(135deg, var(--color-dark) 0%, #252525 100%); color: #fff; padding: 5rem 0; }
+.lights-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+.lights-headline { font-family: var(--font-heading); font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 700; line-height: 1.25; margin: 0 0 1.25rem; }
+.lights-accent { color: var(--color-primary); }
+.lights-content p { color: rgba(255,255,255,0.88); line-height: 1.75; margin-bottom: 1.5rem; }
+.lights-image { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-hover); }
+.lights-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (max-width: 768px) { .lights-inner { grid-template-columns: 1fr; } .lights-image { min-height: 280px; } }
+
+/* Scripture */
+.scripture-section { background: var(--color-bg-warm); padding: 3rem 0; }
+.scripture-section blockquote { margin: 0; font-size: 1.2rem; font-style: italic; color: var(--color-dark); text-align: center; max-width: 700px; margin-left: auto; margin-right: auto; }
+.scripture-section blockquote::before { content: '"'; color: var(--color-primary); }
+
+/* What's On - events */
+.events-section { background: #fff; padding: 4rem 0; }
+.events-section .section-title { color: var(--color-dark); }
+.events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+.event-card-modern { background: var(--color-bg-warm); padding: 2rem; border-radius: var(--radius); border: 2px solid transparent; transition: var(--transition); }
+.event-card-modern:hover { border-color: var(--color-gold-bg); }
+.event-card-modern h3 { margin: 0 0 0.25rem; font-size: 1.2rem; color: var(--color-dark); }
+.event-card-modern .event-time { font-weight: 600; color: var(--color-primary); font-size: 0.9rem; margin-bottom: 0.5rem; }
+.event-card-modern p { margin: 0 0 1rem; color: var(--color-muted); font-size: 0.95rem; }
+.link-arrow { font-weight: 600; color: var(--color-primary); text-decoration: none; }
+.link-arrow:hover { color: var(--color-primary-dark); }
+
+/* Moments - gallery */
+.moments-section { background: var(--color-bg); padding: 4rem 0; }
+.moments-section .section-title { color: var(--color-dark); }
+.moments-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 1rem; margin-top: 2rem; min-height: 350px; }
+.moment-item { border-radius: var(--radius); overflow: hidden; }
+.moment-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (max-width: 768px) { .moments-grid { grid-template-columns: 1fr; } }
+
+/* Voice - testimonial */
+.voice-section { background: var(--color-dark); color: #fff; padding: 4rem 0; text-align: center; }
+.voice-quote { font-family: var(--font-heading); font-size: clamp(1.2rem, 2vw, 1.5rem); font-style: italic; max-width: 750px; margin: 0 auto 1rem; line-height: 1.7; }
+.voice-section cite { font-size: 0.95rem; color: var(--color-primary); font-style: normal; font-weight: 600; }
+
+/* Stay Connected - newsletter */
+.stay-connected-section { background: var(--color-torch-red); color: #fff; padding: 4rem 0; }
+.stay-connected-section .section-title { color: #fff; }
+.stay-connected-section .section-sub { color: rgba(255,255,255,0.9); }
+.stay-connected-section .newsletter-form { max-width: 500px; margin: 0 auto; }
+.stay-connected-section .newsletter-form input { background: rgba(255,255,255,0.95); border-color: rgba(255,255,255,0.5); color: var(--color-dark); }
+.stay-connected-section .newsletter-form input::placeholder { color: var(--color-muted); }
 
 /* Map */
 .map-section { background: #f0f0f0; }
@@ -117,7 +154,7 @@ body { margin: 0; padding-left: 56px; font-family: var(--font-sans); font-size: 
 .btn-sm { padding: 0.5rem 1rem; font-size: 0.9rem; }
 
 /* Buttons - Believers House style */
-.btn { display: inline-flex; align-items: stretch; padding: 0; border-radius: 4px; font-weight: 600; text-decoration: none; transition: var(--transition); border: none; overflow: hidden; }
+.btn { display: inline-flex; align-items: stretch; padding: 0; border-radius: var(--radius-sm); font-weight: 600; text-decoration: none; transition: var(--transition); border: none; overflow: hidden; }
 /* WATCH LIVE / primary CTA: white bg + dark text, gold accent with arrow - works with or without inner spans */
 .btn-watch { background: #fff; color: var(--color-dark); position: relative; padding-right: 3rem; padding-left: 1.25rem; padding-top: 0.75rem; padding-bottom: 0.75rem; }
 .btn-watch::after { content: '→'; position: absolute; right: 0; top: 0; bottom: 0; background: var(--color-primary); color: var(--color-dark); display: flex; align-items: center; justify-content: center; padding: 0 1rem; font-weight: 700; }
@@ -135,7 +172,7 @@ body { margin: 0; padding-left: 56px; font-family: var(--font-sans); font-size: 
 /* Section - Believers House style */
 .section { padding: 4rem 0; }
 .container { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
-.section-title { font-family: var(--font-heading); font-size: 1.35rem; font-weight: 700; color: var(--color-dark); margin: 0 0 1rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.section-title { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: var(--color-dark); margin: 0 0 0.5rem; letter-spacing: -0.02em; }
 .section-lead { font-size: 1.1rem; line-height: 1.75; color: var(--color-muted); max-width: 680px; margin-bottom: 1.5rem; }
 .section-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
 
@@ -197,14 +234,10 @@ body { margin: 0; padding-left: 56px; font-family: var(--font-sans); font-size: 
 .testimonial-dots span { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); }
 .testimonial-dots span.active { background: var(--color-primary); }
 
-/* Newsletter - logo torch red */
-.newsletter-section { background: var(--color-torch-red); color: #fff; padding: 4rem 0; }
-.newsletter-section .section-title { color: #fff; letter-spacing: 0.1em; }
-.newsletter-form { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; max-width: 600px; margin: 0 auto; }
-.newsletter-form input { padding: 0.65rem 1rem; border: 2px solid rgba(255,255,255,0.4); border-radius: 6px; font-size: 0.95rem; font-family: var(--font-sans); background: rgba(255,255,255,0.95); color: var(--color-dark); }
-.newsletter-form input::placeholder { color: var(--color-muted); }
+.newsletter-form { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.newsletter-form input { padding: 0.75rem 1rem; border: 2px solid rgba(0,0,0,0.12); border-radius: var(--radius-sm); font-size: 0.95rem; font-family: var(--font-sans); }
 .newsletter-form input[type="email"] { flex: 1 1 200px; }
-.newsletter-form input[type="text"] { flex: 1 1 180px; }
+.newsletter-form input[type="text"] { flex: 1 1 160px; }
 
 /* Main content */
 .main-content { min-height: 50vh; overflow-x: hidden; }
