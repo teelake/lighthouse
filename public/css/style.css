@@ -23,41 +23,58 @@
 
 * { box-sizing: border-box; }
 html { overflow-x: hidden; }
-body { margin: 0; padding-left: 56px; font-family: var(--font-sans); font-size: 17px; line-height: 1.65; color: var(--color-dark); background: var(--color-bg); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+body { margin: 0; font-family: var(--font-sans); font-size: 17px; line-height: 1.65; color: var(--color-dark); background: var(--color-bg); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
-/* Social sidebar - Believers House: white icons, site-wide (inside body, spans all pages) */
-.social-sidebar { position: fixed; left: 0; top: 0; bottom: 0; width: 56px; z-index: 50; display: flex; flex-direction: column; gap: 1rem; padding: 1rem 0.75rem; background: #000; align-items: center; justify-content: center; }
-.social-sidebar a { color: #fff; transition: var(--transition); }
-.social-sidebar a:hover { color: var(--color-primary); transform: scale(1.1); }
-.social-sidebar svg { display: block; fill: currentColor; }
-
-/* Scroll indicator - Believers House right edge */
-.scroll-indicator { position: fixed; right: 1rem; top: 50%; transform: translateY(-50%); z-index: 40; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: #fff; writing-mode: vertical-rl; text-orientation: mixed; font-size: 0.75rem; letter-spacing: 0.2em; pointer-events: none; }
+/* Scroll indicator - clickable, scrolls down */
+.scroll-indicator { position: fixed; right: 1rem; top: 50%; transform: translateY(-50%); z-index: 40; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.8); writing-mode: vertical-rl; text-orientation: mixed; font-size: 0.75rem; letter-spacing: 0.2em; cursor: pointer; transition: var(--transition); }
+.scroll-indicator:hover { color: var(--color-primary); }
 .scroll-indicator svg { flex-shrink: 0; }
+.scroll-indicator.hidden { opacity: 0; pointer-events: none; }
 @media (max-width: 900px) { .scroll-indicator { display: none; } }
 
-/* Header - Believers House: dark header, white nav links */
-.site-header { position: sticky; top: 0; z-index: 100; background: #000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+/* Scroll to top - appears when scrolled down */
+.scroll-to-top { position: fixed; right: 1rem; bottom: 2rem; z-index: 45; width: 48px; height: 48px; border: none; border-radius: 50%; background: var(--color-dark); color: #fff; cursor: pointer; display: none; align-items: center; justify-content: center; box-shadow: var(--shadow-hover); transition: var(--transition); }
+.scroll-to-top.visible { display: flex; }
+.scroll-to-top:hover { background: var(--color-primary); color: var(--color-dark); }
+@media (max-width: 900px) { .scroll-to-top { right: 1rem; bottom: 1.5rem; width: 44px; height: 44px; } }
+
+/* Header - fixed, transitions to white + black logo when scrolled */
+.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: #000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); transition: background 0.35s ease, box-shadow 0.35s ease; }
+.site-header.header-scrolled { background: #fff; box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
 .header-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; min-height: 72px; }
 .logo { display: flex; align-items: center; text-decoration: none; }
-.logo img { height: 52px; width: auto; max-width: 180px; object-fit: contain; filter: brightness(0) invert(1); }
-.logo-text { font-size: 1.1rem; font-weight: 700; color: var(--color-primary); letter-spacing: 0.02em; }
+.logo .logo-img { height: 52px; width: auto; max-width: 180px; object-fit: contain; filter: brightness(0) invert(1); transition: filter 0.35s ease; }
+.site-header.header-scrolled .logo .logo-img { filter: none; }
+.logo-text { font-size: 1.1rem; font-weight: 700; color: var(--color-primary); letter-spacing: 0.02em; transition: color 0.35s ease; }
+.site-header.header-scrolled .logo-text { color: var(--color-dark); }
+.header-social { display: flex; align-items: center; gap: 0.75rem; }
+.header-social a { color: rgba(255,255,255,0.85); padding: 0.35rem; transition: var(--transition); }
+.header-social a:hover { color: var(--color-primary); }
+.header-social svg { display: block; }
+.site-header.header-scrolled .header-social a { color: var(--color-muted); }
+.site-header.header-scrolled .header-social a:hover { color: var(--color-primary); }
 .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
 .nav-toggle span { display: block; width: 24px; height: 2px; background: #fff; margin: 5px 0; }
 .main-nav ul { display: flex; align-items: center; gap: 0.5rem; list-style: none; margin: 0; padding: 0; }
-.main-nav a { text-decoration: none; color: #fff; padding: 0.5rem 0.75rem; font-weight: 500; font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.main-nav a { text-decoration: none; color: #fff; padding: 0.5rem 0.75rem; font-weight: 500; font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.35s ease; }
 .main-nav a:hover { color: var(--color-primary); }
+.site-header.header-scrolled .main-nav a { color: var(--color-dark); }
+.site-header.header-scrolled .main-nav a:hover { color: var(--color-primary); }
 .main-nav .has-dropdown { position: relative; }
 .main-nav .has-dropdown:hover .dropdown { opacity: 1; visibility: visible; }
 .main-nav .dropdown { position: absolute; top: 100%; left: 0; min-width: 180px; background: #000; border-radius: var(--radius); box-shadow: var(--shadow-hover); opacity: 0; visibility: hidden; transition: var(--transition); padding: 0.5rem 0; list-style: none; margin: 0; }
+.site-header.header-scrolled .main-nav .dropdown { background: #fff; border: 1px solid rgba(0,0,0,0.08); }
 .main-nav .dropdown a { display: block; padding: 0.6rem 1rem; color: #fff !important; }
+.site-header.header-scrolled .main-nav .dropdown a { color: var(--color-dark) !important; }
 .main-nav .dropdown a:hover { color: var(--color-primary) !important; background: rgba(255,255,255,0.08); }
+.site-header.header-scrolled .main-nav .dropdown a:hover { background: var(--color-gold-bg); }
 .btn-give { background: var(--color-primary) !important; color: var(--color-dark) !important; border-radius: 8px; font-weight: 600; }
 .btn-give:hover { background: var(--color-primary-light) !important; color: var(--color-dark) !important; }
+.nav-toggle span { transition: background 0.35s ease; }
+.site-header.header-scrolled .nav-toggle span { background: var(--color-dark); }
 
 @media (max-width: 900px) {
-    body { padding-left: 0; }
-    .social-sidebar { display: none; }
+    .main-nav { background: #000 !important; }
     .nav-toggle { display: block; }
     .main-nav { position: absolute; top: 72px; left: 0; right: 0; background: #000; padding: 1rem; display: none; box-shadow: var(--shadow-hover); }
     .main-nav.active { display: block; }
@@ -240,13 +257,17 @@ body { margin: 0; padding-left: 56px; font-family: var(--font-sans); font-size: 
 .newsletter-form input[type="text"] { flex: 1 1 160px; }
 
 /* Main content */
-.main-content { min-height: 50vh; overflow-x: hidden; }
+.main-content { min-height: 50vh; overflow-x: hidden; padding-top: 72px; }
 
 /* Footer - Believers House multi-column */
 .site-footer { background: var(--color-dark); color: #fff; padding: 4rem 1.5rem 2rem; overflow-x: hidden; }
 .footer-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 2fr; grid-template-rows: auto auto; gap: 2rem 3rem; align-items: start; }
 .footer-brand .logo { display: inline-flex; }
 .footer-brand .logo img { height: 48px; filter: brightness(0) invert(1); }
+.footer-social { display: flex; gap: 1rem; margin: 1rem 0; }
+.footer-social a { color: rgba(255,255,255,0.85); padding: 0.25rem; transition: var(--transition); }
+.footer-social a:hover { color: var(--color-primary); }
+.footer-social svg { display: block; }
 .footer-tagline { font-family: var(--font-heading); font-size: 1.1rem; color: var(--color-primary); margin: 0.5rem 0 1rem; letter-spacing: 0.02em; }
 .copyright { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin: 0; }
 .footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
@@ -260,5 +281,6 @@ body { margin: 0; padding-left: 56px; font-family: var(--font-sans); font-size: 
     .bh-footer .footer-inner { grid-template-columns: 1fr; text-align: center; }
     .bh-footer .footer-nav { grid-template-columns: repeat(2, 1fr); text-align: left; }
     .bh-footer .footer-cta-buttons { justify-content: center; }
+    .bh-footer .footer-brand .footer-social { justify-content: center; }
     .bh-footer .footer-brand .btn-prayer { display: inline-block; }
 }
