@@ -106,11 +106,11 @@
                     <h4>CONTACT</h4>
                     <a href="<?= rtrim(BASE_URL, '/') ?>/contact">Get Directions</a>
                     <a href="<?= rtrim(BASE_URL, '/') ?>/contact">Email Us</a>
+                    <div class="footer-contact-ctas">
+                        <a href="<?= rtrim(BASE_URL, '/') ?>/contact" class="btn btn-watch">CONTACT US</a>
+                        <a href="<?= rtrim(BASE_URL, '/') ?>/giving" class="btn btn-accent">GIVE NOW</a>
+                    </div>
                 </div>
-            </div>
-            <div class="footer-cta-buttons">
-                <a href="<?= rtrim(BASE_URL, '/') ?>/contact" class="btn btn-watch">CONTACT US</a>
-                <a href="<?= rtrim(BASE_URL, '/') ?>/giving" class="btn btn-accent">GIVE NOW</a>
             </div>
         </div>
     </footer>

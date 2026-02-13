@@ -85,9 +85,34 @@ body::before {
 .site-header.header-scrolled .main-nav a:hover { color: var(--color-primary-on-light); }
 .main-nav .has-dropdown { position: relative; }
 .main-nav .has-dropdown:hover .dropdown { opacity: 1; visibility: visible; }
-.main-nav .dropdown { position: absolute; top: 100%; left: 0; min-width: 180px; background: #000; border-radius: var(--radius); box-shadow: var(--shadow-hover); opacity: 0; visibility: hidden; transition: var(--transition); padding: 0.5rem 0; list-style: none; margin: 0; }
-.site-header.header-scrolled .main-nav .dropdown { background: #fff; border: 1px solid rgba(0,0,0,0.08); }
-.main-nav .dropdown a { display: block; padding: 0.6rem 1rem; color: #fff !important; }
+.main-nav .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    background: #000;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hover);
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    padding: 0.5rem 0;
+    list-style: none;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+.main-nav .dropdown li { display: block; margin: 0; }
+.site-header.header-scrolled .main-nav .dropdown {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.08);
+}
+.main-nav .dropdown a {
+    display: block;
+    padding: 0.65rem 1.25rem;
+    color: #fff !important;
+    white-space: nowrap;
+}
 .site-header.header-scrolled .main-nav .dropdown a { color: var(--color-dark) !important; }
 .main-nav .dropdown a:hover { color: var(--color-primary) !important; background: rgba(255,255,255,0.08); }
 .site-header.header-scrolled .main-nav .dropdown a:hover { background: var(--color-gold-bg); }
@@ -616,8 +641,8 @@ body::before {
 /* Buttons - Believers House style */
 .btn { display: inline-flex; align-items: stretch; padding: 0; border-radius: var(--radius-sm); font-weight: 600; text-decoration: none; transition: var(--transition); border: none; overflow: hidden; }
 /* WATCH LIVE / primary CTA: white bg + dark text, gold accent with arrow - works with or without inner spans */
-.btn-watch { background: #fff; color: var(--color-dark); position: relative; padding-right: 3rem; padding-left: 1.25rem; padding-top: 0.75rem; padding-bottom: 0.75rem; }
-.btn-watch::after { content: '→'; position: absolute; right: 0; top: 0; bottom: 0; background: var(--color-primary); color: var(--color-dark); display: flex; align-items: center; justify-content: center; padding: 0 1rem; font-weight: 700; }
+.btn-watch { background: #fff; color: var(--color-dark); position: relative; padding-right: 3.5rem; padding-left: 1.5rem; padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.btn-watch::after { content: '→'; position: absolute; right: 0; top: 0; bottom: 0; width: 2.75rem; background: var(--color-primary); color: var(--color-dark); display: flex; align-items: center; justify-content: center; font-weight: 700; }
 .btn-watch:hover { opacity: 1; transform: translateY(-2px); box-shadow: var(--shadow-hover); }
 .btn-watch:hover::after { background: var(--color-primary-light); }
 /* GIVE HERE / outline: dark bg, gold border, gold text */
@@ -1027,11 +1052,14 @@ body::before {
 .footer-col h4 { font-family: var(--font-heading); font-size: 0.9rem; color: var(--color-primary); margin: 0 0 1rem; letter-spacing: 0.1em; }
 .footer-col a { display: block; color: rgba(255,255,255,0.85); text-decoration: none; margin-bottom: 0.5rem; font-size: 0.95rem; }
 .footer-col a:hover { color: var(--color-primary); }
-.footer-cta-buttons { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 1rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.15); }
+.footer-contact-ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; }
+.footer-contact-ctas .btn { font-size: 0.85rem; padding: 0.6rem 1.25rem; }
+.footer-contact-ctas .btn-watch { padding-right: 3.25rem; padding-left: 1.25rem; }
+.footer-contact-ctas .btn-watch::after { width: 2.5rem; }
 @media (max-width: 900px) {
     .bh-footer .footer-inner { grid-template-columns: 1fr; text-align: center; }
     .bh-footer .footer-nav { grid-template-columns: repeat(2, 1fr); text-align: left; }
-    .bh-footer .footer-cta-buttons { justify-content: center; }
+    .bh-footer .footer-contact-ctas { justify-content: center; }
     .bh-footer .footer-brand .footer-social { justify-content: center; }
     .bh-footer .footer-brand .btn-prayer { display: inline-block; }
 }
