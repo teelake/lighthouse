@@ -31,10 +31,12 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 
 <!-- 2. Gather With Us - HOP-inspired: clear service times, Join Online + Plan Visit -->
 <section class="section gather-section">
-    <div class="container">
-        <div class="section-title-bar">
+    <div class="section-title-bar">
+        <div class="section-title-bar-inner">
             <h2 class="section-title">Gather With Us</h2>
         </div>
+    </div>
+    <div class="container container-fluid">
         <p class="section-sub">Join us in person or online</p>
         <div class="gather-grid">
             <div class="gather-card">
@@ -63,11 +65,13 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 
 <!-- 3. New Here - warm welcome strip -->
 <section class="section new-here-section">
-    <div class="container new-here-inner">
+    <div class="section-title-bar">
+        <div class="section-title-bar-inner">
+            <h2 class="section-title">New Here?</h2>
+        </div>
+    </div>
+    <div class="container container-fluid new-here-inner">
         <div class="new-here-text">
-            <div class="section-title-bar">
-                <h2 class="section-title">New Here?</h2>
-            </div>
             <p>Start your journey. We'd love to connect with you.</p>
         </div>
         <a href="<?= $baseUrl ?>/im-new" class="btn btn-watch">Start Here</a>
@@ -76,7 +80,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 
 <!-- 4. We Raise Lights - our unique branded section -->
 <section class="section lights-section">
-    <div class="container lights-inner">
+    <div class="container container-fluid lights-inner">
         <div class="lights-content">
             <h2 class="lights-headline">We Raise <span class="lights-accent">Lights</span><br>That Transform <span class="lights-accent">Nations</span></h2>
             <p><?= nl2br(htmlspecialchars($whoWeAre['content'] ?? 'The Lighthouse Global Ministry is a Spirit-led ministry commissioned to raise men and women who shine with Christ\'s light—bringing transformation to lives, communities, cultures, and nations.')) ?></p>
@@ -90,7 +94,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 
 <?php if ($scripture && !empty(trim($scripture['content'] ?? ''))): ?>
 <section class="section scripture-section">
-    <div class="container">
+    <div class="container container-fluid">
         <blockquote><?= nl2br(htmlspecialchars($scripture['content'] ?? '')) ?></blockquote>
     </div>
 </section>
@@ -98,11 +102,13 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 
 <!-- 5. What's On - events -->
 <section class="section events-section">
-    <div class="container">
-        <div class="section-title-bar">
+    <div class="section-title-bar">
+        <div class="section-title-bar-inner">
             <h2 class="section-title">What's On</h2>
             <a href="<?= $baseUrl ?>/events" class="btn btn-accent btn-sm">View All Events</a>
         </div>
+    </div>
+    <div class="container container-fluid">
         <div class="events-grid">
             <div class="event-card-modern">
                 <h3>Sunday — Catalysis</h3>
@@ -122,11 +128,13 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 
 <!-- 6. Moments - gallery -->
 <section class="section moments-section">
-    <div class="container">
-        <div class="section-title-bar">
+    <div class="section-title-bar">
+        <div class="section-title-bar-inner">
             <h2 class="section-title">Moments</h2>
             <a href="<?= $baseUrl ?>/media" class="btn btn-accent btn-sm">See More</a>
         </div>
+    </div>
+    <div class="container container-fluid">
         <div class="moments-grid">
             <div class="moment-item"><img src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=600" alt=""></div>
             <div class="moment-item moment-wide"><img src="https://images.unsplash.com/photo-1420161900862-9a86fa1f5c79?w=1200" alt=""></div>
@@ -137,7 +145,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 <!-- 7. Voice - testimonial -->
 <?php if (!empty($testimonials)): ?>
 <section class="section voice-section">
-    <div class="container">
+    <div class="container container-fluid">
         <?php $t = $testimonials[0]; ?>
         <blockquote class="voice-quote">"<?= htmlspecialchars($t['quote']) ?>"</blockquote>
         <cite>— <?= htmlspecialchars($t['author_name']) ?></cite>
@@ -145,7 +153,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 </section>
 <?php else: ?>
 <section class="section voice-section">
-    <div class="container">
+    <div class="container container-fluid">
         <blockquote class="voice-quote">"Lighthouse is more like a family and not just a place of worship. Since I started attending, I've been shown nothing but love."</blockquote>
         <cite>— A Lighthouse Believer</cite>
     </div>
@@ -155,16 +163,18 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 <!-- 8. Map -->
 <section class="map-section">
     <div class="map-container">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2839.0842128169367!2d-63.5952!3d44.6488!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4b5a2112d72a1c81%3A0x4fa5f6e2e7e3e4e5!2sHalifax%2C%20NS!5e0!3m2!1sen!2sca!4v1234567890" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2836.7857583703526!2d-63.6770046!3d44.68315439999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4b5a215128cb02df%3A0xf44bdaa2f32e4a51!2sThe%20LightHouse%20Global%20Ministries!5e0!3m2!1sen!2sng!4v1770960686185!5m2!1sen!2sng" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 </section>
 
 <!-- 9. Stay Connected - newsletter -->
 <section class="section stay-connected-section">
-    <div class="container">
-        <div class="section-title-bar">
+    <div class="section-title-bar">
+        <div class="section-title-bar-inner">
             <h2 class="section-title">Stay Connected</h2>
         </div>
+    </div>
+    <div class="container container-fluid">
         <p class="section-sub">Subscribe for updates and inspiration</p>
         <form class="newsletter-form" action="<?= $baseUrl ?>/newsletter/subscribe" method="post">
             <input type="text" name="name" placeholder="Your name" required>

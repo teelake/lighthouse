@@ -167,10 +167,10 @@ body { margin: 0; padding: 0; width: 100%; min-width: 100%; font-family: var(--f
 .stay-connected-section .newsletter-form input { background: rgba(255,255,255,0.95); border-color: rgba(255,255,255,0.5); color: var(--color-dark); }
 .stay-connected-section .newsletter-form input::placeholder { color: var(--color-muted); }
 
-/* Map */
-.map-section { width: 100%; background: #f0f0f0; }
-.map-container { width: 100%; overflow: hidden; }
-.map-container iframe { display: block; max-width: 100%; }
+/* Map - fills entire section */
+.map-section { width: 100%; height: 450px; background: #f0f0f0; }
+.map-container { width: 100%; height: 100%; overflow: hidden; }
+.map-container iframe { display: block; width: 100%; height: 100%; }
 
 .btn-sm { padding: 0.5rem 1rem; font-size: 0.9rem; }
 
@@ -190,10 +190,12 @@ body { margin: 0; padding: 0; width: 100%; min-width: 100%; font-family: var(--f
 .btn-outline { background: transparent; color: #fff; border: 2px solid var(--color-primary); padding: 0.75rem 1.5rem; }
 .btn-outline:hover { background: rgba(201,162,39,0.2); }
 
-/* Section - big titles with top/bottom border lines */
+/* Section - big titles with top/bottom border lines, full-width borders */
 .section { width: 100%; padding: 4rem 0; }
 .container { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
-.section-title-bar { margin: 0 -1.5rem 2rem; padding: 1rem 1.5rem; border-top: 2px solid var(--color-dark); border-bottom: 2px solid var(--color-dark); background: var(--color-bg-warm); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.container-fluid { width: 100%; max-width: none; padding: 0 2rem; }
+.section-title-bar { width: 100%; margin: 0 0 2rem; padding: 1rem 0; border-top: 2px solid var(--color-dark); border-bottom: 2px solid var(--color-dark); background: var(--color-bg-warm); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.section-title-bar .section-title-bar-inner { width: 100%; max-width: none; margin: 0; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
 .section-title-bar .section-title { margin: 0; }
 .section-title { font-family: var(--font-heading); font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: var(--color-dark); letter-spacing: 0.08em; text-transform: uppercase; }
 .section-lead { font-size: 1.1rem; line-height: 1.75; color: var(--color-muted); max-width: 680px; margin-bottom: 1.5rem; }
