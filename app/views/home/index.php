@@ -29,38 +29,34 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
     </div>
 </section>
 
-<!-- 1.5. Glimpse - image collage with effects & animations (hero → gather bridge) -->
-<section class="glimpse-section" data-animate>
-    <div class="glimpse-grid container">
-        <div class="glimpse-item glimpse-item--wide">
-            <div class="glimpse-img" style="background-image: url('https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=900');"></div>
-            <div class="glimpse-overlay">
-                <span class="glimpse-label">Worship</span>
-            </div>
+<!-- 1.5. Glimpse - dual-row scrolling cards (top→left, bottom→right) like House of Praise Our Expressions -->
+<section class="glimpse-section">
+    <div class="glimpse-row glimpse-row--left" aria-hidden="true">
+        <div class="glimpse-track">
+            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Worship</span></div></div>
+            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1420161900862-9a86fa1f5c79?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Community</span></div></div>
+            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1507692049790-de58290a4334?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Gather</span></div></div>
+            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Ministry</span></div></div>
+            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Connect</span></div></div>
+            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Worship</span></div></div>
+            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1420161900862-9a86fa1f5c79?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Community</span></div></div>
+            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1507692049790-de58290a4334?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Gather</span></div></div>
+            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Ministry</span></div></div>
+            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Connect</span></div></div>
         </div>
-        <div class="glimpse-item">
-            <div class="glimpse-img" style="background-image: url('https://images.unsplash.com/photo-1420161900862-9a86fa1f5c79?w=600');"></div>
-            <div class="glimpse-overlay">
-                <span class="glimpse-label">Community</span>
-            </div>
-        </div>
-        <div class="glimpse-item glimpse-item--tall">
-            <div class="glimpse-img" style="background-image: url('https://images.unsplash.com/photo-1507692049790-de58290a4334?w=600');"></div>
-            <div class="glimpse-overlay">
-                <span class="glimpse-label">Gather</span>
-            </div>
-        </div>
-        <div class="glimpse-item glimpse-item--wide">
-            <div class="glimpse-img" style="background-image: url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=900');"></div>
-            <div class="glimpse-overlay">
-                <span class="glimpse-label">Ministry</span>
-            </div>
-        </div>
-        <div class="glimpse-item">
-            <div class="glimpse-img" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600');"></div>
-            <div class="glimpse-overlay">
-                <span class="glimpse-label">Connect</span>
-            </div>
+    </div>
+    <div class="glimpse-row glimpse-row--right" aria-hidden="true">
+        <div class="glimpse-track">
+            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Faith</span></div></div>
+            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Word</span></div></div>
+            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1507692049790-de58290a4334?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Worship</span></div></div>
+            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1517451332947-b7997297e39a?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Fellowship</span></div></div>
+            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Serve</span></div></div>
+            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Faith</span></div></div>
+            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Word</span></div></div>
+            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1507692049790-de58290a4334?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Worship</span></div></div>
+            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1517451332947-b7997297e39a?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Fellowship</span></div></div>
+            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Serve</span></div></div>
         </div>
     </div>
 </section>
