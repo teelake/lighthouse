@@ -216,7 +216,31 @@ $mediaTypeLabel = function ($t) {
     </div>
 </section>
 
-<!-- 7. Voice - testimonial -->
+<!-- 7. Prayer Wall - two-column: image + content block with CTAs -->
+<section class="section prayer-wall-section" data-animate>
+    <div class="section-title-bar">
+        <div class="section-title-bar-inner">
+            <h2 class="section-title">Prayer Wall</h2>
+            <a href="<?= $baseUrl ?>/prayer" class="btn btn-accent btn-sm">Submit a Request</a>
+        </div>
+    </div>
+    <div class="prayer-wall-inner">
+        <div class="prayer-wall-image">
+            <img src="https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=800" alt="Prayer">
+        </div>
+        <div class="prayer-wall-content">
+            <p class="prayer-wall-eyebrow">Ministry</p>
+            <h3 class="prayer-wall-headline">Pray With Us</h3>
+            <p class="prayer-wall-desc">Prayer is the overflow of our walk with God. It seeks to extend His grace and mercy—for His glory and not our own. We pray as an expression of faith and stewardship, marked by humility, dependence, and expectancy. Submit a request or stand with others in prayer.</p>
+            <div class="prayer-wall-ctas">
+                <a href="<?= $baseUrl ?>/prayer" class="btn btn-prayer-wall btn-primary">Submit a Request</a>
+                <a href="<?= $baseUrl ?>/prayer" class="btn btn-prayer-wall btn-accent">Pray for Others</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 8. Voice - testimonial -->
 <?php if (!empty($testimonials)): ?>
 <section class="section voice-section" data-animate>
     <div class="container">
@@ -234,14 +258,14 @@ $mediaTypeLabel = function ($t) {
 </section>
 <?php endif; ?>
 
-<!-- 8. Map -->
+<!-- 9. Map -->
 <section class="map-section" data-animate>
     <div class="map-container">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2836.7857583703526!2d-63.6770046!3d44.68315439999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4b5a215128cb02df%3A0xf44bdaa2f32e4a51!2sThe%20LightHouse%20Global%20Ministries!5e0!3m2!1sen!2sng!4v1770960686185!5m2!1sen!2sng" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 </section>
 
-<!-- 9. Stay Connected - newsletter -->
+<!-- 10. Stay Connected - newsletter -->
 <section class="section stay-connected-section" data-animate>
     <div class="container newsletter-showcase">
         <div class="newsletter-copy">

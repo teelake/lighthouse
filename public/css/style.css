@@ -312,6 +312,101 @@ body::before {
     .container { padding: 0 1rem; }
 }
 
+/* Prayer Wall - two-column: image left, dark content block right */
+.prayer-wall-section { background: #fff; padding: 0 0 4rem; }
+.prayer-wall-section .section-title-bar { border-color: var(--color-dark); background: var(--color-bg-warm); }
+.prayer-wall-section .section-title { color: var(--color-dark); }
+.prayer-wall-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 420px;
+}
+.prayer-wall-image {
+    overflow: hidden;
+}
+.prayer-wall-image img {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    object-fit: cover;
+    display: block;
+}
+.prayer-wall-content {
+    background: var(--color-dark);
+    color: #fff;
+    padding: 3rem clamp(2rem, 5vw, 4rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.prayer-wall-eyebrow {
+    margin: 0 0 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+}
+.prayer-wall-headline {
+    margin: 0 0 1.25rem;
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.15;
+    color: #fff;
+}
+.prayer-wall-desc {
+    margin: 0 0 1.75rem;
+    color: rgba(255,255,255,0.9);
+    font-size: 1.02rem;
+    line-height: 1.7;
+    max-width: 52ch;
+}
+.prayer-wall-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.prayer-wall-ctas .btn-prayer-wall {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+.prayer-wall-ctas .btn-primary {
+    background: var(--color-primary);
+    color: var(--color-dark);
+    border: 2px solid var(--color-primary);
+}
+.prayer-wall-ctas .btn-primary:hover {
+    background: var(--color-primary-light);
+    border-color: var(--color-primary-light);
+    color: var(--color-dark);
+    transform: translateY(-2px);
+}
+.prayer-wall-ctas .btn-accent {
+    background: transparent;
+    color: #fff;
+    border: 2px solid rgba(255,255,255,0.7);
+}
+.prayer-wall-ctas .btn-accent:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: #fff;
+    color: #fff;
+    transform: translateY(-2px);
+}
+@media (max-width: 900px) {
+    .prayer-wall-inner { grid-template-columns: 1fr; }
+    .prayer-wall-image img { min-height: 300px; }
+    .prayer-wall-content { padding: 2.5rem 1.5rem; }
+}
+
 /* Voice - testimonial */
 .voice-section { background: var(--color-dark); color: #fff; padding: 4rem 0; text-align: center; }
 .voice-quote { font-family: var(--font-sans); font-size: clamp(1.15rem, 2.2vw, 1.55rem); font-style: italic; max-width: 750px; margin: 0 auto 1rem; line-height: 1.75; color: rgba(255,255,255,0.95); }
