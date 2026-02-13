@@ -221,7 +221,7 @@ $mediaTypeLabel = function ($t) {
     <div class="section-title-bar">
         <div class="section-title-bar-inner">
             <h2 class="section-title">Prayer Wall</h2>
-            <a href="<?= $baseUrl ?>/prayer" class="btn btn-accent btn-sm">Submit a Request</a>
+            <a href="<?= $baseUrl ?>/prayer" class="btn btn-accent btn-sm">Go to Prayer Wall</a>
         </div>
     </div>
     <div class="prayer-wall-inner">
@@ -231,9 +231,9 @@ $mediaTypeLabel = function ($t) {
         <div class="prayer-wall-content">
             <p class="prayer-wall-eyebrow">Ministry</p>
             <h3 class="prayer-wall-headline">Pray With Us</h3>
-            <p class="prayer-wall-desc">Prayer is the overflow of our walk with God. It seeks to extend His grace and mercy—for His glory and not our own. We pray as an expression of faith and stewardship, marked by humility, dependence, and expectancy. Submit a request or stand with others in prayer.</p>
+            <p class="prayer-wall-desc">A digital space for church members to post prayer points and invite others to pray with them. You can share openly or post anonymously—either way, the church family stands with you in prayer.</p>
             <div class="prayer-wall-ctas">
-                <a href="<?= $baseUrl ?>/prayer" class="btn btn-prayer-wall btn-primary">Submit a Request</a>
+                <a href="<?= $baseUrl ?>/prayer" class="btn btn-prayer-wall btn-primary">Post a Prayer Point</a>
                 <a href="<?= $baseUrl ?>/prayer" class="btn btn-prayer-wall btn-accent">Pray for Others</a>
             </div>
         </div>
