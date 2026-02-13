@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const header = document.getElementById('site-header');
     const scrollIndicator = document.querySelector('.scroll-indicator');
     const scrollToTop = document.querySelector('.scroll-to-top');
+    const heroSection = document.querySelector('.hero');
+    const heroBg = document.querySelector('.hero-bg');
 
     // Mobile nav toggle
     if (navToggle && mainNav) {
@@ -68,6 +70,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     scrollProgress.style.transform = 'scaleX(' + (pct / 100) + ')';
                     scrollProgress.setAttribute('aria-valuenow', Math.round(pct));
                 }
+                if (heroSection && heroBg) {
+                    var heroTop = heroSection.getBoundingClientRect().top;
+                    var parallax = Math.max(-20, Math.min(40, heroTop * -0.08));
+                    heroBg.style.setProperty('--hero-parallax', parallax + 'px');
+                }
                 ticking = false;
             });
             ticking = true;
@@ -77,12 +84,44 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', onScroll, { passive: true });
     updateHeaderState();
 
+    // Word-level text reveal for section titles
+    function splitWords(el) {
+        if (!el || el.dataset.wordsSplit === 'true') return;
+        var text = (el.textContent || '').trim();
+        if (!text) return;
+        var words = text.split(/\s+/);
+        el.textContent = '';
+        words.forEach(function(word, idx) {
+            var span = document.createElement('span');
+            span.className = 'reveal-word';
+            span.style.setProperty('--word-index', idx);
+            span.textContent = word + (idx < words.length - 1 ? ' ' : '');
+            el.appendChild(span);
+        });
+        el.dataset.wordsSplit = 'true';
+    }
+    document.querySelectorAll('[data-animate] .section-title').forEach(splitWords);
+
+    // Add stagger classes to key content blocks inside each section
+    function setSectionStagger(section) {
+        if (!section) return;
+        var idx = 0;
+        section.querySelectorAll('.gather-card, .event-card-modern, .moment-item, .lights-content, .lights-image, .voice-quote, cite, .newsletter-form, .section-sub, .new-here-text, .new-here-inner > .btn').forEach(function(el) {
+            el.classList.add('stagger-item');
+            el.style.setProperty('--stagger', idx++);
+        });
+    }
+
     // Scroll-in animations: add animate-in when section enters viewport
     const animatedSections = document.querySelectorAll('[data-animate]');
+    animatedSections.forEach(setSectionStagger);
     const animObserver = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animate-in');
+                entry.target.querySelectorAll('.section-title').forEach(function(el) {
+                    el.classList.add('reveal-ready');
+                });
                 animObserver.unobserve(entry.target);
             }
         });
@@ -152,5 +191,17 @@ document.addEventListener('DOMContentLoaded', function() {
             var diff = touchStartX - touchEndX;
             if (Math.abs(diff) > 50) { diff > 0 ? nextSlide() : prevSlide(); }
         }, { passive: true });
+    }
+
+    // Subtle pointer pan on hero for premium depth
+    if (heroSection && heroBg) {
+        heroSection.addEventListener('mousemove', function(e) {
+            var rect = heroSection.getBoundingClientRect();
+            var x = ((e.clientX - rect.left) / rect.width - 0.5) * 12;
+            heroBg.style.setProperty('--hero-pan-x', x.toFixed(2) + 'px');
+        });
+        heroSection.addEventListener('mouseleave', function() {
+            heroBg.style.setProperty('--hero-pan-x', '0px');
+        });
     }
 });
