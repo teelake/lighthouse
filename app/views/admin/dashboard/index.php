@@ -27,13 +27,16 @@
         <h1>Dashboard</h1>
         <p>Welcome to the content management system.</p>
         <div class="grid">
-            <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/sections">Content Sections</a></div>
+            <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/sections">Content Sections</a><br><small>Hero, Gather, Scripture, Prayer Wall, Newsletter, etc.</small></div>
+            <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/glimpse">Glimpse</a><br><small>Homepage scrolling image cards</small></div>
+            <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/moments">Moments</a><br><small>Homepage carousel slides</small></div>
+            <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/testimonials">Testimonials</a><br><small>Voice section quotes</small></div>
             <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/events">Events</a></div>
             <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/ministries">Ministries</a></div>
             <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/small-groups">Small Groups</a></div>
-            <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/media">Media</a></div>
+            <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/media">Media</a><br><small>Sermons & teachings</small></div>
             <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/jobs">Jobs</a></div>
-            <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/settings">Settings</a></div>
+            <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/settings">Settings</a><br><small>General, Homepage, Payment</small></div>
         </div>
     </main>
 </body>

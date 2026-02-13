@@ -20,8 +20,18 @@ class ContentSection extends Model
         $rows = $stmt->fetchAll();
         $keyed = [];
         foreach ($rows as $r) {
+            if (!empty($r['extra_data'])) {
+                $r['extra_data'] = is_string($r['extra_data']) ? json_decode($r['extra_data'], true) : $r['extra_data'];
+            }
             $keyed[$r['section_key']] = $r;
         }
         return $keyed;
+    }
+
+    public function updateByKey($key, $data)
+    {
+        $section = $this->getByKey($key);
+        if (!$section) return false;
+        return $this->update($section['id'], $data);
     }
 }

@@ -54,6 +54,30 @@ $router->add('GET', 'admin/sections', ['controller' => 'Admin\Section', 'action'
 $router->add('GET', 'admin/sections/{key}/edit', ['controller' => 'Admin\Section', 'action' => 'edit']);
 $router->add('POST', 'admin/sections/{key}', ['controller' => 'Admin\Section', 'action' => 'update']);
 
+// Admin - Glimpse section
+$router->add('GET', 'admin/glimpse', ['controller' => 'Admin\Glimpse', 'action' => 'index']);
+$router->add('GET', 'admin/glimpse/create', ['controller' => 'Admin\Glimpse', 'action' => 'create']);
+$router->add('POST', 'admin/glimpse', ['controller' => 'Admin\Glimpse', 'action' => 'store']);
+$router->add('GET', 'admin/glimpse/{id}/edit', ['controller' => 'Admin\Glimpse', 'action' => 'edit']);
+$router->add('POST', 'admin/glimpse/{id}', ['controller' => 'Admin\Glimpse', 'action' => 'update']);
+$router->add('POST', 'admin/glimpse/{id}/delete', ['controller' => 'Admin\Glimpse', 'action' => 'delete']);
+
+// Admin - Moments carousel
+$router->add('GET', 'admin/moments', ['controller' => 'Admin\Moments', 'action' => 'index']);
+$router->add('GET', 'admin/moments/create', ['controller' => 'Admin\Moments', 'action' => 'create']);
+$router->add('POST', 'admin/moments', ['controller' => 'Admin\Moments', 'action' => 'store']);
+$router->add('GET', 'admin/moments/{id}/edit', ['controller' => 'Admin\Moments', 'action' => 'edit']);
+$router->add('POST', 'admin/moments/{id}', ['controller' => 'Admin\Moments', 'action' => 'update']);
+$router->add('POST', 'admin/moments/{id}/delete', ['controller' => 'Admin\Moments', 'action' => 'delete']);
+
+// Admin - Testimonials
+$router->add('GET', 'admin/testimonials', ['controller' => 'Admin\Testimonial', 'action' => 'index']);
+$router->add('GET', 'admin/testimonials/create', ['controller' => 'Admin\Testimonial', 'action' => 'create']);
+$router->add('POST', 'admin/testimonials', ['controller' => 'Admin\Testimonial', 'action' => 'store']);
+$router->add('GET', 'admin/testimonials/{id}/edit', ['controller' => 'Admin\Testimonial', 'action' => 'edit']);
+$router->add('POST', 'admin/testimonials/{id}', ['controller' => 'Admin\Testimonial', 'action' => 'update']);
+$router->add('POST', 'admin/testimonials/{id}/delete', ['controller' => 'Admin\Testimonial', 'action' => 'delete']);
+
 // Admin - Events
 $router->add('GET', 'admin/events', ['controller' => 'Admin\Event', 'action' => 'index']);
 $router->add('GET', 'admin/events/create', ['controller' => 'Admin\Event', 'action' => 'create']);
@@ -99,5 +123,7 @@ $router->add('GET', 'admin/job-applications', ['controller' => 'Admin\JobApplica
 $router->add('GET', 'admin/settings', ['controller' => 'Admin\Setting', 'action' => 'index']);
 $router->add('GET', 'admin/settings/general', ['controller' => 'Admin\Setting', 'action' => 'general']);
 $router->add('POST', 'admin/settings/general', ['controller' => 'Admin\Setting', 'action' => 'updateGeneral']);
+$router->add('GET', 'admin/settings/homepage', ['controller' => 'Admin\Setting', 'action' => 'homepage']);
+$router->add('POST', 'admin/settings/homepage', ['controller' => 'Admin\Setting', 'action' => 'updateHomepage']);
 $router->add('GET', 'admin/settings/payment', ['controller' => 'Admin\Setting', 'action' => 'payment']);
 $router->add('POST', 'admin/settings/payment', ['controller' => 'Admin\Setting', 'action' => 'updatePayment']);

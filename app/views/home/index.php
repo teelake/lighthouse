@@ -2,80 +2,92 @@
 ob_start();
 $baseUrl = rtrim(BASE_URL, '/');
 $hero = $sections['hero_headline'] ?? null;
+$decodeExtra = function ($arr) {
+    if (empty($arr) || !isset($arr['extra_data'])) return [];
+    $ed = $arr['extra_data'];
+    return is_array($ed) ? $ed : (json_decode($ed, true) ?: []);
+};
+$heroExtra = $decodeExtra($sections['hero_config'] ?? []);
+$gatherExtra = $decodeExtra($sections['gather_config'] ?? []);
+$lightsExtra = $decodeExtra($sections['lights_config'] ?? []);
+$prayerExtra = $decodeExtra($sections['prayer_wall_config'] ?? []);
+$newsletterExtra = $decodeExtra($sections['newsletter_config'] ?? []);
+$whatsOnExtra = $decodeExtra($sections['whats_on_config'] ?? []);
 $scripture = $sections['scripture_banner'] ?? null;
 $whoWeAre = $sections['who_we_are'] ?? null;
-$footerCta = $sections['footer_cta'] ?? null;
+
 $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
+$heroTagline = $heroExtra['tagline'] ?? 'A Christ-centered, Spirit-empowered ministry';
+$heroPillars = $heroExtra['pillars'] ?? ['Welcome', 'Worship', 'Word'];
+$heroBg = $heroExtra['bg_image'] ?? 'https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1920';
+$ctaWatch = ltrim($heroExtra['cta_watch_url'] ?? '/media', '/');
+$ctaVisit = ltrim($heroExtra['cta_visit_url'] ?? '/im-new', '/');
 ?>
 
 <!-- 1. Hero - Lighthouse unique: centered, bold, warm gradient -->
 <section class="hero hero-lighthouse">
-    <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1920');"></div>
+    <div class="hero-bg" style="background-image: url('<?= htmlspecialchars($heroBg) ?>');"></div>
     <div class="hero-overlay" style="background: linear-gradient(180deg, rgba(26,26,26,0.6) 0%, rgba(26,26,26,0.85) 100%);"></div>
     <div class="hero-inner hero-centered">
         <div class="hero-content">
-            <p class="hero-tagline">A Christ-centered, Spirit-empowered ministry</p>
+            <p class="hero-tagline"><?= htmlspecialchars($heroTagline) ?></p>
             <h1 class="hero-headline"><?= htmlspecialchars($headline) ?></h1>
             <div class="hero-pillars">
-                <span>Welcome</span>
-                <span>Worship</span>
-                <span>Word</span>
+                <?php foreach ($heroPillars as $p): ?><span><?= htmlspecialchars($p) ?></span><?php endforeach; ?>
             </div>
             <div class="hero-ctas">
-                <a href="<?= $baseUrl ?>/media" class="btn btn-watch">Watch Live</a>
-                <a href="<?= $baseUrl ?>/im-new" class="btn btn-accent">Plan Your Visit</a>
+                <a href="<?= $baseUrl ?>/<?= htmlspecialchars($ctaWatch) ?>" class="btn btn-watch">Watch Live</a>
+                <a href="<?= $baseUrl ?>/<?= htmlspecialchars($ctaVisit) ?>" class="btn btn-accent">Plan Your Visit</a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 1.5. Glimpse - dual-row scrolling cards (top→left, bottom→right). Position: immediately after hero is optimal—visual bridge before primary CTA (Gather). -->
+<!-- 1.5. Glimpse - dual-row scrolling cards (top→left, bottom→right). -->
 <section class="glimpse-section" aria-label="Our expressions">
     <h2 class="sr-only">Our Expressions</h2>
-    <div class="glimpse-row glimpse-row--left">
-        <div class="glimpse-track">
-            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Worship</span></div></div>
-            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1420161900862-9a86fa1f5c79?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Community</span></div></div>
-            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1507692049790-de58290a4334?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Gather</span></div></div>
-            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Ministry</span></div></div>
-            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Connect</span></div></div>
-            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Worship</span></div></div>
-            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1420161900862-9a86fa1f5c79?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Community</span></div></div>
-            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1507692049790-de58290a4334?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Gather</span></div></div>
-            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Ministry</span></div></div>
-            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Connect</span></div></div>
-        </div>
-    </div>
-    <div class="glimpse-row glimpse-row--right">
-        <div class="glimpse-track">
-            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Faith</span></div></div>
-            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Word</span></div></div>
-            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1507692049790-de58290a4334?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Worship</span></div></div>
-            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1517451332947-b7997297e39a?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Fellowship</span></div></div>
-            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Serve</span></div></div>
-            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Faith</span></div></div>
-            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Word</span></div></div>
-            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1507692049790-de58290a4334?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Worship</span></div></div>
-            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1517451332947-b7997297e39a?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Fellowship</span></div></div>
-            <div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=500');"></div><div class="glimpse-slide-overlay"><span class="glimpse-label">Serve</span></div></div>
-        </div>
-    </div>
+    <?php
+    $g1 = $glimpseRow1 ?? [];
+    $g2 = $glimpseRow2 ?? [];
+    $renderGlimpseRow = function ($slides, $rowClass) {
+        if (empty($slides)) return;
+        $dupe = $slides; // duplicate for infinite scroll
+        $all = array_merge($slides, $dupe);
+        echo '<div class="glimpse-row ' . $rowClass . '"><div class="glimpse-track">';
+        foreach ($all as $s) {
+            echo '<div class="glimpse-slide"><div class="glimpse-slide-img" style="background-image: url(\'' . htmlspecialchars($s['image_url']) . '\');"></div>';
+            echo '<div class="glimpse-slide-overlay"><span class="glimpse-label">' . htmlspecialchars($s['label']) . '</span></div></div>';
+        }
+        echo '</div></div>';
+    };
+    if (!empty($g1) || !empty($g2)):
+        if (!empty($g1)) $renderGlimpseRow($g1, 'glimpse-row--left');
+        else echo '<div class="glimpse-row glimpse-row--left"><div class="glimpse-track"></div></div>';
+        if (!empty($g2)) $renderGlimpseRow($g2, 'glimpse-row--right');
+        else echo '<div class="glimpse-row glimpse-row--right"><div class="glimpse-track"></div></div>';
+    else:
+        $fallback1 = [['image_url'=>'https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=500','label'=>'Worship'],['image_url'=>'https://images.unsplash.com/photo-1420161900862-9a86fa1f5c79?w=500','label'=>'Community']];
+        $fallback2 = [['image_url'=>'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=500','label'=>'Faith'],['image_url'=>'https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=500','label'=>'Word']];
+        $renderGlimpseRow($fallback1, 'glimpse-row--left');
+        $renderGlimpseRow($fallback2, 'glimpse-row--right');
+    endif;
+    ?>
 </section>
 
-<!-- 2. Gather With Us - HOP-inspired: clear service times, Join Online + Plan Visit -->
+<!-- 2. Gather With Us -->
 <section class="section gather-section" data-animate>
     <div class="section-title-bar">
         <div class="section-title-bar-inner">
-            <h2 class="section-title">Gather With Us</h2>
+            <h2 class="section-title"><?= htmlspecialchars($gatherExtra['section_title'] ?? 'Gather With Us') ?></h2>
         </div>
     </div>
     <div class="container">
-        <p class="section-sub">Join us in person or online</p>
+        <p class="section-sub"><?= htmlspecialchars($gatherExtra['section_sub'] ?? 'Join us in person or online') ?></p>
         <div class="gather-grid">
             <div class="gather-card">
-                <span class="gather-day">Sunday</span>
+                <span class="gather-day"><?= htmlspecialchars($gatherExtra['sunday_title'] ?? 'Sunday') ?></span>
                 <span class="gather-time"><?= htmlspecialchars($serviceTimes['sunday'] ?? '10:00 AM') ?></span>
-                <p class="gather-desc">Catalysis — Worship that ignites faith</p>
+                <p class="gather-desc"><?= htmlspecialchars($gatherExtra['sunday_desc'] ?? 'Catalysis — Worship that ignites faith') ?></p>
                 <span class="gather-loc">In-Person + Online</span>
                 <div class="gather-actions">
                     <a href="<?= $baseUrl ?>/media" class="btn btn-primary btn-sm">Join Online</a>
@@ -83,9 +95,9 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
                 </div>
             </div>
             <div class="gather-card">
-                <span class="gather-day">Thursday</span>
+                <span class="gather-day"><?= htmlspecialchars($gatherExtra['thursday_title'] ?? 'Thursday') ?></span>
                 <span class="gather-time"><?= htmlspecialchars($serviceTimes['thursday'] ?? '6:00 PM') ?></span>
-                <p class="gather-desc">The Summit — Teaching &amp; prayer</p>
+                <p class="gather-desc"><?= htmlspecialchars($gatherExtra['thursday_desc'] ?? 'The Summit — Teaching & prayer') ?></p>
                 <span class="gather-loc">In-Person + Online</span>
                 <div class="gather-actions">
                     <a href="<?= $baseUrl ?>/media" class="btn btn-primary btn-sm">Join Online</a>
@@ -164,16 +176,16 @@ $mediaTypeLabel = function ($t) {
     </div>
 </section>
 
-<!-- 4. We Raise Lights - our unique branded section -->
+<!-- 4. We Raise Lights -->
 <section class="section lights-section" data-animate>
     <div class="container lights-inner">
         <div class="lights-content">
-            <h2 class="lights-headline">We Raise <span class="lights-accent">Lights</span><br>That Transform <span class="lights-accent">Nations</span></h2>
+            <h2 class="lights-headline"><?= nl2br(htmlspecialchars($lightsExtra['headline'] ?? 'We Raise Lights That Transform Nations')) ?></h2>
             <p><?= nl2br(htmlspecialchars($whoWeAre['content'] ?? 'The Lighthouse Global Ministry is a Spirit-led ministry commissioned to raise men and women who shine with Christ\'s light—bringing transformation to lives, communities, cultures, and nations.')) ?></p>
             <a href="<?= $baseUrl ?>/about" class="btn btn-watch">Learn More</a>
         </div>
         <div class="lights-image">
-            <img src="https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?w=900" alt="Community">
+            <img src="<?= htmlspecialchars($lightsExtra['image'] ?? 'https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?w=900') ?>" alt="Community">
         </div>
     </div>
 </section>
@@ -186,7 +198,7 @@ $mediaTypeLabel = function ($t) {
 </section>
 <?php endif; ?>
 
-<!-- 5. What's On - events -->
+<!-- 5. What's On -->
 <section class="section events-section" data-animate>
     <div class="section-title-bar">
         <div class="section-title-bar-inner">
@@ -197,22 +209,22 @@ $mediaTypeLabel = function ($t) {
     <div class="container">
         <div class="events-grid">
             <div class="event-card-modern">
-                <h3>Sunday — Catalysis</h3>
+                <h3><?= htmlspecialchars($whatsOnExtra['sunday_title'] ?? 'Sunday — Catalysis') ?></h3>
                 <p class="event-time"><?= htmlspecialchars($serviceTimes['sunday'] ?? '10:00 AM') ?></p>
-                <p>A catalytic worship experience designed to ignite faith.</p>
+                <p><?= htmlspecialchars($whatsOnExtra['sunday_desc'] ?? 'A catalytic worship experience designed to ignite faith.') ?></p>
                 <a href="<?= $baseUrl ?>/services" class="link-arrow">Join us →</a>
             </div>
             <div class="event-card-modern">
-                <h3>Thursday — The Summit</h3>
+                <h3><?= htmlspecialchars($whatsOnExtra['thursday_title'] ?? 'Thursday — The Summit') ?></h3>
                 <p class="event-time"><?= htmlspecialchars($serviceTimes['thursday'] ?? '6:00 PM') ?></p>
-                <p>Elevation, encounter, empowerment. Midweek teaching.</p>
+                <p><?= htmlspecialchars($whatsOnExtra['thursday_desc'] ?? 'Elevation, encounter, empowerment. Midweek teaching.') ?></p>
                 <a href="<?= $baseUrl ?>/services" class="link-arrow">Join us →</a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 6. Moments - grid layout carousel (original 1fr + 1.5fr, scrollable) -->
+<!-- 6. Moments carousel -->
 <section class="section moments-section" data-animate>
     <div class="section-title-bar">
         <div class="section-title-bar-inner">
@@ -230,24 +242,23 @@ $mediaTypeLabel = function ($t) {
             </button>
             <div class="carousel-track-wrap">
                 <div class="carousel-track">
+                    <?php
+                    $mList = $moments ?? [];
+                    if (empty($mList)) {
+                        $mList = [
+                            ['image_small'=>'https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=600','image_wide'=>'https://images.unsplash.com/photo-1420161900862-9a86fa1f5c79?w=1200','alt_small'=>'Worship','alt_wide'=>'Community'],
+                            ['image_small'=>'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600','image_wide'=>'https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=1200','alt_small'=>'Gathering','alt_wide'=>'Ministry'],
+                        ];
+                    }
+                    foreach ($mList as $m):
+                    ?>
                     <div class="carousel-slide">
                         <div class="moments-grid">
-                            <div class="moment-item"><img src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=600" alt="Worship"></div>
-                            <div class="moment-item moment-wide"><img src="https://images.unsplash.com/photo-1420161900862-9a86fa1f5c79?w=1200" alt="Community"></div>
+                            <div class="moment-item"><img src="<?= htmlspecialchars($m['image_small']) ?>" alt="<?= htmlspecialchars($m['alt_small'] ?? '') ?>"></div>
+                            <div class="moment-item moment-wide"><img src="<?= htmlspecialchars($m['image_wide']) ?>" alt="<?= htmlspecialchars($m['alt_wide'] ?? '') ?>"></div>
                         </div>
                     </div>
-                    <div class="carousel-slide">
-                        <div class="moments-grid">
-                            <div class="moment-item"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600" alt="Gathering"></div>
-                            <div class="moment-item moment-wide"><img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=1200" alt="Ministry"></div>
-                        </div>
-                    </div>
-                    <div class="carousel-slide">
-                        <div class="moments-grid">
-                            <div class="moment-item"><img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600" alt="Church"></div>
-                            <div class="moment-item moment-wide"><img src="https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1200" alt="Worship service"></div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
             <div class="carousel-dots" role="tablist" aria-label="Carousel navigation"></div>
@@ -255,7 +266,7 @@ $mediaTypeLabel = function ($t) {
     </div>
 </section>
 
-<!-- 7. Prayer Wall - two-column: image + content block with CTAs -->
+<!-- 7. Prayer Wall -->
 <section class="section prayer-wall-section" data-animate>
     <div class="section-title-bar">
         <div class="section-title-bar-inner">
@@ -265,12 +276,12 @@ $mediaTypeLabel = function ($t) {
     </div>
     <div class="prayer-wall-inner">
         <div class="prayer-wall-image">
-            <img src="https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=800" alt="Prayer">
+            <img src="<?= htmlspecialchars($prayerWallImage ?? 'https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=800') ?>" alt="Prayer">
         </div>
         <div class="prayer-wall-content">
-            <p class="prayer-wall-eyebrow">Ministry</p>
-            <h3 class="prayer-wall-headline">Pray With Us</h3>
-            <p class="prayer-wall-desc">A digital space for church members to post prayer points and invite others to pray with them. You can share openly or post anonymously—either way, the church family stands with you in prayer.</p>
+            <p class="prayer-wall-eyebrow"><?= htmlspecialchars($prayerExtra['eyebrow'] ?? 'Ministry') ?></p>
+            <h3 class="prayer-wall-headline"><?= htmlspecialchars($prayerExtra['headline'] ?? 'Pray With Us') ?></h3>
+            <p class="prayer-wall-desc"><?= nl2br(htmlspecialchars($prayerExtra['description'] ?? 'A digital space for church members to post prayer points and invite others to pray with them. You can share openly or post anonymously—either way, the church family stands with you in prayer.')) ?></p>
             <div class="prayer-wall-ctas">
                 <a href="<?= $baseUrl ?>/prayer" class="btn btn-prayer-wall btn-primary">Post a Prayer Point</a>
                 <a href="<?= $baseUrl ?>/prayer" class="btn btn-prayer-wall btn-accent">Pray for Others</a>
@@ -300,7 +311,8 @@ $mediaTypeLabel = function ($t) {
 <!-- 9. Map -->
 <section class="map-section" data-animate>
     <div class="map-container">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2836.7857583703526!2d-63.6770046!3d44.68315439999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4b5a215128cb02df%3A0xf44bdaa2f32e4a51!2sThe%20LightHouse%20Global%20Ministries!5e0!3m2!1sen!2sng!4v1770960686185!5m2!1sen!2sng" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lighthouse Global Church location map"></iframe>
+        <?php $mapSrc = !empty($mapEmbedUrl ?? '') ? $mapEmbedUrl : 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2836.7857583703526!2d-63.6770046!3d44.68315439999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4b5a215128cb02df%3A0xf44bdaa2f32e4a51!2sThe%20LightHouse%20Global%20Ministries!5e0!3m2!1sen!2sng!4v1770960686185!5m2!1sen!2sng'; ?>
+        <iframe src="<?= htmlspecialchars($mapSrc) ?>" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lighthouse Global Church location map"></iframe>
     </div>
 </section>
 
@@ -308,9 +320,9 @@ $mediaTypeLabel = function ($t) {
 <section class="section stay-connected-section" data-animate>
     <div class="container newsletter-showcase">
         <div class="newsletter-copy">
-            <p class="newsletter-eyebrow">Our Newsletter</p>
-            <h2 class="newsletter-title">Get Ministry Updates in Your Inbox</h2>
-            <p class="newsletter-note">Receive event updates, teachings, community highlights, and important church announcements.</p>
+            <p class="newsletter-eyebrow"><?= htmlspecialchars($newsletterExtra['eyebrow'] ?? 'Our Newsletter') ?></p>
+            <h2 class="newsletter-title"><?= htmlspecialchars($newsletterExtra['title'] ?? 'Get Ministry Updates in Your Inbox') ?></h2>
+            <p class="newsletter-note"><?= htmlspecialchars($newsletterExtra['note'] ?? 'Receive event updates, teachings, community highlights, and important church announcements.') ?></p>
             <form class="newsletter-form newsletter-inline js-newsletter-form" action="<?= $baseUrl ?>/newsletter/subscribe" method="post">
                 <input type="text" name="name" placeholder="full name..." autocomplete="name" required>
                 <input type="email" name="email" placeholder="email address..." required>
@@ -321,7 +333,7 @@ $mediaTypeLabel = function ($t) {
         </div>
         <div class="newsletter-visual" aria-hidden="true">
             <div class="newsletter-device">
-                <img src="https://images.unsplash.com/photo-1487014679447-9f8336841d58?w=1200" alt="">
+                <img src="<?= htmlspecialchars($newsletterDeviceImage ?? 'https://images.unsplash.com/photo-1487014679447-9f8336841d58?w=1200') ?>" alt="">
             </div>
         </div>
     </div>
