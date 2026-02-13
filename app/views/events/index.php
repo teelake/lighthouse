@@ -8,7 +8,7 @@ $baseUrl = rtrim(BASE_URL, '/');
             <h1 class="section-title">Events & Experiences</h1>
         </div>
     </div>
-    <div class="container container-fluid brand-shell">
+    <div class="container brand-shell">
         <p class="brand-kicker">What's happening</p>
         <p class="brand-sub">Join worship gatherings, teaching nights, and transformative community moments.</p>
         <div class="brand-grid">

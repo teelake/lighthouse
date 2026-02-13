@@ -8,7 +8,7 @@ $baseUrl = rtrim(BASE_URL, '/');
             <h1 class="section-title">About The Lighthouse</h1>
         </div>
     </div>
-    <div class="container container-fluid brand-shell">
+    <div class="container brand-shell">
         <p class="brand-kicker">Our story</p>
         <p class="brand-sub">A Christ-centered, Spirit-empowered ministry raising lights that transform nations.</p>
         <div class="brand-card">

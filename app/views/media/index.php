@@ -8,7 +8,7 @@ $baseUrl = rtrim(BASE_URL, '/');
             <h1 class="section-title">Media & Teachings</h1>
         </div>
     </div>
-    <div class="container container-fluid brand-shell">
+    <div class="container brand-shell">
         <p class="brand-kicker">Stream & grow</p>
         <p class="brand-sub">Explore sermons, teachings, and worship experiences.</p>
         <?php if (!empty($media)): ?>

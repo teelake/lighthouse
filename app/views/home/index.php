@@ -36,7 +36,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
             <h2 class="section-title">Gather With Us</h2>
         </div>
     </div>
-    <div class="container container-fluid">
+    <div class="container">
         <p class="section-sub">Join us in person or online</p>
         <div class="gather-grid">
             <div class="gather-card">
@@ -70,7 +70,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
             <h2 class="section-title">New Here?</h2>
         </div>
     </div>
-    <div class="container container-fluid new-here-inner">
+    <div class="container new-here-inner">
         <div class="new-here-text">
             <p>Start your journey. We'd love to connect with you.</p>
         </div>
@@ -80,7 +80,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 
 <!-- 4. We Raise Lights - our unique branded section -->
 <section class="section lights-section" data-animate>
-    <div class="container container-fluid lights-inner">
+    <div class="container lights-inner">
         <div class="lights-content">
             <h2 class="lights-headline">We Raise <span class="lights-accent">Lights</span><br>That Transform <span class="lights-accent">Nations</span></h2>
             <p><?= nl2br(htmlspecialchars($whoWeAre['content'] ?? 'The Lighthouse Global Ministry is a Spirit-led ministry commissioned to raise men and women who shine with Christ\'s light—bringing transformation to lives, communities, cultures, and nations.')) ?></p>
@@ -94,7 +94,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 
 <?php if ($scripture && !empty(trim($scripture['content'] ?? ''))): ?>
 <section class="section scripture-section" data-animate>
-    <div class="container container-fluid">
+    <div class="container">
         <blockquote><?= nl2br(htmlspecialchars($scripture['content'] ?? '')) ?></blockquote>
     </div>
 </section>
@@ -108,7 +108,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
             <a href="<?= $baseUrl ?>/events" class="btn btn-accent btn-sm">View All Events</a>
         </div>
     </div>
-    <div class="container container-fluid">
+    <div class="container">
         <div class="events-grid">
             <div class="event-card-modern">
                 <h3>Sunday — Catalysis</h3>
@@ -134,7 +134,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
             <a href="<?= $baseUrl ?>/media" class="btn btn-accent btn-sm">See More</a>
         </div>
     </div>
-    <div class="container container-fluid">
+    <div class="container">
         <div class="moments-carousel" data-moments-carousel>
             <button type="button" class="carousel-btn carousel-prev" aria-label="Previous">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
@@ -172,7 +172,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 <!-- 7. Voice - testimonial -->
 <?php if (!empty($testimonials)): ?>
 <section class="section voice-section" data-animate>
-    <div class="container container-fluid">
+    <div class="container">
         <?php $t = $testimonials[0]; ?>
         <blockquote class="voice-quote">"<?= htmlspecialchars($t['quote']) ?>"</blockquote>
         <cite>— <?= htmlspecialchars($t['author_name']) ?></cite>
@@ -180,7 +180,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 </section>
 <?php else: ?>
 <section class="section voice-section" data-animate>
-    <div class="container container-fluid">
+    <div class="container">
         <blockquote class="voice-quote">"Lighthouse is more like a family and not just a place of worship. Since I started attending, I've been shown nothing but love."</blockquote>
         <cite>— A Lighthouse Believer</cite>
     </div>
@@ -196,7 +196,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 
 <!-- 9. Stay Connected - newsletter -->
 <section class="section stay-connected-section" data-animate>
-    <div class="container container-fluid newsletter-showcase">
+    <div class="container newsletter-showcase">
         <div class="newsletter-copy">
             <p class="newsletter-eyebrow">Our Newsletter</p>
             <h2 class="newsletter-title">Get Daily Scripture in Your Inbox</h2>

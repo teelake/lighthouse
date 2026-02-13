@@ -231,7 +231,7 @@ body::before {
 @media (max-width: 480px) {
     :root { --text-hero: 2.25rem; --text-display: 1.75rem; --text-section: 1.4rem; }
     .section-title-bar-inner { padding: 0 1rem; }
-    .container-fluid { padding: 0 1rem; }
+    .container { padding: 0 1rem; }
 }
 
 /* Voice - testimonial */
@@ -404,7 +404,7 @@ body::before {
 .section[data-animate].animate-in .stagger-item { opacity: 1; transform: translateY(0); }
 
 /* Section - big titles with top/bottom border lines, full-width borders */
-.container { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
 .container-fluid { width: 100%; max-width: none; padding: 0 2rem; }
 .section-title-bar { position: relative; width: 100%; margin: 0 0 2rem; padding: 1rem 0; border-top: 2px solid var(--color-dark); border-bottom: 2px solid var(--color-dark); background: var(--color-bg-warm); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
 .section-title-bar::before {
@@ -416,7 +416,7 @@ body::before {
     top: -1px;
     background: linear-gradient(90deg, transparent, rgba(201,162,39,0.65), transparent);
 }
-.section-title-bar .section-title-bar-inner { width: 100%; max-width: none; margin: 0; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.section-title-bar .section-title-bar-inner { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
 .section-title-bar .section-title { margin: 0; }
 .section-title { font-family: var(--font-heading); font-size: var(--text-section); font-weight: 800; color: var(--color-dark); letter-spacing: 0.06em; text-transform: uppercase; }
 .section-title .reveal-word,
