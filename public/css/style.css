@@ -695,7 +695,7 @@ body::before {
 }
 .section-title-bar .section-title-bar-inner { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
 .section-title-bar .section-title { margin: 0; }
-.section-title { font-family: var(--font-heading); font-size: var(--text-section); font-weight: 800; color: var(--color-dark); letter-spacing: 0.06em; word-spacing: 0.2em; text-transform: uppercase; }
+.section-title { font-family: var(--font-heading); font-size: var(--text-section); font-weight: 800; color: var(--color-dark); letter-spacing: 0.06em; word-spacing: 0.4em; text-transform: uppercase; }
 .section-title .reveal-word,
 .hero-headline .reveal-word {
     display: inline-block;
