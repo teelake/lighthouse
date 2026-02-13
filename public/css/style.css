@@ -230,6 +230,8 @@ body::before {
 }
 @media (max-width: 480px) {
     :root { --text-hero: 2.25rem; --text-display: 1.75rem; --text-section: 1.4rem; }
+    .header-inner { padding: 0 1rem; }
+    .hero-inner { padding: 0 1rem; }
     .section-title-bar-inner { padding: 0 1rem; }
     .container { padding: 0 1rem; }
 }
