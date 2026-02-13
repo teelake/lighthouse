@@ -1,8 +1,6 @@
 <?php
 ob_start();
 $baseUrl = rtrim(BASE_URL, '/');
-/** Card style: 1 = top accent, 2 = hover glow, 3 = day badge — change to preview */
-$cardStyle = 1;
 $hero = $sections['hero_headline'] ?? null;
 $scripture = $sections['scripture_banner'] ?? null;
 $whoWeAre = $sections['who_we_are'] ?? null;
@@ -40,8 +38,8 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
     </div>
     <div class="container">
         <p class="section-sub">Join us in person or online</p>
-        <div class="gather-grid gather-cards-<?= $cardStyle ?>">
-            <div class="gather-card gather-card-sunday">
+        <div class="gather-grid">
+            <div class="gather-card">
                 <span class="gather-day">Sunday</span>
                 <span class="gather-time"><?= htmlspecialchars($serviceTimes['sunday'] ?? '10:00 AM') ?></span>
                 <p class="gather-desc">Catalysis — Worship that ignites faith</p>
@@ -51,7 +49,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
                     <a href="<?= $baseUrl ?>/im-new" class="btn btn-accent btn-sm">Plan Visit</a>
                 </div>
             </div>
-            <div class="gather-card gather-card-thursday">
+            <div class="gather-card">
                 <span class="gather-day">Thursday</span>
                 <span class="gather-time"><?= htmlspecialchars($serviceTimes['thursday'] ?? '6:00 PM') ?></span>
                 <p class="gather-desc">The Summit — Teaching &amp; prayer</p>
@@ -164,18 +162,18 @@ $mediaTypeLabel = function ($t) {
         </div>
     </div>
     <div class="container">
-        <div class="events-grid event-cards-<?= $cardStyle ?>">
-            <div class="event-card-modern event-card-sunday">
+        <div class="events-grid">
+            <div class="event-card-modern">
                 <h3>Sunday — Catalysis</h3>
                 <p class="event-time"><?= htmlspecialchars($serviceTimes['sunday'] ?? '10:00 AM') ?></p>
                 <p>A catalytic worship experience designed to ignite faith.</p>
-                <a href="<?= $baseUrl ?>/services" class="link-arrow">Join us <span class="link-arrow-icon">→</span></a>
+                <a href="<?= $baseUrl ?>/services" class="link-arrow">Join us →</a>
             </div>
-            <div class="event-card-modern event-card-thursday">
+            <div class="event-card-modern">
                 <h3>Thursday — The Summit</h3>
                 <p class="event-time"><?= htmlspecialchars($serviceTimes['thursday'] ?? '6:00 PM') ?></p>
                 <p>Elevation, encounter, empowerment. Midweek teaching.</p>
-                <a href="<?= $baseUrl ?>/services" class="link-arrow">Join us <span class="link-arrow-icon">→</span></a>
+                <a href="<?= $baseUrl ?>/services" class="link-arrow">Join us →</a>
             </div>
         </div>
     </div>
