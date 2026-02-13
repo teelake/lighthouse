@@ -2,20 +2,28 @@
 ob_start();
 $baseUrl = rtrim(BASE_URL, '/');
 ?>
-<section class="section">
-    <div class="container">
-        <h1>Events & Experiences</h1>
+<section class="section brand-page" data-animate>
+    <div class="section-title-bar">
+        <div class="section-title-bar-inner">
+            <h1 class="section-title">Events & Experiences</h1>
+        </div>
+    </div>
+    <div class="container container-fluid brand-shell">
+        <p class="brand-kicker">What's happening</p>
+        <p class="brand-sub">Join worship gatherings, teaching nights, and transformative community moments.</p>
+        <div class="brand-grid">
         <?php foreach ($events ?? [] as $e): ?>
-        <article style="margin: 1rem 0; padding: 1rem; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+        <article class="brand-card">
             <h3><?= htmlspecialchars($e['title']) ?></h3>
             <p><?= htmlspecialchars($e['description']) ?></p>
-            <a href="<?= $baseUrl ?>/events/<?= htmlspecialchars($e['slug']) ?>">Details →</a>
+            <a class="link-arrow" href="<?= $baseUrl ?>/events/<?= htmlspecialchars($e['slug']) ?>">Details →</a>
         </article>
         <?php endforeach; ?>
+        </div>
         <?php if (empty($events)): ?>
-        <p>Events will appear here. Manage from admin.</p>
+        <p class="brand-empty">Events will appear here. Manage from admin.</p>
         <?php endif; ?>
-        <a href="<?= $baseUrl ?>/">← Back to Home</a>
+        <a href="<?= $baseUrl ?>/" class="brand-back">← Back to Home</a>
     </div>
 </section>
 <?php $content = ob_get_clean(); require APP_PATH . '/views/layouts/main.php'; ?>

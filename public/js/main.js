@@ -204,4 +204,20 @@ document.addEventListener('DOMContentLoaded', function() {
             heroBg.style.setProperty('--hero-pan-x', '0px');
         });
     }
+
+    // Premium micro-interaction: subtle magnetic hover (desktop only)
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduceMotion && window.matchMedia('(min-width: 901px)').matches) {
+        document.querySelectorAll('.brand-card').forEach(function(el) {
+            el.addEventListener('mousemove', function(e) {
+                var rect = el.getBoundingClientRect();
+                var x = ((e.clientX - rect.left) / rect.width - 0.5) * 8;
+                var y = ((e.clientY - rect.top) / rect.height - 0.5) * 8;
+                el.style.transform = 'translate(' + x.toFixed(2) + 'px,' + y.toFixed(2) + 'px)';
+            });
+            el.addEventListener('mouseleave', function() {
+                el.style.transform = '';
+            });
+        });
+    }
 });

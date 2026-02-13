@@ -2,11 +2,19 @@
 ob_start();
 $baseUrl = rtrim(BASE_URL, '/');
 ?>
-<section class="section">
-    <div class="container">
-        <h1>About The Lighthouse Global Ministry</h1>
-        <p>Content managed from admin. Coming soon.</p>
-        <a href="<?= $baseUrl ?>/">← Back to Home</a>
+<section class="section brand-page" data-animate>
+    <div class="section-title-bar">
+        <div class="section-title-bar-inner">
+            <h1 class="section-title">About The Lighthouse</h1>
+        </div>
+    </div>
+    <div class="container container-fluid brand-shell">
+        <p class="brand-kicker">Our story</p>
+        <p class="brand-sub">A Christ-centered, Spirit-empowered ministry raising lights that transform nations.</p>
+        <div class="brand-card">
+            <p>Content for this page is managed from the admin dashboard and will be updated with the full ministry story, vision, values, and leadership profile.</p>
+        </div>
+        <a href="<?= $baseUrl ?>/" class="brand-back">← Back to Home</a>
     </div>
 </section>
 <?php

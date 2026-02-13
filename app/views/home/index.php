@@ -196,18 +196,21 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 
 <!-- 9. Stay Connected - newsletter -->
 <section class="section stay-connected-section" data-animate>
-    <div class="section-title-bar">
-        <div class="section-title-bar-inner">
-            <h2 class="section-title">Stay Connected</h2>
+    <div class="container container-fluid newsletter-showcase">
+        <div class="newsletter-copy">
+            <p class="newsletter-eyebrow">Our Newsletter</p>
+            <h2 class="newsletter-title">Get Daily Scripture in Your Inbox</h2>
+            <p class="newsletter-note">A nightly brief of resources and encouragement from our ministry team.</p>
+            <form class="newsletter-form newsletter-inline" action="<?= $baseUrl ?>/newsletter/subscribe" method="post">
+                <input type="email" name="email" placeholder="email address..." required>
+                <button type="submit" class="newsletter-submit">Subscribe</button>
+            </form>
         </div>
-    </div>
-    <div class="container container-fluid">
-        <p class="section-sub">Subscribe for updates and inspiration</p>
-        <form class="newsletter-form" action="<?= $baseUrl ?>/newsletter/subscribe" method="post">
-            <input type="text" name="name" placeholder="Your name" required>
-            <input type="email" name="email" placeholder="Your email" required>
-            <button type="submit" class="btn btn-primary">Subscribe</button>
-        </form>
+        <div class="newsletter-visual" aria-hidden="true">
+            <div class="newsletter-device">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200" alt="">
+            </div>
+        </div>
     </div>
 </section>
 
