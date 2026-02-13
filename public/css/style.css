@@ -92,6 +92,7 @@ body::before {
     min-width: 200px;
     background: #000;
     border-radius: var(--radius);
+    text-align: left;
     box-shadow: var(--shadow-hover);
     opacity: 0;
     visibility: hidden;
@@ -109,13 +110,21 @@ body::before {
 }
 .main-nav .dropdown a {
     display: block;
+    width: 100%;
+    box-sizing: border-box;
     padding: 0.65rem 1.25rem;
     color: #fff !important;
     white-space: nowrap;
+    text-align: left;
 }
 .site-header.header-scrolled .main-nav .dropdown a { color: var(--color-dark) !important; }
-.main-nav .dropdown a:hover { color: var(--color-primary) !important; background: rgba(255,255,255,0.08); }
-.site-header.header-scrolled .main-nav .dropdown a:hover { background: var(--color-gold-bg); }
+.main-nav .dropdown a:hover {
+    color: var(--color-primary) !important;
+    background: rgba(255,255,255,0.08);
+}
+.site-header.header-scrolled .main-nav .dropdown a:hover {
+    background: var(--color-gold-bg);
+}
 .btn-give { background: var(--color-primary) !important; color: var(--color-dark) !important; border-radius: 8px; font-weight: 600; }
 .btn-give:hover { background: var(--color-primary-light) !important; color: var(--color-dark) !important; }
 .nav-toggle span { transition: background 0.35s ease; }
