@@ -30,7 +30,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 </section>
 
 <!-- 2. Gather With Us - HOP-inspired: clear service times, Join Online + Plan Visit -->
-<section class="section gather-section">
+<section class="section gather-section" data-animate>
     <div class="section-title-bar">
         <div class="section-title-bar-inner">
             <h2 class="section-title">Gather With Us</h2>
@@ -64,7 +64,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 </section>
 
 <!-- 3. New Here - warm welcome strip -->
-<section class="section new-here-section">
+<section class="section new-here-section" data-animate>
     <div class="section-title-bar">
         <div class="section-title-bar-inner">
             <h2 class="section-title">New Here?</h2>
@@ -79,7 +79,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 </section>
 
 <!-- 4. We Raise Lights - our unique branded section -->
-<section class="section lights-section">
+<section class="section lights-section" data-animate>
     <div class="container container-fluid lights-inner">
         <div class="lights-content">
             <h2 class="lights-headline">We Raise <span class="lights-accent">Lights</span><br>That Transform <span class="lights-accent">Nations</span></h2>
@@ -93,7 +93,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 </section>
 
 <?php if ($scripture && !empty(trim($scripture['content'] ?? ''))): ?>
-<section class="section scripture-section">
+<section class="section scripture-section" data-animate>
     <div class="container container-fluid">
         <blockquote><?= nl2br(htmlspecialchars($scripture['content'] ?? '')) ?></blockquote>
     </div>
@@ -101,7 +101,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 <?php endif; ?>
 
 <!-- 5. What's On - events -->
-<section class="section events-section">
+<section class="section events-section" data-animate>
     <div class="section-title-bar">
         <div class="section-title-bar-inner">
             <h2 class="section-title">What's On</h2>
@@ -126,8 +126,8 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
     </div>
 </section>
 
-<!-- 6. Moments - gallery -->
-<section class="section moments-section">
+<!-- 6. Moments - carousel gallery -->
+<section class="section moments-section" data-animate>
     <div class="section-title-bar">
         <div class="section-title-bar-inner">
             <h2 class="section-title">Moments</h2>
@@ -135,16 +135,30 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
         </div>
     </div>
     <div class="container container-fluid">
-        <div class="moments-grid">
-            <div class="moment-item"><img src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=600" alt=""></div>
-            <div class="moment-item moment-wide"><img src="https://images.unsplash.com/photo-1420161900862-9a86fa1f5c79?w=1200" alt=""></div>
+        <div class="moments-carousel">
+            <button type="button" class="carousel-btn carousel-prev" aria-label="Previous slide">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button type="button" class="carousel-btn carousel-next" aria-label="Next slide">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+            <div class="carousel-track-wrap">
+                <div class="carousel-track">
+                    <div class="carousel-slide"><div class="moment-slide"><img src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=800" alt="Worship"></div></div>
+                    <div class="carousel-slide"><div class="moment-slide"><img src="https://images.unsplash.com/photo-1420161900862-9a86fa1f5c79?w=800" alt="Community"></div></div>
+                    <div class="carousel-slide"><div class="moment-slide"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800" alt="Gathering"></div></div>
+                    <div class="carousel-slide"><div class="moment-slide"><img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=800" alt="Ministry"></div></div>
+                    <div class="carousel-slide"><div class="moment-slide"><img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800" alt="Church"></div></div>
+                </div>
+            </div>
+            <div class="carousel-dots" role="tablist" aria-label="Carousel navigation"></div>
         </div>
     </div>
 </section>
 
 <!-- 7. Voice - testimonial -->
 <?php if (!empty($testimonials)): ?>
-<section class="section voice-section">
+<section class="section voice-section" data-animate>
     <div class="container container-fluid">
         <?php $t = $testimonials[0]; ?>
         <blockquote class="voice-quote">"<?= htmlspecialchars($t['quote']) ?>"</blockquote>
@@ -152,7 +166,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
     </div>
 </section>
 <?php else: ?>
-<section class="section voice-section">
+<section class="section voice-section" data-animate>
     <div class="container container-fluid">
         <blockquote class="voice-quote">"Lighthouse is more like a family and not just a place of worship. Since I started attending, I've been shown nothing but love."</blockquote>
         <cite>— A Lighthouse Believer</cite>
@@ -161,14 +175,14 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 <?php endif; ?>
 
 <!-- 8. Map -->
-<section class="map-section">
+<section class="map-section" data-animate>
     <div class="map-container">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2836.7857583703526!2d-63.6770046!3d44.68315439999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4b5a215128cb02df%3A0xf44bdaa2f32e4a51!2sThe%20LightHouse%20Global%20Ministries!5e0!3m2!1sen!2sng!4v1770960686185!5m2!1sen!2sng" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 </section>
 
 <!-- 9. Stay Connected - newsletter -->
-<section class="section stay-connected-section">
+<section class="section stay-connected-section" data-animate>
     <div class="section-title-bar">
         <div class="section-title-bar-inner">
             <h2 class="section-title">Stay Connected</h2>
