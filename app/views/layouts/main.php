@@ -27,7 +27,7 @@
                 <span class="logo-text">LIGHTHOUSE GLOBAL CHURCH</span>
                 <?php endif; ?>
             </a>
-            <button class="nav-toggle" aria-label="Menu" type="button">
+            <button class="nav-toggle" aria-label="Menu" aria-expanded="false" type="button">
                 <span></span><span></span><span></span>
             </button>
             <nav class="main-nav">

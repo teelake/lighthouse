@@ -7,10 +7,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const heroSection = document.querySelector('.hero');
     const heroBg = document.querySelector('.hero-bg');
 
-    // Mobile nav toggle
-    if (navToggle && mainNav) {
+    // Mobile nav toggle (hamburger to X animation)
+    if (navToggle && mainNav && header) {
         navToggle.addEventListener('click', function() {
             mainNav.classList.toggle('active');
+            header.classList.toggle('nav-open', mainNav.classList.contains('active'));
+            navToggle.setAttribute('aria-expanded', mainNav.classList.contains('active'));
         });
     }
 
@@ -169,6 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
         function nextSlide() { goToSlide(currentIndex + 1); }
         function prevSlide() { goToSlide(currentIndex - 1); }
         function startAutoPlay() {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
             autoPlayTimer = setInterval(nextSlide, 5000);
         }
         function resetAutoPlay() {

@@ -254,8 +254,8 @@ $mediaTypeLabel = function ($t) {
                     ?>
                     <div class="carousel-slide">
                         <div class="moments-grid">
-                            <div class="moment-item"><img src="<?= htmlspecialchars($m['image_small']) ?>" alt="<?= htmlspecialchars($m['alt_small'] ?? '') ?>"></div>
-                            <div class="moment-item moment-wide"><img src="<?= htmlspecialchars($m['image_wide']) ?>" alt="<?= htmlspecialchars($m['alt_wide'] ?? '') ?>"></div>
+                            <div class="moment-item"><img src="<?= htmlspecialchars($m['image_small']) ?>" alt="<?= htmlspecialchars($m['alt_small'] ?? '') ?>" loading="lazy" decoding="async"></div>
+                            <div class="moment-item moment-wide"><img src="<?= htmlspecialchars($m['image_wide']) ?>" alt="<?= htmlspecialchars($m['alt_wide'] ?? '') ?>" loading="lazy" decoding="async"></div>
                         </div>
                     </div>
                     <?php endforeach; ?>
@@ -324,8 +324,10 @@ $mediaTypeLabel = function ($t) {
             <h2 class="newsletter-title"><?= htmlspecialchars($newsletterExtra['title'] ?? 'Get Ministry Updates in Your Inbox') ?></h2>
             <p class="newsletter-note"><?= htmlspecialchars($newsletterExtra['note'] ?? 'Receive event updates, teachings, community highlights, and important church announcements.') ?></p>
             <form class="newsletter-form newsletter-inline js-newsletter-form" action="<?= $baseUrl ?>/newsletter/subscribe" method="post">
-                <input type="text" name="name" placeholder="full name..." autocomplete="name" required>
-                <input type="email" name="email" placeholder="email address..." required>
+                <label for="newsletter-name" class="sr-only">Full name</label>
+                <input id="newsletter-name" type="text" name="name" placeholder="Full name" autocomplete="name" required aria-label="Full name">
+                <label for="newsletter-email" class="sr-only">Email address</label>
+                <input id="newsletter-email" type="email" name="email" placeholder="Email address" required aria-label="Email address">
                 <button type="submit" class="newsletter-submit">Join Newsletter</button>
             </form>
             <p class="newsletter-trust">No spam. Unsubscribe anytime.</p>
