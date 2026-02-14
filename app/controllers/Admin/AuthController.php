@@ -4,12 +4,18 @@ namespace App\Controllers\Admin;
 use App\Core\Controller;
 use App\Core\Totp;
 use App\Models\User;
-use PDO;
 
 class AuthController extends Controller
 {
     private const RATE_LIMIT_ATTEMPTS = 5;
     private const RATE_LIMIT_WINDOW = 900; // 15 min
+
+    private function logAuth(string $message, array $context = []): void
+    {
+        $logFile = defined('ROOT_PATH') ? ROOT_PATH . '/php-error.log' : __DIR__ . '/../../../php-error.log';
+        $ctx = $context ? ' ' . json_encode($context) : '';
+        @file_put_contents($logFile, sprintf("[%s] AUTH: %s%s\n", date('Y-m-d H:i:s'), $message, $ctx), FILE_APPEND | LOCK_EX);
+    }
 
     public function login()
     {
@@ -17,19 +23,31 @@ class AuthController extends Controller
             $this->redirect(admin_url());
         }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            try {
             if (!csrf_verify()) {
+                $this->logAuth('Login failed: CSRF invalid');
                 return $this->render('admin/auth/login', ['error' => 'Invalid request. Please try again.']);
             }
             if (!$this->checkRateLimit()) {
+                $this->logAuth('Login failed: rate limit exceeded', ['ip' => $_SERVER['REMOTE_ADDR'] ?? '']);
                 return $this->render('admin/auth/login', ['error' => 'Too many failed attempts. Try again in 15 minutes.']);
             }
             $email = trim($this->post('email', ''));
             $password = $this->post('password', '');
             if (!$email || !$password) {
+                $this->logAuth('Login failed: missing email or password');
                 return $this->render('admin/auth/login', ['error' => 'Please enter email and password.']);
             }
-            $user = (new User())->findAll(['email' => $email, 'is_active' => 1])[0] ?? null;
-            if (!$user || !password_verify($password, $user['password'])) {
+            $user = null;
+            try {
+                $user = (new User())->findAll(['email' => $email, 'is_active' => 1])[0] ?? null;
+            } catch (\Throwable $e) {
+                $this->logAuth('Login failed: DB error', ['email' => $email, 'error' => $e->getMessage()]);
+                error_log('Admin login DB error: ' . $e->getMessage() . "\n" . $e->getTraceAsString());
+                return $this->render('admin/auth/login', ['error' => 'A system error occurred. Please try again.']);
+            }
+            if (!$user || !password_verify($password, $user['password'] ?? '')) {
+                $this->logAuth('Login failed: invalid credentials', ['email' => $email]);
                 $this->recordFailedAttempt();
                 return $this->render('admin/auth/login', ['error' => 'Invalid email or password.']);
             }
@@ -40,7 +58,13 @@ class AuthController extends Controller
                 $this->redirect(admin_url('2fa'));
             }
             $this->completeLogin($user);
+            $this->logAuth('Login success', ['email' => $email, 'user_id' => $user['id']]);
             $this->redirect(admin_url());
+            } catch (\Throwable $e) {
+                $this->logAuth('Login exception', ['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
+                error_log('Admin login exception: ' . $e->getMessage() . "\n" . $e->getTraceAsString());
+                return $this->render('admin/auth/login', ['error' => 'An error occurred. Please try again.']);
+            }
         }
         $this->render('admin/auth/login');
     }
@@ -114,6 +138,7 @@ class AuthController extends Controller
             $stmt->execute([$ip, $since]);
             return (int)$stmt->fetchColumn() < self::RATE_LIMIT_ATTEMPTS;
         } catch (\Throwable $e) {
+            $this->logAuth('Rate limit check failed (skipped)', ['error' => $e->getMessage()]);
             return true; // skip rate limit if table missing
         }
     }
@@ -125,7 +150,9 @@ class AuthController extends Controller
             $ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
             $stmt = $db->prepare("INSERT INTO login_attempts (ip_address) VALUES (?)");
             $stmt->execute([$ip]);
-        } catch (\Throwable $e) { /* ignore */ }
+        } catch (\Throwable $e) {
+            $this->logAuth('recordFailedAttempt error', ['error' => $e->getMessage()]);
+        }
     }
 
     private function clearFailedAttempts(): void
@@ -134,6 +161,8 @@ class AuthController extends Controller
             $db = \App\Core\Database::getInstance()->getConnection();
             $ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
             $db->prepare("DELETE FROM login_attempts WHERE ip_address = ?")->execute([$ip]);
-        } catch (\Throwable $e) { /* ignore */ }
+        } catch (\Throwable $e) {
+            $this->logAuth('clearFailedAttempts error', ['error' => $e->getMessage()]);
+        }
     }
 }
