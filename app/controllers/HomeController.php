@@ -25,7 +25,7 @@ class HomeController extends Controller
         $sections = $sectionModel->getAllKeyed();
         $events = $eventModel->findAll(['is_published' => 1], 'event_date ASC, event_time ASC', 6);
         $latestMedia = $mediaModel->findAll(['is_published' => 1], 'published_at DESC, created_at DESC', 3);
-        $testimonials = $testimonialModel->findAll(['is_published' => 1], 'sort_order ASC', 3);
+        $testimonials = $testimonialModel->findAll(['is_published' => 1], 'sort_order ASC', 12);
         $glimpseGrouped = $glimpseModel->getAllGroupedByRow();
         $moments = $momentsModel->findAll([], 'sort_order ASC');
         $serviceTimes = [

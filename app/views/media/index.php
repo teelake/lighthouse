@@ -11,9 +11,10 @@ $mediaThumb = function ($m) {
 };
 ?>
 <section class="section media-page" data-animate>
-    <div class="section-title-bar">
-        <div class="section-title-bar-inner">
-            <h1 class="section-title">Media & Teachings</h1>
+    <div class="page-hero page-hero--media">
+        <div class="container">
+            <h1 class="page-hero-title">Media & Teachings</h1>
+            <p class="page-hero-sub">Stream & grow</p>
         </div>
     </div>
     <div class="container media-shell">

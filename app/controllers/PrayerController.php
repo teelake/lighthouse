@@ -2,12 +2,17 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Models\ContentSection;
 
 class PrayerController extends Controller
 {
     public function index()
     {
-        $this->render('prayer/index', ['pageTitle' => 'Prayer - Lighthouse Global Church']);
+        $sections = (new ContentSection())->getAllKeyed();
+        $this->render('prayer/index', [
+            'pageTitle' => 'Prayer - Lighthouse Global Church',
+            'sections' => $sections,
+        ]);
     }
 
     public function submit()

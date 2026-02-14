@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function setSectionStagger(section) {
         if (!section) return;
         var idx = 0;
-        section.querySelectorAll('.gather-card, .event-card-modern, .moment-item, .lights-content, .lights-image, .prayer-wall-image, .prayer-wall-content, .voice-quote, cite, .newsletter-form, .section-sub, .sermon-card, .media-card, .about-pillar, .leader-card').forEach(function(el) {
+        section.querySelectorAll('.gather-card, .event-card-modern, .moment-item, .lights-content, .lights-image, .prayer-wall-image, .prayer-wall-content, .voice-card, .newsletter-form, .section-sub, .sermon-card, .media-card, .about-pillar, .leader-card, .brand-card, .services-card, .im-new-cta-card, .contact-item, .faq-item, .ministry-card, .job-card, .giving-option').forEach(function(el) {
             el.classList.add('stagger-item');
             el.style.setProperty('--stagger', idx++);
         });
@@ -196,6 +196,93 @@ document.addEventListener('DOMContentLoaded', function() {
         }, { passive: true });
     }
 
+    // Voice (testimonial) carousel - multiple cards visible
+    var voiceCarousel = document.querySelector('[data-voice-carousel]');
+    if (voiceCarousel) {
+        var voiceTrack = voiceCarousel.querySelector('.voice-carousel-track');
+        var voiceCards = voiceCarousel.querySelectorAll('.voice-card');
+        var voicePrev = voiceCarousel.querySelector('.carousel-prev');
+        var voiceNext = voiceCarousel.querySelector('.voice-carousel .carousel-next');
+        var voiceDots = voiceCarousel.querySelector('.voice-carousel-dots');
+        voiceNext = voiceNext || voiceCarousel.querySelector('.carousel-next');
+
+        function getVoiceCardsPerView() {
+            var w = window.innerWidth;
+            if (w >= 900) return 3;
+            if (w >= 600) return 2;
+            return 1;
+        }
+
+        var voiceIndex = 0;
+        var voiceAutoTimer;
+
+        function voiceGoTo(index) {
+            var perView = getVoiceCardsPerView();
+            var maxIdx = Math.max(0, voiceCards.length - perView);
+            voiceIndex = Math.max(0, Math.min(maxIdx, index));
+            var pct = voiceIndex * (100 / perView);
+            if (voiceTrack) voiceTrack.style.transform = 'translateX(-' + pct + '%)';
+            if (voiceDots) {
+                voiceDots.querySelectorAll('.dot').forEach(function(d, i) {
+                    d.classList.toggle('active', i === voiceIndex);
+                });
+            }
+            voiceResetAuto();
+        }
+
+        function voiceCreateDots() {
+            if (!voiceDots) return;
+            voiceDots.innerHTML = '';
+            var perView = getVoiceCardsPerView();
+            var maxIdx = Math.max(0, voiceCards.length - perView);
+            for (var i = 0; i <= maxIdx; i++) {
+                var dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = 'dot' + (i === 0 ? ' active' : '');
+                dot.setAttribute('aria-label', 'Go to testimonial set ' + (i + 1));
+                dot.addEventListener('click', function() { voiceGoTo(parseInt(this.dataset.idx, 10)); });
+                dot.dataset.idx = i;
+                voiceDots.appendChild(dot);
+            }
+        }
+
+        function voiceResetAuto() {
+            clearInterval(voiceAutoTimer);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && voiceCards.length > 1) {
+                voiceAutoTimer = setInterval(function() {
+                    var perView = getVoiceCardsPerView();
+                    var maxIdx = Math.max(0, voiceCards.length - perView);
+                    voiceGoTo(voiceIndex >= maxIdx ? 0 : voiceIndex + 1);
+                }, 6000);
+            }
+        }
+
+        voiceCreateDots();
+        if (voicePrev) voicePrev.addEventListener('click', function() { voiceGoTo(voiceIndex - 1); });
+        if (voiceNext) voiceNext.addEventListener('click', function() { voiceGoTo(voiceIndex + 1); });
+        voiceCarousel.addEventListener('mouseenter', function() { clearInterval(voiceAutoTimer); });
+        voiceCarousel.addEventListener('mouseleave', voiceResetAuto);
+        voiceResetAuto();
+
+        var voiceTouchStart = 0, voiceTouchEnd = 0;
+        voiceCarousel.addEventListener('touchstart', function(e) {
+            voiceTouchStart = e.changedTouches[0].screenX;
+        }, { passive: true });
+        voiceCarousel.addEventListener('touchend', function(e) {
+            voiceTouchEnd = e.changedTouches[0].screenX;
+            var d = voiceTouchStart - voiceTouchEnd;
+            if (Math.abs(d) > 50) voiceGoTo(d > 0 ? voiceIndex + 1 : voiceIndex - 1);
+        }, { passive: true });
+
+        window.addEventListener('resize', function() {
+            var perView = getVoiceCardsPerView();
+            var maxIdx = Math.max(0, voiceCards.length - perView);
+            voiceIndex = Math.min(voiceIndex, maxIdx);
+            voiceGoTo(voiceIndex);
+            voiceCreateDots();
+        });
+    }
+
     // Subtle pointer pan on hero for premium depth
     if (heroSection && heroBg) {
         heroSection.addEventListener('mousemove', function(e) {
@@ -223,6 +310,27 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+    // FAQ accordion
+    document.querySelectorAll('[data-faq-accordion]').forEach(function(wrapper) {
+        wrapper.querySelectorAll('[data-faq-toggle]').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var item = this.closest('.faq-item');
+                if (!item) return;
+                var isOpen = item.classList.contains('is-open');
+                wrapper.querySelectorAll('.faq-item').forEach(function(i) {
+                    i.classList.remove('is-open');
+                    var q = i.querySelector('[data-faq-toggle]');
+                    if (q) q.setAttribute('aria-expanded', 'false');
+                });
+                if (!isOpen) {
+                    item.classList.add('is-open');
+                    var q2 = item.querySelector('[data-faq-toggle]');
+                    if (q2) q2.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+    });
 
     // Newsletter inline UX states (validation + success/error feedback)
     var newsletterForm = document.querySelector('.js-newsletter-form');

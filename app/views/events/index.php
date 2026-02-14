@@ -2,10 +2,11 @@
 ob_start();
 $baseUrl = rtrim(BASE_URL, '/');
 ?>
-<section class="section brand-page" data-animate>
-    <div class="section-title-bar">
-        <div class="section-title-bar-inner">
-            <h1 class="section-title">Events & Experiences</h1>
+<section class="section brand-page events-page" data-animate>
+    <div class="page-hero page-hero--events">
+        <div class="container">
+            <h1 class="page-hero-title">Events & Experiences</h1>
+            <p class="page-hero-sub">What's happening</p>
         </div>
     </div>
     <div class="container brand-shell">

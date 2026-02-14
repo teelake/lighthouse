@@ -290,23 +290,41 @@ $mediaTypeLabel = function ($t) {
     </div>
 </section>
 
-<!-- 8. Voice - testimonial -->
-<?php if (!empty($testimonials)): ?>
+<!-- 8. Voice - testimonial carousel -->
 <section class="section voice-section" data-animate>
+    <div class="section-title-bar">
+        <div class="section-title-bar-inner">
+            <h2 class="section-title">What People Say</h2>
+        </div>
+    </div>
     <div class="container">
-        <?php $t = $testimonials[0]; ?>
-        <blockquote class="voice-quote">"<?= htmlspecialchars($t['quote']) ?>"</blockquote>
-        <cite>— <?= htmlspecialchars($t['author_name']) ?></cite>
+        <div class="voice-carousel" data-voice-carousel>
+            <button type="button" class="carousel-btn carousel-prev" aria-label="Previous testimonial">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button type="button" class="carousel-btn carousel-next" aria-label="Next testimonial">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+            <div class="voice-carousel-track-wrap">
+                <div class="voice-carousel-track">
+                    <?php
+                    $voiceItems = $testimonials ?? [];
+                    if (empty($voiceItems)) {
+                        $voiceItems = [['quote' => "Lighthouse is more like a family and not just a place of worship. Since I started attending, I've been shown nothing but love.", 'author_name' => 'A Lighthouse Believer']];
+                    }
+                    foreach ($voiceItems as $t):
+                    ?>
+                    <div class="voice-card">
+                        <blockquote class="voice-quote">"<?= htmlspecialchars($t['quote']) ?>"</blockquote>
+                        <cite>— <?= htmlspecialchars($t['author_name']) ?></cite>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <div class="voice-carousel-dots" role="tablist" aria-label="Testimonial navigation"></div>
+        </div>
     </div>
 </section>
-<?php else: ?>
-<section class="section voice-section" data-animate>
-    <div class="container">
-        <blockquote class="voice-quote">"Lighthouse is more like a family and not just a place of worship. Since I started attending, I've been shown nothing but love."</blockquote>
-        <cite>— A Lighthouse Believer</cite>
-    </div>
-</section>
-<?php endif; ?>
 
 <!-- 9. Map -->
 <section class="map-section" data-animate>

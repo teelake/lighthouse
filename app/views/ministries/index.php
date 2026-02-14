@@ -2,22 +2,39 @@
 ob_start();
 $baseUrl = rtrim(BASE_URL, '/');
 ?>
-<section class="section">
-    <div class="container">
-        <h1>Our Ministries</h1>
+<section class="section ministries-page" data-animate>
+    <div class="page-hero page-hero--ministries">
+        <div class="container">
+            <h1 class="page-hero-title">Our Ministries</h1>
+            <p class="page-hero-sub">Serve. Grow. Impact.</p>
+        </div>
+    </div>
+
+    <div class="container ministries-content">
+        <p class="ministries-intro">Discover where you can connect, serve, and grow within our church family.</p>
         <?php if (!empty($ministries)): ?>
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 2rem;">
+        <div class="ministries-grid">
             <?php foreach ($ministries as $m): ?>
-            <a href="<?= $baseUrl ?>/ministries/<?= htmlspecialchars($m['slug']) ?>" style="display: block; padding: 1.5rem; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
-                <h3><?= htmlspecialchars($m['title']) ?></h3>
-                <p><?= htmlspecialchars($m['tagline'] ?? '') ?></p>
+            <a href="<?= $baseUrl ?>/ministries/<?= htmlspecialchars($m['slug']) ?>" class="ministry-card stagger-item">
+                <div class="ministry-card-body">
+                    <h3><?= htmlspecialchars($m['title']) ?></h3>
+                    <p><?= htmlspecialchars($m['tagline'] ?? '') ?></p>
+                    <span class="link-arrow">Learn more →</span>
+                </div>
             </a>
             <?php endforeach; ?>
         </div>
         <?php else: ?>
-        <p>Ministries will appear here. Manage from admin.</p>
+        <div class="brand-empty-wrap">
+            <p class="brand-empty">Ministries will appear here. Manage from admin.</p>
+            <a href="<?= $baseUrl ?>/about" class="brand-back">← Back to About</a>
+        </div>
         <?php endif; ?>
-        <a href="<?= $baseUrl ?>/">← Back to Home</a>
     </div>
 </section>
-<?php $content = ob_get_clean(); require APP_PATH . '/views/layouts/main.php'; ?>
+<?php
+$content = ob_get_clean();
+$pageTitle = $pageTitle ?? 'Our Ministries - Lighthouse Global Church';
+$pageDescription = 'Explore ministries at Lighthouse Global Church.';
+require APP_PATH . '/views/layouts/main.php';
+?>

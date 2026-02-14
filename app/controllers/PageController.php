@@ -29,22 +29,37 @@ class PageController extends Controller
 
     public function services()
     {
-        $this->render('pages/services', ['pageTitle' => 'Our Gatherings - Lighthouse Global Church']);
+        $sections = (new ContentSection())->getAllKeyed();
+        $setting = new Setting();
+        $this->render('pages/services', [
+            'pageTitle' => 'Our Gatherings - Lighthouse Global Church',
+            'sections' => $sections,
+            'serviceTimes' => [
+                'sunday' => $setting->get('service_sunday', '10:00 AM'),
+                'thursday' => $setting->get('service_thursday', '6:00 PM'),
+            ],
+        ]);
     }
 
     public function membership()
     {
-        $this->render('pages/membership', ['pageTitle' => 'Membership & Training - Lighthouse Global Church']);
+        $sections = (new ContentSection())->getAllKeyed();
+        $this->render('pages/membership', [
+            'pageTitle' => 'Membership & Training - Lighthouse Global Church',
+            'sections' => $sections,
+        ]);
     }
 
     public function contact()
     {
         $setting = new Setting();
+        $mapUrl = $setting->get('map_embed_url', '');
         $this->render('pages/contact', [
             'pageTitle' => 'Contact Us - Lighthouse Global Church',
             'address' => $setting->get('site_address', '980 Parkland Drive, Holiday Inn & Suites, Halifax, NS, Canada'),
             'phone' => $setting->get('site_phone', '902-240-2087'),
             'email' => $setting->get('site_email', 'info@thelighthouseglobal.org'),
+            'mapEmbedUrl' => $mapUrl,
         ]);
     }
 
@@ -56,6 +71,10 @@ class PageController extends Controller
 
     public function imNew()
     {
-        $this->render('pages/im-new', ['pageTitle' => 'I\'m New - Lighthouse Global Church']);
+        $sections = (new ContentSection())->getAllKeyed();
+        $this->render('pages/im-new', [
+            'pageTitle' => 'I\'m New - Lighthouse Global Church',
+            'sections' => $sections,
+        ]);
     }
 }
