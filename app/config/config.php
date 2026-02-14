@@ -32,9 +32,8 @@ ini_set('session.cookie_samesite', 'Strict');
 
 define('CSRF_TOKEN_NAME', 'csrf_token');
 
-// Admin backend URL path - change this to a non-guessable value in production
-// Example: cp-X7k9m2P4q1a3 (bookmark it - not linked from public site)
-define('ADMIN_PATH', getenv('ADMIN_PATH') ?: 'cp-X7k9m2P4q1a3');
+// Admin backend URL path
+define('ADMIN_PATH', getenv('ADMIN_PATH') ?: 'admin');
 define('MAX_UPLOAD_SIZE', 10485760); // 10MB
 define('ALLOWED_IMAGE_TYPES', ['image/jpeg', 'image/png', 'image/gif', 'image/webp']);
 define('ALLOWED_MEDIA_TYPES', ['video/mp4', 'video/webm', 'audio/mpeg', 'audio/wav', 'audio/mp3']);
