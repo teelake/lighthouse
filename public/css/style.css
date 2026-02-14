@@ -1357,6 +1357,11 @@ body::before {
 .membership-content { padding: 3rem 1.5rem 4rem; }
 .membership-intro { max-width: 720px; margin-bottom: 2.5rem; }
 
+/* About page - beliefs & FAQs */
+.about-beliefs { max-width: 720px; margin-bottom: 2.5rem; }
+.about-faqs { margin-bottom: 2.5rem; }
+.faq-list--inline { max-width: 720px; }
+
 /* Contact page */
 .contact-page { padding-top: 0; }
 .contact-content { padding: 3rem 1.5rem 4rem; }

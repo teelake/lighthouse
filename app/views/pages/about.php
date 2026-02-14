@@ -55,9 +55,43 @@ $story = ($aboutIntro['content'] ?? null) ?: ($whoWeAre['content'] ?? '');
             </div>
         </div>
 
+        <?php $aboutBeliefs = $sections['about_beliefs']['content'] ?? null; ?>
+        <?php if (!empty(trim($aboutBeliefs ?? ''))): ?>
+        <div class="about-beliefs">
+            <h2 class="about-section-title">What We Believe</h2>
+            <div class="about-story-body">
+                <?= nl2br(htmlspecialchars($aboutBeliefs)) ?>
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <?php if (!empty($faqs)): ?>
+        <div class="about-faqs">
+            <h2 class="about-section-title">Frequently Asked Questions</h2>
+            <div class="faq-list faq-list--inline" data-faq-accordion>
+                <?php foreach ($faqs as $i => $faq): ?>
+                <div class="faq-item <?= $i === 0 ? 'is-open' : '' ?>">
+                    <button type="button" class="faq-question" aria-expanded="<?= $i === 0 ? 'true' : 'false' ?>" aria-controls="about-faq-<?= (int)$faq['id'] ?>" id="about-faq-q-<?= (int)$faq['id'] ?>" data-faq-toggle>
+                        <?= htmlspecialchars($faq['question']) ?>
+                        <span class="faq-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer" id="about-faq-<?= (int)$faq['id'] ?>" role="region" aria-labelledby="about-faq-q-<?= (int)$faq['id'] ?>">
+                        <div class="faq-answer-inner">
+                            <?= nl2br(htmlspecialchars($faq['answer'])) ?>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php endif; ?>
+
         <div class="about-cta">
             <a href="<?= $baseUrl ?>/leadership" class="btn btn-accent">Meet Our Leadership</a>
             <a href="<?= $baseUrl ?>/im-new" class="btn btn-watch">Plan Your Visit</a>
+            <a href="<?= $baseUrl ?>/faq" class="btn btn-accent">More FAQs</a>
         </div>
     </div>
 </section>

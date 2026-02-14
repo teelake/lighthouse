@@ -9,5 +9,6 @@ INSERT INTO content_sections (section_key, title, content, extra_data, sort_orde
 ('membership_discipleship', 'Membership - Discipleship Academy', 'Go deeper in your walk with Christ. Systematic teaching, accountability, and practical application for everyday life.', NULL, 26),
 ('giving_intro', 'Giving - Intro', 'Giving is an act of worship and a covenant partnership in advancing God\'s kingdom. Your generosity supports teaching and discipleship, leadership development, outreach and missions, and ministry operations. Thank you for investing in what God is doing through Lighthouse.', NULL, 27),
 ('giving_ways', 'Giving - Other Ways', 'For bank transfers or other giving methods, please contact us.', NULL, 28),
-('prayer_intro', 'Prayer - Intro', 'Share your prayer need with us. You can request prayer openly or anonymously. Our pastoral team and prayer intercessors will pray with you.', NULL, 29)
+('prayer_intro', 'Prayer - Intro', 'Share your prayer need with us. You can request prayer openly or anonymously. Our pastoral team and prayer intercessors will pray with you.', NULL, 29),
+('about_beliefs', 'About - What We Believe', 'We believe in the triune God—Father, Son, and Holy Spirit. We believe the Bible is the inspired, authoritative Word of God. We believe in salvation through faith in Jesus Christ alone. We believe in the baptism of the Holy Spirit and the gifts of the Spirit for edifying the church. We believe in the Great Commission to make disciples of all nations.', NULL, 16)
 ON DUPLICATE KEY UPDATE sort_order = VALUES(sort_order);

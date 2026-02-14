@@ -12,8 +12,10 @@ class PageController extends Controller
     public function about()
     {
         $sections = (new ContentSection())->getAllKeyed();
+        $faqs = (new Faq())->findAll([], 'sort_order ASC');
         $this->render('pages/about', [
             'sections' => $sections,
+            'faqs' => $faqs,
             'pageTitle' => 'About Us - Lighthouse Global Church',
         ]);
     }
