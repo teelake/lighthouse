@@ -70,6 +70,14 @@ $router->add('GET', 'admin/moments/{id}/edit', ['controller' => 'Admin\Moments',
 $router->add('POST', 'admin/moments/{id}', ['controller' => 'Admin\Moments', 'action' => 'update']);
 $router->add('POST', 'admin/moments/{id}/delete', ['controller' => 'Admin\Moments', 'action' => 'delete']);
 
+// Admin - Leadership
+$router->add('GET', 'admin/leaders', ['controller' => 'Admin\Leader', 'action' => 'index']);
+$router->add('GET', 'admin/leaders/create', ['controller' => 'Admin\Leader', 'action' => 'create']);
+$router->add('POST', 'admin/leaders', ['controller' => 'Admin\Leader', 'action' => 'store']);
+$router->add('GET', 'admin/leaders/{id}/edit', ['controller' => 'Admin\Leader', 'action' => 'edit']);
+$router->add('POST', 'admin/leaders/{id}', ['controller' => 'Admin\Leader', 'action' => 'update']);
+$router->add('POST', 'admin/leaders/{id}/delete', ['controller' => 'Admin\Leader', 'action' => 'delete']);
+
 // Admin - Testimonials
 $router->add('GET', 'admin/testimonials', ['controller' => 'Admin\Testimonial', 'action' => 'index']);
 $router->add('GET', 'admin/testimonials/create', ['controller' => 'Admin\Testimonial', 'action' => 'create']);

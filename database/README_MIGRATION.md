@@ -4,10 +4,11 @@ To enable full homepage content management, run the migration:
 
 **Option A – Fresh install:** Run the full `schema.sql` (it now includes the new tables and seed data).
 
-**Option B – Existing database:** Run `migrations/001_homepage_sections.sql`:
+**Option B – Existing database:** Run migrations in order:
 
 ```bash
 mysql -u your_user -p thelwcwm_db < database/migrations/001_homepage_sections.sql
+mysql -u your_user -p thelwcwm_db < database/migrations/002_about_leadership.sql
 ```
 
 ## What's New

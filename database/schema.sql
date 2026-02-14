@@ -313,6 +313,31 @@ INSERT INTO homepage_moments (image_small, image_wide, alt_small, alt_wide, sort
 ('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600', 'https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=1200', 'Gathering', 'Ministry', 2),
 ('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600', 'https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1200', 'Church', 'Worship service', 3);
 
+-- Leadership team
+CREATE TABLE IF NOT EXISTS leaders (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    photo VARCHAR(500),
+    bio TEXT,
+    sort_order INT DEFAULT 0,
+    is_published TINYINT(1) DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- About page content
+INSERT INTO content_sections (section_key, title, content, extra_data, sort_order) VALUES
+('about_intro', 'About Page Intro', 'The Lighthouse Global Ministry (Pharos Ministries) is a Spirit-led ministry commissioned to raise men and women who shine with Christ''s light—bringing transformation to lives, communities, cultures, and nations.', NULL, 12),
+('about_mission', 'Our Mission', 'To raise lights that transform nations by equipping believers for life, leadership, and global impact through worship, the Word, and intentional discipleship.', NULL, 13),
+('about_vision', 'Our Vision', 'A Christ-centered, Spirit-empowered community where every believer shines as a light—transforming lives, families, communities, and nations for the glory of God.', NULL, 14),
+('about_values', 'Our Values', 'We are a worshipping people, a teaching house, and a leadership training ground. We believe in the authority of Scripture, the power of the Holy Spirit, and the mandate to make disciples of all nations.', NULL, 15)
+ON DUPLICATE KEY UPDATE sort_order = VALUES(sort_order);
+
+INSERT INTO leaders (name, title, photo, bio, sort_order) VALUES
+('Pastor Olabanji Afolabi', 'Lead Pastor', 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400', 'Pastor Olabanji leads Lighthouse with a passion for raising leaders who impact their spheres with the light of Christ.', 1),
+('Pastor Damilola Afolabi', 'Co-Lead Pastor', 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400', 'Pastor Damilola co-leads the ministry with a heart for worship, discipleship, and family transformation.', 2);
+
 -- Homepage settings
 INSERT INTO settings (`key`, `value`, `type`) VALUES
 ('map_embed_url', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2836.7857583703526!2d-63.6770046!3d44.68315439999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4b5a215128cb02df%3A0xf44bdaa2f32e4a51!2sThe%20LightHouse%20Global%20Ministries!5e0!3m2!1sen!2sng!4v1770960686185!5m2!1sen!2sng', 'text'),

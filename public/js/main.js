@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function setSectionStagger(section) {
         if (!section) return;
         var idx = 0;
-        section.querySelectorAll('.gather-card, .event-card-modern, .moment-item, .lights-content, .lights-image, .prayer-wall-image, .prayer-wall-content, .voice-quote, cite, .newsletter-form, .section-sub, .sermon-card, .media-card').forEach(function(el) {
+        section.querySelectorAll('.gather-card, .event-card-modern, .moment-item, .lights-content, .lights-image, .prayer-wall-image, .prayer-wall-content, .voice-quote, cite, .newsletter-form, .section-sub, .sermon-card, .media-card, .about-pillar, .leader-card').forEach(function(el) {
             el.classList.add('stagger-item');
             el.style.setProperty('--stagger', idx++);
         });

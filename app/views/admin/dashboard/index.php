@@ -30,6 +30,7 @@
             <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/sections">Content Sections</a><br><small>Hero, Gather, Scripture, Prayer Wall, Newsletter, etc.</small></div>
             <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/glimpse">Glimpse</a><br><small>Homepage scrolling image cards</small></div>
             <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/moments">Moments</a><br><small>Homepage carousel slides</small></div>
+            <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/leaders">Leadership</a><br><small>Team profiles for About page</small></div>
             <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/testimonials">Testimonials</a><br><small>Voice section quotes</small></div>
             <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/events">Events</a></div>
             <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/ministries">Ministries</a></div>

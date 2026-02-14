@@ -1079,6 +1079,186 @@ body::before {
     line-height: 1.75;
 }
 
+/* About & Leadership pages - hero, subnav, content */
+.page-hero {
+    background: linear-gradient(135deg, var(--color-dark) 0%, #252525 100%);
+    color: #fff;
+    padding: 3rem 0;
+    text-align: center;
+}
+.page-hero-title {
+    margin: 0 0 0.35rem;
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4.5vw, 2.75rem);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #fff;
+}
+.page-hero-sub {
+    margin: 0;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.06em;
+}
+.page-subnav {
+    background: var(--color-bg-warm);
+    border-bottom: 2px solid rgba(255,225,0,0.25);
+    padding: 0;
+}
+.page-subnav .container {
+    display: flex;
+    gap: 0;
+}
+.page-subnav-link {
+    display: inline-block;
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--color-muted);
+    border-bottom: 3px solid transparent;
+    transition: var(--transition);
+}
+.page-subnav-link:hover { color: var(--color-primary-on-light); }
+.page-subnav-link--active {
+    color: var(--color-primary-on-light);
+    border-bottom-color: var(--color-primary);
+}
+.about-page { padding-top: 0; }
+.about-content { padding: 3rem 1.5rem 4rem; }
+.about-story {
+    max-width: 720px;
+    margin-bottom: 3rem;
+}
+.about-section-title {
+    margin: 0 0 1rem;
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--color-primary-on-light);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+.about-story-body {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--color-dark);
+}
+.about-pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+.about-pillar {
+    background: #fff;
+    border: 2px solid rgba(255,225,0,0.2);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+.about-pillar:hover {
+    border-color: rgba(255,225,0,0.5);
+    box-shadow: 0 12px 32px rgba(26,26,26,0.08);
+    transform: translateY(-4px);
+}
+.about-pillar-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-gold-bg);
+    border-radius: var(--radius-sm);
+    color: var(--color-primary-on-light);
+    margin-bottom: 1rem;
+}
+.about-pillar-title {
+    margin: 0 0 0.75rem;
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-dark);
+}
+.about-pillar-text {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-muted);
+}
+.about-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.leadership-page { padding-top: 0; }
+.leadership-grid-wrap { padding: 3rem 1.5rem 4rem; }
+.leadership-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+.leader-card {
+    background: #fff;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255,225,0,0.15);
+    transition: var(--transition);
+}
+.leader-card:hover {
+    box-shadow: 0 16px 40px rgba(26,26,26,0.1);
+    transform: translateY(-6px);
+    border-color: rgba(255,225,0,0.35);
+}
+.leader-card-photo {
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: var(--color-bg);
+}
+.leader-card-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.leader-card-body { padding: 1.5rem; }
+.leader-card-name {
+    margin: 0 0 0.25rem;
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-dark);
+}
+.leader-card-title {
+    margin: 0 0 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-primary-on-light);
+}
+.leader-card-bio {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--color-muted);
+}
+.leadership-empty {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: var(--color-gold-bg);
+    border-radius: var(--radius);
+    border: 1px dashed rgba(255,225,0,0.4);
+}
+.leadership-empty p { margin: 0 0 1rem; color: var(--color-muted); }
+@media (max-width: 600px) {
+    .page-subnav .container { flex-wrap: wrap; }
+    .page-subnav-link { padding: 0.75rem 1rem; }
+}
+
 /* Inner page brand signature system */
 .brand-page .section-title-bar {
     background:

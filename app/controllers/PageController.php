@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Models\ContentSection;
+use App\Models\Leader;
 use App\Models\Setting;
 use App\Models\Faq;
 
@@ -19,7 +20,11 @@ class PageController extends Controller
 
     public function leadership()
     {
-        $this->render('pages/leadership', ['pageTitle' => 'Our Leadership - Lighthouse Global Church']);
+        $leaders = (new Leader())->findAll(['is_published' => 1], 'sort_order ASC');
+        $this->render('pages/leadership', [
+            'leaders' => $leaders,
+            'pageTitle' => 'Our Leadership - Lighthouse Global Church',
+        ]);
     }
 
     public function services()
