@@ -28,6 +28,7 @@
 
 2. Default admin login (change password immediately):
    - Email: `admin@thelighthouseglobal.org`
-   - Password: `admin123`
+   - Password: `password` (from schema.sql)
+   - To set a different default (e.g. admin123), run: `php scripts/reset-admin-password.php`
 
 3. Enable 2FA: Sign in → Profile → Enable 2FA → Scan QR with Authenticator app

@@ -252,7 +252,8 @@ CREATE TABLE navigation_menu (
     FOREIGN KEY (parent_id) REFERENCES navigation_menu(id) ON DELETE CASCADE
 );
 
--- Insert default admin (password: admin123 - CHANGE IN PRODUCTION)
+-- Insert default admin (password: password - CHANGE IN PRODUCTION)
+-- Run scripts/reset-admin-password.php to set password to admin123 if preferred
 INSERT INTO users (email, password, name, role) VALUES
 ('admin@thelighthouseglobal.org', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Admin', 'admin');
 
