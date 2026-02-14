@@ -47,7 +47,7 @@ abstract class Controller
     protected function requireAuth()
     {
         if (!isset($_SESSION['user_id'])) {
-            $this->redirect('/admin/login');
+            $this->redirect(function_exists('admin_url') ? admin_url('login') : '/admin/login');
         }
     }
 }

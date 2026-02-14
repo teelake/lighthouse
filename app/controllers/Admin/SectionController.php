@@ -1,39 +1,39 @@
 <?php
 namespace App\Controllers\Admin;
 
-use App\Core\Controller;
 use App\Models\ContentSection;
 
-class SectionController extends Controller
+class SectionController extends BaseController
 {
     private const CONFIG_KEYS = ['hero_config', 'gather_config', 'lights_config', 'prayer_wall_config', 'newsletter_config', 'whats_on_config'];
 
     public function index()
     {
-        $this->requireAuth();
+        $this->requireEditor();
         $sections = (new ContentSection())->findAll([], 'sort_order ASC');
-        $this->render('admin/sections/index', ['sections' => $sections]);
+        $this->render('admin/sections/index', ['sections' => $sections, 'pageHeading' => 'Content Sections', 'currentPage' => 'sections']);
     }
 
     public function edit()
     {
-        $this->requireAuth();
+        $this->requireEditor();
         $key = $this->params['key'] ?? '';
         $section = (new ContentSection())->getByKey($key);
         if (!$section) throw new \Exception('Section not found', 404);
+        $common = ['pageHeading' => 'Edit ' . $key, 'currentPage' => 'sections'];
         if (in_array($key, self::CONFIG_KEYS)) {
             $data = !empty($section['extra_data'])
                 ? (is_string($section['extra_data']) ? json_decode($section['extra_data'], true) : $section['extra_data'])
                 : [];
-            $this->render('admin/sections/edit_config', ['section' => $section, 'data' => $data ?: []]);
+            $this->render('admin/sections/edit_config', array_merge($common, ['section' => $section, 'data' => $data ?: []]));
         } else {
-            $this->render('admin/sections/edit', ['section' => $section]);
+            $this->render('admin/sections/edit', array_merge($common, ['section' => $section]));
         }
     }
 
     public function update()
     {
-        $this->requireAuth();
+        $this->requireEditor();
         $key = $this->params['key'] ?? '';
         $section = (new ContentSection())->getByKey($key);
         if (!$section) throw new \Exception('Section not found', 404);
@@ -45,7 +45,7 @@ class SectionController extends Controller
             $content = $this->post('content', '');
             (new ContentSection())->update($section['id'], ['content' => $content]);
         }
-        $this->redirect('/admin/sections');
+        $this->redirectAdmin('sections');
     }
 
     private function buildExtraData(string $key): array

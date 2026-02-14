@@ -1,44 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Lighthouse Global Church</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { box-sizing: border-box; }
-        body { margin: 0; font-family: 'Outfit', sans-serif; background: #f1f5f9; }
-        .header { background: #0f172a; color: #fff; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-        .header a { color: #fff; text-decoration: none; }
-        .main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-        h1 { color: #1a5f4a; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem; }
-        .card { background: #fff; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-        .card a { color: #1a5f4a; font-weight: 600; }
-    </style>
-</head>
-<body>
-    <header class="header">
-        <a href="<?= rtrim(BASE_URL, '/') ?>/admin">Lighthouse Admin</a>
-        <a href="<?= rtrim(BASE_URL, '/') ?>/">View Site</a>
-        <a href="<?= rtrim(BASE_URL, '/') ?>/admin/logout">Logout</a>
-    </header>
-    <main class="main">
-        <h1>Dashboard</h1>
-        <p>Welcome to the content management system.</p>
-        <div class="grid">
-            <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/sections">Content Sections</a><br><small>Hero, Gather, Scripture, Prayer Wall, Newsletter, etc.</small></div>
-            <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/glimpse">Glimpse</a><br><small>Homepage scrolling image cards</small></div>
-            <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/moments">Moments</a><br><small>Homepage carousel slides</small></div>
-            <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/leaders">Leadership</a><br><small>Team profiles for About page</small></div>
-            <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/testimonials">Testimonials</a><br><small>Voice section quotes</small></div>
-            <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/events">Events</a></div>
-            <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/ministries">Ministries</a></div>
-            <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/small-groups">Small Groups</a></div>
-            <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/media">Media</a><br><small>Sermons & teachings</small></div>
-            <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/jobs">Jobs</a></div>
-            <div class="card"><a href="<?= rtrim(BASE_URL, '/') ?>/admin/settings">Settings</a><br><small>General, Homepage, Payment</small></div>
-        </div>
-    </main>
-</body>
-</html>
+<?php
+$events = $events ?? [];
+?>
+<div class="admin-card">
+    <h2>Welcome back</h2>
+    <p style="color: var(--adm-muted); margin: 0 0 1.5rem;">Manage your church website content from here.</p>
+    <div class="admin-grid">
+        <a href="<?= admin_url('sections') ?>" class="admin-grid-card">
+            <h3>Content Sections</h3>
+            <small>Hero, Gather, Scripture, Prayer Wall, Newsletter</small>
+        </a>
+        <a href="<?= admin_url('glimpse') ?>" class="admin-grid-card">
+            <h3>Glimpse</h3>
+            <small>Homepage scrolling images</small>
+        </a>
+        <a href="<?= admin_url('moments') ?>" class="admin-grid-card">
+            <h3>Moments</h3>
+            <small>Homepage carousel slides</small>
+        </a>
+        <a href="<?= admin_url('leaders') ?>" class="admin-grid-card">
+            <h3>Leadership</h3>
+            <small>Team profiles</small>
+        </a>
+        <a href="<?= admin_url('testimonials') ?>" class="admin-grid-card">
+            <h3>Testimonials</h3>
+            <small>Voice section quotes</small>
+        </a>
+        <a href="<?= admin_url('events') ?>" class="admin-grid-card">
+            <h3>Events</h3>
+            <small>Upcoming events</small>
+        </a>
+        <a href="<?= admin_url('ministries') ?>" class="admin-grid-card">
+            <h3>Ministries</h3>
+            <small>Ministry listings</small>
+        </a>
+        <a href="<?= admin_url('small-groups') ?>" class="admin-grid-card">
+            <h3>Small Groups</h3>
+            <small>Community groups</small>
+        </a>
+        <a href="<?= admin_url('media') ?>" class="admin-grid-card">
+            <h3>Media</h3>
+            <small>Sermons & teachings</small>
+        </a>
+        <a href="<?= admin_url('jobs') ?>" class="admin-grid-card">
+            <h3>Jobs</h3>
+            <small>Job listings</small>
+        </a>
+        <?php if (($isAdmin ?? false)): ?>
+        <a href="<?= admin_url('users') ?>" class="admin-grid-card">
+            <h3>Users</h3>
+            <small>User management</small>
+        </a>
+        <a href="<?= admin_url('settings') ?>" class="admin-grid-card">
+            <h3>Settings</h3>
+            <small>General, Homepage, Payment</small>
+        </a>
+        <?php endif; ?>
+    </div>
+</div>
+<?php if (!empty($events)): ?>
+<div class="admin-card">
+    <h2>Upcoming Events</h2>
+    <table class="admin-table">
+        <thead><tr><th>Event</th><th>Date</th><th>Action</th></tr></thead>
+        <tbody>
+        <?php foreach ($events as $e): ?>
+        <tr>
+            <td><?= htmlspecialchars($e['title']) ?></td>
+            <td><?= htmlspecialchars($e['event_date'] ?? '') ?></td>
+            <td><a href="<?= admin_url('events/' . $e['id'] . '/edit') ?>" class="btn btn-sm btn-outline">Edit</a></td>
+        </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+<?php endif; ?>

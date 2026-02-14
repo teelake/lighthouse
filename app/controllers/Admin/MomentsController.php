@@ -4,24 +4,24 @@ namespace App\Controllers\Admin;
 use App\Core\Controller;
 use App\Models\HomepageMoment;
 
-class MomentsController extends Controller
+class MomentsController extends BaseController
 {
     public function index()
     {
-        $this->requireAuth();
+        $this->requireEditor();
         $moments = (new HomepageMoment())->findAll([], 'sort_order ASC');
         $this->render('admin/moments/index', ['moments' => $moments]);
     }
 
     public function create()
     {
-        $this->requireAuth();
+        $this->requireEditor();
         $this->render('admin/moments/form', ['moment' => null]);
     }
 
     public function store()
     {
-        $this->requireAuth();
+        $this->requireEditor();
         (new HomepageMoment())->create([
             'image_small' => trim($this->post('image_small', '')),
             'image_wide' => trim($this->post('image_wide', '')),
@@ -29,12 +29,12 @@ class MomentsController extends Controller
             'alt_wide' => trim($this->post('alt_wide', '')),
             'sort_order' => (int) $this->post('sort_order', 0),
         ]);
-        $this->redirect('/admin/moments');
+        $this->redirectAdmin('moments');
     }
 
     public function edit()
     {
-        $this->requireAuth();
+        $this->requireEditor();
         $id = $this->params['id'] ?? 0;
         $moment = (new HomepageMoment())->find($id);
         if (!$moment) throw new \Exception('Not found', 404);
@@ -43,7 +43,7 @@ class MomentsController extends Controller
 
     public function update()
     {
-        $this->requireAuth();
+        $this->requireEditor();
         $id = $this->params['id'] ?? 0;
         $moment = (new HomepageMoment())->find($id);
         if (!$moment) throw new \Exception('Not found', 404);
@@ -54,14 +54,14 @@ class MomentsController extends Controller
             'alt_wide' => trim($this->post('alt_wide', '')),
             'sort_order' => (int) $this->post('sort_order', 0),
         ]);
-        $this->redirect('/admin/moments');
+        $this->redirectAdmin('moments');
     }
 
     public function delete()
     {
-        $this->requireAuth();
+        $this->requireEditor();
         $id = $this->params['id'] ?? 0;
         (new HomepageMoment())->delete($id);
-        $this->redirect('/admin/moments');
+        $this->redirectAdmin('moments');
     }
 }

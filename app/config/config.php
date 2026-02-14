@@ -23,6 +23,7 @@ if (APP_ENV === 'development') {
 error_reporting(E_ALL);
 
 require_once __DIR__ . '/database.php';
+require_once __DIR__ . '/../helpers.php';
 
 ini_set('session.cookie_httponly', 1);
 ini_set('session.cookie_secure', isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 1 : 0);
@@ -30,6 +31,10 @@ ini_set('session.use_strict_mode', 1);
 ini_set('session.cookie_samesite', 'Strict');
 
 define('CSRF_TOKEN_NAME', 'csrf_token');
+
+// Admin backend URL path - change this to a non-guessable value in production
+// Example: cp-X7k9m2P4q1a3 (bookmark it - not linked from public site)
+define('ADMIN_PATH', getenv('ADMIN_PATH') ?: 'cp-X7k9m2P4q1a3');
 define('MAX_UPLOAD_SIZE', 10485760); // 10MB
 define('ALLOWED_IMAGE_TYPES', ['image/jpeg', 'image/png', 'image/gif', 'image/webp']);
 define('ALLOWED_MEDIA_TYPES', ['video/mp4', 'video/webm', 'audio/mpeg', 'audio/wav', 'audio/mp3']);

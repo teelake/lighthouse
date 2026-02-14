@@ -1,12 +1,9 @@
 <?php
 namespace App\Controllers\Admin;
 
-use App\Core\Controller;
 use App\Models\Event;
-use App\Models\NewsletterSubscriber;
-use App\Models\PrayerRequest;
 
-class DashboardController extends Controller
+class DashboardController extends BaseController
 {
     public function index()
     {
@@ -14,6 +11,8 @@ class DashboardController extends Controller
         $events = (new Event())->findAll([], 'event_date ASC', 5);
         $this->render('admin/dashboard/index', [
             'pageTitle' => 'Dashboard',
+            'pageHeading' => 'Dashboard',
+            'currentPage' => 'dashboard',
             'events' => $events,
         ]);
     }

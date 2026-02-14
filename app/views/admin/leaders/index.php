@@ -1,39 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leadership - Admin</title>
-    <style>
-        body { font-family: -apple-system, sans-serif; margin: 0; padding: 1.5rem; background: #f5f5f5; }
-        a { color: #1a5f4a; }
-        table { width: 100%; background: #fff; border-radius: 8px; border-collapse: collapse; }
-        th, td { padding: 0.75rem; border-bottom: 1px solid #eee; }
-        .thumb { width: 48px; height: 48px; object-fit: cover; border-radius: 50%; }
-    </style>
-</head>
-<body>
-    <a href="<?= rtrim(BASE_URL,'/') ?>/admin">← Dashboard</a>
-    <h1>Leadership</h1>
-    <p>Manage team profiles shown on the Leadership page.</p>
-    <a href="<?= rtrim(BASE_URL,'/') ?>/admin/leaders/create">Add Leader</a>
-    <table>
-        <tr><th>Photo</th><th>Name</th><th>Title</th><th>Order</th><th>Action</th></tr>
+<div class="admin-card">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+        <h2 style="margin: 0;">Leadership</h2>
+        <a href="<?= admin_url('leaders/create') ?>" class="btn btn-primary">Add Leader</a>
+    </div>
+    <p style="color: var(--adm-muted); margin: 0 0 1rem;">Team profiles shown on the Leadership page.</p>
+    <table class="admin-table">
+        <thead><tr><th>Photo</th><th>Name</th><th>Title</th><th>Order</th><th>Action</th></tr></thead>
+        <tbody>
         <?php foreach ($leaders ?? [] as $l): ?>
         <tr>
-            <td><img class="thumb" src="<?= htmlspecialchars($l['photo'] ?? '') ?>" alt=""></td>
+            <td><img src="<?= htmlspecialchars($l['photo'] ?? '') ?>" alt="" style="width: 48px; height: 48px; object-fit: cover; border-radius: 50%;"></td>
             <td><?= htmlspecialchars($l['name']) ?></td>
             <td><?= htmlspecialchars($l['title']) ?></td>
-            <td><?= (int)$l['sort_order'] ?></td>
+            <td><?= (int)($l['sort_order'] ?? 0) ?></td>
             <td>
-                <a href="<?= rtrim(BASE_URL,'/') ?>/admin/leaders/<?= $l['id'] ?>/edit">Edit</a>
-                <form method="post" action="<?= rtrim(BASE_URL,'/') ?>/admin/leaders/<?= $l['id'] ?>/delete" style="display:inline;" onsubmit="return confirm('Delete?');">
-                    <button type="submit">Delete</button>
+                <a href="<?= admin_url('leaders/' . $l['id'] . '/edit') ?>" class="btn btn-sm btn-outline">Edit</a>
+                <form method="post" action="<?= admin_url('leaders/' . $l['id'] . '/delete') ?>" style="display:inline;" onsubmit="return confirm('Delete this leader?');">
+                    <?= csrf_field() ?>
+                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                 </form>
             </td>
         </tr>
         <?php endforeach; ?>
-        <?php if (empty($leaders)): ?><tr><td colspan="5">No leaders yet.</td></tr><?php endif; ?>
+        <?php if (empty($leaders)): ?><tr><td colspan="5">No leaders yet. <a href="<?= admin_url('leaders/create') ?>">Add one</a></td></tr><?php endif; ?>
+        </tbody>
     </table>
-</body>
-</html>
+</div>

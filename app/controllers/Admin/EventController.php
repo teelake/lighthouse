@@ -1,27 +1,26 @@
 <?php
 namespace App\Controllers\Admin;
 
-use App\Core\Controller;
 use App\Models\Event;
 
-class EventController extends Controller
+class EventController extends BaseController
 {
     public function index()
     {
-        $this->requireAuth();
+        $this->requireEditor();
         $events = (new Event())->findAll([], 'event_date ASC');
         $this->render('admin/events/index', ['events' => $events]);
     }
 
     public function create()
     {
-        $this->requireAuth();
+        $this->requireEditor();
         $this->render('admin/events/form', ['event' => null]);
     }
 
     public function store()
     {
-        $this->requireAuth();
+        $this->requireEditor();
         $slug = strtolower(preg_replace('/[^a-z0-9]+/i', '-', trim($this->post('title', ''))));
         (new Event())->create([
             'title' => $this->post('title'),
@@ -32,12 +31,12 @@ class EventController extends Controller
             'location' => $this->post('location'),
             'is_published' => 1,
         ]);
-        $this->redirect('/admin/events');
+        $this->redirectAdmin('events');
     }
 
     public function edit()
     {
-        $this->requireAuth();
+        $this->requireEditor();
         $id = $this->params['id'] ?? 0;
         $event = (new Event())->find($id);
         if (!$event) throw new \Exception('Not found', 404);
@@ -46,7 +45,7 @@ class EventController extends Controller
 
     public function update()
     {
-        $this->requireAuth();
+        $this->requireEditor();
         $id = $this->params['id'] ?? 0;
         $event = (new Event())->find($id);
         if (!$event) throw new \Exception('Not found', 404);
@@ -57,14 +56,14 @@ class EventController extends Controller
             'event_time' => $this->post('event_time') ?: null,
             'location' => $this->post('location'),
         ]);
-        $this->redirect('/admin/events');
+        $this->redirectAdmin('events');
     }
 
     public function delete()
     {
-        $this->requireAuth();
+        $this->requireEditor();
         $id = $this->params['id'] ?? 0;
         (new Event())->delete($id);
-        $this->redirect('/admin/events');
+        $this->redirectAdmin('events');
     }
 }

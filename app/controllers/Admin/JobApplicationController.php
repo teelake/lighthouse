@@ -1,9 +1,7 @@
 <?php
 namespace App\Controllers\Admin;
 
-use App\Core\Controller;
-
-class JobApplicationController extends Controller
+class JobApplicationController extends BaseController
 {
-    public function index() { $this->requireAuth(); $this->render('admin/job-applications/index', []); }
+    public function index() { $this->requireEditor(); $this->render('admin/job-applications/index', []); }
 }
