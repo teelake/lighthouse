@@ -1,130 +1,169 @@
 <?php
 $stats = $stats ?? [];
-$events = $events ?? [];
-$isEditor = in_array($_SESSION['user_role'] ?? '', ['editor', 'admin']);
+$upcomingEvents = $upcomingEvents ?? [];
+$latestNewsletter = $latestNewsletter ?? [];
+$latestJobApps = $latestJobApps ?? [];
+$latestVisitors = $latestVisitors ?? [];
+$isEditor = $isEditor ?? false;
 $isAdmin = $isAdmin ?? false;
+
+function dash_time_ago($date) {
+    if (empty($date)) return '';
+    $ts = is_numeric($date) ? $date : strtotime($date);
+    $diff = time() - $ts;
+    if ($diff < 60) return 'Just now';
+    if ($diff < 3600) return floor($diff / 60) . 'm ago';
+    if ($diff < 86400) return floor($diff / 3600) . 'h ago';
+    if ($diff < 604800) return floor($diff / 86400) . 'd ago';
+    return date('M j', $ts);
+}
 ?>
-<!-- Analytics overview -->
-<div class="dash-hero">
-    <h1 class="dash-greeting">Welcome back</h1>
-    <p class="dash-sub">Your content at a glance</p>
-</div>
-
-<div class="stats-grid">
-    <a href="<?= admin_url('events') ?>" class="stat-card">
-        <span class="stat-icon stat-events"><?= svg_icon('calendar') ?></span>
-        <span class="stat-value"><?= (int)($stats['events'] ?? 0) ?></span>
-        <span class="stat-label">Events</span>
-    </a>
-    <a href="<?= admin_url('ministries') ?>" class="stat-card">
-        <span class="stat-icon stat-ministries"><?= svg_icon('heart') ?></span>
-        <span class="stat-value"><?= (int)($stats['ministries'] ?? 0) ?></span>
-        <span class="stat-label">Ministries</span>
-    </a>
-    <a href="<?= admin_url('leaders') ?>" class="stat-card">
-        <span class="stat-icon stat-leaders"><?= svg_icon('users') ?></span>
-        <span class="stat-value"><?= (int)($stats['leaders'] ?? 0) ?></span>
-        <span class="stat-label">Leaders</span>
-    </a>
-    <a href="<?= admin_url('media') ?>" class="stat-card">
-        <span class="stat-icon stat-media"><?= svg_icon('play') ?></span>
-        <span class="stat-value"><?= (int)($stats['media'] ?? 0) ?></span>
-        <span class="stat-label">Media</span>
-    </a>
-    <?php if ($isAdmin): ?>
-    <a href="<?= admin_url('job-applications') ?>" class="stat-card stat-highlight">
-        <span class="stat-icon stat-apps"><?= svg_icon('briefcase') ?></span>
-        <span class="stat-value"><?= (int)($stats['job_applications'] ?? 0) ?></span>
-        <span class="stat-label">Applications</span>
-    </a>
-    <span class="stat-card">
-        <span class="stat-icon stat-newsletter"><?= svg_icon('mail') ?></span>
-        <span class="stat-value"><?= (int)($stats['newsletter'] ?? 0) ?></span>
-        <span class="stat-label">Subscribers</span>
-    </span>
-    <?php endif; ?>
-</div>
-
-<!-- Quick links -->
-<div class="admin-card dash-card">
-    <h2 class="card-title">Quick Links</h2>
-    <div class="admin-grid dash-grid">
-        <a href="<?= admin_url('sections') ?>" class="admin-grid-card">
-            <span class="grid-icon"><?= svg_icon('file-text') ?></span>
-            <h3>Content Sections</h3>
-            <small>Hero, Gather, Scripture, Newsletter</small>
+<div class="dash">
+    <!-- KPI row -->
+    <div class="dash-kpi">
+        <a href="<?= admin_url('events') ?>" class="dash-kpi-card">
+            <span class="dash-kpi-value"><?= (int)($stats['events'] ?? 0) ?></span>
+            <span class="dash-kpi-label">Events</span>
         </a>
-        <a href="<?= admin_url('glimpse') ?>" class="admin-grid-card">
-            <span class="grid-icon"><?= svg_icon('image') ?></span>
-            <h3>Glimpse</h3>
-            <small>Homepage scrolling images</small>
+        <a href="<?= admin_url('ministries') ?>" class="dash-kpi-card">
+            <span class="dash-kpi-value"><?= (int)($stats['ministries'] ?? 0) ?></span>
+            <span class="dash-kpi-label">Ministries</span>
         </a>
-        <a href="<?= admin_url('moments') ?>" class="admin-grid-card">
-            <span class="grid-icon"><?= svg_icon('layers') ?></span>
-            <h3>Moments</h3>
-            <small>Homepage carousel</small>
-        </a>
-        <a href="<?= admin_url('leaders') ?>" class="admin-grid-card">
-            <span class="grid-icon"><?= svg_icon('users') ?></span>
-            <h3>Leadership</h3>
-            <small>Team profiles</small>
-        </a>
-        <a href="<?= admin_url('testimonials') ?>" class="admin-grid-card">
-            <span class="grid-icon"><?= svg_icon('message-circle') ?></span>
-            <h3>Testimonials</h3>
-            <small>Voice section quotes</small>
-        </a>
-        <a href="<?= admin_url('events') ?>" class="admin-grid-card">
-            <span class="grid-icon"><?= svg_icon('calendar') ?></span>
-            <h3>Events</h3>
-            <small>Upcoming events</small>
-        </a>
-        <a href="<?= admin_url('ministries') ?>" class="admin-grid-card">
-            <span class="grid-icon"><?= svg_icon('heart') ?></span>
-            <h3>Ministries</h3>
-            <small>Ministry listings</small>
-        </a>
-        <a href="<?= admin_url('small-groups') ?>" class="admin-grid-card">
-            <span class="grid-icon"><?= svg_icon('users') ?></span>
-            <h3>Small Groups</h3>
-            <small>Community groups</small>
-        </a>
-        <a href="<?= admin_url('media') ?>" class="admin-grid-card">
-            <span class="grid-icon"><?= svg_icon('play') ?></span>
-            <h3>Media</h3>
-            <small>Sermons & teachings</small>
-        </a>
-        <a href="<?= admin_url('jobs') ?>" class="admin-grid-card">
-            <span class="grid-icon"><?= svg_icon('briefcase') ?></span>
-            <h3>Jobs</h3>
-            <small>Job listings</small>
+        <a href="<?= admin_url('media') ?>" class="dash-kpi-card">
+            <span class="dash-kpi-value"><?= (int)($stats['media'] ?? 0) ?></span>
+            <span class="dash-kpi-label">Media</span>
         </a>
         <?php if ($isAdmin): ?>
-        <a href="<?= admin_url('users') ?>" class="admin-grid-card">
-            <span class="grid-icon"><?= svg_icon('user-check') ?></span>
-            <h3>Users</h3>
-            <small>User management</small>
+        <a href="<?= admin_url('job-applications') ?>" class="dash-kpi-card dash-kpi-accent">
+            <span class="dash-kpi-value"><?= (int)($stats['job_applications'] ?? 0) ?></span>
+            <span class="dash-kpi-label">Applications</span>
         </a>
-        <a href="<?= admin_url('settings') ?>" class="admin-grid-card">
-            <span class="grid-icon"><?= svg_icon('settings') ?></span>
-            <h3>Settings</h3>
-            <small>General, Homepage</small>
-        </a>
+        <span class="dash-kpi-card">
+            <span class="dash-kpi-value"><?= (int)($stats['newsletter'] ?? 0) ?></span>
+            <span class="dash-kpi-label">Subscribers</span>
+        </span>
         <?php endif; ?>
     </div>
-</div>
 
-<?php if (!empty($events)): ?>
-<div class="admin-card dash-card">
-    <h2 class="card-title">Upcoming Events</h2>
-    <div class="events-list">
-        <?php foreach ($events as $e): ?>
-        <a href="<?= admin_url('events/' . ($e['id'] ?? '') . '/edit') ?>" class="event-row">
-            <span class="event-title"><?= htmlspecialchars($e['title'] ?? '') ?></span>
-            <span class="event-date"><?= htmlspecialchars($e['event_date'] ?? '') ?></span>
-            <span class="event-arrow">→</span>
-        </a>
-        <?php endforeach; ?>
+    <div class="dash-layout">
+        <!-- Main -->
+        <div class="dash-main">
+            <?php if ($isEditor): ?>
+            <div class="dash-widget">
+                <div class="dash-widget-head">
+                    <h2 class="dash-widget-title">Quick Add</h2>
+                </div>
+                <div class="dash-quick-add">
+                    <a href="<?= admin_url('events/create') ?>" class="dash-quick-btn">New Event</a>
+                    <a href="<?= admin_url('testimonials/create') ?>" class="dash-quick-btn">New Testimonial</a>
+                    <a href="<?= admin_url('ministries/create') ?>" class="dash-quick-btn">New Ministry</a>
+                    <a href="<?= admin_url('leaders/create') ?>" class="dash-quick-btn">New Leader</a>
+                    <a href="<?= admin_url('media/create') ?>" class="dash-quick-btn">New Media</a>
+                </div>
+            </div>
+            <?php endif; ?>
+
+            <!-- Latest Newsletter -->
+            <?php if ($isAdmin && !empty($latestNewsletter)): ?>
+            <div class="dash-widget">
+                <div class="dash-widget-head">
+                    <h2 class="dash-widget-title">Latest Signups</h2>
+                    <span class="dash-widget-meta">Newsletter</span>
+                </div>
+                <ul class="dash-list">
+                    <?php foreach ($latestNewsletter as $n): ?>
+                    <li class="dash-list-item">
+                        <span class="dash-list-main"><?= htmlspecialchars(trim(($n['first_name'] ?? '') . ' ' . ($n['last_name'] ?? '')) ?: $n['email']) ?></span>
+                        <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago($n['subscribed_at'] ?? '')) ?></span>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <?php endif; ?>
+
+            <!-- Latest Job Applications -->
+            <?php if ($isAdmin && !empty($latestJobApps)): ?>
+            <div class="dash-widget">
+                <div class="dash-widget-head">
+                    <h2 class="dash-widget-title">Recent Applications</h2>
+                    <a href="<?= admin_url('job-applications') ?>" class="dash-widget-link">View all</a>
+                </div>
+                <ul class="dash-list">
+                    <?php foreach ($latestJobApps as $a): ?>
+                    <li class="dash-list-item">
+                        <span class="dash-list-main"><?= htmlspecialchars($a['name'] ?? '') ?></span>
+                        <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago($a['created_at'] ?? '')) ?></span>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <?php endif; ?>
+
+            <!-- Latest First-Time Visitors -->
+            <?php if ($isAdmin && !empty($latestVisitors)): ?>
+            <div class="dash-widget">
+                <div class="dash-widget-head">
+                    <h2 class="dash-widget-title">First-Time Visitors</h2>
+                </div>
+                <ul class="dash-list">
+                    <?php foreach ($latestVisitors as $v): ?>
+                    <li class="dash-list-item">
+                        <span class="dash-list-main"><?= htmlspecialchars(trim(($v['first_name'] ?? '') . ' ' . ($v['last_name'] ?? ''))) ?></span>
+                        <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago($v['created_at'] ?? '')) ?></span>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <?php endif; ?>
+
+            <?php if (!$isAdmin || (empty($latestNewsletter) && empty($latestJobApps) && empty($latestVisitors) && !$isEditor)): ?>
+            <div class="dash-widget dash-widget-empty">
+                <p class="dash-empty-text">Dashboard overview. Use the sidebar to manage content.</p>
+            </div>
+            <?php endif; ?>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="dash-sidebar">
+            <?php if (!empty($upcomingEvents)): ?>
+            <div class="dash-widget">
+                <div class="dash-widget-head">
+                    <h2 class="dash-widget-title">Upcoming Events</h2>
+                    <a href="<?= admin_url('events') ?>" class="dash-widget-link">All events</a>
+                </div>
+                <ul class="dash-list dash-list-events">
+                    <?php foreach ($upcomingEvents as $e): ?>
+                    <li class="dash-list-item">
+                        <a href="<?= admin_url('events/' . ($e['id'] ?? '') . '/edit') ?>" class="dash-list-link">
+                            <span class="dash-list-main"><?= htmlspecialchars($e['title'] ?? '') ?></span>
+                            <span class="dash-list-meta"><?= htmlspecialchars($e['event_date'] ?? '') ?></span>
+                        </a>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <?php endif; ?>
+
+            <div class="dash-widget">
+                <div class="dash-widget-head">
+                    <h2 class="dash-widget-title">Navigate</h2>
+                </div>
+                <nav class="dash-nav">
+                    <a href="<?= admin_url('sections') ?>">Content Sections</a>
+                    <a href="<?= admin_url('glimpse') ?>">Glimpse</a>
+                    <a href="<?= admin_url('moments') ?>">Moments</a>
+                    <a href="<?= admin_url('leaders') ?>">Leadership</a>
+                    <a href="<?= admin_url('testimonials') ?>">Testimonials</a>
+                    <a href="<?= admin_url('events') ?>">Events</a>
+                    <a href="<?= admin_url('ministries') ?>">Ministries</a>
+                    <a href="<?= admin_url('small-groups') ?>">Small Groups</a>
+                    <a href="<?= admin_url('media') ?>">Media</a>
+                    <a href="<?= admin_url('jobs') ?>">Jobs</a>
+                    <?php if ($isAdmin): ?>
+                    <a href="<?= admin_url('users') ?>">Users</a>
+                    <?php endif; ?>
+                </nav>
+            </div>
+        </aside>
     </div>
 </div>
-<?php endif; ?>
