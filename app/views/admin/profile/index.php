@@ -8,7 +8,7 @@ $has2fa = !empty($user['two_factor_enabled']);
     <?php if (!empty($error)): ?><div class="alert alert-error"><?= htmlspecialchars($error) ?></div><?php endif; ?>
     <?php if (!empty($success)): ?><div class="alert alert-success"><?= htmlspecialchars($success) ?></div><?php endif; ?>
 
-    <h3 style="margin: 1.5rem 0 0.75rem; font-size: 1rem;">Change Password</h3>
+    <h3 id="password" style="margin: 1.5rem 0 0.75rem; font-size: 1rem;">Change Password</h3>
     <form method="post" action="<?= admin_url('profile/password') ?>" style="max-width: 400px;">
         <?= csrf_field() ?>
         <div class="form-group">
