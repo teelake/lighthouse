@@ -37,11 +37,11 @@ $isAdmin = $isAdmin ?? false;
         <span class="stat-value"><?= (int)($stats['job_applications'] ?? 0) ?></span>
         <span class="stat-label">Applications</span>
     </a>
-    <a href="#" class="stat-card">
+    <span class="stat-card">
         <span class="stat-icon stat-newsletter"><?= svg_icon('mail') ?></span>
         <span class="stat-value"><?= (int)($stats['newsletter'] ?? 0) ?></span>
         <span class="stat-label">Subscribers</span>
-    </a>
+    </span>
     <?php endif; ?>
 </div>
 

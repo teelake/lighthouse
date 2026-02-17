@@ -10,10 +10,11 @@ $isEditor = in_array($role, ['editor', 'admin']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($pageTitle ?? 'Dashboard') ?> - Lighthouse Admin</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= rtrim(BASE_URL, '/') ?>/public/css/admin.css">
 </head>
 <body class="admin-body">
+    <div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
     <aside class="admin-sidebar" id="admin-sidebar">
         <div class="sidebar-brand">
             <a href="<?= $adm ?>">LIGHTHOUSE</a>
@@ -50,7 +51,7 @@ $isEditor = in_array($role, ['editor', 'admin']);
     </aside>
     <div class="admin-main">
         <header class="admin-header">
-            <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle menu">
+            <button class="sidebar-toggle" id="sidebar-toggle" type="button" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
             </button>
             <h1 class="page-heading"><?= htmlspecialchars($pageHeading ?? $pageTitle ?? 'Dashboard') ?></h1>
@@ -63,9 +64,15 @@ $isEditor = in_array($role, ['editor', 'admin']);
         </main>
     </div>
     <script>
-        document.getElementById('sidebar-toggle')?.addEventListener('click', function() {
-            document.getElementById('admin-sidebar').classList.toggle('open');
-        });
+        (function() {
+            var sidebar = document.getElementById('admin-sidebar');
+            var overlay = document.getElementById('sidebar-overlay');
+            var toggle = document.getElementById('sidebar-toggle');
+            function open() { sidebar?.classList.add('open'); overlay?.classList.add('visible'); toggle?.classList.add('active'); }
+            function close() { sidebar?.classList.remove('open'); overlay?.classList.remove('visible'); toggle?.classList.remove('active'); }
+            toggle?.addEventListener('click', function() { sidebar?.classList.contains('open') ? close() : open(); });
+            overlay?.addEventListener('click', close);
+        })();
     </script>
 </body>
 </html>
