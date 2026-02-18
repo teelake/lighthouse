@@ -137,8 +137,9 @@ $greeting = date('G') < 12 ? 'Good morning' : (date('G') < 17 ? 'Good afternoon'
             <?= $content ?? '' ?>
         </main>
     </div>
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-    <script src="<?= rtrim(BASE_URL, '/') ?>/public/js/tinymce-init.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.min.js"></script>
+    <script src="<?= rtrim(BASE_URL, '/') ?>/public/js/quill-init.js"></script>
     <script>
         (function() {
             var sidebar = document.getElementById('admin-sidebar');

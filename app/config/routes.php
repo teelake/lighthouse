@@ -141,5 +141,6 @@ $router->add('GET', $adm . '/users/{id}/edit', ['controller' => 'Admin\User', 'a
 $router->add('POST', $adm . '/users/{id}', ['controller' => 'Admin\User', 'action' => 'update']);
 $router->add('POST', $adm . '/users/{id}/delete', ['controller' => 'Admin\User', 'action' => 'delete']);
 $router->add('GET', $adm . '/profile', ['controller' => 'Admin\Profile', 'action' => 'index']);
+$router->add('POST', $adm . '/profile', ['controller' => 'Admin\Profile', 'action' => 'update']);
 $router->add('POST', $adm . '/profile/2fa', ['controller' => 'Admin\Profile', 'action' => 'toggle2fa']);
 $router->add('POST', $adm . '/profile/password', ['controller' => 'Admin\Profile', 'action' => 'changePassword']);

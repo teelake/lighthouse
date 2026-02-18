@@ -918,6 +918,15 @@
     box-shadow: 0 0 0 3px var(--adm-accent-glow);
 }
 .form-actions { display: flex; gap: 0.5rem; margin-top: 1.25rem; }
+
+/* Quill rich editor */
+.quill-editor-wrap { margin-bottom: 1rem; }
+.quill-editor-wrap .ql-container { font-family: inherit; font-size: 0.875rem; }
+.quill-editor-wrap .ql-editor { min-height: 180px; }
+.quill-editor-wrap .ql-toolbar,
+.quill-editor-wrap .ql-container { border-color: var(--adm-border); }
+.quill-editor-wrap .ql-toolbar { border-radius: var(--adm-radius-sm) var(--adm-radius-sm) 0 0; background: var(--adm-bg); }
+.quill-editor-wrap .ql-container { border-radius: 0 0 var(--adm-radius-sm) var(--adm-radius-sm); }
 .help-text { font-size: 0.75rem; color: var(--adm-muted); margin-top: 0.25rem; }
 
 /* ========== ALERTS ========== */
