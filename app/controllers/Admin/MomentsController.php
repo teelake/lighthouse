@@ -10,13 +10,13 @@ class MomentsController extends BaseController
     {
         $this->requireEditor();
         $moments = (new HomepageMoment())->findAll([], 'sort_order ASC');
-        $this->render('admin/moments/index', ['moments' => $moments]);
+        $this->render('admin/moments/index', ['moments' => $moments, 'pageHeading' => 'Moments', 'currentPage' => 'moments']);
     }
 
     public function create()
     {
         $this->requireEditor();
-        $this->render('admin/moments/form', ['moment' => null]);
+        $this->render('admin/moments/form', ['moment' => null, 'pageHeading' => 'Add Moment', 'currentPage' => 'moments']);
     }
 
     public function store()
@@ -38,7 +38,7 @@ class MomentsController extends BaseController
         $id = $this->params['id'] ?? 0;
         $moment = (new HomepageMoment())->find($id);
         if (!$moment) throw new \Exception('Not found', 404);
-        $this->render('admin/moments/form', ['moment' => $moment]);
+        $this->render('admin/moments/form', ['moment' => $moment, 'pageHeading' => 'Edit Moment', 'currentPage' => 'moments']);
     }
 
     public function update()

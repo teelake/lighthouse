@@ -15,7 +15,7 @@ class LeaderController extends BaseController
     public function create()
     {
         $this->requireEditor();
-        $this->render('admin/leaders/form', ['leader' => null]);
+        $this->render('admin/leaders/form', ['leader' => null, 'pageHeading' => 'Add Leader', 'currentPage' => 'leaders']);
     }
 
     public function store()
@@ -38,7 +38,7 @@ class LeaderController extends BaseController
         $id = $this->params['id'] ?? 0;
         $leader = (new Leader())->find($id);
         if (!$leader) throw new \Exception('Not found', 404);
-        $this->render('admin/leaders/form', ['leader' => $leader]);
+        $this->render('admin/leaders/form', ['leader' => $leader, 'pageHeading' => 'Edit Leader', 'currentPage' => 'leaders']);
     }
 
     public function update()

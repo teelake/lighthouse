@@ -1,27 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testimonials - Admin</title>
-</head>
-<body style="font-family: sans-serif; margin: 0; padding: 2rem;">
-    <a href="<?= rtrim(BASE_URL,'/') ?>/admin">← Dashboard</a>
-    <h1>Testimonials</h1>
-    <p>The first published testimonial appears on the homepage (Voice section).</p>
-    <a href="<?= rtrim(BASE_URL,'/') ?>/admin/testimonials/create">Add Testimonial</a>
-    <ul>
+<div class="admin-card">
+    <div class="admin-page-header">
+        <div>
+            <a href="<?= admin_url() ?>" class="admin-back-link">← Dashboard</a>
+            <h2>Testimonials</h2>
+        </div>
+        <a href="<?= admin_url('testimonials/create') ?>" class="btn btn-primary">Add Testimonial</a>
+    </div>
+    <p style="color: var(--adm-muted); margin: 0 0 1rem;">The first published testimonial appears on the homepage (Voice section).</p>
+    <?php if (empty($testimonials ?? [])): ?>
+    <p class="admin-empty">No testimonials yet. <a href="<?= admin_url('testimonials/create') ?>">Add one</a></p>
+    <?php else: ?>
+    <table class="admin-table admin-table-striped">
+        <thead><tr><th>Quote</th><th>Author</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody>
         <?php foreach ($testimonials ?? [] as $t): ?>
-        <li>
-            "<?= htmlspecialchars(mb_strimwidth($t['quote'], 0, 80, '…')) ?>" — <?= htmlspecialchars($t['author_name']) ?>
-            <?= ($t['is_published'] ?? 1) ? '' : '(unpublished)' ?>
-            <a href="<?= rtrim(BASE_URL,'/') ?>/admin/testimonials/<?= $t['id'] ?>/edit">Edit</a>
-            <form method="post" action="<?= rtrim(BASE_URL,'/') ?>/admin/testimonials/<?= $t['id'] ?>/delete" style="display:inline;" onsubmit="return confirm('Delete?');">
-                <button type="submit">Delete</button>
-            </form>
-        </li>
+        <tr>
+            <td><?= htmlspecialchars(mb_strimwidth($t['quote'] ?? '', 0, 60, '…')) ?></td>
+            <td><?= htmlspecialchars($t['author_name'] ?? '') ?></td>
+            <td><?= !empty($t['is_published']) ? '<span class="admin-badge admin-badge-success">Published</span>' : '<span class="admin-badge">Draft</span>' ?></td>
+            <td>
+                <div class="admin-table-actions">
+                    <a href="<?= admin_url('testimonials/' . ($t['id'] ?? '') . '/edit') ?>" class="btn btn-sm btn-outline">Edit</a>
+                    <form method="post" action="<?= admin_url('testimonials/' . ($t['id'] ?? '') . '/delete') ?>" onsubmit="return confirm('Delete this testimonial?');">
+                        <?= csrf_field() ?>
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
         <?php endforeach; ?>
-        <?php if (empty($testimonials)): ?><li>No testimonials yet.</li><?php endif; ?>
-    </ul>
-</body>
-</html>
+        </tbody>
+    </table>
+    <?php endif; ?>
+</div>

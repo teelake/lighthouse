@@ -1,4 +1,5 @@
 <div class="admin-card">
+    <a href="<?= admin_url() ?>" class="admin-back-link">← Dashboard</a>
     <h2>Content Sections</h2>
     <p style="color: var(--adm-muted); margin: 0 0 1rem;">Edit homepage and page content blocks.</p>
     <table class="admin-table">

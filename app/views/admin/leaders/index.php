@@ -1,6 +1,9 @@
 <div class="admin-card">
-    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
-        <h2 style="margin: 0;">Leadership</h2>
+    <div class="admin-page-header">
+        <div>
+            <a href="<?= admin_url() ?>" class="admin-back-link">← Dashboard</a>
+            <h2>Leadership</h2>
+        </div>
         <a href="<?= admin_url('leaders/create') ?>" class="btn btn-primary">Add Leader</a>
     </div>
     <p style="color: var(--adm-muted); margin: 0 0 1rem;">Team profiles shown on the Leadership page.</p>
@@ -14,11 +17,13 @@
             <td><?= htmlspecialchars($l['title']) ?></td>
             <td><?= (int)($l['sort_order'] ?? 0) ?></td>
             <td>
-                <a href="<?= admin_url('leaders/' . $l['id'] . '/edit') ?>" class="btn btn-sm btn-outline">Edit</a>
-                <form method="post" action="<?= admin_url('leaders/' . $l['id'] . '/delete') ?>" style="display:inline;" onsubmit="return confirm('Delete this leader?');">
-                    <?= csrf_field() ?>
-                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                </form>
+                <div class="admin-table-actions">
+                    <a href="<?= admin_url('leaders/' . $l['id'] . '/edit') ?>" class="btn btn-sm btn-outline">Edit</a>
+                    <form method="post" action="<?= admin_url('leaders/' . $l['id'] . '/delete') ?>" onsubmit="return confirm('Delete this leader?');">
+                        <?= csrf_field() ?>
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </div>
             </td>
         </tr>
         <?php endforeach; ?>

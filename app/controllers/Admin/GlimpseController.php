@@ -12,13 +12,15 @@ class GlimpseController extends BaseController
         $this->render('admin/glimpse/index', [
             'row1' => $grouped[1] ?? [],
             'row2' => $grouped[2] ?? [],
+            'pageHeading' => 'Glimpse',
+            'currentPage' => 'glimpse',
         ]);
     }
 
     public function create()
     {
         $this->requireEditor();
-        $this->render('admin/glimpse/form', ['slide' => null]);
+        $this->render('admin/glimpse/form', ['slide' => null, 'pageHeading' => 'Add Glimpse Slide', 'currentPage' => 'glimpse']);
     }
 
     public function store()
@@ -39,7 +41,7 @@ class GlimpseController extends BaseController
         $id = $this->params['id'] ?? 0;
         $slide = (new GlimpseSlide())->find($id);
         if (!$slide) throw new \Exception('Not found', 404);
-        $this->render('admin/glimpse/form', ['slide' => $slide]);
+        $this->render('admin/glimpse/form', ['slide' => $slide, 'pageHeading' => 'Edit Glimpse Slide', 'currentPage' => 'glimpse']);
     }
 
     public function update()

@@ -9,13 +9,13 @@ class EventController extends BaseController
     {
         $this->requireEditor();
         $events = (new Event())->findAll([], 'event_date ASC');
-        $this->render('admin/events/index', ['events' => $events]);
+        $this->render('admin/events/index', ['events' => $events, 'pageHeading' => 'Events', 'currentPage' => 'events']);
     }
 
     public function create()
     {
         $this->requireEditor();
-        $this->render('admin/events/form', ['event' => null]);
+        $this->render('admin/events/form', ['event' => null, 'pageHeading' => 'Add Event', 'currentPage' => 'events']);
     }
 
     public function store()
@@ -40,7 +40,7 @@ class EventController extends BaseController
         $id = $this->params['id'] ?? 0;
         $event = (new Event())->find($id);
         if (!$event) throw new \Exception('Not found', 404);
-        $this->render('admin/events/form', ['event' => $event]);
+        $this->render('admin/events/form', ['event' => $event, 'pageHeading' => 'Edit Event', 'currentPage' => 'events']);
     }
 
     public function update()

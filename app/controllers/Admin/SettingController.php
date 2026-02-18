@@ -10,7 +10,14 @@ class SettingController extends BaseController
     public function general() { $this->requireAdmin(); $s = new Setting(); $this->render('admin/settings/general', ['address' => $s->get('site_address'), 'phone' => $s->get('site_phone'), 'email' => $s->get('site_email'), 'pageHeading' => 'General Settings', 'currentPage' => 'settings']); }
     public function updateGeneral() { $this->requireAdmin(); $s = new Setting(); $s->set('site_address', $this->post('site_address')); $s->set('site_phone', $this->post('site_phone')); $s->set('site_email', $this->post('site_email')); $this->redirectAdmin('settings/general'); }
     public function payment() { $this->requireAdmin(); $s = new Setting(); $this->render('admin/settings/payment', ['paypal_email' => $s->get('paypal_email'), 'stripe_public' => $s->get('stripe_public_key'), 'stripe_secret' => $s->get('stripe_secret_key'), 'pageHeading' => 'Payment Settings', 'currentPage' => 'settings']); }
-    public function updatePayment() { $this->requireAdmin(); $s = new Setting(); $s->set('paypal_email', $this->post('paypal_email')); $s->set('stripe_public_key', $this->post('stripe_public_key')); $s->set('stripe_secret_key', $this->post('stripe_secret_key')); $this->redirectAdmin('settings/payment'); }
+    public function updatePayment() {
+        $this->requireAdmin();
+        $s = new Setting();
+        $s->set('paypal_email', $this->post('paypal_email'));
+        $s->set('stripe_public_key', $this->post('stripe_public_key'));
+        if ($this->post('stripe_secret_key') !== '') $s->set('stripe_secret_key', $this->post('stripe_secret_key'));
+        $this->redirectAdmin('settings/payment');
+    }
 
     public function homepage()
     {

@@ -9,13 +9,13 @@ class TestimonialController extends BaseController
     {
         $this->requireEditor();
         $items = (new Testimonial())->findAll([], 'sort_order ASC');
-        $this->render('admin/testimonials/index', ['testimonials' => $items]);
+        $this->render('admin/testimonials/index', ['testimonials' => $items, 'pageHeading' => 'Testimonials', 'currentPage' => 'testimonials']);
     }
 
     public function create()
     {
         $this->requireEditor();
-        $this->render('admin/testimonials/form', ['testimonial' => null]);
+        $this->render('admin/testimonials/form', ['testimonial' => null, 'pageHeading' => 'Add Testimonial', 'currentPage' => 'testimonials']);
     }
 
     public function store()
@@ -37,7 +37,7 @@ class TestimonialController extends BaseController
         $id = $this->params['id'] ?? 0;
         $item = (new Testimonial())->find($id);
         if (!$item) throw new \Exception('Not found', 404);
-        $this->render('admin/testimonials/form', ['testimonial' => $item]);
+        $this->render('admin/testimonials/form', ['testimonial' => $item, 'pageHeading' => 'Edit Testimonial', 'currentPage' => 'testimonials']);
     }
 
     public function update()
