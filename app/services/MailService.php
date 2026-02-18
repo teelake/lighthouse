@@ -81,7 +81,7 @@ class MailService
         };
         $consumeMultiLine = function () use ($read) {
             while ($line = $read()) {
-                if (strlen($line) >= 4 && substr($line, 3, 1) === ' ') return;
+                if (strlen($line) >= 3 && substr($line, 3, 1) !== '-') return;
             }
         };
 
