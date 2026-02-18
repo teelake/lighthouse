@@ -22,6 +22,19 @@ function dash_time_ago($date) {
 }
 ?>
 <div class="dash">
+    <!-- Welcome hero (dashboard only) -->
+    <div class="dash-hero">
+        <div class="dash-hero-content">
+            <div class="dash-hero-icon">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M24 8L8 16v16h32V16L24 8z"/><path d="M24 16v16"/><path d="M8 16h32"/></svg>
+            </div>
+            <div>
+                <h2 class="dash-hero-title">Lighthouse Admin</h2>
+                <p class="dash-hero-desc">Manage your church content, events, and community from one place.</p>
+            </div>
+        </div>
+    </div>
+
     <!-- KPI row - at a glance -->
     <div class="dash-kpi">
         <a href="<?= admin_url('events') ?>" class="dash-kpi-card">
