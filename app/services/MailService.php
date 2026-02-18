@@ -79,13 +79,16 @@ class MailService
             }
             return false;
         };
+        $consumeMultiLine = function () use ($read) {
+            while ($line = $read()) {
+                if (strlen($line) >= 4 && substr($line, 3, 1) === ' ') return;
+            }
+        };
 
         try {
         $read(); // greeting
         $write("EHLO " . ($_SERVER['SERVER_NAME'] ?? 'localhost'));
-        while ($line = $read()) {
-            if (substr($line, 3, 1) === ' ') break;
-        }
+        $consumeMultiLine();
         if ($useTls && !$useSsl) {
             $write("STARTTLS");
             if (!$expect(220)) {
@@ -99,17 +102,30 @@ class MailService
                 return false;
             }
             $write("EHLO " . ($_SERVER['SERVER_NAME'] ?? 'localhost'));
-            while ($line = $read()) {
-                if (substr($line, 3, 1) === ' ') break;
-            }
+            $consumeMultiLine();
         }
         $write("AUTH LOGIN");
-        $expect(334);
-        $write(base64_encode($user));
-        $expect(334);
-        $write(base64_encode($pass));
-        if (!$expect(235)) {
+        if (!$expect(334)) {
             fclose($sock);
+            if ($this->lastError === '') $this->lastError = 'SMTP AUTH not supported';
+            $this->logError('MailService: ' . $this->lastError);
+            return false;
+        }
+        $write(base64_encode($user));
+        if (!$expect(334)) {
+            fclose($sock);
+            if ($this->lastError === '') $this->lastError = 'SMTP username rejected';
+            $this->logError('MailService: ' . $this->lastError);
+            return false;
+        }
+        $write(base64_encode($pass));
+        $authLine = $read();
+        $authCode = $authLine ? (int) substr($authLine, 0, 3) : 0;
+        if (in_array($authCode, [235, 250], true)) {
+            $consumeMultiLine();
+        } else {
+            fclose($sock);
+            if ($authLine && $this->lastError === '') $this->lastError = 'SMTP: ' . trim($authLine);
             if ($this->lastError === '') $this->lastError = 'SMTP authentication failed';
             $this->logError('MailService auth failed: ' . $this->lastError);
             return false;
