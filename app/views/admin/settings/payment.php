@@ -20,6 +20,7 @@
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Save</button>
             <a href="<?= admin_url('settings/general') ?>" class="btn btn-outline">← General</a>
+            <a href="<?= admin_url('settings/email') ?>" class="btn btn-outline">Email →</a>
         </div>
     </form>
 </div>

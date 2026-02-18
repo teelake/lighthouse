@@ -123,6 +123,8 @@ $router->add('POST', $adm . '/jobs/{id}/delete', ['controller' => 'Admin\Job', '
 $router->add('GET', $adm . '/job-applications', ['controller' => 'Admin\JobApplication', 'action' => 'index']);
 
 $router->add('GET', $adm . '/subscribers', ['controller' => 'Admin\Subscriber', 'action' => 'index']);
+$router->add('GET', $adm . '/subscribers/compose', ['controller' => 'Admin\Subscriber', 'action' => 'compose']);
+$router->add('POST', $adm . '/subscribers/send-mass', ['controller' => 'Admin\Subscriber', 'action' => 'sendMass']);
 $router->add('GET', $adm . '/contact-report', ['controller' => 'Admin\ContactReport', 'action' => 'index']);
 $router->add('GET', $adm . '/prayer-wall', ['controller' => 'Admin\PrayerWall', 'action' => 'index']);
 $router->add('POST', $adm . '/prayer-wall/requests/{id}/delete', ['controller' => 'Admin\PrayerWall', 'action' => 'deleteRequest']);
@@ -135,6 +137,8 @@ $router->add('GET', $adm . '/settings/homepage', ['controller' => 'Admin\Setting
 $router->add('POST', $adm . '/settings/homepage', ['controller' => 'Admin\Setting', 'action' => 'updateHomepage']);
 $router->add('GET', $adm . '/settings/payment', ['controller' => 'Admin\Setting', 'action' => 'payment']);
 $router->add('POST', $adm . '/settings/payment', ['controller' => 'Admin\Setting', 'action' => 'updatePayment']);
+$router->add('GET', $adm . '/settings/email', ['controller' => 'Admin\Setting', 'action' => 'email']);
+$router->add('POST', $adm . '/settings/email', ['controller' => 'Admin\Setting', 'action' => 'updateEmail']);
 
 // Admin - Users (admin role only)
 $router->add('GET', $adm . '/users', ['controller' => 'Admin\User', 'action' => 'index']);

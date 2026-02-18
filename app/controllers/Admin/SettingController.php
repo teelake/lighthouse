@@ -45,4 +45,37 @@ class SettingController extends BaseController
         $s->set('service_thursday', $this->post('service_thursday', '6:00 PM'));
         $this->redirectAdmin('settings/homepage');
     }
+
+    public function email()
+    {
+        $this->requireAdmin();
+        $s = new Setting();
+        $this->render('admin/settings/email', [
+            'mail_from_email' => $s->get('mail_from_email', ''),
+            'mail_from_name' => $s->get('mail_from_name', 'Lighthouse Global Church'),
+            'smtp_host' => $s->get('smtp_host', ''),
+            'smtp_port' => $s->get('smtp_port', '587'),
+            'smtp_encryption' => $s->get('smtp_encryption', 'tls'),
+            'smtp_user' => $s->get('smtp_user', ''),
+            'smtp_pass_is_set' => $s->get('smtp_pass', '') !== '',
+            'pageHeading' => 'Email Settings',
+            'currentPage' => 'settings',
+        ]);
+    }
+
+    public function updateEmail()
+    {
+        $this->requireAdmin();
+        $s = new Setting();
+        $s->set('mail_from_email', $this->post('mail_from_email', ''));
+        $s->set('mail_from_name', $this->post('mail_from_name', 'Lighthouse Global Church'));
+        $s->set('smtp_host', $this->post('smtp_host', ''));
+        $s->set('smtp_port', $this->post('smtp_port', '587'));
+        $s->set('smtp_encryption', $this->post('smtp_encryption', 'tls'));
+        $s->set('smtp_user', $this->post('smtp_user', ''));
+        if ($this->post('smtp_pass') !== '') {
+            $s->set('smtp_pass', $this->post('smtp_pass'));
+        }
+        $this->redirectAdmin('settings/email');
+    }
 }

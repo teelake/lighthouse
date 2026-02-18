@@ -19,6 +19,7 @@
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Save</button>
             <a href="<?= admin_url('settings/homepage') ?>" class="btn btn-outline">Homepage →</a>
+            <a href="<?= admin_url('settings/email') ?>" class="btn btn-outline">Email →</a>
             <a href="<?= admin_url('settings/payment') ?>" class="btn btn-outline">Payment →</a>
         </div>
     </form>

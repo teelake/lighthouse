@@ -1,7 +1,7 @@
 <div class="admin-card">
     <h2><?= $user ? 'Edit User' : 'Add User' ?></h2>
     <?php if (!empty($error)): ?><div class="alert alert-error"><?= htmlspecialchars($error) ?></div><?php endif; ?>
-    <form method="post">
+    <form method="post" action="<?= $user ? admin_url('users/' . $user['id']) : admin_url('users') ?>">
         <?= csrf_field() ?>
         <div class="form-group">
             <label>Name</label>

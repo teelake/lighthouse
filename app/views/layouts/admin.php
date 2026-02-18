@@ -15,6 +15,13 @@ $greeting = date('G') < 12 ? 'Good morning' : (date('G') < 17 ? 'Good afternoon'
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($pageTitle ?? $pageHeading ?? 'Dashboard') ?> - Lighthouse Admin</title>
+    <?php
+    $faviconPath = file_exists(PUBLIC_PATH . '/images/lighthouse-logo.png') ? '/public/images/lighthouse-logo.png' : (file_exists(PUBLIC_PATH . '/images/logo.png') ? '/public/images/logo.png' : null);
+    if ($faviconPath): ?>
+    <link rel="icon" type="image/png" href="<?= rtrim(BASE_URL, '/') . $faviconPath ?>">
+    <?php else: ?>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23b08d57' d='M16 4L4 12v12h24V12L16 4z'/%3E%3Cpath fill='none' stroke='%23b08d57' stroke-width='1.5' d='M16 12v12M4 12h24'/%3E%3C/svg%3E">
+    <?php endif; ?>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
