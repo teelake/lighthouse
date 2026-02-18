@@ -315,7 +315,7 @@ $mediaTypeLabel = function ($t) {
                     foreach ($voiceItems as $t):
                     ?>
                     <div class="voice-card">
-                        <blockquote class="voice-quote">"<?= rich_content($t['quote']) ?>"</blockquote>
+                        <blockquote class="voice-quote"><?= rich_content($t['quote']) ?></blockquote>
                         <footer class="voice-author">
                             <?php if (!empty($t['author_photo'])): ?>
                             <img src="<?= htmlspecialchars($t['author_photo']) ?>" alt="" class="voice-author-photo">
