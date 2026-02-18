@@ -1,14 +1,14 @@
 <?php
-$stats = $stats ?? [];
-$upcomingEvents = $upcomingEvents ?? [];
-$latestNewsletter = $latestNewsletter ?? [];
-$latestJobApps = $latestJobApps ?? [];
-$latestVisitors = $latestVisitors ?? [];
-$latestPrayerRequests = $latestPrayerRequests ?? [];
-$latestPrayerPosts = $latestPrayerPosts ?? [];
-$prayerUsers = $prayerUsers ?? [];
-$isEditor = $isEditor ?? false;
-$isAdmin = $isAdmin ?? false;
+$stats = isset($stats) ? $stats : [];
+$upcomingEvents = isset($upcomingEvents) ? $upcomingEvents : [];
+$latestNewsletter = isset($latestNewsletter) ? $latestNewsletter : [];
+$latestJobApps = isset($latestJobApps) ? $latestJobApps : [];
+$latestVisitors = isset($latestVisitors) ? $latestVisitors : [];
+$latestPrayerRequests = isset($latestPrayerRequests) ? $latestPrayerRequests : [];
+$latestPrayerPosts = isset($latestPrayerPosts) ? $latestPrayerPosts : [];
+$prayerUsers = isset($prayerUsers) ? $prayerUsers : [];
+$isEditor = isset($isEditor) ? $isEditor : false;
+$isAdmin = isset($isAdmin) ? $isAdmin : false;
 
 function dash_time_ago($date) {
     if (empty($date)) return '';
@@ -25,28 +25,28 @@ function dash_time_ago($date) {
     <!-- KPI row - at a glance -->
     <div class="dash-kpi">
         <a href="<?= admin_url('events') ?>" class="dash-kpi-card">
-            <span class="dash-kpi-value"><?= (int)($stats['events'] ?? 0) ?></span>
+            <span class="dash-kpi-value"><?= (int)(isset($stats['events']) ? $stats['events'] : 0) ?></span>
             <span class="dash-kpi-label">Events</span>
         </a>
         <a href="<?= admin_url('ministries') ?>" class="dash-kpi-card">
-            <span class="dash-kpi-value"><?= (int)($stats['ministries'] ?? 0) ?></span>
+            <span class="dash-kpi-value"><?= (int)(isset($stats['ministries']) ? $stats['ministries'] : 0) ?></span>
             <span class="dash-kpi-label">Ministries</span>
         </a>
         <a href="<?= admin_url('media') ?>" class="dash-kpi-card">
-            <span class="dash-kpi-value"><?= (int)($stats['media'] ?? 0) ?></span>
+            <span class="dash-kpi-value"><?= (int)(isset($stats['media']) ? $stats['media'] : 0) ?></span>
             <span class="dash-kpi-label">Media</span>
         </a>
         <?php if ($isAdmin): ?>
         <a href="<?= admin_url('prayer-wall') ?>" class="dash-kpi-card dash-kpi-accent">
-            <span class="dash-kpi-value"><?= (int)($stats['prayer_requests'] ?? 0) + (int)($stats['prayer_wall'] ?? 0) ?></span>
+            <span class="dash-kpi-value"><?= (int)(isset($stats['prayer_requests']) ? $stats['prayer_requests'] : 0) + (int)(isset($stats['prayer_wall']) ? $stats['prayer_wall'] : 0) ?></span>
             <span class="dash-kpi-label">Prayer</span>
         </a>
         <a href="<?= admin_url('job-applications') ?>" class="dash-kpi-card">
-            <span class="dash-kpi-value"><?= (int)($stats['job_applications'] ?? 0) ?></span>
+            <span class="dash-kpi-value"><?= (int)(isset($stats['job_applications']) ? $stats['job_applications'] : 0) ?></span>
             <span class="dash-kpi-label">Applications</span>
         </a>
         <span class="dash-kpi-card">
-            <span class="dash-kpi-value"><?= (int)($stats['newsletter'] ?? 0) ?></span>
+            <span class="dash-kpi-value"><?= (int)(isset($stats['newsletter']) ? $stats['newsletter'] : 0) ?></span>
             <span class="dash-kpi-label">Subscribers</span>
         </span>
         <?php endif; ?>
@@ -82,8 +82,8 @@ function dash_time_ago($date) {
                         <ul class="dash-list">
                             <?php foreach ($latestPrayerRequests as $r): ?>
                             <li class="dash-list-item">
-                                <span class="dash-list-main" title="<?= htmlspecialchars($r['request'] ?? '') ?>"><?= htmlspecialchars(($r['name'] ?? '') ?: 'Anonymous') ?></span>
-                                <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago($r['created_at'] ?? '')) ?></span>
+                                <span class="dash-list-main" title="<?= htmlspecialchars(isset($r['request']) ? $r['request'] : '') ?>"><?= htmlspecialchars((isset($r['name']) && $r['name'] !== '') ? $r['name'] : 'Anonymous') ?></span>
+                                <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago(isset($r['created_at']) ? $r['created_at'] : '')) ?></span>
                             </li>
                             <?php endforeach; ?>
                         </ul>
@@ -95,8 +95,8 @@ function dash_time_ago($date) {
                         <ul class="dash-list">
                             <?php foreach ($latestPrayerPosts as $p): ?>
                             <li class="dash-list-item">
-                                <span class="dash-list-main" title="<?= htmlspecialchars($p['request'] ?? '') ?>"><?= ($p['is_anonymous'] ?? 0) ? 'Anonymous' : htmlspecialchars($prayerUsers[$p['user_id'] ?? 0] ?? '') ?></span>
-                                <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago($p['created_at'] ?? '')) ?></span>
+                                <span class="dash-list-main" title="<?= htmlspecialchars(isset($p['request']) ? $p['request'] : '') ?>"><?= (isset($p['is_anonymous']) && $p['is_anonymous']) ? 'Anonymous' : htmlspecialchars(isset($prayerUsers[isset($p['user_id']) ? $p['user_id'] : 0]) ? $prayerUsers[isset($p['user_id']) ? $p['user_id'] : 0] : '') ?></span>
+                                <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago(isset($p['created_at']) ? $p['created_at'] : '')) ?></span>
                             </li>
                             <?php endforeach; ?>
                         </ul>
@@ -112,10 +112,13 @@ function dash_time_ago($date) {
                     <h2 class="dash-widget-title">Latest Newsletter Signups</h2>
                 </div>
                 <ul class="dash-list">
-                    <?php foreach ($latestNewsletter as $n): ?>
+                    <?php foreach ($latestNewsletter as $n):
+                        $nName = trim((isset($n['first_name']) ? $n['first_name'] : '') . ' ' . (isset($n['last_name']) ? $n['last_name'] : ''));
+                        $nDisplay = $nName !== '' ? $nName : (isset($n['email']) ? $n['email'] : '');
+                    ?>
                     <li class="dash-list-item">
-                        <span class="dash-list-main"><?= htmlspecialchars(trim(($n['first_name'] ?? '') . ' ' . ($n['last_name'] ?? '')) ?: $n['email']) ?></span>
-                        <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago($n['subscribed_at'] ?? '')) ?></span>
+                        <span class="dash-list-main"><?= htmlspecialchars($nDisplay) ?></span>
+                        <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago(isset($n['subscribed_at']) ? $n['subscribed_at'] : '')) ?></span>
                     </li>
                     <?php endforeach; ?>
                 </ul>
@@ -131,8 +134,8 @@ function dash_time_ago($date) {
                 <ul class="dash-list">
                     <?php foreach ($latestJobApps as $a): ?>
                     <li class="dash-list-item">
-                        <span class="dash-list-main"><?= htmlspecialchars($a['name'] ?? '') ?></span>
-                        <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago($a['created_at'] ?? '')) ?></span>
+                        <span class="dash-list-main"><?= htmlspecialchars(isset($a['name']) ? $a['name'] : '') ?></span>
+                        <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago(isset($a['created_at']) ? $a['created_at'] : '')) ?></span>
                     </li>
                     <?php endforeach; ?>
                 </ul>
@@ -147,8 +150,8 @@ function dash_time_ago($date) {
                 <ul class="dash-list">
                     <?php foreach ($latestVisitors as $v): ?>
                     <li class="dash-list-item">
-                        <span class="dash-list-main"><?= htmlspecialchars(trim(($v['first_name'] ?? '') . ' ' . ($v['last_name'] ?? ''))) ?></span>
-                        <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago($v['created_at'] ?? '')) ?></span>
+                        <span class="dash-list-main"><?= htmlspecialchars(trim((isset($v['first_name']) ? $v['first_name'] : '') . ' ' . (isset($v['last_name']) ? $v['last_name'] : ''))) ?></span>
+                        <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago(isset($v['created_at']) ? $v['created_at'] : '')) ?></span>
                     </li>
                     <?php endforeach; ?>
                 </ul>
@@ -172,9 +175,9 @@ function dash_time_ago($date) {
                 <ul class="dash-list dash-list-events">
                     <?php foreach ($upcomingEvents as $e): ?>
                     <li class="dash-list-item">
-                        <a href="<?= admin_url('events/' . ($e['id'] ?? '') . '/edit') ?>" class="dash-list-link">
-                            <span class="dash-list-main"><?= htmlspecialchars($e['title'] ?? '') ?></span>
-                            <span class="dash-list-meta"><?= htmlspecialchars($e['event_date'] ?? '') ?></span>
+                        <a href="<?= admin_url('events/' . (isset($e['id']) ? $e['id'] : '') . '/edit') ?>" class="dash-list-link">
+                            <span class="dash-list-main"><?= htmlspecialchars(isset($e['title']) ? $e['title'] : '') ?></span>
+                            <span class="dash-list-meta"><?= htmlspecialchars(isset($e['event_date']) ? $e['event_date'] : '') ?></span>
                         </a>
                     </li>
                     <?php endforeach; ?>
