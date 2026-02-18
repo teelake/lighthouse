@@ -315,9 +315,6 @@ $mediaTypeLabel = function ($t) {
                     foreach ($voiceItems as $t):
                     ?>
                     <div class="voice-card">
-                        <div class="voice-stars" aria-hidden="true">
-                            <?php for ($i = 0; $i < 5; $i++): ?><span class="voice-star">★</span><?php endfor; ?>
-                        </div>
                         <blockquote class="voice-quote">"<?= rich_content($t['quote']) ?>"</blockquote>
                         <footer class="voice-author">
                             <?php if (!empty($t['author_photo'])): ?>

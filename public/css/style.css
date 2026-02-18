@@ -620,21 +620,19 @@ body::before {
 @media (min-width: 900px) {
     .voice-card { flex: 0 0 calc(33.333% - 1rem); }
 }
-.voice-stars { margin-bottom: 1rem; }
-.voice-star { color: #e67e22; font-size: 1.1rem; }
 .voice-quote {
-    font-family: var(--font-serif, Georgia, serif);
+    font-family: var(--font-sans);
     font-size: clamp(1rem, 2vw, 1.15rem);
-    font-style: italic;
+    font-style: normal;
     margin: 0 0 1rem;
-    line-height: 1.7;
+    line-height: 1.65;
     color: #333;
 }
 .voice-quote p { margin: 0 0 0.5em; }
 .voice-quote p:last-child { margin-bottom: 0; }
 .voice-author { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
 .voice-author-photo { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
-.voice-card cite { font-size: 0.9rem; color: var(--color-primary); font-style: normal; font-weight: 600; }
+.voice-card cite { font-size: 0.9rem; color: var(--color-torch-red); font-style: normal; font-weight: 600; }
 .voice-carousel .carousel-btn {
     position: absolute;
     top: 50%;
