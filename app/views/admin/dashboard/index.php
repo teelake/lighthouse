@@ -62,10 +62,10 @@ function dash_time_ago($date) {
             <span class="dash-kpi-value"><?= (int)(isset($stats['job_applications']) ? $stats['job_applications'] : 0) ?></span>
             <span class="dash-kpi-label">Applications</span>
         </a>
-        <span class="dash-kpi-card">
+        <a href="<?= admin_url('subscribers') ?>" class="dash-kpi-card">
             <span class="dash-kpi-value"><?= (int)(isset($stats['newsletter']) ? $stats['newsletter'] : 0) ?></span>
             <span class="dash-kpi-label">Subscribers</span>
-        </span>
+        </a>
         <?php } ?>
     </div>
 

@@ -1,6 +1,7 @@
 <?php
 ob_start();
 $baseUrl = rtrim(BASE_URL, '/');
+$msg = $msg ?? '';
 $address = $address ?? '980 Parkland Drive, Holiday Inn & Suites, Halifax, NS, Canada';
 $phone = $phone ?? '902-240-2087';
 $email = $email ?? 'info@thelighthouseglobal.org';
@@ -61,6 +62,25 @@ $mapSrc = !empty($mapEmbedUrl) ? $mapEmbedUrl : 'https://www.google.com/maps/emb
                     <a href="tel:<?= preg_replace('/\D/', '', $phone) ?>" class="btn btn-accent">Call Us</a>
                     <a href="mailto:<?= htmlspecialchars($email) ?>" class="btn btn-watch">Email Us</a>
                 </div>
+                <?php if ($msg === 'success'): ?>
+                <div class="contact-msg contact-msg--success">Thank you! Your message has been sent. We'll get back to you soon.</div>
+                <?php elseif ($msg === 'invalid'): ?>
+                <div class="contact-msg contact-msg--error">Please fill in all required fields (name, email, and message) correctly.</div>
+                <?php elseif ($msg === 'error'): ?>
+                <div class="contact-msg contact-msg--error">Something went wrong. Please try again or email us directly.</div>
+                <?php endif; ?>
+                <form class="contact-form" action="<?= $baseUrl ?>/contact/submit" method="post">
+                    <?= csrf_field() ?>
+                    <label for="contact-name">Name <span aria-hidden="true">*</span></label>
+                    <input type="text" id="contact-name" name="name" required maxlength="255" placeholder="Your name">
+                    <label for="contact-email">Email <span aria-hidden="true">*</span></label>
+                    <input type="email" id="contact-email" name="email" required maxlength="255" placeholder="your@email.com">
+                    <label for="contact-subject">Subject</label>
+                    <input type="text" id="contact-subject" name="subject" maxlength="255" placeholder="e.g. General inquiry">
+                    <label for="contact-message">Message <span aria-hidden="true">*</span></label>
+                    <textarea id="contact-message" name="message" required rows="4" placeholder="How can we help?"></textarea>
+                    <button type="submit" class="btn btn-accent">Send Message</button>
+                </form>
             </div>
             <div class="contact-map-wrap">
                 <div class="contact-map">

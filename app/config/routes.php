@@ -37,6 +37,7 @@ $router->add('POST', 'prayer/submit', ['controller' => 'Prayer', 'action' => 'su
 $router->add('POST', 'prayer-wall/post', ['controller' => 'Prayer', 'action' => 'wallPost']);
 $router->add('POST', 'visitor/register', ['controller' => 'Visitor', 'action' => 'register']);
 $router->add('POST', 'newsletter/subscribe', ['controller' => 'Newsletter', 'action' => 'subscribe']);
+$router->add('POST', 'contact/submit', ['controller' => 'Contact', 'action' => 'submit']);
 $router->add('POST', 'jobs/{slug}/apply', ['controller' => 'Job', 'action' => 'apply']);
 
 // === GIVING - prominent ===
@@ -121,6 +122,8 @@ $router->add('POST', $adm . '/jobs/{id}', ['controller' => 'Admin\Job', 'action'
 $router->add('POST', $adm . '/jobs/{id}/delete', ['controller' => 'Admin\Job', 'action' => 'delete']);
 $router->add('GET', $adm . '/job-applications', ['controller' => 'Admin\JobApplication', 'action' => 'index']);
 
+$router->add('GET', $adm . '/subscribers', ['controller' => 'Admin\Subscriber', 'action' => 'index']);
+$router->add('GET', $adm . '/contact-report', ['controller' => 'Admin\ContactReport', 'action' => 'index']);
 $router->add('GET', $adm . '/prayer-wall', ['controller' => 'Admin\PrayerWall', 'action' => 'index']);
 $router->add('POST', $adm . '/prayer-wall/requests/{id}/delete', ['controller' => 'Admin\PrayerWall', 'action' => 'deleteRequest']);
 $router->add('POST', $adm . '/prayer-wall/posts/{id}/delete', ['controller' => 'Admin\PrayerWall', 'action' => 'deletePost']);

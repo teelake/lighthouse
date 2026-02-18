@@ -62,6 +62,7 @@ class PageController extends Controller
             'phone' => $setting->get('site_phone', '902-240-2087'),
             'email' => $setting->get('site_email', 'info@thelighthouseglobal.org'),
             'mapEmbedUrl' => $mapUrl,
+            'msg' => $_GET['msg'] ?? '',
         ]);
     }
 
