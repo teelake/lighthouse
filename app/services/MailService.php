@@ -55,13 +55,22 @@ class MailService
             return false;
         }
         stream_set_timeout($sock, 15);
-        $read = function () use ($sock) { return fgets($sock, 512); };
-        $write = function ($s) use ($sock) { return fwrite($sock, $s . "\r\n"); };
+        $self = $this;
+        $read = function () use ($sock) { return @fgets($sock, 512); };
+        $write = function ($s) use ($sock, $self) {
+            $data = $s . "\r\n";
+            $n = @fwrite($sock, $data);
+            if ($n === false || $n !== strlen($data)) {
+                $self->lastError = 'Connection lost (broken pipe)';
+                throw new \RuntimeException('SMTP write failed');
+            }
+        };
         $expect = function ($code) use ($read) {
             $line = $read();
             return $line && (int) substr($line, 0, 3) === $code;
         };
 
+        try {
         $read(); // greeting
         $write("EHLO " . ($_SERVER['SERVER_NAME'] ?? 'localhost'));
         while ($line = $read()) {
@@ -125,6 +134,12 @@ class MailService
             return false;
         }
         $write("QUIT");
+        } catch (\RuntimeException $e) {
+            if (isset($sock) && is_resource($sock)) {
+                @fclose($sock);
+            }
+            return false;
+        }
         fclose($sock);
         return true;
     }
