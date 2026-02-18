@@ -26,7 +26,13 @@ $greeting = date('G') < 12 ? 'Good morning' : (date('G') < 17 ? 'Good afternoon'
         <div class="sidebar-brand">
             <a href="<?= $adm ?>" class="sidebar-brand-link">
                 <span class="sidebar-logo">
+                    <?php
+                    $logoPath = file_exists(PUBLIC_PATH . '/images/lighthouse-logo.png') ? '/public/images/lighthouse-logo.png' : (file_exists(PUBLIC_PATH . '/images/logo.png') ? '/public/images/logo.png' : null);
+                    if ($logoPath): ?>
+                    <img src="<?= rtrim(BASE_URL, '/') . $logoPath ?>" alt="Lighthouse" class="sidebar-logo-img">
+                    <?php else: ?>
                     <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 4L4 12v12h24V12L16 4z"/><path d="M16 12v12"/><path d="M4 12h24"/></svg>
+                    <?php endif; ?>
                 </span>
                 <span class="sidebar-brand-text">Lighthouse</span>
             </a>

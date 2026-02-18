@@ -125,36 +125,60 @@ function dash_time_ago($date) {
             <?php if ($isAdmin && !empty($latestNewsletter)) { ?>
             <div class="dash-widget">
                 <div class="dash-widget-head">
-                    <h2 class="dash-widget-title">Latest Newsletter Signups</h2>
+                    <h2 class="dash-widget-title">Latest Subscribers</h2>
                 </div>
-                <ul class="dash-list">
-                    <?php foreach ($latestNewsletter as $n) {
-                        $nName = trim((isset($n['first_name']) ? $n['first_name'] : '') . ' ' . (isset($n['last_name']) ? $n['last_name'] : ''));
-                        $nDisplay = $nName !== '' ? $nName : (isset($n['email']) ? $n['email'] : '');
-                    ?>
-                    <li class="dash-list-item">
-                        <span class="dash-list-main"><?= htmlspecialchars($nDisplay) ?></span>
-                        <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago(isset($n['subscribed_at']) ? $n['subscribed_at'] : '')) ?></span>
-                    </li>
-                    <?php } ?>
-                </ul>
+                <div class="dash-table-wrap">
+                    <table class="admin-table admin-table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($latestNewsletter as $n) {
+                                $nName = trim((isset($n['first_name']) ? $n['first_name'] : '') . ' ' . (isset($n['last_name']) ? $n['last_name'] : ''));
+                                $nDisplay = $nName !== '' ? $nName : '—';
+                            ?>
+                            <tr>
+                                <td><?= htmlspecialchars($nDisplay) ?></td>
+                                <td><a href="mailto:<?= htmlspecialchars($n['email'] ?? '') ?>"><?= htmlspecialchars($n['email'] ?? '') ?></a></td>
+                                <td><?= htmlspecialchars(dash_time_ago($n['subscribed_at'] ?? '')) ?></td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <?php } ?>
 
             <?php if ($isAdmin && !empty($latestJobApps)) { ?>
             <div class="dash-widget">
                 <div class="dash-widget-head">
-                    <h2 class="dash-widget-title">Recent Applications</h2>
+                    <h2 class="dash-widget-title">Latest Job Applications</h2>
                     <a href="<?= admin_url('job-applications') ?>" class="dash-widget-link">View all</a>
                 </div>
-                <ul class="dash-list">
-                    <?php foreach ($latestJobApps as $a) { ?>
-                    <li class="dash-list-item">
-                        <span class="dash-list-main"><?= htmlspecialchars(isset($a['name']) ? $a['name'] : '') ?></span>
-                        <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago(isset($a['created_at']) ? $a['created_at'] : '')) ?></span>
-                    </li>
-                    <?php } ?>
-                </ul>
+                <div class="dash-table-wrap">
+                    <table class="admin-table admin-table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($latestJobApps as $a) { ?>
+                            <tr>
+                                <td><?= htmlspecialchars($a['name'] ?? '') ?></td>
+                                <td><?= htmlspecialchars($a['job_title'] ?? '—') ?></td>
+                                <td><?= htmlspecialchars(dash_time_ago($a['created_at'] ?? '')) ?></td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <?php } ?>
 
@@ -163,16 +187,28 @@ function dash_time_ago($date) {
                 <div class="dash-widget-head">
                     <h2 class="dash-widget-title">First-Time Visitors</h2>
                 </div>
-                <ul class="dash-list">
-                    <?php foreach ($latestVisitors as $v) {
-                        $vName = trim((isset($v['first_name']) ? $v['first_name'] : '') . ' ' . (isset($v['last_name']) ? $v['last_name'] : ''));
-                    ?>
-                    <li class="dash-list-item">
-                        <span class="dash-list-main"><?= htmlspecialchars($vName) ?></span>
-                        <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago(isset($v['created_at']) ? $v['created_at'] : '')) ?></span>
-                    </li>
-                    <?php } ?>
-                </ul>
+                <div class="dash-table-wrap">
+                    <table class="admin-table admin-table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($latestVisitors as $v) {
+                                $vName = trim(($v['first_name'] ?? '') . ' ' . ($v['last_name'] ?? ''));
+                            ?>
+                            <tr>
+                                <td><?= htmlspecialchars($vName) ?></td>
+                                <td><a href="mailto:<?= htmlspecialchars($v['email'] ?? '') ?>"><?= htmlspecialchars($v['email'] ?? '') ?></a></td>
+                                <td><?= htmlspecialchars(dash_time_ago($v['created_at'] ?? '')) ?></td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <?php } ?>
 

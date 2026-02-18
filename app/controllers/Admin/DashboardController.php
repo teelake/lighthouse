@@ -36,9 +36,22 @@ class DashboardController extends BaseController
         ];
 
         $upcomingEvents = (new Event())->findAll(['is_published' => 1], 'event_date ASC', 5);
-        $latestNewsletter = (new NewsletterSubscriber())->findAll([], 'subscribed_at DESC', 5);
-        $latestJobApps = (new JobApplication())->findAll([], 'created_at DESC', 5);
-        $latestVisitors = $isAdmin ? (new FirstTimeVisitor())->findAll([], 'created_at DESC', 5) : [];
+        $latestNewsletter = (new NewsletterSubscriber())->findAll([], 'subscribed_at DESC', 8);
+        $latestJobApps = (new JobApplication())->findAll([], 'created_at DESC', 8);
+        $latestVisitors = $isAdmin ? (new FirstTimeVisitor())->findAll([], 'created_at DESC', 8) : [];
+
+        // Enrich job applications with job title
+        if (!empty($latestJobApps)) {
+            $jobModel = new Job();
+            foreach ($latestJobApps as &$app) {
+                $app['job_title'] = '';
+                if (!empty($app['job_id'])) {
+                    $job = $jobModel->find($app['job_id']);
+                    $app['job_title'] = $job['title'] ?? '';
+                }
+            }
+            unset($app);
+        }
         $latestPrayerRequests = $isAdmin ? (new PrayerRequest())->findAll([], 'created_at DESC', 5) : [];
         $latestPrayerPosts = $isAdmin ? (new PrayerWall())->findAll([], 'created_at DESC', 5) : [];
 
