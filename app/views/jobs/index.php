@@ -18,7 +18,7 @@ $baseUrl = rtrim(BASE_URL, '/');
             <a href="<?= $baseUrl ?>/jobs/<?= htmlspecialchars($j['slug']) ?>" class="job-card stagger-item">
                 <div class="job-card-main">
                     <h3><?= htmlspecialchars($j['title']) ?></h3>
-                    <span class="job-type"><?= htmlspecialchars($j['type'] ?? 'Full-time') ?></span>
+                    <span class="job-type"><?= htmlspecialchars(job_type_label($j['type'] ?? '')) ?></span>
                 </div>
                 <span class="link-arrow">View details →</span>
             </a>

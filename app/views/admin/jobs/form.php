@@ -13,6 +13,7 @@
             <select name="type">
                 <option value="full-time" <?= ($job['type'] ?? '') === 'full-time' ? 'selected' : '' ?>>Full-Time</option>
                 <option value="part-time" <?= ($job['type'] ?? '') === 'part-time' ? 'selected' : '' ?>>Part-Time</option>
+                <option value="full-time-part-time" <?= ($job['type'] ?? '') === 'full-time-part-time' ? 'selected' : '' ?>>Full-Time / Part-Time</option>
                 <option value="internship" <?= ($job['type'] ?? '') === 'internship' ? 'selected' : '' ?>>Internship</option>
                 <option value="volunteer" <?= ($job['type'] ?? '') === 'volunteer' ? 'selected' : '' ?>>Volunteer</option>
             </select>

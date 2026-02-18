@@ -59,6 +59,20 @@ if (!function_exists('rich_preview')) {
     }
 }
 
+if (!function_exists('job_type_label')) {
+    function job_type_label(?string $type): string
+    {
+        $labels = [
+            'full-time' => 'Full-Time',
+            'part-time' => 'Part-Time',
+            'full-time-part-time' => 'Full-Time / Part-Time',
+            'internship' => 'Internship',
+            'volunteer' => 'Volunteer',
+        ];
+        return $labels[$type ?? ''] ?? ucfirst(str_replace('-', ' ', $type ?? ''));
+    }
+}
+
 if (!function_exists('svg_icon')) {
     function svg_icon(string $name, int $size = 20): string
     {

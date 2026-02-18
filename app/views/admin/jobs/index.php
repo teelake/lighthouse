@@ -19,7 +19,7 @@
         <?php foreach ($jobs ?? [] as $j): ?>
         <tr>
             <td><?= htmlspecialchars($j['title'] ?? '') ?></td>
-            <td><span class="admin-badge"><?= htmlspecialchars($j['type'] ?? '—') ?></span></td>
+            <td><span class="admin-badge"><?= htmlspecialchars(job_type_label($j['type'] ?? '') ?: '—') ?></span></td>
             <td>
                 <div class="admin-table-actions">
                     <a href="<?= admin_url('jobs/' . ($j['id'] ?? '') . '/edit') ?>" class="btn btn-sm btn-outline">Edit</a>

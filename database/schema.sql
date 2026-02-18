@@ -146,7 +146,7 @@ CREATE TABLE jobs (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     slug VARCHAR(255) NOT NULL UNIQUE,
-    type ENUM('full-time', 'part-time', 'internship', 'volunteer') DEFAULT 'full-time',
+    type ENUM('full-time', 'part-time', 'full-time-part-time', 'internship', 'volunteer') DEFAULT 'full-time',
     description TEXT,
     responsibilities TEXT,
     ideal_candidate TEXT,
