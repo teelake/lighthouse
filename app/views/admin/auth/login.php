@@ -11,8 +11,9 @@
         * { box-sizing: border-box; }
         body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: 'Inter', sans-serif; background: #0d0f12; padding: 1.5rem; -webkit-font-smoothing: antialiased; }
         .auth-card { background: #fff; padding: 2.25rem; border-radius: 12px; width: 100%; max-width: 400px; box-shadow: 0 24px 48px rgba(0,0,0,0.2); }
-        .logo { display: block; margin-bottom: 1.5rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; color: #b08d57; }
-        h1 { margin: 0 0 1.5rem; color: #1a1a1a; font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em; }
+        .auth-logo { display: flex; flex-direction: column; align-items: center; margin-bottom: 1.5rem; text-align: center; }
+        .auth-logo-img { max-width: 140px; max-height: 64px; object-fit: contain; }
+        .auth-logo-text { margin-top: 0.75rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; color: #b08d57; }
         .form-group { margin-bottom: 1.125rem; }
         label { display: block; margin-bottom: 0.375rem; font-weight: 500; color: #4a4a4a; font-size: 0.8125rem; }
         input { width: 100%; padding: 0.5625rem 0.875rem; border: 1px solid #e8e6e3; border-radius: 6px; font-size: 0.875rem; font-family: inherit; transition: border-color 0.18s; }
@@ -24,8 +25,16 @@
 </head>
 <body>
     <div class="auth-card">
-        <span class="logo">LIGHTHOUSE</span>
-        <h1>Sign in to admin</h1>
+        <div class="auth-logo">
+            <?php
+            $logoPath = file_exists(PUBLIC_PATH . '/images/lighthouse-logo.png') ? '/public/images/lighthouse-logo.png' : (file_exists(PUBLIC_PATH . '/images/logo.png') ? '/public/images/logo.png' : null);
+            if ($logoPath): ?>
+            <img src="<?= rtrim(BASE_URL, '/') . $logoPath ?>" alt="Lighthouse" class="auth-logo-img">
+            <?php else: ?>
+            <svg class="auth-logo-img" width="120" height="48" viewBox="0 0 32 32" fill="none" stroke="#b08d57" stroke-width="1.5"><path d="M16 4L4 12v12h24V12L16 4z"/><path d="M16 12v12"/><path d="M4 12h24"/></svg>
+            <?php endif; ?>
+            <span class="auth-logo-text">Admin Login</span>
+        </div>
         <?php if (!empty($error)): ?><div class="error"><?= htmlspecialchars($error) ?></div><?php endif; ?>
         <form method="post">
             <?= csrf_field() ?>
