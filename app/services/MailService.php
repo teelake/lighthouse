@@ -152,7 +152,19 @@ class MailService
         $headers .= "To: " . ($toName ? $this->encodeHeader($toName, $to) : $to) . "\r\n";
         $headers .= "Subject: =?UTF-8?B?" . base64_encode($subject) . "?=\r\n";
         $headers .= "MIME-Version: 1.0\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n";
-        $write($headers . $bodyHtml);
+        $data = $headers . $bodyHtml;
+        $data = preg_replace('/^\./m', '..', $data);
+        $payload = $data . "\r\n";
+        $len = strlen($payload);
+        $written = 0;
+        while ($written < $len) {
+            $n = @fwrite($sock, substr($payload, $written, 8192));
+            if ($n === false || $n === 0) {
+                $self->lastError = 'Connection lost (broken pipe)';
+                throw new \RuntimeException('SMTP DATA write failed');
+            }
+            $written += $n;
+        }
         $write(".");
         if (!$expect(250)) {
             fclose($sock);
