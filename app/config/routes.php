@@ -35,7 +35,6 @@ $router->add('GET', 'jobs/{slug}', ['controller' => 'Job', 'action' => 'view']);
 // Forms - POST
 $router->add('POST', 'prayer/submit', ['controller' => 'Prayer', 'action' => 'submit']);
 $router->add('POST', 'prayer-wall/post', ['controller' => 'Prayer', 'action' => 'wallPost']);
-$router->add('POST', 'visitor/register', ['controller' => 'Visitor', 'action' => 'register']);
 $router->add('POST', 'newsletter/subscribe', ['controller' => 'Newsletter', 'action' => 'subscribe']);
 $router->add('POST', 'contact/submit', ['controller' => 'Contact', 'action' => 'submit']);
 $router->add('POST', 'jobs/{slug}/apply', ['controller' => 'Job', 'action' => 'apply']);
@@ -121,6 +120,12 @@ $router->add('GET', $adm . '/jobs/{id}/edit', ['controller' => 'Admin\Job', 'act
 $router->add('POST', $adm . '/jobs/{id}', ['controller' => 'Admin\Job', 'action' => 'update']);
 $router->add('POST', $adm . '/jobs/{id}/delete', ['controller' => 'Admin\Job', 'action' => 'delete']);
 $router->add('GET', $adm . '/job-applications', ['controller' => 'Admin\JobApplication', 'action' => 'index']);
+$router->add('GET', $adm . '/visitors', ['controller' => 'Admin\FirstTimeVisitor', 'action' => 'index']);
+$router->add('GET', $adm . '/visitors/create', ['controller' => 'Admin\FirstTimeVisitor', 'action' => 'create']);
+$router->add('POST', $adm . '/visitors', ['controller' => 'Admin\FirstTimeVisitor', 'action' => 'store']);
+$router->add('GET', $adm . '/visitors/{id}/edit', ['controller' => 'Admin\FirstTimeVisitor', 'action' => 'edit']);
+$router->add('POST', $adm . '/visitors/{id}', ['controller' => 'Admin\FirstTimeVisitor', 'action' => 'update']);
+$router->add('POST', $adm . '/visitors/{id}/delete', ['controller' => 'Admin\FirstTimeVisitor', 'action' => 'delete']);
 
 $router->add('GET', $adm . '/subscribers', ['controller' => 'Admin\Subscriber', 'action' => 'index']);
 $router->add('GET', $adm . '/subscribers/compose', ['controller' => 'Admin\Subscriber', 'action' => 'compose']);

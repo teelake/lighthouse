@@ -66,6 +66,10 @@ function dash_time_ago($date) {
             <span class="dash-kpi-value"><?= (int)(isset($stats['newsletter']) ? $stats['newsletter'] : 0) ?></span>
             <span class="dash-kpi-label">Subscribers</span>
         </a>
+        <a href="<?= admin_url('visitors') ?>" class="dash-kpi-card">
+            <span class="dash-kpi-value"><?= (int)(isset($stats['visitors']) ? $stats['visitors'] : 0) ?></span>
+            <span class="dash-kpi-label">Visitors</span>
+        </a>
         <?php } ?>
     </div>
 
@@ -210,10 +214,11 @@ function dash_time_ago($date) {
             </div>
             <?php } ?>
 
-            <?php if ($isAdmin && !empty($latestVisitors)) { ?>
+            <?php if ($isAdmin) { ?>
             <div class="dash-widget">
                 <div class="dash-widget-head">
                     <h2 class="dash-widget-title">First-Time Visitors</h2>
+                    <a href="<?= admin_url('visitors') ?>" class="dash-widget-link">Manage</a>
                 </div>
                 <div class="dash-table-wrap">
                     <table class="admin-table admin-table-striped">
@@ -225,7 +230,9 @@ function dash_time_ago($date) {
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($latestVisitors as $v) {
+                            <?php if (empty($latestVisitors)): ?>
+                            <tr><td colspan="3" class="admin-empty">No visitors yet. <a href="<?= admin_url('visitors/create') ?>">Add one</a></td></tr>
+                            <?php else: foreach ($latestVisitors as $v) {
                                 $vName = trim(($v['first_name'] ?? '') . ' ' . ($v['last_name'] ?? ''));
                             ?>
                             <tr>
@@ -233,7 +240,7 @@ function dash_time_ago($date) {
                                 <td><a href="mailto:<?= htmlspecialchars($v['email'] ?? '') ?>"><?= htmlspecialchars($v['email'] ?? '') ?></a></td>
                                 <td><?= htmlspecialchars(dash_time_ago($v['created_at'] ?? '')) ?></td>
                             </tr>
-                            <?php } ?>
+                            <?php } endif; ?>
                         </tbody>
                     </table>
                 </div>

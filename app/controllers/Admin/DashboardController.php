@@ -33,6 +33,7 @@ class DashboardController extends BaseController
             'newsletter' => (new NewsletterSubscriber())->count(),
             'prayer_requests' => (new PrayerRequest())->count(),
             'prayer_wall' => (new PrayerWall())->count(),
+            'visitors' => (new FirstTimeVisitor())->count(),
         ];
 
         $upcomingEvents = (new Event())->findAll(['is_published' => 1], 'event_date ASC', 5);
