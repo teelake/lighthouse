@@ -35,7 +35,7 @@ define('CSRF_TOKEN_NAME', 'csrf_token');
 // Admin backend URL path
 define('ADMIN_PATH', getenv('ADMIN_PATH') ?: 'admin');
 define('MAX_UPLOAD_SIZE', 10485760); // 10MB
-define('ALLOWED_IMAGE_TYPES', ['image/jpeg', 'image/png', 'image/gif', 'image/webp']);
+define('ALLOWED_IMAGE_TYPES', ['image/jpeg', 'image/png', 'image/avif', 'image/svg+xml']);
 define('ALLOWED_MEDIA_TYPES', ['video/mp4', 'video/webm', 'audio/mpeg', 'audio/wav', 'audio/mp3']);
 define('ITEMS_PER_PAGE', 12);
 define('RATE_LIMIT_REQUESTS', 60);

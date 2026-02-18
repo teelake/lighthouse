@@ -3,12 +3,38 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\Admin\BaseController;
 use App\Models\Setting;
+use App\Services\ImageUpload;
 
 class SettingController extends BaseController
 {
     public function index() { $this->requireAdmin(); $this->redirectAdmin('settings/general'); }
     public function general() { $this->requireAdmin(); $s = new Setting(); $this->render('admin/settings/general', ['address' => $s->get('site_address'), 'phone' => $s->get('site_phone'), 'email' => $s->get('site_email'), 'pageHeading' => 'General Settings', 'currentPage' => 'settings']); }
     public function updateGeneral() { $this->requireAdmin(); $s = new Setting(); $s->set('site_address', $this->post('site_address')); $s->set('site_phone', $this->post('site_phone')); $s->set('site_email', $this->post('site_email')); $this->redirectAdmin('settings/general'); }
+
+    public function social()
+    {
+        $this->requireAdmin();
+        $s = new Setting();
+        $this->render('admin/settings/social', [
+            'social_facebook' => $s->get('social_facebook', ''),
+            'social_instagram' => $s->get('social_instagram', ''),
+            'social_youtube' => $s->get('social_youtube', ''),
+            'social_twitter' => $s->get('social_twitter', ''),
+            'pageHeading' => 'Social Media Links',
+            'currentPage' => 'settings',
+        ]);
+    }
+
+    public function updateSocial()
+    {
+        $this->requireAdmin();
+        $s = new Setting();
+        $s->set('social_facebook', trim($this->post('social_facebook', '')));
+        $s->set('social_instagram', trim($this->post('social_instagram', '')));
+        $s->set('social_youtube', trim($this->post('social_youtube', '')));
+        $s->set('social_twitter', trim($this->post('social_twitter', '')));
+        $this->redirectAdmin('settings/social');
+    }
     public function payment() { $this->requireAdmin(); $s = new Setting(); $this->render('admin/settings/payment', ['paypal_email' => $s->get('paypal_email'), 'stripe_public' => $s->get('stripe_public_key'), 'stripe_secret' => $s->get('stripe_secret_key'), 'pageHeading' => 'Payment Settings', 'currentPage' => 'settings']); }
     public function updatePayment() {
         $this->requireAdmin();
@@ -38,9 +64,43 @@ class SettingController extends BaseController
     {
         $this->requireAdmin();
         $s = new Setting();
+        $prayerImg = $s->get('prayer_wall_image', '');
+        $newsletterImg = $s->get('newsletter_device_image', '');
+        $uploader = new ImageUpload();
+        $uploaded = $uploader->upload('prayer_wall_image', 'homepage');
+        if ($uploaded !== null) $prayerImg = $uploaded;
+        elseif ($uploader->getLastError()) {
+            $this->render('admin/settings/homepage', [
+                'error' => $uploader->getLastError(),
+                'map_embed_url' => $this->post('map_embed_url'),
+                'prayer_wall_image' => $prayerImg,
+                'newsletter_device_image' => $newsletterImg,
+                'service_sunday' => $this->post('service_sunday', '10:00 AM'),
+                'service_thursday' => $this->post('service_thursday', '6:00 PM'),
+                'pageHeading' => 'Homepage Settings',
+                'currentPage' => 'settings',
+            ]);
+            return;
+        }
+        $uploader2 = new ImageUpload();
+        $uploaded2 = $uploader2->upload('newsletter_device_image', 'homepage');
+        if ($uploaded2 !== null) $newsletterImg = $uploaded2;
+        elseif ($uploader2->getLastError()) {
+            $this->render('admin/settings/homepage', [
+                'error' => $uploader2->getLastError(),
+                'map_embed_url' => $this->post('map_embed_url'),
+                'prayer_wall_image' => $prayerImg,
+                'newsletter_device_image' => $newsletterImg,
+                'service_sunday' => $this->post('service_sunday', '10:00 AM'),
+                'service_thursday' => $this->post('service_thursday', '6:00 PM'),
+                'pageHeading' => 'Homepage Settings',
+                'currentPage' => 'settings',
+            ]);
+            return;
+        }
         $s->set('map_embed_url', $this->post('map_embed_url', ''));
-        $s->set('prayer_wall_image', $this->post('prayer_wall_image', ''));
-        $s->set('newsletter_device_image', $this->post('newsletter_device_image', ''));
+        $s->set('prayer_wall_image', $prayerImg);
+        $s->set('newsletter_device_image', $newsletterImg);
         $s->set('service_sunday', $this->post('service_sunday', '10:00 AM'));
         $s->set('service_thursday', $this->post('service_thursday', '6:00 PM'));
         $this->redirectAdmin('settings/homepage');

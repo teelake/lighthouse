@@ -2,6 +2,7 @@
 namespace App\Controllers\Admin;
 
 use App\Models\ContentSection;
+use App\Services\ImageUpload;
 
 class SectionController extends BaseController
 {
@@ -39,8 +40,22 @@ class SectionController extends BaseController
         if (!$section) throw new \Exception('Section not found', 404);
 
         if (in_array($key, self::CONFIG_KEYS)) {
-            $extra = $this->buildExtraData($key);
-            (new ContentSection())->update($section['id'], ['extra_data' => json_encode($extra)]);
+            try {
+                $existing = !empty($section['extra_data'])
+                    ? (is_string($section['extra_data']) ? json_decode($section['extra_data'], true) : $section['extra_data'])
+                    : [];
+                $existing = is_array($existing) ? $existing : [];
+                $extra = $this->buildExtraData($key, $existing);
+                (new ContentSection())->update($section['id'], ['extra_data' => json_encode($extra)]);
+            } catch (\Throwable $e) {
+                $data = !empty($section['extra_data']) ? (is_string($section['extra_data']) ? json_decode($section['extra_data'], true) : $section['extra_data']) : [];
+                $this->render('admin/sections/edit_config', array_merge([
+                    'section' => $section,
+                    'data' => $data ?: [],
+                    'error' => $e->getMessage(),
+                ], ['pageHeading' => 'Edit ' . $key, 'currentPage' => 'sections']));
+                return;
+            }
         } else {
             $content = $this->post('content', '');
             (new ContentSection())->update($section['id'], ['content' => $content]);
@@ -48,7 +63,7 @@ class SectionController extends BaseController
         $this->redirectAdmin('sections');
     }
 
-    private function buildExtraData(string $key): array
+    private function buildExtraData(string $key, array $existing = []): array
     {
         $map = [
             'hero_config' => ['tagline', 'pillars', 'bg_image', 'cta_watch_url', 'cta_visit_url'],
@@ -60,10 +75,21 @@ class SectionController extends BaseController
         ];
         $fields = $map[$key] ?? [];
         $out = [];
+        $imageFields = ['bg_image', 'image'];
         foreach ($fields as $f) {
             if ($f === 'pillars') {
                 $raw = $this->post('pillars', '');
                 $out[$f] = array_values(array_filter(array_map('trim', explode("\n", $raw))));
+            } elseif (in_array($f, $imageFields, true)) {
+                $uploader = new ImageUpload();
+                $url = $uploader->upload($f, 'sections');
+                if ($url !== null) {
+                    $out[$f] = $url;
+                } elseif ($uploader->getLastError()) {
+                    throw new \RuntimeException($uploader->getLastError());
+                } else {
+                    $out[$f] = $existing[$f] ?? '';
+                }
             } else {
                 $out[$f] = trim($this->post($f, ''));
             }

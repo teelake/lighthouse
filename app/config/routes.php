@@ -138,6 +138,8 @@ $router->add('POST', $adm . '/prayer-wall/posts/{id}/delete', ['controller' => '
 $router->add('GET', $adm . '/settings', ['controller' => 'Admin\Setting', 'action' => 'index']);
 $router->add('GET', $adm . '/settings/general', ['controller' => 'Admin\Setting', 'action' => 'general']);
 $router->add('POST', $adm . '/settings/general', ['controller' => 'Admin\Setting', 'action' => 'updateGeneral']);
+$router->add('GET', $adm . '/settings/social', ['controller' => 'Admin\Setting', 'action' => 'social']);
+$router->add('POST', $adm . '/settings/social', ['controller' => 'Admin\Setting', 'action' => 'updateSocial']);
 $router->add('GET', $adm . '/settings/homepage', ['controller' => 'Admin\Setting', 'action' => 'homepage']);
 $router->add('POST', $adm . '/settings/homepage', ['controller' => 'Admin\Setting', 'action' => 'updateHomepage']);
 $router->add('GET', $adm . '/settings/payment', ['controller' => 'Admin\Setting', 'action' => 'payment']);

@@ -2,7 +2,7 @@
     <a href="<?= admin_url('leaders') ?>" class="admin-back-link">← Leadership</a>
     <h2><?= $leader ? 'Edit Leader' : 'Add Leader' ?></h2>
     <?php if (!empty($error)): ?><div class="alert alert-error"><?= htmlspecialchars($error) ?></div><?php endif; ?>
-    <form method="post" action="<?= $leader ? admin_url('leaders/' . $leader['id']) : admin_url('leaders') ?>">
+    <form method="post" action="<?= $leader ? admin_url('leaders/' . $leader['id']) : admin_url('leaders') ?>" enctype="multipart/form-data">
         <?= csrf_field() ?>
         <div class="form-group">
             <label>Name</label>
@@ -12,9 +12,17 @@
             <label>Title</label>
             <input type="text" name="title" value="<?= htmlspecialchars($leader['title'] ?? '') ?>" required>
         </div>
+        <?php $currentPhoto = $leader['photo'] ?? ''; ?>
         <div class="form-group">
-            <label>Photo URL</label>
-            <input type="url" name="photo" value="<?= htmlspecialchars($leader['photo'] ?? '') ?>">
+            <label>Photo</label>
+            <?php if (!empty($currentPhoto)): ?>
+            <div class="admin-image-preview" style="margin-bottom: 0.75rem;">
+                <img src="<?= htmlspecialchars($currentPhoto) ?>" alt="" style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%; border: 1px solid var(--adm-border);">
+                <p class="admin-muted" style="font-size: 0.85rem; margin-top: 0.25rem;">Upload to replace.</p>
+            </div>
+            <?php endif; ?>
+            <input type="file" name="photo" accept="image/jpeg,image/png,image/avif,image/svg+xml">
+            <p class="admin-muted" style="font-size: 0.85rem; margin-top: 0.25rem;">JPG, JPEG, PNG, AVIF, SVG. Max <?= defined('MAX_UPLOAD_SIZE') ? round(MAX_UPLOAD_SIZE / 1024 / 1024) : 10 ?>MB.</p>
         </div>
         <div class="form-group">
             <label>Bio</label>

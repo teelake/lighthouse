@@ -2,6 +2,7 @@
 namespace App\Controllers\Admin;
 
 use App\Models\Testimonial;
+use App\Services\ImageUpload;
 
 class TestimonialController extends BaseController
 {
@@ -21,10 +22,18 @@ class TestimonialController extends BaseController
     public function store()
     {
         $this->requireEditor();
+        $photo = '';
+        $u = new ImageUpload();
+        $up = $u->upload('author_photo', 'testimonials');
+        if ($up !== null) $photo = $up;
+        elseif ($u->getLastError()) {
+            $this->render('admin/testimonials/form', ['testimonial' => null, 'error' => $u->getLastError(), 'pageHeading' => 'Add Testimonial', 'currentPage' => 'testimonials']);
+            return;
+        }
         (new Testimonial())->create([
             'quote' => trim($this->post('quote', '')),
             'author_name' => trim($this->post('author_name', '')),
-            'author_photo' => trim($this->post('author_photo', '')),
+            'author_photo' => $photo,
             'sort_order' => (int) $this->post('sort_order', 0),
             'is_published' => $this->post('is_published') ? 1 : 0,
         ]);
@@ -46,10 +55,18 @@ class TestimonialController extends BaseController
         $id = $this->params['id'] ?? 0;
         $item = (new Testimonial())->find($id);
         if (!$item) throw new \Exception('Not found', 404);
+        $photo = $item['author_photo'] ?? '';
+        $u = new ImageUpload();
+        $up = $u->upload('author_photo', 'testimonials');
+        if ($up !== null) $photo = $up;
+        elseif ($u->getLastError()) {
+            $this->render('admin/testimonials/form', ['testimonial' => $item, 'error' => $u->getLastError(), 'pageHeading' => 'Edit Testimonial', 'currentPage' => 'testimonials']);
+            return;
+        }
         (new Testimonial())->update($id, [
             'quote' => trim($this->post('quote', '')),
             'author_name' => trim($this->post('author_name', '')),
-            'author_photo' => trim($this->post('author_photo', '')),
+            'author_photo' => $photo,
             'sort_order' => (int) $this->post('sort_order', 0),
             'is_published' => $this->post('is_published') ? 1 : 0,
         ]);

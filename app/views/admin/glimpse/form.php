@@ -2,11 +2,16 @@
     <a href="<?= admin_url('glimpse') ?>" class="admin-back-link">← Glimpse</a>
     <h2><?= $slide ? 'Edit Slide' : 'Add Slide' ?></h2>
     <?php if (!empty($error)): ?><div class="alert alert-error"><?= htmlspecialchars($error) ?></div><?php endif; ?>
-    <form method="post" action="<?= $slide ? admin_url('glimpse/' . $slide['id']) : admin_url('glimpse') ?>">
+    <form method="post" action="<?= $slide ? admin_url('glimpse/' . $slide['id']) : admin_url('glimpse') ?>" enctype="multipart/form-data">
         <?= csrf_field() ?>
+        <?php $hasImage = !empty($slide['image_url']); ?>
         <div class="form-group">
-            <label>Image URL</label>
-            <input type="url" name="image_url" value="<?= htmlspecialchars($slide['image_url'] ?? '') ?>" required>
+            <label>Image</label>
+            <?php if ($hasImage): ?>
+            <div class="admin-image-preview" style="margin-bottom: 0.75rem;"><img src="<?= htmlspecialchars($slide['image_url']) ?>" alt="" style="max-width: 200px; max-height: 120px; object-fit: contain; border: 1px solid var(--adm-border); border-radius: 6px;"></div>
+            <?php endif; ?>
+            <input type="file" name="image_url" accept="image/jpeg,image/png,image/avif,image/svg+xml" <?= !$hasImage ? 'required' : '' ?>>
+            <p class="admin-muted" style="font-size: 0.85rem; margin-top: 0.25rem;"><?= $hasImage ? 'Upload to replace.' : 'Required.' ?> JPG, JPEG, PNG, AVIF, SVG.</p>
         </div>
         <div class="form-group">
             <label>Label</label>
