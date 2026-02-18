@@ -41,7 +41,12 @@ class MailService
         $hostPart = $useSsl ? 'ssl://' . $host : $host;
         $errNo = 0;
         $errStr = '';
-        $ctx = stream_context_create(['ssl' => ['verify_peer' => false, 'verify_peer_name' => false]]);
+        $sslOpts = [
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true,
+        ];
+        $ctx = stream_context_create(['ssl' => $sslOpts]);
         $sock = @stream_socket_client(
             $hostPart . ':' . $port,
             $errNo,
@@ -52,6 +57,7 @@ class MailService
         );
         if (!$sock) {
             $this->lastError = "Could not connect: $errStr ($errNo)";
+            $this->logError($this->lastError . " [{$host}:{$port}]");
             return false;
         }
         stream_set_timeout($sock, 15);
@@ -65,9 +71,13 @@ class MailService
                 throw new \RuntimeException('SMTP write failed');
             }
         };
-        $expect = function ($code) use ($read) {
+        $expect = function ($code) use ($read, $self) {
             $line = $read();
-            return $line && (int) substr($line, 0, 3) === $code;
+            if ($line && (int) substr($line, 0, 3) === $code) return true;
+            if ($line && $self->lastError === '') {
+                $self->lastError = 'SMTP: ' . trim($line);
+            }
+            return false;
         };
 
         try {
@@ -80,10 +90,9 @@ class MailService
             $write("STARTTLS");
             if (!$expect(220)) {
                 fclose($sock);
-                $this->lastError = 'STARTTLS failed';
+                if ($this->lastError === '') $this->lastError = 'STARTTLS failed';
                 return false;
             }
-            $ctx = stream_context_create(['ssl' => ['verify_peer' => false, 'verify_peer_name' => false]]);
             if (!stream_socket_enable_crypto($sock, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
                 fclose($sock);
                 $this->lastError = 'TLS handshake failed';
@@ -101,25 +110,26 @@ class MailService
         $write(base64_encode($pass));
         if (!$expect(235)) {
             fclose($sock);
-            $this->lastError = 'SMTP authentication failed';
+            if ($this->lastError === '') $this->lastError = 'SMTP authentication failed';
+            $this->logError('MailService auth failed: ' . $this->lastError);
             return false;
         }
         $write("MAIL FROM:<" . $fromEmail . ">");
         if (!$expect(250)) {
             fclose($sock);
-            $this->lastError = 'MAIL FROM rejected';
+            if ($this->lastError === '') $this->lastError = 'MAIL FROM rejected';
             return false;
         }
         $write("RCPT TO:<" . $to . ">");
         if (!$expect(250)) {
             fclose($sock);
-            $this->lastError = 'RCPT TO rejected';
+            if ($this->lastError === '') $this->lastError = 'RCPT TO rejected';
             return false;
         }
         $write("DATA");
         if (!$expect(354)) {
             fclose($sock);
-            $this->lastError = 'DATA rejected';
+            if ($this->lastError === '') $this->lastError = 'DATA rejected';
             return false;
         }
         $headers = "From: " . $this->encodeHeader($fromName, $fromEmail) . "\r\n";
@@ -130,7 +140,7 @@ class MailService
         $write(".");
         if (!$expect(250)) {
             fclose($sock);
-            $this->lastError = 'Message rejected';
+            if ($this->lastError === '') $this->lastError = 'Message rejected';
             return false;
         }
         $write("QUIT");
@@ -138,6 +148,7 @@ class MailService
             if (isset($sock) && is_resource($sock)) {
                 @fclose($sock);
             }
+            $this->logError('MailService: ' . $this->lastError . " [to: $to]");
             return false;
         }
         fclose($sock);
@@ -172,5 +183,11 @@ class MailService
         $host = trim($this->setting->get('smtp_host', ''));
         $user = trim($this->setting->get('smtp_user', ''));
         return $host !== '' && $user !== '';
+    }
+
+    private function logError(string $msg): void
+    {
+        $log = (defined('ROOT_PATH') ? ROOT_PATH . '/' : '') . 'php-error.log';
+        @file_put_contents($log, '[' . date('Y-m-d H:i:s') . "] $msg\n", FILE_APPEND | LOCK_EX);
     }
 }

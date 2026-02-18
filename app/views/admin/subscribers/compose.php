@@ -3,7 +3,7 @@
     <h2>Send Mass Email</h2>
     <p style="color: var(--adm-muted); margin: 0 0 1rem;">This will send the email to all <?= (int)($subscriberCount ?? 0) ?> newsletter subscribers. Configure SMTP in <a href="<?= admin_url('settings/email') ?>">Email Settings</a> first.</p>
     <?php if (!empty($error)): ?><div class="alert alert-error"><?= htmlspecialchars($error) ?></div><?php endif; ?>
-    <?php if (!empty($success)): ?><div class="alert" style="background: #d1fae5; color: #065f46;"><?= htmlspecialchars($success) ?></div><?php endif; ?>
+    <?php if (!empty($success)): ?><div class="alert" style="background: <?= strpos($success ?? '', 'failed') !== false ? '#fef2f2' : '#d1fae5' ?>; color: <?= strpos($success ?? '', 'failed') !== false ? '#991b1b' : '#065f46' ?>;"><?= htmlspecialchars($success) ?></div><?php endif; ?>
     <form method="post" action="<?= admin_url('subscribers/send-mass') ?>">
         <?= csrf_field() ?>
         <div class="form-group">

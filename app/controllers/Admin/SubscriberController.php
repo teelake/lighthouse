@@ -60,6 +60,7 @@ class SubscriberController extends BaseController
         $mail = new MailService();
         $sent = 0;
         $failed = 0;
+        $lastError = '';
         foreach ($subscribers as $s) {
             $email = $s['email'] ?? '';
             if (!$email) continue;
@@ -69,11 +70,16 @@ class SubscriberController extends BaseController
                 $sent++;
             } else {
                 $failed++;
+                $lastError = $mail->getLastError();
             }
+        }
+        $msg = "Sent to $sent subscriber(s)." . ($failed > 0 ? " $failed failed." : '');
+        if ($failed > 0 && $lastError) {
+            $msg .= ' Error: ' . $lastError;
         }
         $this->render('admin/subscribers/compose', [
             'subscriberCount' => count($subscribers),
-            'success' => "Sent to $sent subscriber(s)." . ($failed > 0 ? " $failed failed." : ''),
+            'success' => $msg,
             'pageHeading' => 'Send Mass Email',
             'currentPage' => 'subscribers',
         ]);
