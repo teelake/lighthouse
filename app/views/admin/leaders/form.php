@@ -12,7 +12,7 @@
         <p><label>Name</label><br><input name="name" value="<?= htmlspecialchars($leader['name'] ?? '') ?>" required></p>
         <p><label>Title</label><br><input name="title" value="<?= htmlspecialchars($leader['title'] ?? '') ?>" required></p>
         <p><label>Photo URL</label><br><input name="photo" value="<?= htmlspecialchars($leader['photo'] ?? '') ?>" style="width:100%;max-width:500px;"></p>
-        <p><label>Bio</label><br><textarea name="bio" rows="5" style="width:100%;max-width:500px;"><?= htmlspecialchars($leader['bio'] ?? '') ?></textarea></p>
+        <p><label>Bio</label><br><textarea name="bio" class="rich-editor" rows="5" style="width:100%;max-width:500px;"><?= htmlspecialchars($leader['bio'] ?? '') ?></textarea></p>
         <p><label>Sort Order</label><br><input type="number" name="sort_order" value="<?= (int)($leader['sort_order'] ?? 0) ?>" min="0"></p>
         <p><label><input type="checkbox" name="is_published" value="1" <?= ($leader['is_published'] ?? 1) ? 'checked' : '' ?>> Published</label></p>
         <button type="submit">Save</button>

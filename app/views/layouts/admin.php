@@ -45,13 +45,13 @@ $initials = mb_strtoupper(mb_substr($initials, 0, 2)) ?: 'U';
             <?php endif; ?>
             <?php if ($isAdmin): ?>
             <div class="nav-group">System</div>
+            <a href="<?= admin_url('prayer-wall') ?>" class="nav-item <?= ($currentPage ?? '') === 'prayer-wall' ? 'active' : '' ?>">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M12 6v6"/><path d="M9 9h6"/></svg>
+                Prayer Wall
+            </a>
             <a href="<?= admin_url('users') ?>" class="nav-item <?= ($currentPage ?? '') === 'users' ? 'active' : '' ?>">Users</a>
             <?php endif; ?>
         </nav>
-        <div class="sidebar-footer">
-            <a href="<?= rtrim(BASE_URL, '/') ?>/" target="_blank" class="nav-item">View Site</a>
-            <a href="<?= admin_url('logout') ?>" class="nav-item logout">Logout</a>
-        </div>
     </aside>
     <div class="admin-main">
         <header class="admin-header">
@@ -65,6 +65,7 @@ $initials = mb_strtoupper(mb_substr($initials, 0, 2)) ?: 'U';
                         <span class="profile-avatar" aria-hidden="true"><?= htmlspecialchars($initials) ?></span>
                     </button>
                     <div class="profile-menu" id="profile-menu" role="menu" aria-hidden="true">
+                        <a href="<?= rtrim(BASE_URL, '/') ?>/" target="_blank" role="menuitem">View Site</a>
                         <a href="<?= admin_url('profile') ?>" role="menuitem">Edit Profile</a>
                         <a href="<?= admin_url('profile') ?>#password" role="menuitem">Password Settings</a>
                         <a href="<?= admin_url('logout') ?>" role="menuitem" class="profile-menu-logout">Logout</a>
@@ -76,6 +77,8 @@ $initials = mb_strtoupper(mb_substr($initials, 0, 2)) ?: 'U';
             <?= $content ?? '' ?>
         </main>
     </div>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="<?= rtrim(BASE_URL, '/') ?>/public/js/tinymce-init.js"></script>
     <script>
         (function() {
             var sidebar = document.getElementById('admin-sidebar');

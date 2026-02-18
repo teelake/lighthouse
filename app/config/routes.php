@@ -121,6 +121,10 @@ $router->add('POST', $adm . '/jobs/{id}', ['controller' => 'Admin\Job', 'action'
 $router->add('POST', $adm . '/jobs/{id}/delete', ['controller' => 'Admin\Job', 'action' => 'delete']);
 $router->add('GET', $adm . '/job-applications', ['controller' => 'Admin\JobApplication', 'action' => 'index']);
 
+$router->add('GET', $adm . '/prayer-wall', ['controller' => 'Admin\PrayerWall', 'action' => 'index']);
+$router->add('POST', $adm . '/prayer-wall/requests/{id}/delete', ['controller' => 'Admin\PrayerWall', 'action' => 'deleteRequest']);
+$router->add('POST', $adm . '/prayer-wall/posts/{id}/delete', ['controller' => 'Admin\PrayerWall', 'action' => 'deletePost']);
+
 $router->add('GET', $adm . '/settings', ['controller' => 'Admin\Setting', 'action' => 'index']);
 $router->add('GET', $adm . '/settings/general', ['controller' => 'Admin\Setting', 'action' => 'general']);
 $router->add('POST', $adm . '/settings/general', ['controller' => 'Admin\Setting', 'action' => 'updateGeneral']);

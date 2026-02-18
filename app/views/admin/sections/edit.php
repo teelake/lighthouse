@@ -23,7 +23,7 @@
         <form method="post" action="<?= rtrim(BASE_URL,'/') ?>/admin/sections/<?= htmlspecialchars($section['section_key']) ?>">
             <div style="margin-bottom: 1rem;">
                 <label><strong><?= htmlspecialchars($section['title'] ?? $section['section_key']) ?></strong></label>
-                <textarea name="content"><?= htmlspecialchars($section['content'] ?? '') ?></textarea>
+                <textarea name="content" class="rich-editor"><?= htmlspecialchars($section['content'] ?? '') ?></textarea>
             </div>
             <button type="submit">Save</button>
         </form>

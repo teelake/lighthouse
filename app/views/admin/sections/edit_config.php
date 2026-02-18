@@ -57,14 +57,14 @@
             <label>Headline</label>
             <input name="headline" value="<?= htmlspecialchars($d['headline'] ?? '') ?>">
             <label>Description</label>
-            <textarea name="description"><?= htmlspecialchars($d['description'] ?? '') ?></textarea>
+            <textarea name="description" class="rich-editor"><?= htmlspecialchars($d['description'] ?? '') ?></textarea>
         <?php elseif ($key === 'newsletter_config'): ?>
             <label>Eyebrow</label>
             <input name="eyebrow" value="<?= htmlspecialchars($d['eyebrow'] ?? '') ?>">
             <label>Title</label>
             <input name="title" value="<?= htmlspecialchars($d['title'] ?? '') ?>">
             <label>Note</label>
-            <textarea name="note"><?= htmlspecialchars($d['note'] ?? '') ?></textarea>
+            <textarea name="note" class="rich-editor"><?= htmlspecialchars($d['note'] ?? '') ?></textarea>
         <?php elseif ($key === 'whats_on_config'): ?>
             <label>Sunday Title</label>
             <input name="sunday_title" value="<?= htmlspecialchars($d['sunday_title'] ?? '') ?>">
