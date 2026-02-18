@@ -36,7 +36,7 @@ function dash_time_ago($date) {
             <span class="dash-kpi-value"><?= (int)(isset($stats['media']) ? $stats['media'] : 0) ?></span>
             <span class="dash-kpi-label">Media</span>
         </a>
-        <?php if ($isAdmin): ?>
+        <?php if ($isAdmin) { ?>
         <a href="<?= admin_url('prayer-wall') ?>" class="dash-kpi-card dash-kpi-accent">
             <span class="dash-kpi-value"><?= (int)(isset($stats['prayer_requests']) ? $stats['prayer_requests'] : 0) + (int)(isset($stats['prayer_wall']) ? $stats['prayer_wall'] : 0) ?></span>
             <span class="dash-kpi-label">Prayer</span>
@@ -49,12 +49,12 @@ function dash_time_ago($date) {
             <span class="dash-kpi-value"><?= (int)(isset($stats['newsletter']) ? $stats['newsletter'] : 0) ?></span>
             <span class="dash-kpi-label">Subscribers</span>
         </span>
-        <?php endif; ?>
+        <?php } ?>
     </div>
 
     <div class="dash-layout">
         <div class="dash-main">
-            <?php if ($isEditor): ?>
+            <?php if ($isEditor) { ?>
             <div class="dash-widget">
                 <div class="dash-widget-head">
                     <h2 class="dash-widget-title">Quick Add</h2>
@@ -67,52 +67,55 @@ function dash_time_ago($date) {
                     <a href="<?= admin_url('media/create') ?>" class="dash-quick-btn">New Media</a>
                 </div>
             </div>
-            <?php endif; ?>
+            <?php } ?>
 
-            <?php if ($isAdmin && (!empty($latestPrayerRequests) || !empty($latestPrayerPosts))): ?>
+            <?php if ($isAdmin && (!empty($latestPrayerRequests) || !empty($latestPrayerPosts))) { ?>
             <div class="dash-widget">
                 <div class="dash-widget-head">
                     <h2 class="dash-widget-title">Prayer Wall</h2>
                     <a href="<?= admin_url('prayer-wall') ?>" class="dash-widget-link">Manage</a>
                 </div>
                 <div class="dash-prayer-grid">
-                    <?php if (!empty($latestPrayerRequests)): ?>
+                    <?php if (!empty($latestPrayerRequests)) { ?>
                     <div class="dash-prayer-col">
                         <p class="dash-prayer-label">Recent Requests</p>
                         <ul class="dash-list">
-                            <?php foreach ($latestPrayerRequests as $r): ?>
+                            <?php foreach ($latestPrayerRequests as $r) { ?>
                             <li class="dash-list-item">
                                 <span class="dash-list-main" title="<?= htmlspecialchars(isset($r['request']) ? $r['request'] : '') ?>"><?= htmlspecialchars((isset($r['name']) && $r['name'] !== '') ? $r['name'] : 'Anonymous') ?></span>
                                 <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago(isset($r['created_at']) ? $r['created_at'] : '')) ?></span>
                             </li>
-                            <?php endforeach; ?>
+                            <?php } ?>
                         </ul>
                     </div>
-                    <?php endif; ?>
-                    <?php if (!empty($latestPrayerPosts)): ?>
+                    <?php } ?>
+                    <?php if (!empty($latestPrayerPosts)) { ?>
                     <div class="dash-prayer-col">
                         <p class="dash-prayer-label">Recent Posts</p>
                         <ul class="dash-list">
-                            <?php foreach ($latestPrayerPosts as $p): ?>
+                            <?php foreach ($latestPrayerPosts as $p) {
+                                $pid = isset($p['user_id']) ? $p['user_id'] : 0;
+                                $pAuthor = (isset($p['is_anonymous']) && $p['is_anonymous']) ? 'Anonymous' : (isset($prayerUsers[$pid]) ? $prayerUsers[$pid] : '');
+                            ?>
                             <li class="dash-list-item">
-                                <span class="dash-list-main" title="<?= htmlspecialchars(isset($p['request']) ? $p['request'] : '') ?>"><?= (isset($p['is_anonymous']) && $p['is_anonymous']) ? 'Anonymous' : htmlspecialchars(isset($prayerUsers[isset($p['user_id']) ? $p['user_id'] : 0]) ? $prayerUsers[isset($p['user_id']) ? $p['user_id'] : 0] : '') ?></span>
+                                <span class="dash-list-main" title="<?= htmlspecialchars(isset($p['request']) ? $p['request'] : '') ?>"><?= htmlspecialchars($pAuthor) ?></span>
                                 <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago(isset($p['created_at']) ? $p['created_at'] : '')) ?></span>
                             </li>
-                            <?php endforeach; ?>
+                            <?php } ?>
                         </ul>
                     </div>
-                    <?php endif; ?>
+                    <?php } ?>
                 </div>
             </div>
-            <?php endif; ?>
+            <?php } ?>
 
-            <?php if ($isAdmin && !empty($latestNewsletter)): ?>
+            <?php if ($isAdmin && !empty($latestNewsletter)) { ?>
             <div class="dash-widget">
                 <div class="dash-widget-head">
                     <h2 class="dash-widget-title">Latest Newsletter Signups</h2>
                 </div>
                 <ul class="dash-list">
-                    <?php foreach ($latestNewsletter as $n):
+                    <?php foreach ($latestNewsletter as $n) {
                         $nName = trim((isset($n['first_name']) ? $n['first_name'] : '') . ' ' . (isset($n['last_name']) ? $n['last_name'] : ''));
                         $nDisplay = $nName !== '' ? $nName : (isset($n['email']) ? $n['email'] : '');
                     ?>
@@ -120,70 +123,75 @@ function dash_time_ago($date) {
                         <span class="dash-list-main"><?= htmlspecialchars($nDisplay) ?></span>
                         <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago(isset($n['subscribed_at']) ? $n['subscribed_at'] : '')) ?></span>
                     </li>
-                    <?php endforeach; ?>
+                    <?php } ?>
                 </ul>
             </div>
-            <?php endif; ?>
+            <?php } ?>
 
-            <?php if ($isAdmin && !empty($latestJobApps)): ?>
+            <?php if ($isAdmin && !empty($latestJobApps)) { ?>
             <div class="dash-widget">
                 <div class="dash-widget-head">
                     <h2 class="dash-widget-title">Recent Applications</h2>
                     <a href="<?= admin_url('job-applications') ?>" class="dash-widget-link">View all</a>
                 </div>
                 <ul class="dash-list">
-                    <?php foreach ($latestJobApps as $a): ?>
+                    <?php foreach ($latestJobApps as $a) { ?>
                     <li class="dash-list-item">
                         <span class="dash-list-main"><?= htmlspecialchars(isset($a['name']) ? $a['name'] : '') ?></span>
                         <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago(isset($a['created_at']) ? $a['created_at'] : '')) ?></span>
                     </li>
-                    <?php endforeach; ?>
+                    <?php } ?>
                 </ul>
             </div>
-            <?php endif; ?>
+            <?php } ?>
 
-            <?php if ($isAdmin && !empty($latestVisitors)): ?>
+            <?php if ($isAdmin && !empty($latestVisitors)) { ?>
             <div class="dash-widget">
                 <div class="dash-widget-head">
                     <h2 class="dash-widget-title">First-Time Visitors</h2>
                 </div>
                 <ul class="dash-list">
-                    <?php foreach ($latestVisitors as $v): ?>
+                    <?php foreach ($latestVisitors as $v) {
+                        $vName = trim((isset($v['first_name']) ? $v['first_name'] : '') . ' ' . (isset($v['last_name']) ? $v['last_name'] : ''));
+                    ?>
                     <li class="dash-list-item">
-                        <span class="dash-list-main"><?= htmlspecialchars(trim((isset($v['first_name']) ? $v['first_name'] : '') . ' ' . (isset($v['last_name']) ? $v['last_name'] : ''))) ?></span>
+                        <span class="dash-list-main"><?= htmlspecialchars($vName) ?></span>
                         <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago(isset($v['created_at']) ? $v['created_at'] : '')) ?></span>
                     </li>
-                    <?php endforeach; ?>
+                    <?php } ?>
                 </ul>
             </div>
-            <?php endif; ?>
+            <?php } ?>
 
-            <?php if (!$isEditor && (!$isAdmin || (empty($latestNewsletter) && empty($latestJobApps) && empty($latestVisitors) && empty($latestPrayerRequests) && empty($latestPrayerPosts))): ?>
+            <?php
+            $showEmpty = !$isEditor && (!$isAdmin || (empty($latestNewsletter) && empty($latestJobApps) && empty($latestVisitors) && empty($latestPrayerRequests) && empty($latestPrayerPosts)));
+            if ($showEmpty) {
+            ?>
             <div class="dash-widget dash-widget-empty">
                 <p class="dash-empty-text">Dashboard overview. Use the sidebar to manage content.</p>
             </div>
-            <?php endif; ?>
+            <?php } ?>
         </div>
 
         <aside class="dash-sidebar">
-            <?php if (!empty($upcomingEvents)): ?>
+            <?php if (!empty($upcomingEvents)) { ?>
             <div class="dash-widget">
                 <div class="dash-widget-head">
                     <h2 class="dash-widget-title">Upcoming Events</h2>
                     <a href="<?= admin_url('events') ?>" class="dash-widget-link">All</a>
                 </div>
                 <ul class="dash-list dash-list-events">
-                    <?php foreach ($upcomingEvents as $e): ?>
+                    <?php foreach ($upcomingEvents as $e) { ?>
                     <li class="dash-list-item">
                         <a href="<?= admin_url('events/' . (isset($e['id']) ? $e['id'] : '') . '/edit') ?>" class="dash-list-link">
                             <span class="dash-list-main"><?= htmlspecialchars(isset($e['title']) ? $e['title'] : '') ?></span>
                             <span class="dash-list-meta"><?= htmlspecialchars(isset($e['event_date']) ? $e['event_date'] : '') ?></span>
                         </a>
                     </li>
-                    <?php endforeach; ?>
+                    <?php } ?>
                 </ul>
             </div>
-            <?php endif; ?>
+            <?php } ?>
         </aside>
     </div>
 </div>
