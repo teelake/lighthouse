@@ -17,7 +17,7 @@ $whatToExpect = $sections['im_new_expect']['content'] ?? null;
         <div class="im-new-intro">
             <h2 class="about-section-title">We're Glad You're Here</h2>
             <div class="about-story-body">
-                <?= nl2br(htmlspecialchars($imNewIntro ?? 'At Lighthouse, you\'re not just welcome—you\'re celebrated. No matter where you are in life or your faith journey, there\'s a place for you here. Whether you\'re exploring faith for the first time or looking for a church home, we\'re here to walk with you.')) ?>
+                <?= rich_content($imNewIntro ?? 'At Lighthouse, you\'re not just welcome—you\'re celebrated. No matter where you are in life or your faith journey, there\'s a place for you here. Whether you\'re exploring faith for the first time or looking for a church home, we\'re here to walk with you.') ?>
             </div>
         </div>
 
@@ -43,7 +43,7 @@ $whatToExpect = $sections['im_new_expect']['content'] ?? null;
         <div class="im-new-cta-section">
             <div class="im-new-cta-card">
                 <h3>Plan Your Visit</h3>
-                <p><?= htmlspecialchars($whatToExpect ?? 'Join us Sunday at 10:00 AM or Thursday at 6:00 PM. We meet at Holiday Inn & Suites, 980 Parkland Drive, Halifax.') ?></p>
+                <p><?= rich_content($whatToExpect ?? 'Join us Sunday at 10:00 AM or Thursday at 6:00 PM. We meet at Holiday Inn & Suites, 980 Parkland Drive, Halifax.') ?></p>
                 <a href="<?= $baseUrl ?>/contact" class="btn btn-watch">Get Directions</a>
             </div>
             <div class="im-new-cta-card">

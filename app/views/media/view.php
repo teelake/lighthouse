@@ -21,7 +21,7 @@ if (($item['source'] ?? '') === 'youtube' && !empty($item['embed_url']) && preg_
         <?php endif; ?>
         <?php if (!empty($item['description'])): ?>
         <div class="media-view-desc">
-            <?= nl2br(htmlspecialchars($item['description'])) ?>
+            <?= rich_content($item['description']) ?>
         </div>
         <?php endif; ?>
         <a href="<?= $baseUrl ?>/media" class="media-back">← All Media</a>

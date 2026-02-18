@@ -6,7 +6,7 @@ $baseUrl = rtrim(BASE_URL, '/');
     <div class="container">
         <h1><?= htmlspecialchars($ministry['title']) ?></h1>
         <?php if (!empty($ministry['tagline'])): ?><p class="lead"><?= htmlspecialchars($ministry['tagline']) ?></p><?php endif; ?>
-        <p><?= nl2br(htmlspecialchars($ministry['description'] ?? '')) ?></p>
+        <div class="ministry-desc"><?= rich_content($ministry['description'] ?? '') ?></div>
         <a href="<?= $baseUrl ?>/ministries">← All Ministries</a>
     </div>
 </section>

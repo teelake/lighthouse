@@ -6,7 +6,7 @@ $baseUrl = rtrim(BASE_URL, '/');
     <div class="container">
         <h1><?= htmlspecialchars($job['title']) ?></h1>
         <p><?= htmlspecialchars($job['type']) ?></p>
-        <p><?= nl2br(htmlspecialchars($job['description'] ?? '')) ?></p>
+        <div class="job-desc"><?= rich_content($job['description'] ?? '') ?></div>
         <a href="<?= $baseUrl ?>/jobs">← All Jobs</a>
     </div>
 </section>

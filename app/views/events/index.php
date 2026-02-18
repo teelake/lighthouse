@@ -16,7 +16,7 @@ $baseUrl = rtrim(BASE_URL, '/');
         <?php foreach ($events ?? [] as $e): ?>
         <article class="brand-card">
             <h3><?= htmlspecialchars($e['title']) ?></h3>
-            <p><?= htmlspecialchars($e['description']) ?></p>
+            <p><?= rich_preview($e['description'], 160) ?></p>
             <a class="link-arrow" href="<?= $baseUrl ?>/events/<?= htmlspecialchars($e['slug']) ?>">Details →</a>
         </article>
         <?php endforeach; ?>

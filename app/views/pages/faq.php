@@ -24,7 +24,7 @@ $faqs = $faqs ?? [];
                 </button>
                 <div class="faq-answer" id="faq-answer-<?= (int)$faq['id'] ?>" role="region" aria-labelledby="faq-q-<?= (int)$faq['id'] ?>">
                     <div class="faq-answer-inner">
-                        <?= nl2br(htmlspecialchars($faq['answer'])) ?>
+                        <?= rich_content($faq['answer']) ?>
                     </div>
                 </div>
             </div>

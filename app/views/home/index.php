@@ -143,7 +143,7 @@ $mediaTypeLabel = function ($t) {
                     </span>
                     <div class="sermon-card-overlay">
                         <h3 class="sermon-card-title"><?= htmlspecialchars($item['title']) ?></h3>
-                        <p class="sermon-card-desc"><?= htmlspecialchars(mb_strimwidth($item['description'] ?? '', 0, 120, '…')) ?></p>
+                        <p class="sermon-card-desc"><?= rich_preview($item['description'] ?? '', 120) ?></p>
                     </div>
                 </div>
             </a>
@@ -181,7 +181,7 @@ $mediaTypeLabel = function ($t) {
     <div class="container lights-inner">
         <div class="lights-content">
             <h2 class="lights-headline"><?= nl2br(htmlspecialchars($lightsExtra['headline'] ?? 'We Raise Lights That Transform Nations')) ?></h2>
-            <p><?= nl2br(htmlspecialchars($whoWeAre['content'] ?? 'The Lighthouse Global Ministry is a Spirit-led ministry commissioned to raise men and women who shine with Christ\'s light—bringing transformation to lives, communities, cultures, and nations.')) ?></p>
+            <div class="lights-body"><?= rich_content($whoWeAre['content'] ?? 'The Lighthouse Global Ministry is a Spirit-led ministry commissioned to raise men and women who shine with Christ\'s light—bringing transformation to lives, communities, cultures, and nations.') ?></div>
             <a href="<?= $baseUrl ?>/about" class="btn btn-watch">Learn More</a>
         </div>
         <div class="lights-image">
@@ -193,7 +193,7 @@ $mediaTypeLabel = function ($t) {
 <?php if ($scripture && !empty(trim($scripture['content'] ?? ''))): ?>
 <section class="section scripture-section" data-animate>
     <div class="container">
-        <blockquote><?= nl2br(htmlspecialchars($scripture['content'] ?? '')) ?></blockquote>
+        <blockquote><?= rich_content($scripture['content'] ?? '') ?></blockquote>
     </div>
 </section>
 <?php endif; ?>
@@ -281,7 +281,7 @@ $mediaTypeLabel = function ($t) {
         <div class="prayer-wall-content">
             <p class="prayer-wall-eyebrow"><?= htmlspecialchars($prayerExtra['eyebrow'] ?? 'Ministry') ?></p>
             <h3 class="prayer-wall-headline"><?= htmlspecialchars($prayerExtra['headline'] ?? 'Pray With Us') ?></h3>
-            <p class="prayer-wall-desc"><?= nl2br(htmlspecialchars($prayerExtra['description'] ?? 'A digital space for church members to post prayer points and invite others to pray with them. You can share openly or post anonymously—either way, the church family stands with you in prayer.')) ?></p>
+            <div class="prayer-wall-desc"><?= rich_content($prayerExtra['description'] ?? 'A digital space for church members to post prayer points and invite others to pray with them. You can share openly or post anonymously—either way, the church family stands with you in prayer.') ?></div>
             <div class="prayer-wall-ctas">
                 <a href="<?= $baseUrl ?>/prayer" class="btn btn-prayer-wall btn-primary">Post a Prayer Point</a>
                 <a href="<?= $baseUrl ?>/prayer" class="btn btn-prayer-wall btn-accent">Pray for Others</a>
@@ -290,7 +290,7 @@ $mediaTypeLabel = function ($t) {
     </div>
 </section>
 
-<!-- 8. Voice - testimonial carousel -->
+<!-- 8. Voice - testimonial carousel (cards style, black background) -->
 <section class="section voice-section" data-animate>
     <div class="section-title-bar">
         <div class="section-title-bar-inner">
@@ -310,13 +310,21 @@ $mediaTypeLabel = function ($t) {
                     <?php
                     $voiceItems = $testimonials ?? [];
                     if (empty($voiceItems)) {
-                        $voiceItems = [['quote' => "Lighthouse is more like a family and not just a place of worship. Since I started attending, I've been shown nothing but love.", 'author_name' => 'A Lighthouse Believer']];
+                        $voiceItems = [['quote' => "Lighthouse is more like a family and not just a place of worship. Since I started attending, I've been shown nothing but love.", 'author_name' => 'A Lighthouse Believer', 'author_photo' => '']];
                     }
                     foreach ($voiceItems as $t):
                     ?>
                     <div class="voice-card">
-                        <blockquote class="voice-quote">"<?= htmlspecialchars($t['quote']) ?>"</blockquote>
-                        <cite>— <?= htmlspecialchars($t['author_name']) ?></cite>
+                        <div class="voice-stars" aria-hidden="true">
+                            <?php for ($i = 0; $i < 5; $i++): ?><span class="voice-star">★</span><?php endfor; ?>
+                        </div>
+                        <blockquote class="voice-quote">"<?= rich_content($t['quote']) ?>"</blockquote>
+                        <footer class="voice-author">
+                            <?php if (!empty($t['author_photo'])): ?>
+                            <img src="<?= htmlspecialchars($t['author_photo']) ?>" alt="" class="voice-author-photo">
+                            <?php endif; ?>
+                            <cite>— <?= htmlspecialchars($t['author_name']) ?></cite>
+                        </footer>
                     </div>
                     <?php endforeach; ?>
                 </div>

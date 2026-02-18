@@ -27,7 +27,7 @@ $story = ($aboutIntro['content'] ?? null) ?: ($whoWeAre['content'] ?? '');
         <div class="about-story">
             <h2 class="about-section-title">Our Story</h2>
             <div class="about-story-body">
-                <?= nl2br(htmlspecialchars($story)) ?>
+                <?= rich_content($story) ?>
             </div>
         </div>
 
@@ -37,21 +37,21 @@ $story = ($aboutIntro['content'] ?? null) ?: ($whoWeAre['content'] ?? '');
                     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5"/></svg>
                 </div>
                 <h3 class="about-pillar-title">Our Mission</h3>
-                <p class="about-pillar-text"><?= nl2br(htmlspecialchars($aboutMission['content'] ?? 'To raise lights that transform nations.')) ?></p>
+                <div class="about-pillar-text"><?= rich_content($aboutMission['content'] ?? 'To raise lights that transform nations.') ?></div>
             </div>
             <div class="about-pillar about-pillar--vision stagger-item">
                 <div class="about-pillar-icon" aria-hidden="true">
                     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
                 </div>
                 <h3 class="about-pillar-title">Our Vision</h3>
-                <p class="about-pillar-text"><?= nl2br(htmlspecialchars($aboutVision['content'] ?? 'A Christ-centered, Spirit-empowered community.')) ?></p>
+                <div class="about-pillar-text"><?= rich_content($aboutVision['content'] ?? 'A Christ-centered, Spirit-empowered community.') ?></div>
             </div>
             <div class="about-pillar about-pillar--values stagger-item">
                 <div class="about-pillar-icon" aria-hidden="true">
                     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                 </div>
                 <h3 class="about-pillar-title">Our Values</h3>
-                <p class="about-pillar-text"><?= nl2br(htmlspecialchars($aboutValues['content'] ?? 'Worship, Word, and leadership training.')) ?></p>
+                <div class="about-pillar-text"><?= rich_content($aboutValues['content'] ?? 'Worship, Word, and leadership training.') ?></div>
             </div>
         </div>
 
@@ -60,7 +60,7 @@ $story = ($aboutIntro['content'] ?? null) ?: ($whoWeAre['content'] ?? '');
         <div class="about-beliefs">
             <h2 class="about-section-title">What We Believe</h2>
             <div class="about-story-body">
-                <?= nl2br(htmlspecialchars($aboutBeliefs)) ?>
+                <?= rich_content($aboutBeliefs) ?>
             </div>
         </div>
         <?php endif; ?>
@@ -79,7 +79,7 @@ $story = ($aboutIntro['content'] ?? null) ?: ($whoWeAre['content'] ?? '');
                     </button>
                     <div class="faq-answer" id="about-faq-<?= (int)$faq['id'] ?>" role="region" aria-labelledby="about-faq-q-<?= (int)$faq['id'] ?>">
                         <div class="faq-answer-inner">
-                            <?= nl2br(htmlspecialchars($faq['answer'])) ?>
+                            <?= rich_content($faq['answer']) ?>
                         </div>
                     </div>
                 </div>

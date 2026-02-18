@@ -31,6 +31,34 @@ if (!function_exists('csrf_verify')) {
     }
 }
 
+/**
+ * Output trusted HTML from CMS/rich-editor content. Strips dangerous tags, allows formatting.
+ * Use for: testimonials, section content, media/job/event descriptions from admin.
+ */
+if (!function_exists('rich_content')) {
+    function rich_content(?string $html): string
+    {
+        if ($html === null || $html === '') return '';
+        $allowed = '<p><br><strong><b><em><i><u><h1><h2><h3><h4><ul><ol><li><a><span><blockquote>';
+        $cleaned = strip_tags($html, $allowed);
+        // Remove script, javascript: and other dangerous protocols from links
+        $cleaned = preg_replace('/<a\s+([^>]*?)href\s*=\s*["\']?\s*javascript:[^"\']*["\']?/i', '<a href="#"', $cleaned);
+        return $cleaned;
+    }
+}
+
+/**
+ * Plain-text preview from HTML (for card descriptions, list summaries).
+ */
+if (!function_exists('rich_preview')) {
+    function rich_preview(?string $html, int $len = 120): string
+    {
+        if ($html === null || $html === '') return '';
+        $text = strip_tags($html);
+        return htmlspecialchars(mb_strimwidth($text, 0, $len, '…'));
+    }
+}
+
 if (!function_exists('svg_icon')) {
     function svg_icon(string $name, int $size = 20): string
     {

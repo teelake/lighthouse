@@ -19,7 +19,7 @@ $paypalUrl = $paypalUrl ?? '';
         <div class="giving-intro">
             <h2 class="about-section-title">Partner With Us</h2>
             <div class="about-story-body">
-                <?= nl2br(htmlspecialchars($givingIntro ?? 'Giving is an act of worship and a covenant partnership in advancing God\'s kingdom. Your generosity supports teaching and discipleship, leadership development, outreach and missions, and ministry operations. Thank you for investing in what God is doing through Lighthouse.')) ?>
+                <?= rich_content($givingIntro ?? 'Giving is an act of worship and a covenant partnership in advancing God\'s kingdom. Your generosity supports teaching and discipleship, leadership development, outreach and missions, and ministry operations. Thank you for investing in what God is doing through Lighthouse.') ?>
             </div>
         </div>
 
@@ -71,7 +71,7 @@ $paypalUrl = $paypalUrl ?? '';
             </div>
         </div>
 
-        <p class="giving-note"><?= nl2br(htmlspecialchars($givingWays ?? 'For bank transfers or other giving methods, please contact us at ' . $paypalEmail . '.')) ?></p>
+        <div class="giving-note"><?= rich_content($givingWays ?? 'For bank transfers or other giving methods, please contact us at ' . htmlspecialchars($paypalEmail) . '.') ?></div>
 
         <div class="about-cta">
             <a href="<?= $baseUrl ?>/contact" class="btn btn-accent">Contact Us</a>

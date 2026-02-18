@@ -23,7 +23,7 @@ $submitted = isset($_GET['submitted']);
         <div class="prayer-grid">
             <div class="prayer-submit-card">
                 <h2 class="about-section-title">Submit a Prayer Request</h2>
-                <p class="prayer-desc"><?= nl2br(htmlspecialchars($prayerIntro ?? 'Share your prayer need with us. You can request prayer openly or anonymously. Our pastoral team and prayer intercessors will pray with you.')) ?></p>
+                <div class="prayer-desc"><?= rich_content($prayerIntro ?? 'Share your prayer need with us. You can request prayer openly or anonymously. Our pastoral team and prayer intercessors will pray with you.') ?></div>
                 <form class="prayer-form" action="<?= $baseUrl ?>/prayer/submit" method="post">
                     <div class="form-group">
                         <label for="prayer-name">Your name (optional)</label>

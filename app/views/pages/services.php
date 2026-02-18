@@ -16,7 +16,7 @@ $serviceTimes = $serviceTimes ?? ['sunday' => '10:00 AM', 'thursday' => '6:00 PM
 
     <div class="container services-content">
         <div class="services-intro">
-            <p class="services-lead"><?= nl2br(htmlspecialchars($sections['services_intro']['content'] ?? 'We gather to worship, grow in the Word, and be equipped for life and leadership. Whether you prefer Sunday morning or Thursday evening, there\'s a service for you.')) ?></p>
+            <div class="services-lead"><?= rich_content($sections['services_intro']['content'] ?? 'We gather to worship, grow in the Word, and be equipped for life and leadership. Whether you prefer Sunday morning or Thursday evening, there\'s a service for you.') ?></div>
         </div>
 
         <div class="services-grid">
