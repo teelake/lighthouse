@@ -64,6 +64,29 @@ class DashboardController extends BaseController
             }
         }
 
+        // Chart data: last 6 months for subscribers, job apps, visitors
+        $chartMonths = [];
+        $chartSubscribers = [];
+        $chartApplications = [];
+        $chartVisitors = [];
+        if ($isAdmin) {
+            for ($i = 5; $i >= 0; $i--) {
+                $ts = strtotime("-$i months");
+                $start = date('Y-m-01 00:00:00', $ts);
+                $end = date('Y-m-t 23:59:59', $ts);
+                $chartMonths[] = date('M Y', $ts);
+                $ns = new NewsletterSubscriber();
+                $r = $ns->query("SELECT COUNT(*) as c FROM newsletter_subscribers WHERE subscribed_at >= ? AND subscribed_at <= ?", [$start, $end]);
+                $chartSubscribers[] = (int)($r[0]['c'] ?? 0);
+                $ja = new JobApplication();
+                $r = $ja->query("SELECT COUNT(*) as c FROM job_applications WHERE created_at >= ? AND created_at <= ?", [$start, $end]);
+                $chartApplications[] = (int)($r[0]['c'] ?? 0);
+                $fv = new FirstTimeVisitor();
+                $r = $fv->query("SELECT COUNT(*) as c FROM first_time_visitors WHERE created_at >= ? AND created_at <= ?", [$start, $end]);
+                $chartVisitors[] = (int)($r[0]['c'] ?? 0);
+            }
+        }
+
         $this->render('admin/dashboard/index', [
             'pageTitle' => 'Dashboard',
             'pageHeading' => 'Dashboard',
@@ -78,6 +101,10 @@ class DashboardController extends BaseController
             'prayerUsers' => $prayerUsers,
             'isAdmin' => $isAdmin,
             'isEditor' => $isEditor,
+            'chartMonths' => $chartMonths,
+            'chartSubscribers' => $chartSubscribers,
+            'chartApplications' => $chartApplications,
+            'chartVisitors' => $chartVisitors,
         ]);
     }
 }

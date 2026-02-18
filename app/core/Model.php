@@ -82,4 +82,12 @@ abstract class Model
         $stmt->execute($params);
         return (int)$stmt->fetch()['c'];
     }
+
+    /** Run raw SQL query and return all rows */
+    public function query(string $sql, array $params = []): array
+    {
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC) ?: [];
+    }
 }

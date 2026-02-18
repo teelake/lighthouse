@@ -559,6 +559,19 @@
     font-weight: 500;
 }
 
+.dash-charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.dash-chart-widget { min-height: 280px; }
+.dash-chart-container {
+    padding: 1rem 1.25rem;
+    height: 240px;
+}
+.dash-chart-container.dash-chart-doughnut { height: 260px; }
+
 .dash-kpi {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));

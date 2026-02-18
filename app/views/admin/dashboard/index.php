@@ -9,6 +9,10 @@ $latestPrayerPosts = isset($latestPrayerPosts) ? $latestPrayerPosts : [];
 $prayerUsers = isset($prayerUsers) ? $prayerUsers : [];
 $isEditor = isset($isEditor) ? $isEditor : false;
 $isAdmin = isset($isAdmin) ? $isAdmin : false;
+$chartMonths = isset($chartMonths) ? $chartMonths : [];
+$chartSubscribers = isset($chartSubscribers) ? $chartSubscribers : [];
+$chartApplications = isset($chartApplications) ? $chartApplications : [];
+$chartVisitors = isset($chartVisitors) ? $chartVisitors : [];
 
 function dash_time_ago($date) {
     if (empty($date)) return '';
@@ -62,6 +66,30 @@ function dash_time_ago($date) {
             <span class="dash-kpi-value"><?= (int)(isset($stats['newsletter']) ? $stats['newsletter'] : 0) ?></span>
             <span class="dash-kpi-label">Subscribers</span>
         </span>
+        <?php } ?>
+    </div>
+
+    <!-- Charts -->
+    <div class="dash-charts">
+        <?php if ($isAdmin && !empty($chartMonths)) { ?>
+        <div class="dash-widget dash-chart-widget">
+            <div class="dash-widget-head">
+                <h2 class="dash-widget-title">Activity (Last 6 Months)</h2>
+            </div>
+            <div class="dash-chart-container">
+                <canvas id="dash-activity-chart" height="220"></canvas>
+            </div>
+        </div>
+        <?php } ?>
+        <?php if ($isEditor) { ?>
+        <div class="dash-widget dash-chart-widget">
+            <div class="dash-widget-head">
+                <h2 class="dash-widget-title">Content Overview</h2>
+            </div>
+            <div class="dash-chart-container dash-chart-doughnut">
+                <canvas id="dash-content-chart" height="220"></canvas>
+            </div>
+        </div>
         <?php } ?>
     </div>
 
@@ -244,3 +272,65 @@ function dash_time_ago($date) {
         </aside>
     </div>
 </div>
+
+<?php if ($isEditor || ($isAdmin && !empty($chartMonths))) { ?>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+(function() {
+    var Chart = typeof window.Chart !== 'undefined' ? window.Chart : null;
+    if (!Chart) return;
+
+    Chart.defaults.font.family = "'DM Sans', -apple-system, sans-serif";
+    Chart.defaults.color = '#64748b';
+
+    <?php if ($isAdmin && !empty($chartMonths)) { ?>
+    var activityCtx = document.getElementById('dash-activity-chart');
+    if (activityCtx) {
+        new Chart(activityCtx, {
+            type: 'bar',
+            data: {
+                labels: <?= json_encode($chartMonths) ?>,
+                datasets: [
+                    { label: 'Subscribers', data: <?= json_encode($chartSubscribers) ?>, backgroundColor: 'rgba(184,141,87,0.7)', borderColor: '#b08d57', borderWidth: 1 },
+                    { label: 'Applications', data: <?= json_encode($chartApplications) ?>, backgroundColor: 'rgba(30,64,175,0.7)', borderColor: '#1e40af', borderWidth: 1 },
+                    { label: 'Visitors', data: <?= json_encode($chartVisitors) ?>, backgroundColor: 'rgba(22,163,74,0.7)', borderColor: '#16a34a', borderWidth: 1 }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'top' } },
+                scales: {
+                    x: { grid: { display: false } },
+                    y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' } }
+                }
+            }
+        });
+    }
+    <?php } ?>
+
+    <?php if ($isEditor) { ?>
+    var contentCtx = document.getElementById('dash-content-chart');
+    if (contentCtx) {
+        new Chart(contentCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Events', 'Ministries', 'Media'],
+                datasets: [{
+                    data: [<?= (int)($stats['events'] ?? 0) ?>, <?= (int)($stats['ministries'] ?? 0) ?>, <?= (int)($stats['media'] ?? 0) ?>],
+                    backgroundColor: ['#b08d57', '#1e40af', '#16a34a'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '60%',
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+    }
+    <?php } ?>
+})();
+</script>
+<?php } ?>
