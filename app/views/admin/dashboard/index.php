@@ -4,6 +4,9 @@ $upcomingEvents = $upcomingEvents ?? [];
 $latestNewsletter = $latestNewsletter ?? [];
 $latestJobApps = $latestJobApps ?? [];
 $latestVisitors = $latestVisitors ?? [];
+$latestPrayerRequests = $latestPrayerRequests ?? [];
+$latestPrayerPosts = $latestPrayerPosts ?? [];
+$prayerUsers = $prayerUsers ?? [];
 $isEditor = $isEditor ?? false;
 $isAdmin = $isAdmin ?? false;
 
@@ -19,7 +22,7 @@ function dash_time_ago($date) {
 }
 ?>
 <div class="dash">
-    <!-- KPI row -->
+    <!-- KPI row - at a glance -->
     <div class="dash-kpi">
         <a href="<?= admin_url('events') ?>" class="dash-kpi-card">
             <span class="dash-kpi-value"><?= (int)($stats['events'] ?? 0) ?></span>
@@ -34,7 +37,11 @@ function dash_time_ago($date) {
             <span class="dash-kpi-label">Media</span>
         </a>
         <?php if ($isAdmin): ?>
-        <a href="<?= admin_url('job-applications') ?>" class="dash-kpi-card dash-kpi-accent">
+        <a href="<?= admin_url('prayer-wall') ?>" class="dash-kpi-card dash-kpi-accent">
+            <span class="dash-kpi-value"><?= (int)($stats['prayer_requests'] ?? 0) + (int)($stats['prayer_wall'] ?? 0) ?></span>
+            <span class="dash-kpi-label">Prayer</span>
+        </a>
+        <a href="<?= admin_url('job-applications') ?>" class="dash-kpi-card">
             <span class="dash-kpi-value"><?= (int)($stats['job_applications'] ?? 0) ?></span>
             <span class="dash-kpi-label">Applications</span>
         </a>
@@ -46,7 +53,6 @@ function dash_time_ago($date) {
     </div>
 
     <div class="dash-layout">
-        <!-- Main -->
         <div class="dash-main">
             <?php if ($isEditor): ?>
             <div class="dash-widget">
@@ -63,12 +69,47 @@ function dash_time_ago($date) {
             </div>
             <?php endif; ?>
 
-            <!-- Latest Newsletter -->
+            <?php if ($isAdmin && (!empty($latestPrayerRequests) || !empty($latestPrayerPosts))): ?>
+            <div class="dash-widget">
+                <div class="dash-widget-head">
+                    <h2 class="dash-widget-title">Prayer Wall</h2>
+                    <a href="<?= admin_url('prayer-wall') ?>" class="dash-widget-link">Manage</a>
+                </div>
+                <div class="dash-prayer-grid">
+                    <?php if (!empty($latestPrayerRequests)): ?>
+                    <div class="dash-prayer-col">
+                        <p class="dash-prayer-label">Recent Requests</p>
+                        <ul class="dash-list">
+                            <?php foreach ($latestPrayerRequests as $r): ?>
+                            <li class="dash-list-item">
+                                <span class="dash-list-main" title="<?= htmlspecialchars($r['request'] ?? '') ?>"><?= htmlspecialchars(($r['name'] ?? '') ?: 'Anonymous') ?></span>
+                                <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago($r['created_at'] ?? '')) ?></span>
+                            </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <?php endif; ?>
+                    <?php if (!empty($latestPrayerPosts)): ?>
+                    <div class="dash-prayer-col">
+                        <p class="dash-prayer-label">Recent Posts</p>
+                        <ul class="dash-list">
+                            <?php foreach ($latestPrayerPosts as $p): ?>
+                            <li class="dash-list-item">
+                                <span class="dash-list-main" title="<?= htmlspecialchars($p['request'] ?? '') ?>"><?= ($p['is_anonymous'] ?? 0) ? 'Anonymous' : htmlspecialchars($prayerUsers[$p['user_id'] ?? 0] ?? '') ?></span>
+                                <span class="dash-list-meta"><?= htmlspecialchars(dash_time_ago($p['created_at'] ?? '')) ?></span>
+                            </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <?php endif; ?>
+
             <?php if ($isAdmin && !empty($latestNewsletter)): ?>
             <div class="dash-widget">
                 <div class="dash-widget-head">
-                    <h2 class="dash-widget-title">Latest Signups</h2>
-                    <span class="dash-widget-meta">Newsletter</span>
+                    <h2 class="dash-widget-title">Latest Newsletter Signups</h2>
                 </div>
                 <ul class="dash-list">
                     <?php foreach ($latestNewsletter as $n): ?>
@@ -81,7 +122,6 @@ function dash_time_ago($date) {
             </div>
             <?php endif; ?>
 
-            <!-- Latest Job Applications -->
             <?php if ($isAdmin && !empty($latestJobApps)): ?>
             <div class="dash-widget">
                 <div class="dash-widget-head">
@@ -99,7 +139,6 @@ function dash_time_ago($date) {
             </div>
             <?php endif; ?>
 
-            <!-- Latest First-Time Visitors -->
             <?php if ($isAdmin && !empty($latestVisitors)): ?>
             <div class="dash-widget">
                 <div class="dash-widget-head">
@@ -116,20 +155,19 @@ function dash_time_ago($date) {
             </div>
             <?php endif; ?>
 
-            <?php if (!$isAdmin || (empty($latestNewsletter) && empty($latestJobApps) && empty($latestVisitors) && !$isEditor)): ?>
+            <?php if (!$isEditor && (!$isAdmin || (empty($latestNewsletter) && empty($latestJobApps) && empty($latestVisitors) && empty($latestPrayerRequests) && empty($latestPrayerPosts))): ?>
             <div class="dash-widget dash-widget-empty">
                 <p class="dash-empty-text">Dashboard overview. Use the sidebar to manage content.</p>
             </div>
             <?php endif; ?>
         </div>
 
-        <!-- Sidebar -->
         <aside class="dash-sidebar">
             <?php if (!empty($upcomingEvents)): ?>
             <div class="dash-widget">
                 <div class="dash-widget-head">
                     <h2 class="dash-widget-title">Upcoming Events</h2>
-                    <a href="<?= admin_url('events') ?>" class="dash-widget-link">All events</a>
+                    <a href="<?= admin_url('events') ?>" class="dash-widget-link">All</a>
                 </div>
                 <ul class="dash-list dash-list-events">
                     <?php foreach ($upcomingEvents as $e): ?>
@@ -143,27 +181,6 @@ function dash_time_ago($date) {
                 </ul>
             </div>
             <?php endif; ?>
-
-            <div class="dash-widget">
-                <div class="dash-widget-head">
-                    <h2 class="dash-widget-title">Navigate</h2>
-                </div>
-                <nav class="dash-nav">
-                    <a href="<?= admin_url('sections') ?>">Content Sections</a>
-                    <a href="<?= admin_url('glimpse') ?>">Glimpse</a>
-                    <a href="<?= admin_url('moments') ?>">Moments</a>
-                    <a href="<?= admin_url('leaders') ?>">Leadership</a>
-                    <a href="<?= admin_url('testimonials') ?>">Testimonials</a>
-                    <a href="<?= admin_url('events') ?>">Events</a>
-                    <a href="<?= admin_url('ministries') ?>">Ministries</a>
-                    <a href="<?= admin_url('small-groups') ?>">Small Groups</a>
-                    <a href="<?= admin_url('media') ?>">Media</a>
-                    <a href="<?= admin_url('jobs') ?>">Jobs</a>
-                    <?php if ($isAdmin): ?>
-                    <a href="<?= admin_url('users') ?>">Users</a>
-                    <?php endif; ?>
-                </nav>
-            </div>
         </aside>
     </div>
 </div>

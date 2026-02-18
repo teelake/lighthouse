@@ -31,25 +31,39 @@ $initials = mb_strtoupper(mb_substr($initials, 0, 2)) ?: 'U';
                 Dashboard
             </a>
             <?php if ($isEditor): ?>
-            <div class="nav-group">Content</div>
-            <a href="<?= admin_url('sections') ?>" class="nav-item <?= ($currentPage ?? '') === 'sections' ? 'active' : '' ?>">Sections</a>
-            <a href="<?= admin_url('glimpse') ?>" class="nav-item <?= ($currentPage ?? '') === 'glimpse' ? 'active' : '' ?>">Glimpse</a>
-            <a href="<?= admin_url('moments') ?>" class="nav-item <?= ($currentPage ?? '') === 'moments' ? 'active' : '' ?>">Moments</a>
-            <a href="<?= admin_url('leaders') ?>" class="nav-item <?= ($currentPage ?? '') === 'leaders' ? 'active' : '' ?>">Leadership</a>
-            <a href="<?= admin_url('testimonials') ?>" class="nav-item <?= ($currentPage ?? '') === 'testimonials' ? 'active' : '' ?>">Testimonials</a>
-            <a href="<?= admin_url('events') ?>" class="nav-item <?= ($currentPage ?? '') === 'events' ? 'active' : '' ?>">Events</a>
-            <a href="<?= admin_url('ministries') ?>" class="nav-item <?= ($currentPage ?? '') === 'ministries' ? 'active' : '' ?>">Ministries</a>
-            <a href="<?= admin_url('small-groups') ?>" class="nav-item <?= ($currentPage ?? '') === 'small-groups' ? 'active' : '' ?>">Small Groups</a>
-            <a href="<?= admin_url('media') ?>" class="nav-item <?= ($currentPage ?? '') === 'media' ? 'active' : '' ?>">Media</a>
-            <a href="<?= admin_url('jobs') ?>" class="nav-item <?= ($currentPage ?? '') === 'jobs' ? 'active' : '' ?>">Jobs</a>
+            <div class="nav-collapse" data-group="content">
+                <button type="button" class="nav-collapse-trigger" aria-expanded="true" aria-controls="nav-content">
+                    <span class="nav-group">Content</span>
+                    <svg class="nav-collapse-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="nav-collapse-panel" id="nav-content">
+                    <a href="<?= admin_url('sections') ?>" class="nav-item <?= ($currentPage ?? '') === 'sections' ? 'active' : '' ?>">Sections</a>
+                    <a href="<?= admin_url('glimpse') ?>" class="nav-item <?= ($currentPage ?? '') === 'glimpse' ? 'active' : '' ?>">Glimpse</a>
+                    <a href="<?= admin_url('moments') ?>" class="nav-item <?= ($currentPage ?? '') === 'moments' ? 'active' : '' ?>">Moments</a>
+                    <a href="<?= admin_url('leaders') ?>" class="nav-item <?= ($currentPage ?? '') === 'leaders' ? 'active' : '' ?>">Leadership</a>
+                    <a href="<?= admin_url('testimonials') ?>" class="nav-item <?= ($currentPage ?? '') === 'testimonials' ? 'active' : '' ?>">Testimonials</a>
+                    <a href="<?= admin_url('events') ?>" class="nav-item <?= ($currentPage ?? '') === 'events' ? 'active' : '' ?>">Events</a>
+                    <a href="<?= admin_url('ministries') ?>" class="nav-item <?= ($currentPage ?? '') === 'ministries' ? 'active' : '' ?>">Ministries</a>
+                    <a href="<?= admin_url('small-groups') ?>" class="nav-item <?= ($currentPage ?? '') === 'small-groups' ? 'active' : '' ?>">Small Groups</a>
+                    <a href="<?= admin_url('media') ?>" class="nav-item <?= ($currentPage ?? '') === 'media' ? 'active' : '' ?>">Media</a>
+                    <a href="<?= admin_url('jobs') ?>" class="nav-item <?= ($currentPage ?? '') === 'jobs' ? 'active' : '' ?>">Jobs</a>
+                </div>
+            </div>
             <?php endif; ?>
             <?php if ($isAdmin): ?>
-            <div class="nav-group">System</div>
-            <a href="<?= admin_url('prayer-wall') ?>" class="nav-item <?= ($currentPage ?? '') === 'prayer-wall' ? 'active' : '' ?>">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M12 6v6"/><path d="M9 9h6"/></svg>
-                Prayer Wall
-            </a>
-            <a href="<?= admin_url('users') ?>" class="nav-item <?= ($currentPage ?? '') === 'users' ? 'active' : '' ?>">Users</a>
+            <div class="nav-collapse" data-group="system">
+                <button type="button" class="nav-collapse-trigger" aria-expanded="true" aria-controls="nav-system">
+                    <span class="nav-group">System</span>
+                    <svg class="nav-collapse-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="nav-collapse-panel" id="nav-system">
+                    <a href="<?= admin_url('prayer-wall') ?>" class="nav-item <?= ($currentPage ?? '') === 'prayer-wall' ? 'active' : '' ?>">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M12 6v6"/><path d="M9 9h6"/></svg>
+                        Prayer Wall
+                    </a>
+                    <a href="<?= admin_url('users') ?>" class="nav-item <?= ($currentPage ?? '') === 'users' ? 'active' : '' ?>">Users</a>
+                </div>
+            </div>
             <?php endif; ?>
         </nav>
     </aside>
@@ -97,6 +111,24 @@ $initials = mb_strtoupper(mb_substr($initials, 0, 2)) ?: 'U';
             function close() { menu.setAttribute('aria-hidden', 'true'); trigger.setAttribute('aria-expanded', 'false'); menu.classList.remove('open'); }
             trigger.addEventListener('click', function(e) { e.stopPropagation(); menu.classList.contains('open') ? close() : open(); });
             document.addEventListener('click', function() { close(); });
+        })();
+        (function() {
+            var STORAGE = 'adm_nav_collapsed';
+            document.querySelectorAll('.nav-collapse').forEach(function(block) {
+                var btn = block.querySelector('.nav-collapse-trigger');
+                var panel = block.querySelector('.nav-collapse-panel');
+                var group = block.getAttribute('data-group');
+                var key = STORAGE + '_' + group;
+                var collapsed = localStorage.getItem(key) === '1';
+                function setExpanded(exp) {
+                    btn.setAttribute('aria-expanded', exp ? 'true' : 'false');
+                    panel.classList.toggle('collapsed', !exp);
+                    block.classList.toggle('collapsed', !exp);
+                    localStorage.setItem(key, exp ? '0' : '1');
+                }
+                if (collapsed) setExpanded(false);
+                btn.addEventListener('click', function() { setExpanded(panel.classList.contains('collapsed')); });
+            });
         })();
     </script>
 </body>

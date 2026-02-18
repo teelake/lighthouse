@@ -13,6 +13,9 @@ use App\Models\HomepageMoment;
 use App\Models\JobApplication;
 use App\Models\NewsletterSubscriber;
 use App\Models\FirstTimeVisitor;
+use App\Models\PrayerRequest;
+use App\Models\PrayerWall;
+use App\Models\User;
 
 class DashboardController extends BaseController
 {
@@ -25,18 +28,28 @@ class DashboardController extends BaseController
         $stats = [
             'events' => (new Event())->count(),
             'ministries' => (new Ministry())->count(),
-            'leaders' => (new Leader())->count(),
-            'testimonials' => (new Testimonial())->count(),
             'media' => (new Media())->count(),
-            'jobs' => (new Job())->count(),
             'job_applications' => (new JobApplication())->count(),
             'newsletter' => (new NewsletterSubscriber())->count(),
+            'prayer_requests' => (new PrayerRequest())->count(),
+            'prayer_wall' => (new PrayerWall())->count(),
         ];
 
         $upcomingEvents = (new Event())->findAll(['is_published' => 1], 'event_date ASC', 5);
         $latestNewsletter = (new NewsletterSubscriber())->findAll([], 'subscribed_at DESC', 5);
         $latestJobApps = (new JobApplication())->findAll([], 'created_at DESC', 5);
         $latestVisitors = $isAdmin ? (new FirstTimeVisitor())->findAll([], 'created_at DESC', 5) : [];
+        $latestPrayerRequests = $isAdmin ? (new PrayerRequest())->findAll([], 'created_at DESC', 5) : [];
+        $latestPrayerPosts = $isAdmin ? (new PrayerWall())->findAll([], 'created_at DESC', 5) : [];
+
+        $prayerUsers = [];
+        if (!empty($latestPrayerPosts)) {
+            $userModel = new User();
+            foreach (array_unique(array_filter(array_column($latestPrayerPosts, 'user_id'))) as $uid) {
+                $u = $userModel->find($uid);
+                if ($u) $prayerUsers[$uid] = $u['name'] ?? $u['email'] ?? 'Unknown';
+            }
+        }
 
         $this->render('admin/dashboard/index', [
             'pageTitle' => 'Dashboard',
@@ -47,6 +60,9 @@ class DashboardController extends BaseController
             'latestNewsletter' => $latestNewsletter,
             'latestJobApps' => $latestJobApps,
             'latestVisitors' => $latestVisitors,
+            'latestPrayerRequests' => $latestPrayerRequests,
+            'latestPrayerPosts' => $latestPrayerPosts,
+            'prayerUsers' => $prayerUsers,
             'isAdmin' => $isAdmin,
             'isEditor' => $isEditor,
         ]);

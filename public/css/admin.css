@@ -196,12 +196,56 @@
 }
 
 .nav-group {
-    padding: 0.625rem 1.5rem 0.5rem;
+    padding: 0;
     font-size: 0.5625rem;
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: rgba(255,255,255,0.28);
+}
+
+/* Collapsible nav groups */
+.nav-collapse {
+    margin-top: 0.5rem;
+}
+.nav-collapse-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.5rem 1.5rem 0.5rem 1rem;
+    margin: 0 0.5rem;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.4);
+    cursor: pointer;
+    font: inherit;
+    text-align: left;
+    border-radius: 6px;
+    transition: var(--adm-transition);
+}
+.nav-collapse-trigger:hover {
+    color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.04);
+}
+.nav-collapse-icon {
+    flex-shrink: 0;
+    opacity: 0.7;
+    transition: transform 0.2s ease;
+}
+.nav-collapse.collapsed .nav-collapse-icon {
+    transform: rotate(-90deg);
+}
+.nav-collapse-panel {
+    max-height: 400px;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+}
+.nav-collapse-panel.collapsed {
+    max-height: 0 !important;
+}
+.nav-collapse-panel .nav-item {
+    padding-left: 2rem;
 }
 
 .nav-item {
@@ -467,6 +511,31 @@
 }
 .dash-nav a:hover { color: var(--adm-accent); }
 
+.dash-prayer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+}
+.dash-prayer-col {
+    padding: 0 1.25rem 1rem;
+    border-right: 1px solid var(--adm-border-subtle);
+}
+.dash-prayer-col:last-child { border-right: none; }
+.dash-prayer-label {
+    margin: 0 0 0.5rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--adm-muted);
+}
+.dash-list-main {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+}
+
 .dash-widget-empty { border-style: dashed; }
 .dash-empty-text {
     margin: 0;
@@ -673,6 +742,9 @@
     .admin-content { padding: 1rem; }
     .dash-kpi-card { min-width: 80px; padding: 0.75rem 1rem; }
     .dash-kpi-value { font-size: 1.125rem; }
+    .dash-prayer-grid { grid-template-columns: 1fr; }
+    .dash-prayer-col { border-right: none; border-bottom: 1px solid var(--adm-border-subtle); padding-bottom: 1rem; }
+    .dash-prayer-col:last-child { border-bottom: none; }
 }
 
 @media (max-width: 600px) {
