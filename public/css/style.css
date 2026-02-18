@@ -611,7 +611,7 @@ body::before {
     color: var(--color-dark);
     border-radius: 12px;
     padding: 2rem 1.5rem;
-    text-align: left;
+    text-align: center;
     box-shadow: 0 4px 20px rgba(0,0,0,0.25);
 }
 @media (min-width: 600px) {
@@ -630,15 +630,16 @@ body::before {
 }
 .voice-quote p { margin: 0 0 0.5em; }
 .voice-quote p:last-child { margin-bottom: 0; }
-.voice-author { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+.voice-author { display: flex; align-items: center; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }
 .voice-author-photo { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
-.voice-card cite { font-size: 0.9rem; color: var(--color-torch-red); font-style: normal; font-weight: 600; }
+.voice-card cite { font-family: var(--font-heading); font-size: 0.9rem; color: var(--color-torch-red); font-style: normal; font-weight: 600; }
 .voice-carousel .carousel-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255,255,255,0.15);
-    color: #fff;
+    background: rgba(255,255,255,0.95);
+    color: var(--color-dark);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
 }
 .voice-carousel .carousel-btn:hover { background: var(--color-primary); color: var(--color-dark); transform: translateY(-50%) scale(1.08); }
 .voice-carousel .carousel-prev { left: 0.5rem; }
