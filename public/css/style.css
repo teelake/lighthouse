@@ -632,7 +632,7 @@ body::before {
 .voice-quote p:last-child { margin-bottom: 0; }
 .voice-author { display: flex; align-items: center; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }
 .voice-author-photo { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
-.voice-card cite { font-family: var(--font-heading); font-size: 0.9rem; color: var(--color-torch-red); font-style: normal; font-weight: 600; }
+.voice-card cite { font-family: var(--font-heading); font-size: 0.9rem; color: var(--color-torch-red); font-style: normal; font-weight: 600; text-transform: uppercase; }
 .voice-carousel .carousel-btn {
     position: absolute;
     top: 50%;
