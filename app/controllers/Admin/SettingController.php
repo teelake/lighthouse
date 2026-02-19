@@ -35,6 +35,63 @@ class SettingController extends BaseController
         $s->set('social_twitter', trim($this->post('social_twitter', '')));
         $this->redirectAdmin('settings/social');
     }
+
+    public function footer()
+    {
+        $this->requireAdmin();
+        $s = new Setting();
+        $json = $s->get('footer_config', '');
+        $data = $json ? json_decode($json, true) : null;
+        $tagline = $data['tagline'] ?? 'Join us. Grow with us. Shine with us.';
+        $cols = $data['columns'] ?? [
+            ['title' => 'QUICK LINKS', 'links' => [
+                ['label' => 'About Us', 'url' => '/about'],
+                ['label' => 'Ministries', 'url' => '/ministries'],
+                ['label' => 'Events', 'url' => '/events'],
+                ['label' => 'Join the Team', 'url' => '/jobs'],
+                ['label' => 'Contact Us', 'url' => '/contact'],
+                ['label' => 'Giving', 'url' => '/giving'],
+            ]],
+            ['title' => 'CONNECT', 'links' => [
+                ['label' => "I'm New", 'url' => '/im-new'],
+                ['label' => 'Small Groups', 'url' => '/small-groups'],
+                ['label' => 'Media', 'url' => '/media'],
+            ]],
+            ['title' => 'CONTACT', 'links' => [
+                ['label' => 'Get Directions', 'url' => '/contact'],
+                ['label' => 'Email Us', 'url' => '/contact'],
+            ]],
+        ];
+        $this->render('admin/settings/footer', [
+            'footer_tagline' => $tagline,
+            'footer_columns' => $cols,
+            'pageHeading' => 'Footer Configuration',
+            'currentPage' => 'settings',
+        ]);
+    }
+
+    public function updateFooter()
+    {
+        $this->requireAdmin();
+        $s = new Setting();
+        $tagline = trim($this->post('footer_tagline', 'Join us. Grow with us. Shine with us.'));
+        $cols = [];
+        for ($i = 0; $i < 3; $i++) {
+            $title = trim($this->post("footer_col_{$i}_title", ''));
+            $raw = $this->post("footer_col_{$i}_links", '');
+            $links = [];
+            foreach (array_filter(explode("\n", $raw)) as $line) {
+                $line = trim($line);
+                if ($line === '') continue;
+                $parts = explode('|', $line, 2);
+                $links[] = ['label' => trim($parts[0] ?? ''), 'url' => trim($parts[1] ?? '')];
+            }
+            $cols[] = ['title' => $title, 'links' => $links];
+        }
+        $config = json_encode(['tagline' => $tagline, 'columns' => $cols]);
+        $s->set('footer_config', $config);
+        $this->redirectAdmin('settings/footer');
+    }
     public function payment() { $this->requireAdmin(); $s = new Setting(); $this->render('admin/settings/payment', ['paypal_email' => $s->get('paypal_email'), 'stripe_public' => $s->get('stripe_public_key'), 'stripe_secret' => $s->get('stripe_secret_key'), 'pageHeading' => 'Payment Settings', 'currentPage' => 'settings']); }
     public function updatePayment() {
         $this->requireAdmin();

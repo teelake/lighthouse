@@ -7,6 +7,7 @@
         <div style="display: flex; gap: 0.5rem;">
             <a href="<?= admin_url('settings/general') ?>" class="btn btn-outline btn-sm">General</a>
             <a href="<?= admin_url('settings/social') ?>" class="btn btn-outline btn-sm">Social</a>
+            <a href="<?= admin_url('settings/footer') ?>" class="btn btn-outline btn-sm">Footer</a>
             <a href="<?= admin_url('settings/email') ?>" class="btn btn-outline btn-sm">Email</a>
             <a href="<?= admin_url('settings/payment') ?>" class="btn btn-outline btn-sm">Payment</a>
         </div>

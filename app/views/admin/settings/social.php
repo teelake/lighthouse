@@ -7,6 +7,7 @@
         <div style="display: flex; gap: 0.5rem;">
             <a href="<?= admin_url('settings/general') ?>" class="btn btn-outline btn-sm">General</a>
             <a href="<?= admin_url('settings/homepage') ?>" class="btn btn-outline btn-sm">Homepage</a>
+            <a href="<?= admin_url('settings/footer') ?>" class="btn btn-outline btn-sm">Footer</a>
         </div>
     </div>
     <p style="color: var(--adm-muted); margin: 0 0 1rem;">Configure social media URLs shown in the header and footer. Leave blank to hide a link.</p>

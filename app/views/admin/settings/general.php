@@ -20,6 +20,7 @@
             <button type="submit" class="btn btn-primary">Save</button>
             <a href="<?= admin_url('settings/homepage') ?>" class="btn btn-outline">Homepage →</a>
             <a href="<?= admin_url('settings/social') ?>" class="btn btn-outline">Social →</a>
+            <a href="<?= admin_url('settings/footer') ?>" class="btn btn-outline">Footer →</a>
             <a href="<?= admin_url('settings/email') ?>" class="btn btn-outline">Email →</a>
             <a href="<?= admin_url('settings/payment') ?>" class="btn btn-outline">Payment →</a>
         </div>

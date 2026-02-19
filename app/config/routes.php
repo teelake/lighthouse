@@ -140,6 +140,8 @@ $router->add('GET', $adm . '/settings/general', ['controller' => 'Admin\Setting'
 $router->add('POST', $adm . '/settings/general', ['controller' => 'Admin\Setting', 'action' => 'updateGeneral']);
 $router->add('GET', $adm . '/settings/social', ['controller' => 'Admin\Setting', 'action' => 'social']);
 $router->add('POST', $adm . '/settings/social', ['controller' => 'Admin\Setting', 'action' => 'updateSocial']);
+$router->add('GET', $adm . '/settings/footer', ['controller' => 'Admin\Setting', 'action' => 'footer']);
+$router->add('POST', $adm . '/settings/footer', ['controller' => 'Admin\Setting', 'action' => 'updateFooter']);
 $router->add('GET', $adm . '/settings/homepage', ['controller' => 'Admin\Setting', 'action' => 'homepage']);
 $router->add('POST', $adm . '/settings/homepage', ['controller' => 'Admin\Setting', 'action' => 'updateHomepage']);
 $router->add('GET', $adm . '/settings/payment', ['controller' => 'Admin\Setting', 'action' => 'payment']);

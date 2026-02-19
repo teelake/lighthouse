@@ -48,9 +48,11 @@
                             <li><a href="<?= rtrim(BASE_URL, '/') ?>/im-new">I'm New</a></li>
                             <li><a href="<?= rtrim(BASE_URL, '/') ?>/ministries">Ministries</a></li>
                             <li><a href="<?= rtrim(BASE_URL, '/') ?>/small-groups">Small Groups</a></li>
+                            <li><a href="<?= rtrim(BASE_URL, '/') ?>/jobs">Join the Team</a></li>
                         </ul>
                     </li>
                     <li><a href="<?= rtrim(BASE_URL, '/') ?>/media">Media</a></li>
+                    <li><a href="<?= rtrim(BASE_URL, '/') ?>/jobs">Join the Team</a></li>
                     <li><a href="<?= rtrim(BASE_URL, '/') ?>/contact">Contact</a></li>
                     <li class="header-social" aria-label="Social media">
                         <?php
@@ -82,7 +84,18 @@
                     <span class="logo-text">LIGHTHOUSE GLOBAL CHURCH</span>
                     <?php endif; ?>
                 </a>
-                <p class="footer-tagline"><?= htmlspecialchars($footerCta ?? 'Join us. Grow with us. Shine with us.', ENT_QUOTES, 'UTF-8') ?></p>
+                <?php
+                $footerSetting = new \App\Models\Setting();
+                $footerJson = $footerSetting->get('footer_config', '');
+                $footerData = $footerJson ? json_decode($footerJson, true) : null;
+                $footerTagline = $footerData['tagline'] ?? $footerCta ?? 'Join us. Grow with us. Shine with us.';
+                $footerCols = $footerData['columns'] ?? [
+                    ['title' => 'QUICK LINKS', 'links' => [['label' => 'About Us', 'url' => '/about'], ['label' => 'Ministries', 'url' => '/ministries'], ['label' => 'Events', 'url' => '/events'], ['label' => 'Join the Team', 'url' => '/jobs'], ['label' => 'Contact Us', 'url' => '/contact'], ['label' => 'Giving', 'url' => '/giving']]],
+                    ['title' => 'CONNECT', 'links' => [['label' => "I'm New", 'url' => '/im-new'], ['label' => 'Small Groups', 'url' => '/small-groups'], ['label' => 'Media', 'url' => '/media']]],
+                    ['title' => 'CONTACT', 'links' => [['label' => 'Get Directions', 'url' => '/contact'], ['label' => 'Email Us', 'url' => '/contact']]],
+                ];
+                ?>
+                <p class="footer-tagline"><?= htmlspecialchars($footerTagline, ENT_QUOTES, 'UTF-8') ?></p>
                 <div class="footer-social" aria-label="Social media">
                     <?php
                     $sFooter = new \App\Models\Setting();
@@ -97,29 +110,23 @@
                 <a href="<?= rtrim(BASE_URL, '/') ?>/prayer" class="btn btn-outline btn-prayer">REQUEST PRAYER</a>
             </div>
             <div class="footer-nav">
+                <?php $base = rtrim(BASE_URL, '/'); foreach ($footerCols as $fci => $fc): ?>
                 <div class="footer-col">
-                    <h4>QUICK LINKS</h4>
-                    <a href="<?= rtrim(BASE_URL, '/') ?>/about">About Us</a>
-                    <a href="<?= rtrim(BASE_URL, '/') ?>/ministries">Ministries</a>
-                    <a href="<?= rtrim(BASE_URL, '/') ?>/events">Events</a>
-                    <a href="<?= rtrim(BASE_URL, '/') ?>/contact">Contact Us</a>
-                    <a href="<?= rtrim(BASE_URL, '/') ?>/giving">Giving</a>
-                </div>
-                <div class="footer-col">
-                    <h4>CONNECT</h4>
-                    <a href="<?= rtrim(BASE_URL, '/') ?>/im-new">I'm New</a>
-                    <a href="<?= rtrim(BASE_URL, '/') ?>/small-groups">Small Groups</a>
-                    <a href="<?= rtrim(BASE_URL, '/') ?>/media">Media</a>
-                </div>
-                <div class="footer-col">
-                    <h4>CONTACT</h4>
-                    <a href="<?= rtrim(BASE_URL, '/') ?>/contact">Get Directions</a>
-                    <a href="<?= rtrim(BASE_URL, '/') ?>/contact">Email Us</a>
+                    <h4><?= htmlspecialchars($fc['title'] ?? '') ?></h4>
+                    <?php foreach ($fc['links'] ?? [] as $fl): if (empty($fl['label']) && empty($fl['url'])) continue;
+                        $href = $fl['url'] ?? '#';
+                        if ($href !== '#' && strpos($href, 'http') !== 0) $href = $base . '/' . ltrim($href, '/');
+                    ?>
+                    <a href="<?= htmlspecialchars($href) ?>"><?= htmlspecialchars($fl['label'] ?? '') ?></a>
+                    <?php endforeach; ?>
+                    <?php if ($fci === count($footerCols) - 1): ?>
                     <div class="footer-contact-ctas">
-                        <a href="<?= rtrim(BASE_URL, '/') ?>/contact" class="btn btn-watch">CONTACT US</a>
-                        <a href="<?= rtrim(BASE_URL, '/') ?>/giving" class="btn btn-accent">GIVE NOW</a>
+                        <a href="<?= $base ?>/contact" class="btn btn-watch">CONTACT US</a>
+                        <a href="<?= $base ?>/giving" class="btn btn-accent">GIVE NOW</a>
                     </div>
+                    <?php endif; ?>
                 </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </footer>
