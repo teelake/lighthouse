@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In - Lighthouse Admin</title>
+    <title>Reset Password - Lighthouse Admin</title>
     <?php
     $faviconPath = file_exists(PUBLIC_PATH . '/images/lighthouse-logo.png') ? '/public/images/lighthouse-logo.png' : (file_exists(PUBLIC_PATH . '/images/logo.png') ? '/public/images/logo.png' : null);
     if ($faviconPath): ?>
@@ -21,6 +21,8 @@
         .auth-logo { display: flex; flex-direction: column; align-items: center; margin-bottom: 1.5rem; text-align: center; }
         .auth-logo-img { max-width: 140px; max-height: 64px; object-fit: contain; }
         .auth-logo-text { margin-top: 0.75rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; color: #b08d57; }
+        h1 { margin: 0 0 0.5rem; color: #1a1a1a; font-size: 1.25rem; font-weight: 600; }
+        .sub { color: #6b7280; font-size: 0.875rem; margin-bottom: 1.25rem; }
         .form-group { margin-bottom: 1.125rem; }
         label { display: block; margin-bottom: 0.375rem; font-weight: 500; color: #4a4a4a; font-size: 0.8125rem; }
         input { width: 100%; padding: 0.5625rem 0.875rem; border: 1px solid #e8e6e3; border-radius: 6px; font-size: 0.875rem; font-family: inherit; transition: border-color 0.18s; }
@@ -28,8 +30,9 @@
         button { width: 100%; padding: 0.6875rem; background: #12151a; color: #fff; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.875rem; font-family: inherit; transition: background 0.18s; }
         button:hover { background: #1a1d24; }
         .error { background: #fef2f2; color: #b91c1c; padding: 0.75rem 1rem; border-radius: 6px; margin-bottom: 1rem; font-size: 0.8125rem; }
-        .forgot-link { display: block; margin-top: 1rem; color: #6b7280; font-size: 0.8125rem; text-decoration: none; font-weight: 500; }
-        .forgot-link:hover { color: #1a1a1a; }
+        .success { background: #f0fdf4; color: #166534; padding: 0.75rem 1rem; border-radius: 6px; margin-bottom: 1rem; font-size: 0.8125rem; }
+        .back { display: block; margin-top: 1rem; color: #6b7280; font-size: 0.8125rem; text-decoration: none; font-weight: 500; }
+        .back:hover { color: #1a1a1a; }
     </style>
 </head>
 <body>
@@ -42,22 +45,31 @@
             <?php else: ?>
             <svg class="auth-logo-img" width="120" height="48" viewBox="0 0 32 32" fill="none" stroke="#b08d57" stroke-width="1.5"><path d="M16 4L4 12v12h24V12L16 4z"/><path d="M16 12v12"/><path d="M4 12h24"/></svg>
             <?php endif; ?>
-            <span class="auth-logo-text">Admin Login</span>
+            <span class="auth-logo-text">Admin</span>
         </div>
+        <?php if (!empty($success)): ?>
+        <h1>Password Reset</h1>
+        <div class="success">Your password has been reset successfully. You can now sign in with your new password.</div>
+        <a href="<?= admin_url('login') ?>" class="back">← Sign in</a>
+        <?php else: ?>
+        <h1>Reset Password</h1>
+        <p class="sub">Enter your new password below.</p>
         <?php if (!empty($error)): ?><div class="error"><?= htmlspecialchars($error) ?></div><?php endif; ?>
         <form method="post">
             <?= csrf_field() ?>
+            <input type="hidden" name="token" value="<?= htmlspecialchars($token ?? '') ?>">
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required autofocus>
+                <label for="password">New password</label>
+                <input type="password" id="password" name="password" minlength="6" required autofocus>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
+                <label for="password_confirm">Confirm password</label>
+                <input type="password" id="password_confirm" name="password_confirm" minlength="6" required>
             </div>
-            <button type="submit">Sign In</button>
-            <a href="<?= admin_url('forgot-password') ?>" class="forgot-link">Forgot password?</a>
+            <button type="submit">Reset Password</button>
         </form>
+        <a href="<?= admin_url('login') ?>" class="back">← Back to login</a>
+        <?php endif; ?>
     </div>
 </body>
 </html>
