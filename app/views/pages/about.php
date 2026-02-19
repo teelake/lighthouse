@@ -8,8 +8,12 @@ $aboutVision = $sections['about_vision'] ?? null;
 $aboutValues = $sections['about_values'] ?? null;
 $story = ($aboutIntro['content'] ?? null) ?: ($whoWeAre['content'] ?? '');
 ?>
+<?php
+$aboutHeroImage = $aboutHeroImage ?? '';
+$aboutStoryImage = $aboutStoryImage ?? '';
+?>
 <section class="section about-page" data-animate>
-    <div class="page-hero page-hero--about">
+    <div class="page-hero page-hero--about<?= page_hero_classes($aboutHeroImage) ?>"<?= page_hero_style($aboutHeroImage) ?>>
         <div class="container">
             <h1 class="page-hero-title">About Us</h1>
             <p class="page-hero-sub">Raising lights that transform nations</p>
@@ -24,11 +28,25 @@ $story = ($aboutIntro['content'] ?? null) ?: ($whoWeAre['content'] ?? '');
     </nav>
 
     <div class="container about-content">
-        <div class="about-story">
+        <div class="about-story <?= !empty($aboutStoryImage) ? 'about-story--with-image' : '' ?>">
+            <?php if (!empty($aboutStoryImage)): ?>
+            <div class="about-story-grid">
+                <div class="about-story-image">
+                    <img src="<?= htmlspecialchars($aboutStoryImage) ?>" alt="Lighthouse Global Church" loading="lazy">
+                </div>
+                <div class="about-story-text">
+                    <h2 class="about-section-title">Our Story</h2>
+                    <div class="about-story-body">
+                        <?= rich_content($story) ?>
+                    </div>
+                </div>
+            </div>
+            <?php else: ?>
             <h2 class="about-section-title">Our Story</h2>
             <div class="about-story-body">
                 <?= rich_content($story) ?>
             </div>
+            <?php endif; ?>
         </div>
 
         <div class="about-pillars">

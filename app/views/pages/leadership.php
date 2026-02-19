@@ -3,8 +3,9 @@ ob_start();
 $baseUrl = rtrim(BASE_URL, '/');
 $leaders = $leaders ?? [];
 ?>
+<?php $leadershipHeroImg = page_hero_image('leadership'); ?>
 <section class="section leadership-page" data-animate>
-    <div class="page-hero page-hero--leadership">
+    <div class="page-hero page-hero--leadership<?= page_hero_classes($leadershipHeroImg) ?>"<?= page_hero_style($leadershipHeroImg) ?>>
         <div class="container">
             <h1 class="page-hero-title">Our Leadership</h1>
             <p class="page-hero-sub">Shepherds who lead with heart and vision</p>

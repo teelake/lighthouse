@@ -8,8 +8,9 @@ $email = $email ?? 'info@thelighthouseglobal.org';
 $mapEmbedUrl = $mapEmbedUrl ?? '';
 $mapSrc = !empty($mapEmbedUrl) ? $mapEmbedUrl : 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2836.7857583703526!2d-63.6770046!3d44.68315439999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4b5a215128cb02df%3A0xf44bdaa2f32e4a51!2sThe%20LightHouse%20Global%20Ministries!5e0!3m2!1sen!2sng!4v1770960686185!5m2!1sen!2sng';
 ?>
+<?php $contactHeroImg = page_hero_image('contact'); ?>
 <section class="section contact-page" data-animate>
-    <div class="page-hero page-hero--contact">
+    <div class="page-hero page-hero--contact<?= page_hero_classes($contactHeroImg) ?>"<?= page_hero_style($contactHeroImg) ?>>
         <div class="container">
             <h1 class="page-hero-title">Get In Touch</h1>
             <p class="page-hero-sub">Questions? Ideas? Prayers? We'd love to hear from you</p>

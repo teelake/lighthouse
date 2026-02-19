@@ -10,6 +10,7 @@
             <a href="<?= admin_url('settings/footer') ?>" class="btn btn-outline btn-sm">Footer</a>
             <a href="<?= admin_url('settings/email') ?>" class="btn btn-outline btn-sm">Email</a>
             <a href="<?= admin_url('settings/payment') ?>" class="btn btn-outline btn-sm">Payment</a>
+            <a href="<?= admin_url('settings/page-images') ?>" class="btn btn-outline btn-sm">Page Images</a>
         </div>
     </div>
     <?php if (!empty($error)): ?><div class="alert alert-error"><?= htmlspecialchars($error) ?></div><?php endif; ?>

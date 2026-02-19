@@ -5,8 +5,9 @@ $sections = $sections ?? [];
 $imNewIntro = $sections['im_new_intro']['content'] ?? null;
 $whatToExpect = $sections['im_new_expect']['content'] ?? null;
 ?>
+<?php $imNewHeroImg = page_hero_image('im-new'); ?>
 <section class="section im-new-page" data-animate>
-    <div class="page-hero page-hero--im-new">
+    <div class="page-hero page-hero--im-new<?= page_hero_classes($imNewHeroImg) ?>"<?= page_hero_style($imNewHeroImg) ?>>
         <div class="container">
             <h1 class="page-hero-title">Welcome Home</h1>
             <p class="page-hero-sub">You're not just welcome—you're celebrated</p>

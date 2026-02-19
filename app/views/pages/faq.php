@@ -3,8 +3,9 @@ ob_start();
 $baseUrl = rtrim(BASE_URL, '/');
 $faqs = $faqs ?? [];
 ?>
+<?php $faqHeroImg = page_hero_image('faq'); ?>
 <section class="section faq-page" data-animate>
-    <div class="page-hero page-hero--faq">
+    <div class="page-hero page-hero--faq<?= page_hero_classes($faqHeroImg) ?>"<?= page_hero_style($faqHeroImg) ?>>
         <div class="container">
             <h1 class="page-hero-title">Frequently Asked Questions</h1>
             <p class="page-hero-sub">Quick answers to common questions</p>

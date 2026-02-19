@@ -85,6 +85,33 @@ if (!function_exists('job_type_label')) {
     }
 }
 
+/**
+ * Get hero background image URL for an inner page.
+ * About uses about_hero_image; other pages use page_hero_image.
+ */
+if (!function_exists('page_hero_image')) {
+    function page_hero_image(string $page): string
+    {
+        $s = new \App\Models\Setting();
+        if ($page === 'about') return $s->get('about_hero_image', '');
+        return $s->get('page_hero_image', '');
+    }
+}
+
+/**
+ * Return class and style attributes for page hero with optional background image.
+ * Use: <div class="page-hero page-hero--contact<?= page_hero_classes($img) ?>"<?= page_hero_style($img) ?>>
+ */
+if (!function_exists('page_hero_classes')) {
+    function page_hero_classes(string $img): string { return !empty($img) ? ' page-hero--has-image' : ''; }
+}
+if (!function_exists('page_hero_style')) {
+    function page_hero_style(string $img): string {
+        if (empty($img)) return '';
+        return ' style="background-image: linear-gradient(to bottom, rgba(26,26,26,0.75) 0%, rgba(26,26,26,0.6) 100%), url(' . htmlspecialchars($img) . ');"';
+    }
+}
+
 if (!function_exists('svg_icon')) {
     function svg_icon(string $name, int $size = 20): string
     {

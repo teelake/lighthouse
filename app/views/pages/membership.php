@@ -4,8 +4,9 @@ $baseUrl = rtrim(BASE_URL, '/');
 $sections = $sections ?? [];
 $membershipIntro = $sections['membership_intro']['content'] ?? null;
 ?>
+<?php $membershipHeroImg = page_hero_image('membership'); ?>
 <section class="section membership-page" data-animate>
-    <div class="page-hero page-hero--membership">
+    <div class="page-hero page-hero--membership<?= page_hero_classes($membershipHeroImg) ?>"<?= page_hero_style($membershipHeroImg) ?>>
         <div class="container">
             <h1 class="page-hero-title">Membership & Training</h1>
             <p class="page-hero-sub">Pharos Academies — Equipping for life and leadership</p>

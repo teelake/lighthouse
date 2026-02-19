@@ -6,8 +6,9 @@ $gatherExtra = $sections['gather_config']['extra_data'] ?? [];
 $gatherExtra = is_array($gatherExtra) ? $gatherExtra : [];
 $serviceTimes = $serviceTimes ?? ['sunday' => '10:00 AM', 'thursday' => '6:00 PM'];
 ?>
+<?php $servicesHeroImg = page_hero_image('services'); ?>
 <section class="section services-page" data-animate>
-    <div class="page-hero page-hero--services">
+    <div class="page-hero page-hero--services<?= page_hero_classes($servicesHeroImg) ?>"<?= page_hero_style($servicesHeroImg) ?>>
         <div class="container">
             <h1 class="page-hero-title">Our Gatherings</h1>
             <p class="page-hero-sub">Join us in person or online</p>

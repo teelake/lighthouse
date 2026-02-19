@@ -168,6 +168,42 @@ class SettingController extends BaseController
         $this->redirectAdmin('settings/homepage');
     }
 
+    public function pageImages()
+    {
+        $this->requireAdmin();
+        $s = new Setting();
+        $this->render('admin/settings/page-images', [
+            'about_hero_image' => $s->get('about_hero_image', ''),
+            'about_story_image' => $s->get('about_story_image', ''),
+            'page_hero_image' => $s->get('page_hero_image', ''),
+            'pageHeading' => 'Page Images',
+            'currentPage' => 'settings',
+        ]);
+    }
+
+    public function updatePageImages()
+    {
+        $this->requireAdmin();
+        $s = new Setting();
+        $uploader = new ImageUpload();
+        $imgs = [
+            'about_hero_image' => $s->get('about_hero_image', ''),
+            'about_story_image' => $s->get('about_story_image', ''),
+            'page_hero_image' => $s->get('page_hero_image', ''),
+        ];
+        foreach (['about_hero_image', 'about_story_image', 'page_hero_image'] as $key) {
+            $u = new ImageUpload();
+            $uploaded = $u->upload($key, 'pages');
+            if ($uploaded !== null) $imgs[$key] = $uploaded;
+            elseif ($u->getLastError()) {
+                $this->render('admin/settings/page-images', array_merge($imgs, ['error' => $u->getLastError(), 'pageHeading' => 'Page Images', 'currentPage' => 'settings']));
+                return;
+            }
+        }
+        foreach ($imgs as $k => $v) $s->set($k, $v);
+        $this->redirectAdmin('settings/page-images');
+    }
+
     public function email()
     {
         $this->requireAdmin();

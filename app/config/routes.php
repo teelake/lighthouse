@@ -151,6 +151,8 @@ $router->add('GET', $adm . '/settings/footer', ['controller' => 'Admin\Setting',
 $router->add('POST', $adm . '/settings/footer', ['controller' => 'Admin\Setting', 'action' => 'updateFooter']);
 $router->add('GET', $adm . '/settings/homepage', ['controller' => 'Admin\Setting', 'action' => 'homepage']);
 $router->add('POST', $adm . '/settings/homepage', ['controller' => 'Admin\Setting', 'action' => 'updateHomepage']);
+$router->add('GET', $adm . '/settings/page-images', ['controller' => 'Admin\Setting', 'action' => 'pageImages']);
+$router->add('POST', $adm . '/settings/page-images', ['controller' => 'Admin\Setting', 'action' => 'updatePageImages']);
 $router->add('GET', $adm . '/settings/payment', ['controller' => 'Admin\Setting', 'action' => 'payment']);
 $router->add('POST', $adm . '/settings/payment', ['controller' => 'Admin\Setting', 'action' => 'updatePayment']);
 $router->add('GET', $adm . '/settings/email', ['controller' => 'Admin\Setting', 'action' => 'email']);
