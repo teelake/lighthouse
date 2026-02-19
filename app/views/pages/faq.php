@@ -31,34 +31,8 @@ $faqs = $faqs ?? [];
             <?php endforeach; ?>
         </div>
         <?php else: ?>
-        <div class="faq-list" data-faq-accordion>
-            <div class="faq-item is-open">
-                <button type="button" class="faq-question" aria-expanded="true" data-faq-toggle>
-                    Is Lighthouse open to everyone?
-                    <span class="faq-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
-                </button>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">Yes. We welcome people from all backgrounds. No matter where you are in your faith journey, you have a place here.</div>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button type="button" class="faq-question" aria-expanded="false" data-faq-toggle>
-                    Do I need to be a member to attend?
-                    <span class="faq-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
-                </button>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">No. Membership is encouraged but not required. Feel free to attend services, small groups, and events as a visitor.</div>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button type="button" class="faq-question" aria-expanded="false" data-faq-toggle>
-                    What should I wear?
-                    <span class="faq-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
-                </button>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">Come as you are. Most people dress casually, though some prefer more formal attire. We care more about you than what you wear.</div>
-                </div>
-            </div>
+        <div class="faq-empty-state">
+            <p>No FAQs have been added yet. Check back soon or <a href="<?= $baseUrl ?>/contact">contact us</a> with your question.</p>
         </div>
         <?php endif; ?>
 

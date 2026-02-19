@@ -110,6 +110,7 @@ function dash_time_ago($date) {
                     <a href="<?= admin_url('ministries/create') ?>" class="dash-quick-btn">New Ministry</a>
                     <a href="<?= admin_url('leaders/create') ?>" class="dash-quick-btn">New Leader</a>
                     <a href="<?= admin_url('media/create') ?>" class="dash-quick-btn">New Media</a>
+                    <a href="<?= admin_url('faqs/create') ?>" class="dash-quick-btn">New FAQ</a>
                 </div>
             </div>
             <?php } ?>

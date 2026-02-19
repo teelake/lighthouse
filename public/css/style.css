@@ -1522,6 +1522,10 @@ body::before {
     line-height: 1.7;
     color: var(--color-muted);
 }
+.faq-empty-state { max-width: 480px; margin: 0 auto 2rem; padding: 2rem; text-align: center; color: var(--color-muted); background: var(--color-gold-bg); border: 1px solid rgba(255,225,0,0.3); border-radius: var(--radius); }
+.faq-empty-state p { margin: 0; font-size: 1.05rem; }
+.faq-empty-state a { color: var(--color-primary-on-light); font-weight: 600; }
+.faq-empty-state a:hover { text-decoration: underline; }
 .faq-cta {
     text-align: center;
     padding: 2rem;

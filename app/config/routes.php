@@ -78,6 +78,13 @@ $router->add('GET', $adm . '/leaders/{id}/edit', ['controller' => 'Admin\Leader'
 $router->add('POST', $adm . '/leaders/{id}', ['controller' => 'Admin\Leader', 'action' => 'update']);
 $router->add('POST', $adm . '/leaders/{id}/delete', ['controller' => 'Admin\Leader', 'action' => 'delete']);
 
+$router->add('GET', $adm . '/faqs', ['controller' => 'Admin\Faq', 'action' => 'index']);
+$router->add('GET', $adm . '/faqs/create', ['controller' => 'Admin\Faq', 'action' => 'create']);
+$router->add('POST', $adm . '/faqs', ['controller' => 'Admin\Faq', 'action' => 'store']);
+$router->add('GET', $adm . '/faqs/{id}/edit', ['controller' => 'Admin\Faq', 'action' => 'edit']);
+$router->add('POST', $adm . '/faqs/{id}', ['controller' => 'Admin\Faq', 'action' => 'update']);
+$router->add('POST', $adm . '/faqs/{id}/delete', ['controller' => 'Admin\Faq', 'action' => 'delete']);
+
 $router->add('GET', $adm . '/testimonials', ['controller' => 'Admin\Testimonial', 'action' => 'index']);
 $router->add('GET', $adm . '/testimonials/create', ['controller' => 'Admin\Testimonial', 'action' => 'create']);
 $router->add('POST', $adm . '/testimonials', ['controller' => 'Admin\Testimonial', 'action' => 'store']);
