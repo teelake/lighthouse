@@ -2057,7 +2057,8 @@ body::before {
 .job-card-main h3 { margin: 0 0 0.25rem; font-family: var(--font-heading); font-size: 1.15rem; color: var(--color-dark); }
 .job-type { font-size: 0.9rem; color: var(--color-primary-on-light); font-weight: 600; }
 
-/* Events/Media with page hero - ensure content has top padding */
+/* Events/Media with page hero - no gap between header and hero */
+.events-page { padding-top: 0; }
 .events-page .brand-shell, .media-page .media-shell { padding-top: 2rem; }
 
 /* Events grid - cards with images */

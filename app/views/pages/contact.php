@@ -90,10 +90,6 @@ $mapSrc = !empty($mapEmbedUrl) ? $mapEmbedUrl : 'https://www.google.com/maps/emb
                     <h3 class="contact-hours-title">Service Times</h3>
                     <p class="contact-hours-text">Sunday 10:00 AM · Thursday 6:00 PM</p>
                 </div>
-                <div class="contact-quick-ctas">
-                    <a href="tel:<?= preg_replace('/\D/', '', $phone) ?>" class="btn btn-accent btn-block">Call Now</a>
-                    <a href="mailto:<?= htmlspecialchars($email) ?>" class="btn btn-watch btn-block">Email Directly</a>
-                </div>
             </div>
         </div>
 
