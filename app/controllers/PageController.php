@@ -43,6 +43,7 @@ class PageController extends Controller
                 'sunday' => $setting->get('service_sunday', '10:00 AM'),
                 'thursday' => $setting->get('service_thursday', '6:00 PM'),
             ],
+            'address' => $setting->get('site_address', '980 Parkland Drive, Holiday Inn & Suites, Halifax, NS, Canada'),
         ]);
     }
 
