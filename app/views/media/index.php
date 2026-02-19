@@ -9,6 +9,14 @@ $mediaThumb = function ($m) {
     }
     return 'https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=600';
 };
+$mediaList = $media ?? [];
+$countAll = count($mediaList);
+$countAudio = count(array_filter($mediaList, fn($m) => ($m['media_type'] ?? '') === 'audio'));
+$countVideo = count(array_filter($mediaList, fn($m) => in_array($m['media_type'] ?? '', ['video', 'teaching'], true)));
+$filterType = function ($m) {
+    $t = $m['media_type'] ?? 'video';
+    return $t === 'audio' ? 'audio' : 'video';
+};
 ?>
 <?php $mediaHeroImg = page_hero_image('media'); ?>
 <section class="section media-page" data-animate>
@@ -21,10 +29,15 @@ $mediaThumb = function ($m) {
     <div class="container media-shell">
         <p class="media-kicker">Stream & grow</p>
         <p class="media-sub">Watch sermons, teachings, and worship — anytime, anywhere.</p>
-        <?php if (!empty($media)): ?>
-        <div class="media-grid">
-            <?php foreach ($media as $m): ?>
-            <a class="media-card" href="<?= $baseUrl ?>/media/<?= htmlspecialchars($m['slug']) ?>" aria-label="Watch: <?= htmlspecialchars($m['title']) ?>">
+        <?php if (!empty($mediaList)): ?>
+        <nav class="media-filters" role="tablist" aria-label="Filter media by type">
+            <button type="button" class="media-filter-pill media-filter-pill--active" data-filter="all" role="tab" aria-selected="true">All (<?= $countAll ?>)</button>
+            <button type="button" class="media-filter-pill" data-filter="audio" role="tab" aria-selected="false">Audio (<?= $countAudio ?>)</button>
+            <button type="button" class="media-filter-pill" data-filter="video" role="tab" aria-selected="false">Video (<?= $countVideo ?>)</button>
+        </nav>
+        <div class="media-grid" id="media-grid">
+            <?php foreach ($mediaList as $m): ?>
+            <a class="media-card" href="<?= $baseUrl ?>/media/<?= htmlspecialchars($m['slug']) ?>" data-type="<?= htmlspecialchars($filterType($m)) ?>" aria-label="Watch: <?= htmlspecialchars($m['title']) ?>">
                 <div class="media-card-thumb" style="background-image: url('<?= htmlspecialchars($mediaThumb($m)) ?>');">
                     <span class="media-card-tag"><?= htmlspecialchars(ucfirst($m['media_type'])) ?></span>
                     <?php if (!empty($m['duration'])): ?><span class="media-card-duration"><?= htmlspecialchars($m['duration']) ?></span><?php endif; ?>

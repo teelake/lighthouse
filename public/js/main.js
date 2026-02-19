@@ -392,4 +392,45 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // Media page: filter pills (All / Audio / Video)
+    var mediaFilters = document.querySelector('.media-filters');
+    var mediaGrid = document.getElementById('media-grid');
+    if (mediaFilters && mediaGrid) {
+        var pills = mediaFilters.querySelectorAll('.media-filter-pill');
+        var cards = mediaGrid.querySelectorAll('.media-card');
+
+        function getTypeFromUrl() {
+            var params = new URLSearchParams(window.location.search);
+            var t = params.get('type');
+            return (t === 'audio' || t === 'video') ? t : 'all';
+        }
+
+        function applyFilter(type) {
+            pills.forEach(function(p) {
+                var isActive = p.getAttribute('data-filter') === type;
+                p.classList.toggle('media-filter-pill--active', isActive);
+                p.setAttribute('aria-selected', isActive);
+            });
+            cards.forEach(function(c) {
+                var cardType = c.getAttribute('data-type') || '';
+                var show = type === 'all' || cardType === type;
+                c.setAttribute('data-filter-hidden', show ? 'false' : 'true');
+            });
+            var url = window.location.pathname + (type !== 'all' ? '?type=' + type : '');
+            if (window.history.replaceState) {
+                window.history.replaceState(null, '', url);
+            }
+        }
+
+        pills.forEach(function(pill) {
+            pill.addEventListener('click', function() {
+                var filter = this.getAttribute('data-filter');
+                applyFilter(filter);
+            });
+        });
+
+        var initialType = getTypeFromUrl();
+        if (initialType !== 'all') applyFilter(initialType);
+    }
 });
