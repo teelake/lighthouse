@@ -17,11 +17,10 @@ $baseUrl = rtrim(BASE_URL, '/');
         <div class="ministries-grid">
             <?php foreach ($ministries as $m): ?>
             <a href="<?= $baseUrl ?>/ministries/<?= htmlspecialchars($m['slug']) ?>" class="ministry-card stagger-item">
-                <?php if (!empty($m['image'])): ?>
-                <div class="ministry-card-img" style="background-image: url('<?= htmlspecialchars($m['image']) ?>');"></div>
-                <?php else: ?>
-                <div class="ministry-card-img ministry-card-img--placeholder" style="background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800');"></div>
-                <?php endif; ?>
+                <div class="ministry-card-img">
+                    <?php $imgSrc = !empty($m['image']) ? full_image_url($m['image']) : 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800'; ?>
+                    <img src="<?= htmlspecialchars($imgSrc) ?>" alt="<?= htmlspecialchars($m['title']) ?>" loading="lazy">
+                </div>
                 <div class="ministry-card-body">
                     <h3><?= htmlspecialchars($m['title']) ?></h3>
                     <div class="ministry-card-tagline"><?= rich_content($m['tagline'] ?? '') ?></div>

@@ -2223,9 +2223,14 @@ body::before {
 .ministry-card:hover .link-arrow { color: var(--color-primary-dark); }
 .ministry-card-img {
     aspect-ratio: 16/9;
-    background-size: cover;
-    background-position: center;
+    overflow: hidden;
     background-color: var(--color-bg);
+}
+.ministry-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 .ministry-card-body {
     padding: 1.25rem;

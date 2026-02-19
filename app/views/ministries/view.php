@@ -7,7 +7,7 @@ $baseUrl = rtrim(BASE_URL, '/');
         <a href="<?= $baseUrl ?>/ministries" class="event-detail-back">← All Ministries</a>
         <?php if (!empty($ministry['image'])): ?>
         <div class="ministry-detail-image">
-            <img src="<?= htmlspecialchars($ministry['image']) ?>" alt="<?= htmlspecialchars($ministry['title']) ?>" loading="eager">
+            <img src="<?= htmlspecialchars(full_image_url($ministry['image'])) ?>" alt="<?= htmlspecialchars($ministry['title']) ?>" loading="eager">
         </div>
         <?php endif; ?>
         <article class="ministry-detail-body">

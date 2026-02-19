@@ -112,6 +112,18 @@ if (!function_exists('page_hero_style')) {
     }
 }
 
+/**
+ * Ensure image URL is absolute. Handles paths stored as /uploads/... or full URLs.
+ */
+if (!function_exists('full_image_url')) {
+    function full_image_url(?string $path): string
+    {
+        if (empty($path)) return '';
+        if (preg_match('#^https?://#i', $path)) return $path;
+        return rtrim(BASE_URL ?? '', '/') . '/' . ltrim($path, '/');
+    }
+}
+
 if (!function_exists('svg_icon')) {
     function svg_icon(string $name, int $size = 20): string
     {
