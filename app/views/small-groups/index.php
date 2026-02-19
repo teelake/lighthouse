@@ -2,8 +2,9 @@
 ob_start();
 $baseUrl = rtrim(BASE_URL, '/');
 ?>
+<?php $smallGroupsHeroImg = page_hero_image('small-groups'); ?>
 <section class="section small-groups-page" data-animate>
-    <div class="page-hero page-hero--small-groups">
+    <div class="page-hero page-hero--small-groups<?= page_hero_classes($smallGroupsHeroImg) ?>"<?= page_hero_style($smallGroupsHeroImg) ?>>
         <div class="container">
             <h1 class="page-hero-title">Small Groups</h1>
             <p class="page-hero-sub">Connect in community</p>

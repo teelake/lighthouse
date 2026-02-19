@@ -5,8 +5,9 @@ $sections = $sections ?? [];
 $prayerIntro = $sections['prayer_intro']['content'] ?? null;
 $submitted = isset($_GET['submitted']);
 ?>
+<?php $prayerHeroImg = page_hero_image('prayer'); ?>
 <section class="section prayer-page" data-animate>
-    <div class="page-hero page-hero--prayer">
+    <div class="page-hero page-hero--prayer<?= page_hero_classes($prayerHeroImg) ?>"<?= page_hero_style($prayerHeroImg) ?>>
         <div class="container">
             <h1 class="page-hero-title">Prayer</h1>
             <p class="page-hero-sub">We stand with you in prayer</p>

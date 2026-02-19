@@ -2,8 +2,9 @@
 ob_start();
 $baseUrl = rtrim(BASE_URL, '/');
 ?>
+<?php $eventsHeroImg = page_hero_image('events'); ?>
 <section class="section brand-page events-page" data-animate>
-    <div class="page-hero page-hero--events">
+    <div class="page-hero page-hero--events<?= page_hero_classes($eventsHeroImg) ?>"<?= page_hero_style($eventsHeroImg) ?>>
         <div class="container">
             <h1 class="page-hero-title">Events & Experiences</h1>
             <p class="page-hero-sub">What's happening</p>

@@ -2,8 +2,9 @@
 ob_start();
 $baseUrl = rtrim(BASE_URL, '/');
 ?>
+<?php $jobsHeroImg = page_hero_image('jobs'); ?>
 <section class="section jobs-page" data-animate>
-    <div class="page-hero page-hero--jobs">
+    <div class="page-hero page-hero--jobs<?= page_hero_classes($jobsHeroImg) ?>"<?= page_hero_style($jobsHeroImg) ?>>
         <div class="container">
             <h1 class="page-hero-title">Join Our Team</h1>
             <p class="page-hero-sub">Build. Serve. Shine.</p>

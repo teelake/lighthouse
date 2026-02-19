@@ -10,8 +10,9 @@ $mediaThumb = function ($m) {
     return 'https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=600';
 };
 ?>
+<?php $mediaHeroImg = page_hero_image('media'); ?>
 <section class="section media-page" data-animate>
-    <div class="page-hero page-hero--media">
+    <div class="page-hero page-hero--media<?= page_hero_classes($mediaHeroImg) ?>"<?= page_hero_style($mediaHeroImg) ?>>
         <div class="container">
             <h1 class="page-hero-title">Media & Teachings</h1>
             <p class="page-hero-sub">Stream & grow</p>
