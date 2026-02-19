@@ -27,7 +27,7 @@ $mapSrc = !empty($mapEmbedUrl) ? $mapEmbedUrl : 'https://www.google.com/maps/emb
                 <?php if ($msg === 'success'): ?>
                 <div class="contact-msg contact-msg--success">
                     <span class="contact-msg-icon" aria-hidden="true">✓</span>
-                    Thank you! Your message has been sent. We'll get back to you soon.
+                    Thank you! Your message has been sent. We'll get back to you soon. Check your email for a confirmation.
                 </div>
                 <?php elseif ($msg === 'invalid'): ?>
                 <div class="contact-msg contact-msg--error">Please fill in all required fields (name, email, and message) correctly.</div>

@@ -38,7 +38,7 @@
                         <ul class="dropdown">
                             <li><a href="<?= rtrim(BASE_URL, '/') ?>/about">About Us</a></li>
                             <li><a href="<?= rtrim(BASE_URL, '/') ?>/leadership">Leadership</a></li>
-                            <li><a href="<?= rtrim(BASE_URL, '/') ?>/faq">FAQ</a></li>
+                            <li><a href="<?= rtrim(BASE_URL, '/') ?>/about#about-faqs">FAQ</a></li>
                         </ul>
                     </li>
                     <li><a href="<?= rtrim(BASE_URL, '/') ?>/services">Services</a></li>
@@ -92,7 +92,7 @@
                 $footerData = $footerJson ? json_decode($footerJson, true) : null;
                 $footerTagline = $footerData['tagline'] ?? $footerCta ?? 'Join us. Grow with us. Shine with us.';
                 $footerCols = $footerData['columns'] ?? [
-                    ['title' => 'ABOUT', 'links' => [['label' => 'About Us', 'url' => '/about'], ['label' => 'Leadership', 'url' => '/leadership'], ['label' => 'FAQ', 'url' => '/faq']]],
+                    ['title' => 'ABOUT', 'links' => [['label' => 'About Us', 'url' => '/about'], ['label' => 'Leadership', 'url' => '/leadership'], ['label' => 'FAQ', 'url' => '/about#about-faqs']]],
                     ['title' => 'GATHERINGS', 'links' => [['label' => 'Services', 'url' => '/services'], ['label' => 'Events', 'url' => '/events'], ['label' => 'Ministries', 'url' => '/ministries'], ['label' => 'Media', 'url' => '/media']]],
                     ['title' => 'GET INVOLVED', 'links' => [['label' => "I'm New", 'url' => '/im-new'], ['label' => 'Small Groups', 'url' => '/small-groups'], ['label' => 'Membership & Training', 'url' => '/membership'], ['label' => 'Join the Team', 'url' => '/jobs'], ['label' => 'Prayer', 'url' => '/prayer']]],
                     ['title' => 'CONTACT', 'links' => [['label' => 'Contact Us', 'url' => '/contact'], ['label' => 'Giving', 'url' => '/giving']]],

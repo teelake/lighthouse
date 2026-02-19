@@ -66,7 +66,7 @@ $story = ($aboutIntro['content'] ?? null) ?: ($whoWeAre['content'] ?? '');
         <?php endif; ?>
 
         <?php if (!empty($faqs)): ?>
-        <div class="about-faqs">
+        <div class="about-faqs" id="about-faqs">
             <h2 class="about-section-title">Frequently Asked Questions</h2>
             <div class="faq-list faq-list--inline" data-faq-accordion>
                 <?php foreach ($faqs as $i => $faq): ?>
@@ -89,9 +89,8 @@ $story = ($aboutIntro['content'] ?? null) ?: ($whoWeAre['content'] ?? '');
         <?php endif; ?>
 
         <div class="about-cta">
-            <a href="<?= $baseUrl ?>/leadership" class="btn btn-accent">Meet Our Leadership</a>
+            <a href="<?= $baseUrl ?>/leadership" class="btn btn-primary">Meet Our Leadership</a>
             <a href="<?= $baseUrl ?>/im-new" class="btn btn-watch">Plan Your Visit</a>
-            <a href="<?= $baseUrl ?>/faq" class="btn btn-accent">More FAQs</a>
         </div>
     </div>
 </section>
