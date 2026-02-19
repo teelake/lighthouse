@@ -10,6 +10,7 @@ To enable full homepage content management, run the migration:
 mysql -u your_user -p thelwcwm_db < database/migrations/001_homepage_sections.sql
 mysql -u your_user -p thelwcwm_db < database/migrations/002_about_leadership.sql
 mysql -u your_user -p thelwcwm_db < database/migrations/007_scriptural_foundation_config.sql
+mysql -u your_user -p thelwcwm_db < database/migrations/008_core_values_config.sql
 ```
 
 ## What's New

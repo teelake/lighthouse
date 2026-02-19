@@ -6,7 +6,7 @@ use App\Services\ImageUpload;
 
 class SectionController extends BaseController
 {
-    private const CONFIG_KEYS = ['hero_config', 'gather_config', 'lights_config', 'prayer_wall_config', 'newsletter_config', 'whats_on_config', 'scriptural_foundation_config'];
+    private const CONFIG_KEYS = ['hero_config', 'gather_config', 'lights_config', 'prayer_wall_config', 'newsletter_config', 'whats_on_config', 'scriptural_foundation_config', 'core_values_config'];
 
     public function index()
     {
@@ -73,6 +73,7 @@ class SectionController extends BaseController
             'newsletter_config' => ['eyebrow', 'title', 'note'],
             'whats_on_config' => ['sunday_title', 'sunday_desc', 'thursday_title', 'thursday_desc'],
             'scriptural_foundation_config' => ['scripture_1_ref', 'scripture_1_desc', 'scripture_2_ref', 'scripture_2_desc', 'scripture_3_ref', 'scripture_3_desc'],
+            'core_values_config' => ['value_1_title', 'value_1_desc', 'value_2_title', 'value_2_desc', 'value_3_title', 'value_3_desc', 'value_4_title', 'value_4_desc', 'value_5_title', 'value_5_desc'],
         ];
         $fields = $map[$key] ?? [];
         $out = [];

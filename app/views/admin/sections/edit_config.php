@@ -57,6 +57,15 @@ $key = $section['section_key'] ?? '';
         <div class="form-group"><label>Scripture 2 Description</label><textarea name="scripture_2_desc" rows="3"><?= htmlspecialchars($d['scripture_2_desc'] ?? '') ?></textarea></div>
         <div class="form-group"><label>Scripture 3 Reference (optional)</label><input type="text" name="scripture_3_ref" value="<?= htmlspecialchars($d['scripture_3_ref'] ?? '') ?>" placeholder="e.g. Matthew 5:14"></div>
         <div class="form-group"><label>Scripture 3 Description (optional)</label><textarea name="scripture_3_desc" rows="3"><?= htmlspecialchars($d['scripture_3_desc'] ?? '') ?></textarea></div>
+        <?php elseif ($key === 'core_values_config'): ?>
+        <p style="color: var(--adm-muted); margin: 0 0 1rem;">Core values displayed in a grid on the About page. Each value has a title and description. Leave a row empty to hide it.</p>
+        <?php for ($i = 1; $i <= 5; $i++): ?>
+        <div style="padding: 1rem 0; border-bottom: 1px solid var(--adm-border);">
+            <h4 style="font-size: 0.9rem; margin: 0 0 0.75rem; color: var(--adm-muted);">Value <?= $i ?></h4>
+            <div class="form-group"><label>Title</label><input type="text" name="value_<?= $i ?>_title" value="<?= htmlspecialchars($d["value_{$i}_title"] ?? '') ?>" placeholder="e.g. Audacity"></div>
+            <div class="form-group"><label>Description</label><input type="text" name="value_<?= $i ?>_desc" value="<?= htmlspecialchars($d["value_{$i}_desc"] ?? '') ?>" placeholder="e.g. Faith that dares the impossible."></div>
+        </div>
+        <?php endfor; ?>
         <?php endif; ?>
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Save</button>
