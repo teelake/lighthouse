@@ -30,8 +30,8 @@ $ctaVisit = ltrim($heroExtra['cta_visit_url'] ?? '/im-new', '/');
     <div class="hero-overlay" style="background: linear-gradient(180deg, rgba(26,26,26,0.6) 0%, rgba(26,26,26,0.85) 100%);"></div>
     <div class="hero-inner hero-centered">
         <div class="hero-content">
-            <p class="hero-tagline"><?= htmlspecialchars($heroTagline) ?></p>
-            <h1 class="hero-headline"><?= htmlspecialchars($headline) ?></h1>
+            <div class="hero-tagline"><?= rich_content($heroTagline) ?></div>
+            <h1 class="hero-headline"><?= content_text($headline) ?></h1>
             <div class="hero-pillars">
                 <?php foreach ($heroPillars as $p): ?><span><?= htmlspecialchars($p) ?></span><?php endforeach; ?>
             </div>
@@ -78,16 +78,16 @@ $ctaVisit = ltrim($heroExtra['cta_visit_url'] ?? '/im-new', '/');
 <section class="section gather-section" data-animate>
     <div class="section-title-bar">
         <div class="section-title-bar-inner">
-            <h2 class="section-title"><?= htmlspecialchars($gatherExtra['section_title'] ?? 'Gather With Us') ?></h2>
+            <h2 class="section-title"><?= content_text($gatherExtra['section_title'] ?? 'Gather With Us') ?></h2>
         </div>
     </div>
     <div class="container">
-        <p class="section-sub"><?= htmlspecialchars($gatherExtra['section_sub'] ?? 'Join us in person or online') ?></p>
+        <div class="section-sub"><?= rich_content($gatherExtra['section_sub'] ?? 'Join us in person or online') ?></div>
         <div class="gather-grid">
             <div class="gather-card">
-                <span class="gather-day"><?= htmlspecialchars($gatherExtra['sunday_title'] ?? 'Sunday') ?></span>
+                <span class="gather-day"><?= content_text($gatherExtra['sunday_title'] ?? 'Sunday') ?></span>
                 <span class="gather-time"><?= htmlspecialchars($serviceTimes['sunday'] ?? '10:00 AM') ?></span>
-                <p class="gather-desc"><?= htmlspecialchars($gatherExtra['sunday_desc'] ?? 'Catalysis — Worship that ignites faith') ?></p>
+                <div class="gather-desc"><?= rich_content($gatherExtra['sunday_desc'] ?? 'Catalysis — Worship that ignites faith') ?></div>
                 <span class="gather-loc">In-Person + Online</span>
                 <div class="gather-actions">
                     <a href="<?= $baseUrl ?>/media" class="btn btn-primary btn-sm">Join Online</a>
@@ -95,9 +95,9 @@ $ctaVisit = ltrim($heroExtra['cta_visit_url'] ?? '/im-new', '/');
                 </div>
             </div>
             <div class="gather-card">
-                <span class="gather-day"><?= htmlspecialchars($gatherExtra['thursday_title'] ?? 'Thursday') ?></span>
+                <span class="gather-day"><?= content_text($gatherExtra['thursday_title'] ?? 'Thursday') ?></span>
                 <span class="gather-time"><?= htmlspecialchars($serviceTimes['thursday'] ?? '6:00 PM') ?></span>
-                <p class="gather-desc"><?= htmlspecialchars($gatherExtra['thursday_desc'] ?? 'The Summit — Teaching & prayer') ?></p>
+                <div class="gather-desc"><?= rich_content($gatherExtra['thursday_desc'] ?? 'The Summit — Teaching & prayer') ?></div>
                 <span class="gather-loc">In-Person + Online</span>
                 <div class="gather-actions">
                     <a href="<?= $baseUrl ?>/media" class="btn btn-primary btn-sm">Join Online</a>
@@ -180,7 +180,7 @@ $mediaTypeLabel = function ($t) {
 <section class="section lights-section" data-animate>
     <div class="container lights-inner">
         <div class="lights-content">
-            <h2 class="lights-headline"><?= nl2br(htmlspecialchars($lightsExtra['headline'] ?? 'We Raise Lights That Transform Nations')) ?></h2>
+            <h2 class="lights-headline"><?= nl2br(content_text($lightsExtra['headline'] ?? 'We Raise Lights That Transform Nations')) ?></h2>
             <div class="lights-body"><?= rich_content($whoWeAre['content'] ?? 'The Lighthouse Global Ministry is a Spirit-led ministry commissioned to raise men and women who shine with Christ\'s light—bringing transformation to lives, communities, cultures, and nations.') ?></div>
             <a href="<?= $baseUrl ?>/about" class="btn btn-watch">Learn More</a>
         </div>
@@ -209,15 +209,15 @@ $mediaTypeLabel = function ($t) {
     <div class="container">
         <div class="events-grid">
             <div class="event-card-modern">
-                <h3><?= htmlspecialchars($whatsOnExtra['sunday_title'] ?? 'Sunday — Catalysis') ?></h3>
+                <h3><?= content_text($whatsOnExtra['sunday_title'] ?? 'Sunday — Catalysis') ?></h3>
                 <p class="event-time"><?= htmlspecialchars($serviceTimes['sunday'] ?? '10:00 AM') ?></p>
-                <p><?= htmlspecialchars($whatsOnExtra['sunday_desc'] ?? 'A catalytic worship experience designed to ignite faith.') ?></p>
+                <div><?= rich_content($whatsOnExtra['sunday_desc'] ?? 'A catalytic worship experience designed to ignite faith.') ?></div>
                 <a href="<?= $baseUrl ?>/services" class="link-arrow">Join us →</a>
             </div>
             <div class="event-card-modern">
-                <h3><?= htmlspecialchars($whatsOnExtra['thursday_title'] ?? 'Thursday — The Summit') ?></h3>
+                <h3><?= content_text($whatsOnExtra['thursday_title'] ?? 'Thursday — The Summit') ?></h3>
                 <p class="event-time"><?= htmlspecialchars($serviceTimes['thursday'] ?? '6:00 PM') ?></p>
-                <p><?= htmlspecialchars($whatsOnExtra['thursday_desc'] ?? 'Elevation, encounter, empowerment. Midweek teaching.') ?></p>
+                <div><?= rich_content($whatsOnExtra['thursday_desc'] ?? 'Elevation, encounter, empowerment. Midweek teaching.') ?></div>
                 <a href="<?= $baseUrl ?>/services" class="link-arrow">Join us →</a>
             </div>
         </div>
@@ -279,8 +279,8 @@ $mediaTypeLabel = function ($t) {
             <img src="<?= htmlspecialchars($prayerWallImage ?? 'https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=800') ?>" alt="Prayer">
         </div>
         <div class="prayer-wall-content">
-            <p class="prayer-wall-eyebrow"><?= htmlspecialchars($prayerExtra['eyebrow'] ?? 'Ministry') ?></p>
-            <h3 class="prayer-wall-headline"><?= htmlspecialchars($prayerExtra['headline'] ?? 'Pray With Us') ?></h3>
+            <p class="prayer-wall-eyebrow"><?= content_text($prayerExtra['eyebrow'] ?? 'Ministry') ?></p>
+            <h3 class="prayer-wall-headline"><?= content_text($prayerExtra['headline'] ?? 'Pray With Us') ?></h3>
             <div class="prayer-wall-desc"><?= rich_content($prayerExtra['description'] ?? 'A digital space for church members to post prayer points and invite others to pray with them. You can share openly or post anonymously—either way, the church family stands with you in prayer.') ?></div>
             <div class="prayer-wall-ctas">
                 <a href="<?= $baseUrl ?>/prayer" class="btn btn-prayer-wall btn-primary">Post a Prayer Point</a>
@@ -343,9 +343,9 @@ $mediaTypeLabel = function ($t) {
 <section class="section stay-connected-section" data-animate>
     <div class="container newsletter-showcase">
         <div class="newsletter-copy">
-            <p class="newsletter-eyebrow"><?= htmlspecialchars($newsletterExtra['eyebrow'] ?? 'Our Newsletter') ?></p>
-            <h2 class="newsletter-title"><?= htmlspecialchars($newsletterExtra['title'] ?? 'Get Ministry Updates in Your Inbox') ?></h2>
-            <p class="newsletter-note"><?= htmlspecialchars($newsletterExtra['note'] ?? 'Receive event updates, teachings, community highlights, and important church announcements.') ?></p>
+            <p class="newsletter-eyebrow"><?= content_text($newsletterExtra['eyebrow'] ?? 'Our Newsletter') ?></p>
+            <h2 class="newsletter-title"><?= content_text($newsletterExtra['title'] ?? 'Get Ministry Updates in Your Inbox') ?></h2>
+            <div class="newsletter-note"><?= rich_content($newsletterExtra['note'] ?? 'Receive event updates, teachings, community highlights, and important church announcements.') ?></div>
             <form class="newsletter-form newsletter-inline js-newsletter-form" action="<?= $baseUrl ?>/newsletter/subscribe" method="post">
                 <label for="newsletter-name" class="sr-only">Full name</label>
                 <input id="newsletter-name" type="text" name="name" placeholder="Full name" autocomplete="name" required aria-label="Full name">

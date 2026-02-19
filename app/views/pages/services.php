@@ -22,16 +22,16 @@ $serviceTimes = $serviceTimes ?? ['sunday' => '10:00 AM', 'thursday' => '6:00 PM
         <div class="services-grid">
             <article class="event-card-modern services-card stagger-item">
                 <div class="services-card-badge">Sunday</div>
-                <h3><?= htmlspecialchars($gatherExtra['sunday_title'] ?? 'Catalysis') ?></h3>
+                <h3><?= content_text($gatherExtra['sunday_title'] ?? 'Catalysis') ?></h3>
                 <p class="event-time"><?= htmlspecialchars($serviceTimes['sunday']) ?></p>
-                <p><?= htmlspecialchars($gatherExtra['sunday_desc'] ?? 'A catalytic worship experience designed to ignite faith. Join us for Spirit-led praise, communion, and powerful teaching from the Word.') ?></p>
+                <div><?= rich_content($gatherExtra['sunday_desc'] ?? 'A catalytic worship experience designed to ignite faith. Join us for Spirit-led praise, communion, and powerful teaching from the Word.') ?></div>
                 <a href="<?= $baseUrl ?>/im-new" class="link-arrow">Plan your visit →</a>
             </article>
             <article class="event-card-modern services-card stagger-item">
                 <div class="services-card-badge">Thursday</div>
-                <h3><?= htmlspecialchars($gatherExtra['thursday_title'] ?? 'The Summit') ?></h3>
+                <h3><?= content_text($gatherExtra['thursday_title'] ?? 'The Summit') ?></h3>
                 <p class="event-time"><?= htmlspecialchars($serviceTimes['thursday']) ?></p>
-                <p><?= htmlspecialchars($gatherExtra['thursday_desc'] ?? 'Elevation, encounter, empowerment. Midweek teaching and prayer. A time to go deeper and be refreshed.') ?></p>
+                <div><?= rich_content($gatherExtra['thursday_desc'] ?? 'Elevation, encounter, empowerment. Midweek teaching and prayer. A time to go deeper and be refreshed.') ?></div>
                 <a href="<?= $baseUrl ?>/im-new" class="link-arrow">Join us →</a>
             </article>
         </div>

@@ -98,7 +98,7 @@
                     ['title' => 'CONTACT', 'links' => [['label' => 'Contact Us', 'url' => '/contact'], ['label' => 'Giving', 'url' => '/giving']]],
                 ];
                 ?>
-                <p class="footer-tagline"><?= htmlspecialchars($footerTagline, ENT_QUOTES, 'UTF-8') ?></p>
+                <div class="footer-tagline"><?= rich_content($footerTagline) ?></div>
                 <?php
                     $sFooter = new \App\Models\Setting();
                     $sFb = $sFooter->get('social_facebook', ''); $sIg = $sFooter->get('social_instagram', ''); $sYt = $sFooter->get('social_youtube', ''); $sTw = $sFooter->get('social_twitter', '');

@@ -48,6 +48,18 @@ if (!function_exists('rich_content')) {
 }
 
 /**
+ * Strip HTML tags and return plain text. Use for headings/short fields where
+ * backend content might include HTML (e.g. pasted from editor) but we want plain text.
+ */
+if (!function_exists('content_text')) {
+    function content_text(?string $html): string
+    {
+        if ($html === null || $html === '') return '';
+        return htmlspecialchars(strip_tags($html), ENT_QUOTES, 'UTF-8');
+    }
+}
+
+/**
  * Plain-text preview from HTML (for card descriptions, list summaries).
  */
 if (!function_exists('rich_preview')) {
