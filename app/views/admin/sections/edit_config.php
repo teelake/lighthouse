@@ -49,6 +49,14 @@ $key = $section['section_key'] ?? '';
         <div class="form-group"><label>Sunday Description</label><textarea name="sunday_desc"><?= htmlspecialchars($d['sunday_desc'] ?? '') ?></textarea></div>
         <div class="form-group"><label>Thursday Title</label><input type="text" name="thursday_title" value="<?= htmlspecialchars($d['thursday_title'] ?? 'Thursday') ?>"></div>
         <div class="form-group"><label>Thursday Description</label><textarea name="thursday_desc"><?= htmlspecialchars($d['thursday_desc'] ?? '') ?></textarea></div>
+        <?php elseif ($key === 'scriptural_foundation_config'): ?>
+        <p style="color: var(--adm-muted); margin: 0 0 1rem;">Scripture blocks shown in the "Our Scriptural Foundation" section on the About page. Leave reference/description empty to hide a block.</p>
+        <div class="form-group"><label>Scripture 1 Reference</label><input type="text" name="scripture_1_ref" value="<?= htmlspecialchars($d['scripture_1_ref'] ?? '') ?>" placeholder="e.g. Isaiah 42:5–11"></div>
+        <div class="form-group"><label>Scripture 1 Description</label><textarea name="scripture_1_desc" rows="3"><?= htmlspecialchars($d['scripture_1_desc'] ?? '') ?></textarea></div>
+        <div class="form-group"><label>Scripture 2 Reference</label><input type="text" name="scripture_2_ref" value="<?= htmlspecialchars($d['scripture_2_ref'] ?? '') ?>" placeholder="e.g. Isaiah 2:2–4"></div>
+        <div class="form-group"><label>Scripture 2 Description</label><textarea name="scripture_2_desc" rows="3"><?= htmlspecialchars($d['scripture_2_desc'] ?? '') ?></textarea></div>
+        <div class="form-group"><label>Scripture 3 Reference (optional)</label><input type="text" name="scripture_3_ref" value="<?= htmlspecialchars($d['scripture_3_ref'] ?? '') ?>" placeholder="e.g. Matthew 5:14"></div>
+        <div class="form-group"><label>Scripture 3 Description (optional)</label><textarea name="scripture_3_desc" rows="3"><?= htmlspecialchars($d['scripture_3_desc'] ?? '') ?></textarea></div>
         <?php endif; ?>
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Save</button>
