@@ -23,7 +23,6 @@ $aboutStoryImage = $aboutStoryImage ?? '';
             <a href="<?= $baseUrl ?>/about" class="about-subnav-link about-subnav-link--active">Who We Are</a>
             <a href="<?= $baseUrl ?>/leadership" class="about-subnav-link">Our Leadership</a>
             <a href="<?= $baseUrl ?>/about#about-faqs" class="about-subnav-link">FAQ</a>
-            <a href="<?= $baseUrl ?>/contact" class="about-subnav-link">Contact Us</a>
         </div>
     </nav>
 

@@ -1990,6 +1990,110 @@ body::before {
 /* Events/Media with page hero - ensure content has top padding */
 .events-page .brand-shell, .media-page .media-shell { padding-top: 2rem; }
 
+/* Events grid - cards with images */
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+.event-card-event {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: #fff;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 2px solid rgba(255,225,0,0.15);
+    transition: var(--transition);
+}
+.event-card-event:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(255,225,0,0.35);
+}
+.event-card-event-img {
+    aspect-ratio: 16/9;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--color-bg);
+}
+.event-card-event-body {
+    padding: 1.25rem;
+}
+.event-card-event-date {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-primary-on-light);
+    margin-bottom: 0.5rem;
+}
+.event-card-event-body h3 {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    color: var(--color-dark);
+}
+.event-card-event-body p {
+    margin: 0 0 0.75rem;
+    font-size: 0.95rem;
+    color: var(--color-muted);
+    line-height: 1.5;
+}
+.event-card-event-body .link-arrow {
+    font-size: 0.9rem;
+}
+
+/* Event detail page */
+.event-detail-page .container { max-width: 800px; padding-top: 2rem; }
+.event-detail-back {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    color: var(--color-primary-on-light);
+    text-decoration: none;
+    transition: var(--transition);
+}
+.event-detail-back:hover { color: var(--color-primary-dark); }
+.event-detail-image {
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+}
+.event-detail-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+.event-detail-body h1 {
+    margin: 0 0 1rem;
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    color: var(--color-dark);
+}
+.event-detail-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    color: var(--color-muted);
+}
+.event-detail-meta span:not(:last-child)::after {
+    content: ' · ';
+    margin-left: 0.25rem;
+    color: var(--color-muted);
+}
+.event-detail-desc {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--color-dark);
+}
+.event-detail-desc p { margin: 0 0 1rem; }
+
 .brand-empty-wrap { margin-top: 1rem; }
 
 @media (max-width: 600px) {

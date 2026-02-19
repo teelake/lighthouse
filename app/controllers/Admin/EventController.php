@@ -2,6 +2,7 @@
 namespace App\Controllers\Admin;
 
 use App\Models\Event;
+use App\Services\ImageUpload;
 
 class EventController extends BaseController
 {
@@ -22,6 +23,14 @@ class EventController extends BaseController
     {
         $this->requireEditor();
         $slug = strtolower(preg_replace('/[^a-z0-9]+/i', '-', trim($this->post('title', ''))));
+        $imageUrl = '';
+        $uploader = new ImageUpload();
+        $uploaded = $uploader->upload('image', 'events');
+        if ($uploaded !== null) $imageUrl = $uploaded;
+        elseif ($uploader->getLastError()) {
+            $this->render('admin/events/form', ['event' => null, 'error' => $uploader->getLastError(), 'pageHeading' => 'Add Event', 'currentPage' => 'events']);
+            return;
+        }
         (new Event())->create([
             'title' => $this->post('title'),
             'slug' => $slug,
@@ -29,6 +38,7 @@ class EventController extends BaseController
             'event_date' => $this->post('event_date') ?: null,
             'event_time' => $this->post('event_time') ?: null,
             'location' => $this->post('location'),
+            'image' => $imageUrl ?: null,
             'is_published' => 1,
         ]);
         $this->redirectAdmin('events');
@@ -49,12 +59,21 @@ class EventController extends BaseController
         $id = $this->params['id'] ?? 0;
         $event = (new Event())->find($id);
         if (!$event) throw new \Exception('Not found', 404);
+        $imageUrl = $event['image'] ?? '';
+        $uploader = new ImageUpload();
+        $uploaded = $uploader->upload('image', 'events');
+        if ($uploaded !== null) $imageUrl = $uploaded;
+        elseif ($uploader->getLastError()) {
+            $this->render('admin/events/form', ['event' => $event, 'error' => $uploader->getLastError(), 'pageHeading' => 'Edit Event', 'currentPage' => 'events']);
+            return;
+        }
         (new Event())->update($id, [
             'title' => $this->post('title'),
             'description' => $this->post('description'),
             'event_date' => $this->post('event_date') ?: null,
             'event_time' => $this->post('event_time') ?: null,
             'location' => $this->post('location'),
+            'image' => $imageUrl ?: null,
         ]);
         $this->redirectAdmin('events');
     }
