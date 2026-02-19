@@ -1456,10 +1456,10 @@ body::before {
     .about-page--hop .about-pillars-grid { grid-template-columns: 1fr; }
 }
 
-/* Core Values - listed from backend */
+/* Core Values - card layout matching Mission/Vision pillars */
 .about-page--hop .about-core-values-block {
     padding: 4rem 0;
-    background: var(--color-bg-warm);
+    background: #fff;
 }
 .about-page--hop .about-core-values-grid {
     display: grid;
@@ -1468,7 +1468,7 @@ body::before {
 }
 .about-page--hop .about-value-card {
     background: #fff;
-    border: 2px solid rgba(166,125,15,0.25);
+    border: 2px solid rgba(166,125,15,0.35);
     border-radius: var(--radius);
     padding: 2rem;
     text-align: center;
@@ -1476,20 +1476,31 @@ body::before {
 }
 .about-page--hop .about-value-card:hover {
     border-color: var(--color-brand-accent);
-    box-shadow: 0 8px 30px rgba(166,125,15,0.15);
+    box-shadow: 0 8px 30px rgba(166,125,15,0.2);
     transform: translateY(-4px);
+}
+.about-page--hop .about-value-card-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(166,125,15,0.12);
+    border-radius: 50%;
+    color: var(--color-brand-accent);
 }
 .about-page--hop .about-value-card-title {
     margin: 0 0 0.5rem;
     font-family: var(--font-heading);
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     font-weight: 700;
-    color: var(--color-brand-accent);
+    color: var(--color-brand-black);
 }
 .about-page--hop .about-value-card-desc {
     margin: 0;
     font-size: 0.95rem;
-    line-height: 1.6;
+    line-height: 1.65;
     color: var(--color-muted);
 }
 
