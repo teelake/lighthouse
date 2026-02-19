@@ -11,59 +11,24 @@ $mapSrc = !empty($mapEmbedUrl) ? $mapEmbedUrl : 'https://www.google.com/maps/emb
 <section class="section contact-page" data-animate>
     <div class="page-hero page-hero--contact">
         <div class="container">
-            <h1 class="page-hero-title">Contact Us</h1>
-            <p class="page-hero-sub">We'd love to hear from you</p>
+            <h1 class="page-hero-title">Get In Touch</h1>
+            <p class="page-hero-sub">Questions? Ideas? Prayers? We'd love to hear from you</p>
         </div>
     </div>
 
     <div class="container contact-content">
+        <div class="contact-intro">
+            <p class="contact-lead">Reach out anytime—we're here to connect, answer questions, and walk alongside you.</p>
+        </div>
+
         <div class="contact-grid">
-            <div class="contact-info">
-                <h2 class="about-section-title">Get In Touch</h2>
-                <div class="contact-details">
-                    <div class="contact-item">
-                        <span class="contact-icon" aria-hidden="true">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                        </span>
-                        <div>
-                            <strong>Address</strong>
-                            <p><?= nl2br(htmlspecialchars($address)) ?></p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon" aria-hidden="true">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                        </span>
-                        <div>
-                            <strong>Phone</strong>
-                            <p><a href="tel:<?= preg_replace('/\D/', '', $phone) ?>"><?= htmlspecialchars($phone) ?></a></p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon" aria-hidden="true">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                        </span>
-                        <div>
-                            <strong>Email</strong>
-                            <p><a href="mailto:<?= htmlspecialchars($email) ?>"><?= htmlspecialchars($email) ?></a></p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon" aria-hidden="true">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                        </span>
-                        <div>
-                            <strong>Service Times</strong>
-                            <p>Sunday 10:00 AM · Thursday 6:00 PM</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-ctas">
-                    <a href="tel:<?= preg_replace('/\D/', '', $phone) ?>" class="btn btn-accent">Call Us</a>
-                    <a href="mailto:<?= htmlspecialchars($email) ?>" class="btn btn-watch">Email Us</a>
-                </div>
+            <div class="contact-form-card">
+                <h2 class="contact-form-title">Send a Message</h2>
                 <?php if ($msg === 'success'): ?>
-                <div class="contact-msg contact-msg--success">Thank you! Your message has been sent. We'll get back to you soon.</div>
+                <div class="contact-msg contact-msg--success">
+                    <span class="contact-msg-icon" aria-hidden="true">✓</span>
+                    Thank you! Your message has been sent. We'll get back to you soon.
+                </div>
                 <?php elseif ($msg === 'invalid'): ?>
                 <div class="contact-msg contact-msg--error">Please fill in all required fields (name, email, and message) correctly.</div>
                 <?php elseif ($msg === 'error'): ?>
@@ -71,17 +36,68 @@ $mapSrc = !empty($mapEmbedUrl) ? $mapEmbedUrl : 'https://www.google.com/maps/emb
                 <?php endif; ?>
                 <form class="contact-form" action="<?= $baseUrl ?>/contact/submit" method="post">
                     <?= csrf_field() ?>
-                    <label for="contact-name">Name <span aria-hidden="true">*</span></label>
-                    <input type="text" id="contact-name" name="name" required maxlength="255" placeholder="Your name">
-                    <label for="contact-email">Email <span aria-hidden="true">*</span></label>
-                    <input type="email" id="contact-email" name="email" required maxlength="255" placeholder="your@email.com">
-                    <label for="contact-subject">Subject</label>
-                    <input type="text" id="contact-subject" name="subject" maxlength="255" placeholder="e.g. General inquiry">
-                    <label for="contact-message">Message <span aria-hidden="true">*</span></label>
-                    <textarea id="contact-message" name="message" required rows="4" placeholder="How can we help?"></textarea>
-                    <button type="submit" class="btn btn-accent">Send Message</button>
+                    <div class="contact-form-row">
+                        <div class="contact-form-field">
+                            <label for="contact-name">Name <span aria-hidden="true">*</span></label>
+                            <input type="text" id="contact-name" name="name" required maxlength="255" placeholder="Your name">
+                        </div>
+                        <div class="contact-form-field">
+                            <label for="contact-email">Email <span aria-hidden="true">*</span></label>
+                            <input type="email" id="contact-email" name="email" required maxlength="255" placeholder="your@email.com">
+                        </div>
+                    </div>
+                    <div class="contact-form-field">
+                        <label for="contact-subject">Subject</label>
+                        <input type="text" id="contact-subject" name="subject" maxlength="255" placeholder="e.g. General inquiry">
+                    </div>
+                    <div class="contact-form-field">
+                        <label for="contact-message">Message <span aria-hidden="true">*</span></label>
+                        <textarea id="contact-message" name="message" required rows="5" placeholder="How can we help?"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary contact-form-submit">
+                        <span>Send Message</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                    </button>
                 </form>
             </div>
+
+            <div class="contact-sidebar">
+                <div class="contact-info-cards">
+                    <a href="https://maps.google.com/?q=<?= rawurlencode($address) ?>" target="_blank" rel="noopener noreferrer" class="contact-info-card contact-info-card--location">
+                        <span class="contact-info-card-icon" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </span>
+                        <h3>Visit Us</h3>
+                        <p><?= nl2br(htmlspecialchars($address)) ?></p>
+                    </a>
+                    <a href="tel:<?= preg_replace('/\D/', '', $phone) ?>" class="contact-info-card contact-info-card--phone">
+                        <span class="contact-info-card-icon" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        </span>
+                        <h3>Call Us</h3>
+                        <p><?= htmlspecialchars($phone) ?></p>
+                    </a>
+                    <a href="mailto:<?= htmlspecialchars($email) ?>" class="contact-info-card contact-info-card--email">
+                        <span class="contact-info-card-icon" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </span>
+                        <h3>Email Us</h3>
+                        <p><?= htmlspecialchars($email) ?></p>
+                    </a>
+                </div>
+                <div class="contact-hours">
+                    <h3 class="contact-hours-title">Service Times</h3>
+                    <p class="contact-hours-text">Sunday 10:00 AM · Thursday 6:00 PM</p>
+                </div>
+                <div class="contact-quick-ctas">
+                    <a href="tel:<?= preg_replace('/\D/', '', $phone) ?>" class="btn btn-accent btn-block">Call Now</a>
+                    <a href="mailto:<?= htmlspecialchars($email) ?>" class="btn btn-watch btn-block">Email Directly</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-map-section">
+            <h2 class="contact-map-title">Find Us</h2>
             <div class="contact-map-wrap">
                 <div class="contact-map">
                     <iframe src="<?= htmlspecialchars($mapSrc) ?>" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lighthouse Global Church location"></iframe>
