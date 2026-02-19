@@ -2211,7 +2211,7 @@ body::before {
     background: #fff;
     border: 2px solid rgba(255,225,0,0.2);
     border-radius: var(--radius);
-    padding: 2rem;
+    overflow: hidden;
     box-shadow: var(--shadow);
     transition: var(--transition);
 }
@@ -2221,6 +2221,15 @@ body::before {
     box-shadow: var(--shadow-hover);
 }
 .ministry-card:hover .link-arrow { color: var(--color-primary-dark); }
+.ministry-card-img {
+    aspect-ratio: 16/9;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--color-bg);
+}
+.ministry-card-body {
+    padding: 1.25rem;
+}
 .ministry-card-body h3 { margin: 0 0 0.5rem; font-family: var(--font-heading); font-size: 1.2rem; color: var(--color-dark); }
 .ministry-card-body p { margin: 0 0 0.75rem; font-size: 0.95rem; color: var(--color-muted); }
 .ministry-card-body .ministry-card-tagline { margin: 0 0 0.75rem; font-size: 0.95rem; color: var(--color-muted); }
@@ -2333,6 +2342,22 @@ body::before {
     box-shadow: var(--shadow);
 }
 .event-detail-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+
+/* Ministry detail page */
+.ministry-detail-page .container { max-width: 800px; padding-top: 2rem; }
+.ministry-detail-image {
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+}
+.ministry-detail-image img {
     width: 100%;
     height: auto;
     display: block;
