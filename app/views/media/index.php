@@ -35,6 +35,7 @@ $filterType = function ($m) {
             <button type="button" class="media-filter-pill" data-filter="audio" role="tab" aria-selected="false">Audio (<?= $countAudio ?>)</button>
             <button type="button" class="media-filter-pill" data-filter="video" role="tab" aria-selected="false">Video (<?= $countVideo ?>)</button>
         </nav>
+        <p class="media-filter-empty" id="media-filter-empty" hidden>No media in this category.</p>
         <div class="media-grid" id="media-grid">
             <?php foreach ($mediaList as $m): ?>
             <a class="media-card" href="<?= $baseUrl ?>/media/<?= htmlspecialchars($m['slug']) ?>" data-type="<?= htmlspecialchars($filterType($m)) ?>" aria-label="Watch: <?= htmlspecialchars($m['title']) ?>">

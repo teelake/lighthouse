@@ -412,11 +412,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 p.classList.toggle('media-filter-pill--active', isActive);
                 p.setAttribute('aria-selected', isActive);
             });
+            var visibleCount = 0;
             cards.forEach(function(c) {
                 var cardType = c.getAttribute('data-type') || '';
                 var show = type === 'all' || cardType === type;
                 c.setAttribute('data-filter-hidden', show ? 'false' : 'true');
+                if (show) visibleCount++;
             });
+            var emptyEl = document.getElementById('media-filter-empty');
+            if (emptyEl) {
+                emptyEl.hidden = visibleCount > 0;
+            }
             var url = window.location.pathname + (type !== 'all' ? '?type=' + type : '');
             if (window.history.replaceState) {
                 window.history.replaceState(null, '', url);

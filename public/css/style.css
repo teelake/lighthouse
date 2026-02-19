@@ -1037,6 +1037,14 @@ body::before {
 .media-card[data-filter-hidden="true"] {
     display: none;
 }
+.media-filter-empty {
+    margin: 2rem 0;
+    padding: 2rem;
+    text-align: center;
+    color: var(--color-muted);
+    background: var(--color-gold-bg);
+    border-radius: var(--radius);
+}
 .media-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
