@@ -1,22 +1,27 @@
 <?php
 $baseUrl = rtrim(BASE_URL, '/');
 $defaultCols = [
-    ['title' => 'QUICK LINKS', 'links' => [
+    ['title' => 'ABOUT', 'links' => [
         ['label' => 'About Us', 'url' => '/about'],
-        ['label' => 'Ministries', 'url' => '/ministries'],
-        ['label' => 'Events', 'url' => '/events'],
-        ['label' => 'Join the Team', 'url' => '/jobs'],
-        ['label' => 'Contact Us', 'url' => '/contact'],
-        ['label' => 'Giving', 'url' => '/giving'],
+        ['label' => 'Leadership', 'url' => '/leadership'],
+        ['label' => 'FAQ', 'url' => '/faq'],
     ]],
-    ['title' => 'CONNECT', 'links' => [
-        ['label' => "I'm New", 'url' => '/im-new'],
-        ['label' => 'Small Groups', 'url' => '/small-groups'],
+    ['title' => 'GATHERINGS', 'links' => [
+        ['label' => 'Services', 'url' => '/services'],
+        ['label' => 'Events', 'url' => '/events'],
+        ['label' => 'Ministries', 'url' => '/ministries'],
         ['label' => 'Media', 'url' => '/media'],
     ]],
+    ['title' => 'GET INVOLVED', 'links' => [
+        ['label' => "I'm New", 'url' => '/im-new'],
+        ['label' => 'Small Groups', 'url' => '/small-groups'],
+        ['label' => 'Membership & Training', 'url' => '/membership'],
+        ['label' => 'Join the Team', 'url' => '/jobs'],
+        ['label' => 'Prayer', 'url' => '/prayer'],
+    ]],
     ['title' => 'CONTACT', 'links' => [
-        ['label' => 'Get Directions', 'url' => '/contact'],
-        ['label' => 'Email Us', 'url' => '/contact'],
+        ['label' => 'Contact Us', 'url' => '/contact'],
+        ['label' => 'Giving', 'url' => '/giving'],
     ]],
 ];
 $cols = $footer_columns ?? $defaultCols;

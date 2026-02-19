@@ -44,22 +44,27 @@ class SettingController extends BaseController
         $data = $json ? json_decode($json, true) : null;
         $tagline = $data['tagline'] ?? 'Join us. Grow with us. Shine with us.';
         $cols = $data['columns'] ?? [
-            ['title' => 'QUICK LINKS', 'links' => [
+            ['title' => 'ABOUT', 'links' => [
                 ['label' => 'About Us', 'url' => '/about'],
-                ['label' => 'Ministries', 'url' => '/ministries'],
-                ['label' => 'Events', 'url' => '/events'],
-                ['label' => 'Join the Team', 'url' => '/jobs'],
-                ['label' => 'Contact Us', 'url' => '/contact'],
-                ['label' => 'Giving', 'url' => '/giving'],
+                ['label' => 'Leadership', 'url' => '/leadership'],
+                ['label' => 'FAQ', 'url' => '/faq'],
             ]],
-            ['title' => 'CONNECT', 'links' => [
-                ['label' => "I'm New", 'url' => '/im-new'],
-                ['label' => 'Small Groups', 'url' => '/small-groups'],
+            ['title' => 'GATHERINGS', 'links' => [
+                ['label' => 'Services', 'url' => '/services'],
+                ['label' => 'Events', 'url' => '/events'],
+                ['label' => 'Ministries', 'url' => '/ministries'],
                 ['label' => 'Media', 'url' => '/media'],
             ]],
+            ['title' => 'GET INVOLVED', 'links' => [
+                ['label' => "I'm New", 'url' => '/im-new'],
+                ['label' => 'Small Groups', 'url' => '/small-groups'],
+                ['label' => 'Membership & Training', 'url' => '/membership'],
+                ['label' => 'Join the Team', 'url' => '/jobs'],
+                ['label' => 'Prayer', 'url' => '/prayer'],
+            ]],
             ['title' => 'CONTACT', 'links' => [
-                ['label' => 'Get Directions', 'url' => '/contact'],
-                ['label' => 'Email Us', 'url' => '/contact'],
+                ['label' => 'Contact Us', 'url' => '/contact'],
+                ['label' => 'Giving', 'url' => '/giving'],
             ]],
         ];
         $this->render('admin/settings/footer', [
@@ -76,7 +81,7 @@ class SettingController extends BaseController
         $s = new Setting();
         $tagline = trim($this->post('footer_tagline', 'Join us. Grow with us. Shine with us.'));
         $cols = [];
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 4; $i++) {
             $title = trim($this->post("footer_col_{$i}_title", ''));
             $raw = $this->post("footer_col_{$i}_links", '');
             $links = [];
