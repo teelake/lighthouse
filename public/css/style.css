@@ -1428,6 +1428,8 @@ body::before {
     font-style: normal;
     margin-bottom: 0.35rem;
 }
+.about-page--hop .about-scriptural-desc p { margin: 0 0 0.5em; }
+.about-page--hop .about-scriptural-desc p:last-child { margin-bottom: 0; }
 .about-page--hop .about-scriptural-desc {
     margin: 0 0 1.5rem;
     font-size: 1.05rem;
@@ -1487,6 +1489,8 @@ body::before {
     font-weight: 700;
     color: var(--color-brand-black);
 }
+.about-page--hop .about-pillar-card-text p { margin: 0 0 0.5em; }
+.about-page--hop .about-pillar-card-text p:last-child { margin-bottom: 0; }
 .about-page--hop .about-pillar-card-text {
     margin: 0;
     font-size: 0.95rem;
@@ -1538,6 +1542,8 @@ body::before {
     font-weight: 700;
     color: var(--color-brand-black);
 }
+.about-page--hop .about-value-card-desc p { margin: 0 0 0.5em; }
+.about-page--hop .about-value-card-desc p:last-child { margin-bottom: 0; }
 .about-page--hop .about-value-card-desc {
     margin: 0;
     font-size: 0.95rem;
@@ -2096,6 +2102,9 @@ body::before {
 .ministry-card:hover .link-arrow { color: var(--color-primary-dark); }
 .ministry-card-body h3 { margin: 0 0 0.5rem; font-family: var(--font-heading); font-size: 1.2rem; color: var(--color-dark); }
 .ministry-card-body p { margin: 0 0 0.75rem; font-size: 0.95rem; color: var(--color-muted); }
+.ministry-card-body .ministry-card-tagline { margin: 0 0 0.75rem; font-size: 0.95rem; color: var(--color-muted); }
+.ministry-card-tagline p { margin: 0 0 0.5em; }
+.ministry-card-tagline p:last-child { margin-bottom: 0; }
 
 /* Small groups page */
 .small-groups-page { padding-top: 0; }

@@ -145,8 +145,8 @@ $aboutStoryImage = $aboutStoryImage ?? '';
                         <div class="about-value-card-icon" aria-hidden="true">
                             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                         </div>
-                        <h3 class="about-value-card-title"><?= htmlspecialchars($v['title']) ?></h3>
-                        <p class="about-value-card-desc"><?= htmlspecialchars($v['desc']) ?></p>
+                        <h3 class="about-value-card-title"><?= content_text($v['title']) ?></h3>
+                        <div class="about-value-card-desc"><?= rich_content($v['desc']) ?></div>
                     </div>
                     <?php endforeach; ?>
                 </div>
@@ -175,7 +175,7 @@ $aboutStoryImage = $aboutStoryImage ?? '';
                     <?php foreach ($faqs as $i => $faq): ?>
                     <div class="faq-item faq-item--hop <?= $i === 0 ? 'is-open' : '' ?>">
                         <button type="button" class="faq-question faq-question--hop" aria-expanded="<?= $i === 0 ? 'true' : 'false' ?>" aria-controls="about-faq-<?= (int)$faq['id'] ?>" id="about-faq-q-<?= (int)$faq['id'] ?>" data-faq-toggle>
-                            <?= htmlspecialchars($faq['question']) ?>
+                            <?= content_text($faq['question']) ?>
                             <span class="faq-icon" aria-hidden="true">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
                             </span>
