@@ -986,6 +986,7 @@ body::before {
 .newsletter-form input[type="text"] { flex: 1 1 160px; }
 
 /* Media page - streaming-style thumbnail grid */
+.media-page { padding-top: 0; }
 .media-page .section-title-bar {
     background: linear-gradient(120deg, rgba(255,251,245,0.98) 0%, rgba(255,255,255,0.98) 40%, rgba(255,251,245,0.98) 100%);
 }
