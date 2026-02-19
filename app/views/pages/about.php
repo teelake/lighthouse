@@ -23,6 +23,7 @@ $aboutStoryImage = $aboutStoryImage ?? '';
             <a href="<?= $baseUrl ?>/about" class="about-subnav-link about-subnav-link--active">Who We Are</a>
             <a href="<?= $baseUrl ?>/leadership" class="about-subnav-link">Our Leadership</a>
             <a href="<?= $baseUrl ?>/about#about-faqs" class="about-subnav-link">FAQ</a>
+            <a href="<?= $baseUrl ?>/contact" class="about-subnav-link">Contact Us</a>
         </div>
     </nav>
 
@@ -61,7 +62,7 @@ $aboutStoryImage = $aboutStoryImage ?? '';
                 <span class="about-eyebrow about-eyebrow--light">Our Mission</span>
                 <h2 class="about-mission-title"><?= content_text($aboutMission['content'] ?? 'To raise lights that transform nations.') ?></h2>
                 <div class="about-mission-desc">
-                    <?= rich_content($aboutVision['content'] ?? 'A Christ-centered, Spirit-empowered community where every believer shines as a light.') ?>
+                    <?= rich_content($aboutValues['content'] ?? 'We are a worshipping people, a teaching house, and a leadership training ground.') ?>
                 </div>
             </div>
         </div>
