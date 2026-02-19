@@ -18,7 +18,7 @@ $faqs = $faqs ?? [];
             <?php foreach ($faqs as $i => $faq): ?>
             <div class="faq-item <?= $i === 0 ? 'is-open' : '' ?>">
                 <button type="button" class="faq-question" aria-expanded="<?= $i === 0 ? 'true' : 'false' ?>" aria-controls="faq-answer-<?= (int)$faq['id'] ?>" id="faq-q-<?= (int)$faq['id'] ?>" data-faq-toggle>
-                    <?= htmlspecialchars($faq['question']) ?>
+                    <?= content_text($faq['question']) ?>
                     <span class="faq-icon" aria-hidden="true">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
                     </span>

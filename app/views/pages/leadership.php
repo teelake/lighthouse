@@ -30,7 +30,7 @@ $leaders = $leaders ?? [];
                 <div class="leader-card-body">
                     <h3 class="leader-card-name"><?= htmlspecialchars($leader['name']) ?></h3>
                     <p class="leader-card-title"><?= htmlspecialchars($leader['title']) ?></p>
-                    <p class="leader-card-bio"><?= nl2br(htmlspecialchars($leader['bio'] ?? '')) ?></p>
+                    <div class="leader-card-bio"><?= rich_content($leader['bio'] ?? '') ?></div>
                 </div>
             </article>
             <?php endforeach; ?>

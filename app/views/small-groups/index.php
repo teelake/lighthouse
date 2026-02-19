@@ -19,7 +19,7 @@ $baseUrl = rtrim(BASE_URL, '/');
             <a href="<?= $baseUrl ?>/small-groups/<?= htmlspecialchars($g['slug']) ?>" class="ministry-card stagger-item">
                 <div class="ministry-card-body">
                     <h3><?= htmlspecialchars($g['title']) ?></h3>
-                    <p><?= htmlspecialchars($g['tagline'] ?? '') ?></p>
+                    <div class="ministry-card-tagline"><?= rich_content($g['tagline'] ?? '') ?></div>
                     <span class="link-arrow">Join group →</span>
                 </div>
             </a>

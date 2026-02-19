@@ -19,7 +19,7 @@ $baseUrl = rtrim(BASE_URL, '/');
             <a href="<?= $baseUrl ?>/ministries/<?= htmlspecialchars($m['slug']) ?>" class="ministry-card stagger-item">
                 <div class="ministry-card-body">
                     <h3><?= htmlspecialchars($m['title']) ?></h3>
-                    <p><?= htmlspecialchars($m['tagline'] ?? '') ?></p>
+                    <div class="ministry-card-tagline"><?= rich_content($m['tagline'] ?? '') ?></div>
                     <span class="link-arrow">Learn more →</span>
                 </div>
             </a>

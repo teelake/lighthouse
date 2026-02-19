@@ -31,7 +31,7 @@ $ctaVisit = ltrim($heroExtra['cta_visit_url'] ?? '/im-new', '/');
     <div class="hero-inner hero-centered">
         <div class="hero-content">
             <div class="hero-tagline"><?= rich_content($heroTagline) ?></div>
-            <h1 class="hero-headline"><?= content_text($headline) ?></h1>
+            <h1 class="hero-headline"><?= rich_content($headline) ?></h1>
             <div class="hero-pillars">
                 <?php foreach ($heroPillars as $p): ?><span><?= htmlspecialchars($p) ?></span><?php endforeach; ?>
             </div>
