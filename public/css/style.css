@@ -1242,6 +1242,7 @@ body::before {
     --color-brand-red: #B22222;
     --color-brand-red-light: #c93a3a;
     --color-brand-gold: #ffe100;
+    --color-brand-accent: #A67D0F; /* Antique gold - borders, accents */
 }
 
 .about-page { padding-top: 0; }
@@ -1270,7 +1271,7 @@ body::before {
 }
 .about-page--hop .about-subnav {
     background: var(--color-brand-black);
-    border-bottom: 3px solid var(--color-brand-red);
+    border-bottom: 3px solid var(--color-brand-accent);
     padding: 0;
 }
 .about-page--hop .about-subnav .container {
@@ -1307,7 +1308,7 @@ body::before {
     font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--color-brand-red);
+    color: var(--color-brand-accent);
     margin-bottom: 0.75rem;
 }
 .about-page--hop .about-eyebrow--light { color: var(--color-brand-gold); }
@@ -1395,15 +1396,15 @@ body::before {
 }
 .about-page--hop .about-pillar-card {
     background: #fff;
-    border: 2px solid rgba(178,34,34,0.2);
+    border: 2px solid rgba(166,125,15,0.35);
     border-radius: var(--radius);
     padding: 2rem;
     transition: var(--transition);
     text-align: center;
 }
 .about-page--hop .about-pillar-card:hover {
-    border-color: var(--color-brand-red);
-    box-shadow: 0 8px 30px rgba(178,34,34,0.15);
+    border-color: var(--color-brand-accent);
+    box-shadow: 0 8px 30px rgba(166,125,15,0.2);
     transform: translateY(-4px);
 }
 .about-page--hop .about-pillar-card-icon {
@@ -1413,9 +1414,9 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(178,34,34,0.1);
+    background: rgba(166,125,15,0.12);
     border-radius: 50%;
-    color: var(--color-brand-red);
+    color: var(--color-brand-accent);
 }
 .about-page--hop .about-pillar-card-title {
     margin: 0 0 0.5rem;
@@ -1463,13 +1464,13 @@ body::before {
     background: var(--color-bg-warm);
 }
 .about-page--hop .faq-item--hop {
-    border: 2px solid rgba(178,34,34,0.2);
+    border: 2px solid rgba(166,125,15,0.35);
     border-radius: var(--radius);
 }
-.about-page--hop .faq-item--hop:hover { border-color: rgba(178,34,34,0.4); }
-.about-page--hop .faq-item--hop.is-open { border-color: var(--color-brand-red); }
-.about-page--hop .faq-question--hop:hover { background: rgba(178,34,34,0.06); }
-.about-page--hop .faq-item--hop.is-open .faq-question { color: var(--color-brand-red); }
+.about-page--hop .faq-item--hop:hover { border-color: rgba(166,125,15,0.55); }
+.about-page--hop .faq-item--hop.is-open { border-color: var(--color-brand-accent); }
+.about-page--hop .faq-question--hop:hover { background: rgba(166,125,15,0.08); }
+.about-page--hop .faq-item--hop.is-open .faq-question { color: var(--color-brand-accent); }
 
 .about-page--hop .about-cta-block {
     background: var(--color-brand-black);
