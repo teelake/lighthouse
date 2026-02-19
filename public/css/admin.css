@@ -514,6 +514,8 @@
     margin-bottom: 1rem;
 }
 .admin-page-header h2 { margin: 0; }
+.admin-page-header > a.btn-primary,
+.admin-page-header > a.btn-accent { margin-left: auto; }
 .admin-back-link {
     font-size: 0.875rem;
     color: var(--adm-muted);
@@ -525,15 +527,19 @@
 }
 .admin-back-link:hover { color: var(--adm-accent); }
 
-/* Table action buttons - consistent Edit/Delete */
+/* Table action buttons - consistent Edit/Delete (same line) */
 .admin-table-actions {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 .admin-table-actions .btn { flex-shrink: 0; }
-.admin-table-actions form { display: inline; margin: 0; }
+.admin-table-actions form {
+    display: inline-flex;
+    margin: 0;
+    align-items: center;
+}
 
 /* List empty state */
 .admin-empty { color: var(--adm-muted); padding: 1.5rem 0; }

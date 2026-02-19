@@ -19,12 +19,14 @@
             <td><a href="mailto:<?= htmlspecialchars($v['email'] ?? '') ?>"><?= htmlspecialchars($v['email'] ?? '') ?></a></td>
             <td><?= htmlspecialchars($v['phone'] ?? '—') ?></td>
             <td><?= htmlspecialchars($v['created_at'] ?? '') ?></td>
-            <td class="admin-table-actions">
-                <a href="<?= admin_url('visitors/' . ($v['id'] ?? '') . '/edit') ?>" class="btn btn-sm btn-outline">Edit</a>
-                <form method="post" action="<?= admin_url('visitors/' . ($v['id'] ?? '') . '/delete') ?>" onsubmit="return confirm('Delete this visitor?');" style="display:inline;">
-                    <?= csrf_field() ?>
-                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                </form>
+            <td>
+                <div class="admin-table-actions">
+                    <a href="<?= admin_url('visitors/' . ($v['id'] ?? '') . '/edit') ?>" class="btn btn-sm btn-outline">Edit</a>
+                    <form method="post" action="<?= admin_url('visitors/' . ($v['id'] ?? '') . '/delete') ?>" onsubmit="return confirm('Delete this visitor?');">
+                        <?= csrf_field() ?>
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </div>
             </td>
         </tr>
         <?php endforeach; ?>
