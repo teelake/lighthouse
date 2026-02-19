@@ -1762,25 +1762,7 @@ body::before {
     font-size: 1.1rem;
     line-height: 1.75;
     color: var(--color-muted);
-    margin: 0 0 1.5rem;
-}
-.services-quick-info {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.5rem 2rem;
-}
-.services-quick-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--color-dark);
-}
-.services-quick-item svg {
-    flex-shrink: 0;
-    color: var(--color-brand-accent, #A67D0F);
+    margin: 0;
 }
 
 /* Service cards - two-column, distinctive */

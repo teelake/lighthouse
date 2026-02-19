@@ -19,16 +19,6 @@ $address = $address ?? '980 Parkland Drive, Holiday Inn & Suites, Halifax, NS, C
     <div class="container services-content">
         <div class="services-intro-block">
             <p class="services-lead"><?= rich_content($sections['services_intro']['content'] ?? 'We gather to worship, grow in the Word, and be equipped for life and leadership. Whether you prefer Sunday morning or Thursday evening, there\'s a service for you.') ?></p>
-            <div class="services-quick-info">
-                <span class="services-quick-item">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                    Sunday <?= htmlspecialchars($serviceTimes['sunday']) ?> · Thursday <?= htmlspecialchars($serviceTimes['thursday']) ?>
-                </span>
-                <span class="services-quick-item">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    <?= htmlspecialchars($address) ?>
-                </span>
-            </div>
         </div>
 
         <div class="services-cards">
