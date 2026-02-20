@@ -18,7 +18,7 @@ $key = $section['section_key'] ?? '';
             <?php endif; ?>
             <input type="file" name="bg_image" accept="image/jpeg,image/png,image/avif,image/svg+xml">
         </div>
-        <div class="form-group"><label>Watch CTA URL</label><input type="text" name="cta_watch_url" value="<?= htmlspecialchars($d['cta_watch_url'] ?? '/media') ?>"></div>
+        <div class="form-group"><label>Watch Live URL</label><input type="url" name="cta_watch_url" value="<?= htmlspecialchars($d['cta_watch_url'] ?? '/media') ?>" placeholder="https://youtube.com/... or /media"><p class="admin-muted" style="font-size: 0.85rem; margin-top: 0.25rem;">Full YouTube livestream URL (e.g. https://youtube.com/@YourChannel/live) or /media for archived content.</p></div>
         <div class="form-group"><label>Visit CTA URL</label><input type="text" name="cta_visit_url" value="<?= htmlspecialchars($d['cta_visit_url'] ?? '/im-new') ?>"></div>
         <?php elseif ($key === 'gather_config'): ?>
         <div class="form-group"><label>Section Title</label><input type="text" name="section_title" value="<?= htmlspecialchars($d['section_title'] ?? '') ?>"></div>

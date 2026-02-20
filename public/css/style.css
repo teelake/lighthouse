@@ -1747,6 +1747,26 @@ body::before {
 .im-new-cta-card:hover { border-color: rgba(255,225,0,0.4); box-shadow: var(--shadow-hover); }
 .im-new-cta-card h3 { margin: 0 0 0.75rem; font-family: var(--font-heading); font-size: 1.2rem; color: var(--color-dark); }
 .im-new-cta-card p { margin: 0 0 1.25rem; color: var(--color-muted); font-size: 0.98rem; line-height: 1.65; }
+.im-new-detail-sections { margin: 2.5rem 0; }
+.im-new-detail { margin-bottom: 2rem; }
+.im-new-detail-title { font-family: var(--font-heading); font-size: 1.25rem; color: var(--color-dark); margin: 0 0 0.75rem; }
+.im-new-detail-body { color: var(--color-muted); line-height: 1.7; max-width: 720px; }
+.im-new-expect-section { margin: 2rem 0; }
+.im-new-section-title { font-family: var(--font-heading); font-size: 1.15rem; color: var(--color-dark); margin: 0 0 1rem; }
+.im-new-expect-list ul { margin: 0; padding-left: 1.25rem; color: var(--color-muted); line-height: 1.7; }
+.im-new-next-steps { margin: 1.5rem 0; color: var(--color-muted); line-height: 1.7; }
+.im-new-next-steps p { margin: 0 0 0.5rem; }
+.im-new-faq-cta { margin: 1.5rem 0; }
+.im-new-visitor-form-section { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(255,225,0,0.2); max-width: 480px; }
+.im-new-form-intro { color: var(--color-muted); margin-bottom: 1.25rem; font-size: 0.95rem; }
+.im-new-visitor-form .form-group { margin-bottom: 1rem; }
+.im-new-visitor-form label { display: block; margin-bottom: 0.25rem; font-weight: 500; font-size: 0.9rem; }
+.im-new-visitor-form input, .im-new-visitor-form textarea { width: 100%; padding: 0.5rem 0.75rem; border: 1px solid var(--color-border, #e8e6e3); border-radius: 6px; font-family: inherit; }
+.im-new-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 540px) { .im-new-form-row { grid-template-columns: 1fr; } }
+.im-new-msg { padding: 1rem; border-radius: var(--radius); margin-bottom: 1rem; }
+.im-new-msg--success { background: #f0fdf4; color: #166534; }
+.im-new-msg--error { background: #fef2f2; color: #b91c1c; }
 
 /* Services page - redesigned v2 */
 .services-page { padding-top: 0; }

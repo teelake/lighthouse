@@ -4,6 +4,15 @@ $baseUrl = rtrim(BASE_URL, '/');
 $sections = $sections ?? [];
 $imNewIntro = $sections['im_new_intro']['content'] ?? null;
 $whatToExpect = $sections['im_new_expect']['content'] ?? null;
+$arrive = $sections['im_new_arrive']['content'] ?? null;
+$service = $sections['im_new_service']['content'] ?? null;
+$after = $sections['im_new_after']['content'] ?? null;
+$arriveSummary = $sections['im_new_arrive_summary']['content'] ?? 'Upon arrival, you\'ll find plenty of parking and our friendly greeters will guide you every step of the way. Our team will help with children\'s check-in—just ask anyone wearing a Welcome Team badge.';
+$serviceSummary = $sections['im_new_service_summary']['content'] ?? 'Experience 2–3 hours of heartfelt worship and an inspiring, gospel-centered message. Participate at your comfort level—sing, clap, reflect, or simply soak it all in.';
+$afterSummary = $sections['im_new_after_summary']['content'] ?? 'Hang around and meet our church family! Our Connection Team will help you take your next steps. Stop by the Welcome Station for a special gift.';
+$whatToExpectBullets = $sections['im_new_what_to_expect']['content'] ?? null;
+$registered = $_GET['registered'] ?? null;
+$regError = $_GET['error'] ?? null;
 ?>
 <?php $imNewHeroImg = page_hero_image('im-new'); ?>
 <section class="section im-new-page" data-animate>
@@ -26,20 +35,50 @@ $whatToExpect = $sections['im_new_expect']['content'] ?? null;
         <div class="im-new-steps">
             <div class="brand-card stagger-item">
                 <span class="brand-card-num">1</span>
-                <h3 class="brand-card-title">Welcome</h3>
-                <p class="brand-card-text">From the moment you walk in, expect a warm greeting. Our team will help you find a seat, answer questions, and connect you with others.</p>
+                <h3 class="brand-card-title">When You Arrive</h3>
+                <p class="brand-card-text"><?= strip_tags($arriveSummary) ?></p>
             </div>
             <div class="brand-card stagger-item">
                 <span class="brand-card-num">2</span>
-                <h3 class="brand-card-title">Worship & Word</h3>
-                <p class="brand-card-text">Experience Spirit-led worship and practical, life-changing teaching from the Bible. Services typically run 90 minutes.</p>
+                <h3 class="brand-card-title">In The Service</h3>
+                <p class="brand-card-text"><?= strip_tags($serviceSummary) ?></p>
             </div>
             <div class="brand-card stagger-item">
                 <span class="brand-card-num">3</span>
-                <h3 class="brand-card-title">Stay Connected</h3>
-                <p class="brand-card-text">Visit our Connect desk after service, join a small group, or simply come again. No pressure—just genuine relationship.</p>
+                <h3 class="brand-card-title">After The Service</h3>
+                <p class="brand-card-text"><?= strip_tags($afterSummary) ?></p>
             </div>
         </div>
+
+        <?php if ($arrive || $service || $after): ?>
+        <div class="im-new-detail-sections">
+            <?php if ($arrive): ?>
+            <div class="im-new-detail">
+                <h3 class="im-new-detail-title">When You Arrive</h3>
+                <div class="im-new-detail-body"><?= rich_content($arrive) ?></div>
+            </div>
+            <?php endif; ?>
+            <?php if ($service): ?>
+            <div class="im-new-detail">
+                <h3 class="im-new-detail-title">In The Service</h3>
+                <div class="im-new-detail-body"><?= rich_content($service) ?></div>
+            </div>
+            <?php endif; ?>
+            <?php if ($after): ?>
+            <div class="im-new-detail">
+                <h3 class="im-new-detail-title">After The Service</h3>
+                <div class="im-new-detail-body"><?= rich_content($after) ?></div>
+            </div>
+            <?php endif; ?>
+        </div>
+        <?php endif; ?>
+
+        <?php if ($whatToExpectBullets): ?>
+        <div class="im-new-expect-section">
+            <h3 class="im-new-section-title">What You'll Experience</h3>
+            <div class="im-new-expect-list"><?= rich_content($whatToExpectBullets) ?></div>
+        </div>
+        <?php endif; ?>
 
         <div class="im-new-cta-section">
             <div class="im-new-cta-card">
@@ -49,15 +88,61 @@ $whatToExpect = $sections['im_new_expect']['content'] ?? null;
             </div>
             <div class="im-new-cta-card">
                 <h3>Watch Online</h3>
-                <p>Can't join in person? Tune in to our live streams and archived teachings from anywhere.</p>
+                <p>Can't join in person? Browse our archived teachings and sermons from anywhere.</p>
                 <a href="<?= $baseUrl ?>/media" class="btn btn-accent">Watch Media</a>
             </div>
         </div>
 
+        <h3 class="im-new-section-title">Next Steps</h3>
+        <div class="im-new-next-steps">
+            <p><strong>Connect with Us</strong> — Join us for newcomers' lunch, small group registration, and getting connected.</p>
+            <p><strong>Explore Our Ministries</strong> — Discover specific ministry pages for deeper involvement.</p>
+        </div>
         <div class="about-cta">
             <a href="<?= $baseUrl ?>/services" class="btn btn-watch">Our Gatherings</a>
             <a href="<?= $baseUrl ?>/small-groups" class="btn btn-accent">Find a Small Group</a>
+            <a href="<?= $baseUrl ?>/ministries" class="btn btn-accent">Explore Ministries</a>
             <a href="<?= $baseUrl ?>/contact" class="btn btn-accent">Contact Us</a>
+        </div>
+
+        <div class="im-new-faq-cta">
+            <p>Have questions about parking, attire, service times, or childcare? <a href="<?= $baseUrl ?>/faq">See our FAQs</a>.</p>
+        </div>
+
+        <div class="im-new-visitor-form-section">
+            <h3 class="im-new-section-title">First-Time Visitor Registration</h3>
+            <p class="im-new-form-intro">We'd love to welcome you! Share your details and we'll reach out with a warm welcome and helpful next steps.</p>
+            <?php if ($registered === '1'): ?>
+            <div class="im-new-msg im-new-msg--success">Thank you for registering! We're excited to connect with you. Check your email for a welcome message.</div>
+            <?php elseif ($regError): ?>
+            <div class="im-new-msg im-new-msg--error"><?= $regError === 'required' ? 'Please fill in first name, last name, and email.' : 'Something went wrong. Please try again.' ?></div>
+            <?php endif; ?>
+            <form class="im-new-visitor-form" action="<?= $baseUrl ?>/visitor/register" method="post">
+                <?= csrf_field() ?>
+                <div class="im-new-form-row">
+                    <div class="form-group">
+                        <label for="visitor-first">First Name <span aria-hidden="true">*</span></label>
+                        <input type="text" id="visitor-first" name="first_name" required maxlength="255">
+                    </div>
+                    <div class="form-group">
+                        <label for="visitor-last">Last Name <span aria-hidden="true">*</span></label>
+                        <input type="text" id="visitor-last" name="last_name" required maxlength="255">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="visitor-email">Email <span aria-hidden="true">*</span></label>
+                    <input type="email" id="visitor-email" name="email" required maxlength="255">
+                </div>
+                <div class="form-group">
+                    <label for="visitor-phone">Phone</label>
+                    <input type="tel" id="visitor-phone" name="phone" maxlength="50">
+                </div>
+                <div class="form-group">
+                    <label for="visitor-message">Message (optional)</label>
+                    <textarea id="visitor-message" name="message" rows="3" placeholder="Any questions or how we can help?"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Register My Visit</button>
+            </form>
         </div>
     </div>
 </section>

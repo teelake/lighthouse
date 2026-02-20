@@ -37,6 +37,7 @@ $router->add('POST', 'prayer/submit', ['controller' => 'Prayer', 'action' => 'su
 $router->add('POST', 'prayer-wall/post', ['controller' => 'Prayer', 'action' => 'wallPost']);
 $router->add('POST', 'newsletter/subscribe', ['controller' => 'Newsletter', 'action' => 'subscribe']);
 $router->add('POST', 'contact/submit', ['controller' => 'Contact', 'action' => 'submit']);
+$router->add('POST', 'visitor/register', ['controller' => 'Visitor', 'action' => 'register']);
 $router->add('POST', 'jobs/{slug}/apply', ['controller' => 'Job', 'action' => 'apply']);
 
 // === GIVING - prominent ===

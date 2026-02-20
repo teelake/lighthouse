@@ -20,7 +20,11 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 $heroTagline = $heroExtra['tagline'] ?? 'A Christ-centered, Spirit-empowered ministry';
 $heroPillars = $heroExtra['pillars'] ?? ['Welcome', 'Worship', 'Word'];
 $heroBg = $heroExtra['bg_image'] ?? 'https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1920';
-$ctaWatch = ltrim($heroExtra['cta_watch_url'] ?? '/media', '/');
+$ctaWatchRaw = trim($heroExtra['cta_watch_url'] ?? '/media');
+$ctaWatch = (strpos($ctaWatchRaw, 'http://') === 0 || strpos($ctaWatchRaw, 'https://') === 0)
+    ? $ctaWatchRaw
+    : ($baseUrl . '/' . ltrim($ctaWatchRaw, '/'));
+$ctaWatchExternal = (strpos($ctaWatchRaw, 'http://') === 0 || strpos($ctaWatchRaw, 'https://') === 0);
 $ctaVisit = ltrim($heroExtra['cta_visit_url'] ?? '/im-new', '/');
 ?>
 
@@ -36,7 +40,7 @@ $ctaVisit = ltrim($heroExtra['cta_visit_url'] ?? '/im-new', '/');
                 <?php foreach ($heroPillars as $p): ?><span><?= htmlspecialchars($p) ?></span><?php endforeach; ?>
             </div>
             <div class="hero-ctas">
-                <a href="<?= $baseUrl ?>/<?= htmlspecialchars($ctaWatch) ?>" class="btn btn-watch">Watch Live</a>
+                <a href="<?= htmlspecialchars($ctaWatch) ?>" class="btn btn-watch"<?= $ctaWatchExternal ? ' target="_blank" rel="noopener noreferrer"' : '' ?>>Watch Live</a>
                 <a href="<?= $baseUrl ?>/<?= htmlspecialchars($ctaVisit) ?>" class="btn btn-accent">Plan Your Visit</a>
             </div>
         </div>
