@@ -1724,7 +1724,20 @@ body::before {
 /* I'm New page */
 .im-new-page { padding-top: 0; }
 .im-new-content { padding: 3rem 1.5rem 4rem; }
-.im-new-intro { max-width: 720px; margin-bottom: 2.5rem; }
+.im-new-intro-block { margin-bottom: 2.5rem; }
+.im-new-intro-block--with-image .im-new-intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 2.5rem;
+    align-items: center;
+}
+.im-new-intro-image { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-hover); }
+.im-new-intro-image img { width: 100%; height: auto; display: block; aspect-ratio: 4/3; object-fit: cover; }
+.im-new-intro-text .about-story-body { font-size: 1.05rem; line-height: 1.8; color: var(--color-dark); }
+@media (max-width: 768px) {
+    .im-new-intro-block--with-image .im-new-intro-grid { grid-template-columns: 1fr; }
+    .im-new-intro-image { order: -1; }
+}
 .im-new-steps {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

@@ -79,9 +79,11 @@ class PageController extends Controller
     public function imNew()
     {
         $sections = (new ContentSection())->getAllKeyed();
+        $setting = new Setting();
         $this->render('pages/im-new', [
             'pageTitle' => 'I\'m New - Lighthouse Global Church',
             'sections' => $sections,
+            'imNewIntroImage' => $setting->get('im_new_intro_image', ''),
         ]);
     }
 }

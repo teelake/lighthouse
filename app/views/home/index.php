@@ -20,11 +20,7 @@ $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 $heroTagline = $heroExtra['tagline'] ?? 'A Christ-centered, Spirit-empowered ministry';
 $heroPillars = $heroExtra['pillars'] ?? ['Welcome', 'Worship', 'Word'];
 $heroBg = $heroExtra['bg_image'] ?? 'https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1920';
-$ctaWatchRaw = trim($heroExtra['cta_watch_url'] ?? '/media');
-$ctaWatch = (strpos($ctaWatchRaw, 'http://') === 0 || strpos($ctaWatchRaw, 'https://') === 0)
-    ? $ctaWatchRaw
-    : ($baseUrl . '/' . ltrim($ctaWatchRaw, '/'));
-$ctaWatchExternal = (strpos($ctaWatchRaw, 'http://') === 0 || strpos($ctaWatchRaw, 'https://') === 0);
+[$ctaWatch, $ctaWatchExternal] = watch_online_url();
 $ctaVisit = ltrim($heroExtra['cta_visit_url'] ?? '/im-new', '/');
 ?>
 
@@ -94,7 +90,7 @@ $ctaVisit = ltrim($heroExtra['cta_visit_url'] ?? '/im-new', '/');
                 <div class="gather-desc"><?= rich_content($gatherExtra['sunday_desc'] ?? 'Catalysis — Worship that ignites faith') ?></div>
                 <span class="gather-loc">In-Person + Online</span>
                 <div class="gather-actions">
-                    <a href="<?= $baseUrl ?>/media" class="btn btn-primary btn-sm">Join Online</a>
+                    <a href="<?= htmlspecialchars($ctaWatch) ?>" class="btn btn-primary btn-sm"<?= $ctaWatchExternal ? ' target="_blank" rel="noopener noreferrer"' : '' ?>>Join Online</a>
                     <a href="<?= $baseUrl ?>/im-new" class="btn btn-accent btn-sm">Plan Visit</a>
                 </div>
             </div>
@@ -104,7 +100,7 @@ $ctaVisit = ltrim($heroExtra['cta_visit_url'] ?? '/im-new', '/');
                 <div class="gather-desc"><?= rich_content($gatherExtra['thursday_desc'] ?? 'The Summit — Teaching & prayer') ?></div>
                 <span class="gather-loc">In-Person + Online</span>
                 <div class="gather-actions">
-                    <a href="<?= $baseUrl ?>/media" class="btn btn-primary btn-sm">Join Online</a>
+                    <a href="<?= htmlspecialchars($ctaWatch) ?>" class="btn btn-primary btn-sm"<?= $ctaWatchExternal ? ' target="_blank" rel="noopener noreferrer"' : '' ?>>Join Online</a>
                     <a href="<?= $baseUrl ?>/im-new" class="btn btn-accent btn-sm">Plan Visit</a>
                 </div>
             </div>

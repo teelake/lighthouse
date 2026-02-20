@@ -26,6 +26,18 @@
             <label>Thursday Service Time</label>
             <input type="text" name="service_thursday" value="<?= htmlspecialchars($service_thursday ?? '6:00 PM') ?>">
         </div>
+        <h3 style="font-size: 1rem; font-weight: 600; margin: 1.5rem 0 0.75rem;">Hero Background</h3>
+        <div class="form-group">
+            <label>Homepage Hero Background Image</label>
+            <p class="admin-muted" style="font-size: 0.85rem; margin: 0 0 0.5rem;">Background for the main hero section. Recommended: 1920×1080 or wider.</p>
+            <?php if (!empty($hero_background_image ?? '')): ?>
+            <div class="admin-image-preview" style="margin-bottom: 0.75rem;">
+                <img src="<?= htmlspecialchars($hero_background_image) ?>" alt="" style="max-width: 320px; max-height: 120px; object-fit: cover; border: 1px solid var(--adm-border); border-radius: 6px;">
+                <p class="admin-muted" style="font-size: 0.85rem; margin-top: 0.25rem;">Current image. Upload to replace.</p>
+            </div>
+            <?php endif; ?>
+            <input type="file" name="hero_background_image" accept="image/jpeg,image/png,image/avif,image/svg+xml">
+        </div>
         <h3 style="font-size: 1rem; font-weight: 600; margin: 1.5rem 0 0.75rem;">Images & Map</h3>
         <div class="form-group">
             <label>Map Embed URL</label>

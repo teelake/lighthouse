@@ -113,6 +113,26 @@ if (!function_exists('page_hero_style')) {
 }
 
 /**
+ * Watch Online URL - used site-wide for Watch Online / Watch Media / Join Online buttons.
+ * Returns [url, is_external]. Stored in settings; falls back to /media when empty.
+ */
+if (!function_exists('watch_online_url')) {
+    function watch_online_url(): array
+    {
+        $raw = (new \App\Models\Setting())->get('watch_online_url', '');
+        $raw = trim($raw);
+        $base = rtrim(BASE_URL ?? '', '/');
+        if ($raw === '') {
+            return [$base . '/media', false];
+        }
+        if (strpos($raw, 'http://') === 0 || strpos($raw, 'https://') === 0) {
+            return [$raw, true];
+        }
+        return [$base . '/' . ltrim($raw, '/'), false];
+    }
+}
+
+/**
  * Ensure image URL is absolute. Handles paths stored as /uploads/... or full URLs.
  */
 if (!function_exists('full_image_url')) {

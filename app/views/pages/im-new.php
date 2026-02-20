@@ -13,6 +13,7 @@ $afterSummary = $sections['im_new_after_summary']['content'] ?? 'Hang around and
 $whatToExpectBullets = $sections['im_new_what_to_expect']['content'] ?? null;
 $registered = $_GET['registered'] ?? null;
 $regError = $_GET['error'] ?? null;
+$imNewIntroImage = $imNewIntroImage ?? '';
 ?>
 <?php $imNewHeroImg = page_hero_image('im-new'); ?>
 <section class="section im-new-page" data-animate>
@@ -24,11 +25,27 @@ $regError = $_GET['error'] ?? null;
     </div>
 
     <div class="container im-new-content">
-        <div class="im-new-intro">
-            <h2 class="about-section-title">We're Glad You're Here</h2>
-            <div class="about-story-body">
-                <?= rich_content($imNewIntro ?? 'At Lighthouse, you\'re not just welcome—you\'re celebrated. No matter where you are in life or your faith journey, there\'s a place for you here. Whether you\'re exploring faith for the first time or looking for a church home, we\'re here to walk with you.') ?>
+        <div class="im-new-intro-block <?= !empty($imNewIntroImage) ? 'im-new-intro-block--with-image' : '' ?>">
+            <?php if (!empty($imNewIntroImage)): ?>
+            <div class="im-new-intro-grid">
+                <div class="im-new-intro-image">
+                    <img src="<?= htmlspecialchars(full_image_url($imNewIntroImage)) ?>" alt="Welcome to Lighthouse" loading="lazy">
+                </div>
+                <div class="im-new-intro-text">
+                    <h2 class="about-section-title">We're Glad You're Here</h2>
+                    <div class="about-story-body">
+                        <?= rich_content($imNewIntro ?? 'At Lighthouse, you\'re not just welcome—you\'re celebrated. No matter where you are in life or your faith journey, there\'s a place for you here. Whether you\'re exploring faith for the first time or looking for a church home, we\'re here to walk with you.') ?>
+                    </div>
+                </div>
             </div>
+            <?php else: ?>
+            <div class="im-new-intro-text-only">
+                <h2 class="about-section-title">We're Glad You're Here</h2>
+                <div class="about-story-body">
+                    <?= rich_content($imNewIntro ?? 'At Lighthouse, you\'re not just welcome—you\'re celebrated. No matter where you are in life or your faith journey, there\'s a place for you here. Whether you\'re exploring faith for the first time or looking for a church home, we\'re here to walk with you.') ?>
+                </div>
+            </div>
+            <?php endif; ?>
         </div>
 
         <h2 class="about-section-title">What to Expect</h2>
@@ -89,7 +106,8 @@ $regError = $_GET['error'] ?? null;
             <div class="im-new-cta-card">
                 <h3>Watch Online</h3>
                 <p>Can't join in person? Browse our archived teachings and sermons from anywhere.</p>
-                <a href="<?= $baseUrl ?>/media" class="btn btn-accent">Watch Media</a>
+                <?php [$watchUrl, $watchExt] = watch_online_url(); ?>
+                <a href="<?= htmlspecialchars($watchUrl) ?>" class="btn btn-accent"<?= $watchExt ? ' target="_blank" rel="noopener noreferrer"' : '' ?>>Watch Media</a>
             </div>
         </div>
 

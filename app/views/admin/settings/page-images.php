@@ -36,6 +36,18 @@
             <?php endif; ?>
             <input type="file" name="about_story_image" accept="image/jpeg,image/png,image/avif,image/svg+xml">
         </div>
+        <h3 style="font-size: 1rem; font-weight: 600; margin: 1.5rem 0 0.75rem;">I'm New Page</h3>
+        <div class="form-group">
+            <label>We're Glad You're Here Image</label>
+            <p class="admin-muted" style="font-size: 0.85rem; margin: 0 0 0.5rem;">Image beside the intro section (first column). Recommended: 600×400 or similar.</p>
+            <?php if (!empty($im_new_intro_image ?? '')): ?>
+            <div class="admin-image-preview" style="margin-bottom: 0.75rem;">
+                <img src="<?= htmlspecialchars($im_new_intro_image) ?>" alt="" style="max-width: 320px; max-height: 180px; object-fit: contain; border: 1px solid var(--adm-border); border-radius: 6px;">
+                <p class="admin-muted" style="font-size: 0.85rem; margin-top: 0.25rem;">Current image. Upload to replace.</p>
+            </div>
+            <?php endif; ?>
+            <input type="file" name="im_new_intro_image" accept="image/jpeg,image/png,image/avif,image/svg+xml">
+        </div>
         <h3 style="font-size: 1rem; font-weight: 600; margin: 1.5rem 0 0.75rem;">Other Inner Pages</h3>
         <div class="form-group">
             <label>Page Hero Image (Shared)</label>

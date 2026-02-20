@@ -54,7 +54,8 @@ $address = $address ?? '980 Parkland Drive, Holiday Inn & Suites, Halifax, NS, C
                 </div>
             </div>
             <div class="services-cta-strip">
-                <a href="<?= $baseUrl ?>/media" class="btn btn-watch services-cta-btn">
+                <?php [$watchUrl, $watchExt] = watch_online_url(); ?>
+                <a href="<?= htmlspecialchars($watchUrl) ?>" class="btn btn-watch services-cta-btn"<?= $watchExt ? ' target="_blank" rel="noopener noreferrer"' : '' ?>>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                     Watch Online
                 </a>
