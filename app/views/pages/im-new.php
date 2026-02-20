@@ -65,6 +65,25 @@ $imNewIntroImage = $imNewIntroImage ?? '';
                 <h3 class="brand-card-title">After The Service</h3>
                 <p class="brand-card-text"><?= strip_tags($afterSummary) ?></p>
             </div>
+            <div class="brand-card stagger-item">
+                <span class="brand-card-num">4</span>
+                <h3 class="brand-card-title">Plan Your Visit</h3>
+                <p class="brand-card-text"><?= strip_tags(rich_preview($whatToExpect ?? 'Join us Sunday at 10:00 AM or Thursday at 6:00 PM. We meet at Holiday Inn & Suites, 980 Parkland Drive, Halifax.', 100)) ?></p>
+                <a href="<?= $baseUrl ?>/contact" class="btn btn-watch btn-sm" style="margin-top: 0.75rem;">Get Directions</a>
+            </div>
+            <div class="brand-card stagger-item">
+                <span class="brand-card-num">5</span>
+                <h3 class="brand-card-title">Watch Online</h3>
+                <p class="brand-card-text">Can't join in person? Browse our archived teachings and sermons from anywhere.</p>
+                <?php [$watchUrl, $watchExt] = watch_online_url(); ?>
+                <a href="<?= htmlspecialchars($watchUrl) ?>" class="btn btn-accent btn-sm"<?= $watchExt ? ' target="_blank" rel="noopener noreferrer"' : '' ?> style="margin-top: 0.75rem;">Watch Media</a>
+            </div>
+            <div class="brand-card stagger-item">
+                <span class="brand-card-num">6</span>
+                <h3 class="brand-card-title">Connect with Us</h3>
+                <p class="brand-card-text">Join us for newcomers' lunch, small group registration, and getting connected. Stop by the Welcome Station after service.</p>
+                <a href="<?= $baseUrl ?>/contact" class="btn btn-accent btn-sm" style="margin-top: 0.75rem;">Get Connected</a>
+            </div>
         </div>
 
         <?php if ($arrive || $service || $after): ?>
@@ -96,20 +115,6 @@ $imNewIntroImage = $imNewIntroImage ?? '';
             <div class="im-new-expect-list"><?= rich_content($whatToExpectBullets) ?></div>
         </div>
         <?php endif; ?>
-
-        <div class="im-new-cta-section">
-            <div class="im-new-cta-card">
-                <h3>Plan Your Visit</h3>
-                <p><?= rich_content($whatToExpect ?? 'Join us Sunday at 10:00 AM or Thursday at 6:00 PM. We meet at Holiday Inn & Suites, 980 Parkland Drive, Halifax.') ?></p>
-                <a href="<?= $baseUrl ?>/contact" class="btn btn-watch">Get Directions</a>
-            </div>
-            <div class="im-new-cta-card">
-                <h3>Watch Online</h3>
-                <p>Can't join in person? Browse our archived teachings and sermons from anywhere.</p>
-                <?php [$watchUrl, $watchExt] = watch_online_url(); ?>
-                <a href="<?= htmlspecialchars($watchUrl) ?>" class="btn btn-accent"<?= $watchExt ? ' target="_blank" rel="noopener noreferrer"' : '' ?>>Watch Media</a>
-            </div>
-        </div>
 
         <h3 class="im-new-section-title">Next Steps</h3>
         <div class="im-new-next-steps">

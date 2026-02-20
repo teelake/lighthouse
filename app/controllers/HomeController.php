@@ -33,6 +33,7 @@ class HomeController extends Controller
             'thursday' => $settingModel->get('service_thursday', '6:00 PM'),
         ];
         $mapEmbedUrl = $settingModel->get('map_embed_url', '');
+        $heroBackgroundImage = $settingModel->get('hero_background_image', '');
         $prayerWallImage = $settingModel->get('prayer_wall_image', '');
         $newsletterDeviceImage = $settingModel->get('newsletter_device_image', '');
 
@@ -46,6 +47,7 @@ class HomeController extends Controller
             'moments' => $moments,
             'serviceTimes' => $serviceTimes,
             'mapEmbedUrl' => $mapEmbedUrl,
+            'heroBackgroundImage' => $heroBackgroundImage,
             'prayerWallImage' => $prayerWallImage,
             'newsletterDeviceImage' => $newsletterDeviceImage,
             'pageTitle' => 'Lighthouse Global Church - Raising Lights That Transform Nations',
