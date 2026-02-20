@@ -11,6 +11,8 @@ $arriveSummary = $sections['im_new_arrive_summary']['content'] ?? 'Upon arrival,
 $serviceSummary = $sections['im_new_service_summary']['content'] ?? 'Experience 2–3 hours of heartfelt worship and an inspiring, gospel-centered message. Participate at your comfort level—sing, clap, reflect, or simply soak it all in.';
 $afterSummary = $sections['im_new_after_summary']['content'] ?? 'Hang around and meet our church family! Our Connection Team will help you take your next steps. Stop by the Welcome Station for a special gift.';
 $whatToExpectBullets = $sections['im_new_what_to_expect']['content'] ?? null;
+$watchOnlineCopy = $sections['im_new_watch_online']['content'] ?? 'Can\'t join in person? Browse our archived teachings and sermons from anywhere.';
+$connectCopy = $sections['im_new_connect']['content'] ?? 'Join us for newcomers\' lunch, small group registration, and getting connected. Stop by the Welcome Station after service.';
 $registered = $_GET['registered'] ?? null;
 $regError = $_GET['error'] ?? null;
 $imNewIntroImage = $imNewIntroImage ?? '';
@@ -65,24 +67,24 @@ $imNewIntroImage = $imNewIntroImage ?? '';
                 <h3 class="brand-card-title">After The Service</h3>
                 <p class="brand-card-text"><?= strip_tags($afterSummary) ?></p>
             </div>
-            <div class="brand-card stagger-item">
-                <span class="brand-card-num">4</span>
-                <h3 class="brand-card-title">Plan Your Visit</h3>
-                <p class="brand-card-text"><?= strip_tags(rich_preview($whatToExpect ?? 'Join us Sunday at 10:00 AM or Thursday at 6:00 PM. We meet at Holiday Inn & Suites, 980 Parkland Drive, Halifax.', 100)) ?></p>
-                <a href="<?= $baseUrl ?>/contact" class="btn btn-watch btn-sm" style="margin-top: 0.75rem;">Get Directions</a>
+        </div>
+
+        <div class="im-new-cta-section">
+            <div class="im-new-cta-card stagger-item">
+                <h3 class="im-new-cta-title">Plan Your Visit</h3>
+                <div class="im-new-cta-body"><?= rich_content($whatToExpect ?? 'Join us Sunday at 10:00 AM or Thursday at 6:00 PM. We meet at Holiday Inn & Suites, 980 Parkland Drive, Halifax.') ?></div>
+                <a href="<?= $baseUrl ?>/contact" class="btn btn-watch btn-sm">Get Directions</a>
             </div>
-            <div class="brand-card stagger-item">
-                <span class="brand-card-num">5</span>
-                <h3 class="brand-card-title">Watch Online</h3>
-                <p class="brand-card-text">Can't join in person? Browse our archived teachings and sermons from anywhere.</p>
+            <div class="im-new-cta-card stagger-item">
+                <h3 class="im-new-cta-title">Watch Online</h3>
+                <p><?= htmlspecialchars(strip_tags($watchOnlineCopy)) ?></p>
                 <?php [$watchUrl, $watchExt] = watch_online_url(); ?>
-                <a href="<?= htmlspecialchars($watchUrl) ?>" class="btn btn-accent btn-sm"<?= $watchExt ? ' target="_blank" rel="noopener noreferrer"' : '' ?> style="margin-top: 0.75rem;">Watch Media</a>
+                <a href="<?= htmlspecialchars($watchUrl) ?>" class="btn btn-accent btn-sm"<?= $watchExt ? ' target="_blank" rel="noopener noreferrer"' : '' ?>>Watch Media</a>
             </div>
-            <div class="brand-card stagger-item">
-                <span class="brand-card-num">6</span>
-                <h3 class="brand-card-title">Connect with Us</h3>
-                <p class="brand-card-text">Join us for newcomers' lunch, small group registration, and getting connected. Stop by the Welcome Station after service.</p>
-                <a href="<?= $baseUrl ?>/contact" class="btn btn-accent btn-sm" style="margin-top: 0.75rem;">Get Connected</a>
+            <div class="im-new-cta-card stagger-item">
+                <h3 class="im-new-cta-title">Connect with Us</h3>
+                <p><?= htmlspecialchars(strip_tags($connectCopy)) ?></p>
+                <a href="<?= $baseUrl ?>/contact" class="btn btn-accent btn-sm">Get Connected</a>
             </div>
         </div>
 

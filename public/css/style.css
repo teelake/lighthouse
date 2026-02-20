@@ -463,7 +463,13 @@ body::before {
 .lights-headline { font-family: var(--font-heading); font-size: var(--text-display); font-weight: 700; line-height: 1.2; margin: 0 0 1.25rem; letter-spacing: -0.02em; color: #fff; }
 .lights-headline .lights-accent { color: var(--color-primary-light); background: linear-gradient(135deg, var(--color-primary-light) 0%, #ffd966 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .lights-headline:not(:has(.lights-accent)) { color: #fff; }
-.lights-content p { color: #fff; line-height: 1.75; margin-bottom: 1.5rem; }
+.lights-content { color: #fff; }
+.lights-content .lights-body,
+.lights-content .lights-body p,
+.lights-content .lights-body li,
+.lights-content .lights-body span,
+.lights-content .lights-body strong { color: #fff !important; }
+.lights-content .lights-body p { line-height: 1.75; margin-bottom: 1.5rem; }
 .lights-content a { color: var(--color-primary-light); }
 .lights-content a:hover { color: #ffd966; }
 .lights-image { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-hover); transition: var(--transition); }
@@ -1768,8 +1774,10 @@ body::before {
     transition: var(--transition);
 }
 .im-new-cta-card:hover { border-color: rgba(255,225,0,0.4); box-shadow: var(--shadow-hover); }
-.im-new-cta-card h3 { margin: 0 0 0.75rem; font-family: var(--font-heading); font-size: 1.2rem; color: var(--color-dark); }
-.im-new-cta-card p { margin: 0 0 1.25rem; color: var(--color-muted); font-size: 0.98rem; line-height: 1.65; }
+.im-new-cta-card h3, .im-new-cta-card .im-new-cta-title { margin: 0 0 0.75rem; font-family: var(--font-heading); font-size: 1.2rem; color: var(--color-dark); }
+.im-new-cta-card p, .im-new-cta-card .im-new-cta-body { margin: 0 0 1.25rem; color: var(--color-muted); font-size: 0.98rem; line-height: 1.65; }
+.im-new-cta-card .im-new-cta-body p { margin: 0 0 0.75rem; }
+.im-new-cta-card .im-new-cta-body p:last-child { margin-bottom: 0; }
 .im-new-detail-sections { margin: 2.5rem 0; }
 .im-new-detail { margin-bottom: 2rem; }
 .im-new-detail-title { font-family: var(--font-heading); font-size: 1.25rem; color: var(--color-dark); margin: 0 0 0.75rem; }
