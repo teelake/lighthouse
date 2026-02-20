@@ -2,11 +2,8 @@
 ob_start();
 $baseUrl = rtrim(BASE_URL, '/');
 $sections = $sections ?? [];
-$imNewIntro = $sections['im_new_intro']['content'] ?? null;
-$whatToExpect = $sections['im_new_expect']['content'] ?? null;
-$arrive = $sections['im_new_arrive']['content'] ?? null;
-$service = $sections['im_new_service']['content'] ?? null;
-$after = $sections['im_new_after']['content'] ?? null;
+$imNewIntro = ($sections['im_new_intro'] ?? [])['content'] ?? null;
+$whatToExpect = ($sections['im_new_expect'] ?? [])['content'] ?? null;
 $_arrive = trim((string)(($sections['im_new_arrive_summary'] ?? [])['content'] ?? ''));
 $arriveSummary = $_arrive !== '' ? $_arrive : 'Upon arrival, you\'ll find plenty of parking and our friendly greeters will guide you every step of the way. Our team will help with children\'s check-in—just ask anyone wearing a Welcome Team badge.';
 $_service = trim((string)(($sections['im_new_service_summary'] ?? [])['content'] ?? ''));
@@ -89,29 +86,6 @@ $imNewIntroImage = $imNewIntroImage ?? '';
                 <a href="<?= $baseUrl ?>/contact" class="btn btn-accent btn-sm">Get Connected</a>
             </div>
         </div>
-
-        <?php if ($arrive || $service || $after): ?>
-        <div class="im-new-detail-sections">
-            <?php if ($arrive): ?>
-            <div class="im-new-detail">
-                <h3 class="im-new-detail-title">When You Arrive</h3>
-                <div class="im-new-detail-body"><?= rich_content($arrive) ?></div>
-            </div>
-            <?php endif; ?>
-            <?php if ($service): ?>
-            <div class="im-new-detail">
-                <h3 class="im-new-detail-title">In The Service</h3>
-                <div class="im-new-detail-body"><?= rich_content($service) ?></div>
-            </div>
-            <?php endif; ?>
-            <?php if ($after): ?>
-            <div class="im-new-detail">
-                <h3 class="im-new-detail-title">After The Service</h3>
-                <div class="im-new-detail-body"><?= rich_content($after) ?></div>
-            </div>
-            <?php endif; ?>
-        </div>
-        <?php endif; ?>
 
         <h3 class="im-new-section-title">Next Steps</h3>
         <div class="im-new-next-steps">
