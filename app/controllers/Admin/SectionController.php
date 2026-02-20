@@ -8,10 +8,16 @@ class SectionController extends BaseController
 {
     private const CONFIG_KEYS = ['hero_config', 'gather_config', 'lights_config', 'prayer_wall_config', 'newsletter_config', 'whats_on_config', 'scriptural_foundation_config', 'core_values_config'];
 
+    /** Section keys that have been removed and must not appear in admin */
+    private const OBSOLETE_SECTION_KEYS = ['im_new_what_to_expect'];
+
     public function index()
     {
         $this->requireEditor();
-        $sections = (new ContentSection())->findAll([], 'sort_order ASC');
+        $sections = (new ContentSection())->findAll([], 'section_key ASC');
+        $sections = array_values(array_filter($sections, function ($s) {
+            return !in_array($s['section_key'] ?? '', self::OBSOLETE_SECTION_KEYS, true);
+        }));
         $this->render('admin/sections/index', ['sections' => $sections, 'pageHeading' => 'Content Sections', 'currentPage' => 'sections']);
     }
 
