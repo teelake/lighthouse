@@ -57,17 +57,17 @@ $imNewIntroImage = $imNewIntroImage ?? '';
             <div class="brand-card stagger-item">
                 <span class="brand-card-num">1</span>
                 <h3 class="brand-card-title">When You Arrive</h3>
-                <p class="brand-card-text"><?= strip_tags($arriveSummary) ?></p>
+                <p class="brand-card-text"><?= rich_preview($arriveSummary, 140) ?></p>
             </div>
             <div class="brand-card stagger-item">
                 <span class="brand-card-num">2</span>
                 <h3 class="brand-card-title">In The Service</h3>
-                <p class="brand-card-text"><?= strip_tags($serviceSummary) ?></p>
+                <p class="brand-card-text"><?= rich_preview($serviceSummary, 140) ?></p>
             </div>
             <div class="brand-card stagger-item">
                 <span class="brand-card-num">3</span>
                 <h3 class="brand-card-title">After The Service</h3>
-                <p class="brand-card-text"><?= strip_tags($afterSummary) ?></p>
+                <p class="brand-card-text"><?= rich_preview($afterSummary, 140) ?></p>
             </div>
         </div>
 
