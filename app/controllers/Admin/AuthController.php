@@ -23,8 +23,9 @@ class AuthController extends Controller
 
     public function login()
     {
+        $redirectTo = trim($this->post('redirect', $this->get('redirect', '')));
         if (isset($_SESSION['user_id'])) {
-            $this->redirect(admin_url());
+            $this->redirect($this->resolveRedirect($redirectTo) ?? admin_url());
         }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
@@ -59,18 +60,19 @@ class AuthController extends Controller
             if (!empty($user['two_factor_enabled']) && !empty($user['two_factor_secret'])) {
                 $_SESSION['auth_2fa_user_id'] = $user['id'];
                 $_SESSION['auth_2fa_email'] = $user['email'];
+                $_SESSION['auth_2fa_redirect'] = $redirectTo;
                 $this->redirect(admin_url('2fa'));
             }
             $this->completeLogin($user);
             $this->logAuth('Login success', ['email' => $email, 'user_id' => $user['id']]);
-            $this->redirect(admin_url());
+            $this->redirect($this->resolveRedirect($redirectTo) ?? admin_url());
             } catch (\Throwable $e) {
                 $this->logAuth('Login exception', ['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
                 error_log('Admin login exception: ' . $e->getMessage() . "\n" . $e->getTraceAsString());
                 return $this->render('admin/auth/login', ['error' => 'An error occurred. Please try again.']);
             }
         }
-        $this->render('admin/auth/login');
+        $this->render('admin/auth/login', ['redirect' => $redirectTo]);
     }
 
     public function twoFactor()
@@ -109,9 +111,10 @@ class AuthController extends Controller
             $this->render('admin/auth/2fa', ['email' => $user['email'], 'error' => 'Invalid or expired code. Try again.']);
             return;
         }
-        unset($_SESSION['auth_2fa_user_id'], $_SESSION['auth_2fa_email']);
+        $redirectTo = $_SESSION['auth_2fa_redirect'] ?? '';
+        unset($_SESSION['auth_2fa_user_id'], $_SESSION['auth_2fa_email'], $_SESSION['auth_2fa_redirect']);
         $this->completeLogin($user);
-        $this->redirect(admin_url());
+        $this->redirect($this->resolveRedirect($redirectTo) ?? admin_url());
     }
 
     public function logout()
@@ -287,6 +290,18 @@ class AuthController extends Controller
         } catch (\Throwable $e) {
             $this->logAuth('recordFailedAttempt error', ['error' => $e->getMessage()]);
         }
+    }
+
+    /** Resolve redirect URL - allows return to frontend (e.g. /prayer) after login */
+    private function resolveRedirect(string $path): ?string
+    {
+        $path = trim($path);
+        if ($path === '' || strpos($path, '//') !== false || preg_match('#^[a-z]+:#i', $path)) {
+            return null;
+        }
+        $path = ltrim($path, '/');
+        $base = rtrim(BASE_URL ?? '', '/');
+        return $path !== '' ? $base . '/' . $path : null;
     }
 
     private function clearFailedAttempts(): void

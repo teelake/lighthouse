@@ -7,10 +7,12 @@ $whatToExpect = $sections['im_new_expect']['content'] ?? null;
 $arrive = $sections['im_new_arrive']['content'] ?? null;
 $service = $sections['im_new_service']['content'] ?? null;
 $after = $sections['im_new_after']['content'] ?? null;
-$arriveSummary = $sections['im_new_arrive_summary']['content'] ?? 'Upon arrival, you\'ll find plenty of parking and our friendly greeters will guide you every step of the way. Our team will help with children\'s check-in—just ask anyone wearing a Welcome Team badge.';
-$serviceSummary = $sections['im_new_service_summary']['content'] ?? 'Experience 2–3 hours of heartfelt worship and an inspiring, gospel-centered message. Participate at your comfort level—sing, clap, reflect, or simply soak it all in.';
-$afterSummary = $sections['im_new_after_summary']['content'] ?? 'Hang around and meet our church family! Our Connection Team will help you take your next steps. Stop by the Welcome Station for a special gift.';
-$whatToExpectBullets = $sections['im_new_what_to_expect']['content'] ?? null;
+$_arrive = trim((string)(($sections['im_new_arrive_summary'] ?? [])['content'] ?? ''));
+$arriveSummary = $_arrive !== '' ? $_arrive : 'Upon arrival, you\'ll find plenty of parking and our friendly greeters will guide you every step of the way. Our team will help with children\'s check-in—just ask anyone wearing a Welcome Team badge.';
+$_service = trim((string)(($sections['im_new_service_summary'] ?? [])['content'] ?? ''));
+$serviceSummary = $_service !== '' ? $_service : 'Experience 2–3 hours of heartfelt worship and an inspiring, gospel-centered message. Participate at your comfort level—sing, clap, reflect, or simply soak it all in.';
+$_after = trim((string)(($sections['im_new_after_summary'] ?? [])['content'] ?? ''));
+$afterSummary = $_after !== '' ? $_after : 'Hang around and meet our church family! Our Connection Team will help you take your next steps. Stop by the Welcome Station for a special gift.';
 $watchOnlineCopy = $sections['im_new_watch_online']['content'] ?? 'Can\'t join in person? Browse our archived teachings and sermons from anywhere.';
 $connectCopy = $sections['im_new_connect']['content'] ?? 'Join us for newcomers\' lunch, small group registration, and getting connected. Stop by the Welcome Station after service.';
 $registered = $_GET['registered'] ?? null;
@@ -108,13 +110,6 @@ $imNewIntroImage = $imNewIntroImage ?? '';
                 <div class="im-new-detail-body"><?= rich_content($after) ?></div>
             </div>
             <?php endif; ?>
-        </div>
-        <?php endif; ?>
-
-        <?php if ($whatToExpectBullets): ?>
-        <div class="im-new-expect-section">
-            <h3 class="im-new-section-title">What You'll Experience</h3>
-            <div class="im-new-expect-list"><?= rich_content($whatToExpectBullets) ?></div>
         </div>
         <?php endif; ?>
 
