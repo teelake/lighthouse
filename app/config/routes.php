@@ -132,6 +132,7 @@ $router->add('POST', $adm . '/jobs', ['controller' => 'Admin\Job', 'action' => '
 $router->add('GET', $adm . '/jobs/{id}/edit', ['controller' => 'Admin\Job', 'action' => 'edit']);
 $router->add('POST', $adm . '/jobs/{id}', ['controller' => 'Admin\Job', 'action' => 'update']);
 $router->add('POST', $adm . '/jobs/{id}/delete', ['controller' => 'Admin\Job', 'action' => 'delete']);
+$router->add('GET', $adm . '/job-applications/{id}', ['controller' => 'Admin\JobApplication', 'action' => 'view']);
 $router->add('GET', $adm . '/job-applications', ['controller' => 'Admin\JobApplication', 'action' => 'index']);
 $router->add('GET', $adm . '/visitors', ['controller' => 'Admin\FirstTimeVisitor', 'action' => 'index']);
 $router->add('GET', $adm . '/visitors/create', ['controller' => 'Admin\FirstTimeVisitor', 'action' => 'create']);

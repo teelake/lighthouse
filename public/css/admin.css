@@ -1047,3 +1047,56 @@
     .page-heading { font-size: 1.125rem; }
     .dash-kpi { grid-template-columns: 1fr; }
 }
+
+/* Job application view (detail page) */
+.job-app-view { margin-top: 1.5rem; }
+.job-app-view-section {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--adm-border);
+}
+.job-app-view-section:last-child { border-bottom: none; }
+.job-app-view-title {
+    margin: 0 0 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--adm-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.job-app-view-value { margin: 0; font-size: 0.9375rem; color: var(--adm-text); }
+.job-app-view-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--adm-accent);
+    text-decoration: none;
+}
+.job-app-view-link:hover { text-decoration: underline; }
+.job-app-view-dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 0.5rem 1.5rem;
+}
+.job-app-view-dl dt {
+    font-size: 0.8125rem;
+    color: var(--adm-muted);
+    font-weight: 500;
+}
+.job-app-view-dl dd {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--adm-text);
+}
+.job-app-view-dl dd a { color: var(--adm-accent); }
+.job-app-view-message {
+    margin: 0;
+    padding: 1rem;
+    background: var(--adm-bg);
+    border-radius: var(--adm-radius-sm);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+.job-app-view-empty { margin: 0; color: var(--adm-muted); font-style: italic; }
+.job-app-view-meta .job-app-view-value { color: var(--adm-muted); font-size: 0.875rem; }

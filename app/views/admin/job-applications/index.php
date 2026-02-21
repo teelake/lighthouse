@@ -25,6 +25,7 @@
             <td><?= htmlspecialchars($a['created_at'] ?? '') ?></td>
             <td>
                 <div class="admin-table-actions">
+                    <a href="<?= admin_url('job-applications/' . (int)($a['id'] ?? 0)) ?>" class="btn btn-sm btn-primary">View</a>
                     <a href="mailto:<?= htmlspecialchars($a['email'] ?? '') ?>?subject=Re: <?= rawurlencode($a['job_title'] ?? '') ?> Application" class="btn btn-sm btn-outline">Contact</a>
                 </div>
             </td>
