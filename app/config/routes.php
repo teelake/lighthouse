@@ -30,6 +30,7 @@ $router->add('GET', 'faq', ['controller' => 'Page', 'action' => 'faq']);
 $router->add('GET', 'im-new', ['controller' => 'Page', 'action' => 'imNew']);
 $router->add('GET', 'prayer', ['controller' => 'Prayer', 'action' => 'index']);
 $router->add('GET', 'jobs', ['controller' => 'Job', 'action' => 'index']);
+$router->add('GET', 'jobs/{slug}/apply', ['controller' => 'Job', 'action' => 'applyForm']);
 $router->add('GET', 'jobs/{slug}', ['controller' => 'Job', 'action' => 'view']);
 
 // Forms - POST

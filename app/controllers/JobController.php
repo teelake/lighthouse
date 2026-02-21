@@ -22,6 +22,17 @@ class JobController extends Controller
         $this->render('jobs/view', ['pageTitle' => $job['title'] . ' - Lighthouse Global Church', 'job' => $job]);
     }
 
+    public function applyForm()
+    {
+        $slug = $this->params['slug'] ?? '';
+        $job = (new Job())->findBySlug($slug);
+        if (!$job) throw new \Exception('Job not found', 404);
+        $this->render('jobs/apply', [
+            'pageTitle' => 'Apply - ' . $job['title'] . ' - Lighthouse Global Church',
+            'job' => $job,
+        ]);
+    }
+
     public function apply()
     {
         $slug = $this->params['slug'] ?? '';
@@ -29,7 +40,8 @@ class JobController extends Controller
         if (!$job) throw new \Exception('Job not found', 404);
 
         if (!csrf_verify()) {
-            $this->redirect('/jobs/' . $slug . '?error=error');
+            $this->redirect('/jobs/' . $slug . '/apply?error=error');
+            return;
         }
 
         $firstName = trim($this->post('first_name', ''));
@@ -41,21 +53,21 @@ class JobController extends Controller
         $message = trim($this->post('message', ''));
 
         if (!$firstName || !$lastName || !$email || !$phone || !$ageRange || !$engagementType) {
-            $this->redirect('/jobs/' . $slug . '?error=required');
+            $this->redirect('/jobs/' . $slug . '/apply?error=required');
             return;
         }
 
         $resumeUploader = new ResumeUpload();
         $resumePath = $resumeUploader->upload('resume');
         if (!$resumePath) {
-            $this->redirect('/jobs/' . $slug . '?error=' . ($resumeUploader->getLastError() ? 'resume' : 'required'));
+            $this->redirect('/jobs/' . $slug . '/apply?error=' . ($resumeUploader->getLastError() ? 'resume' : 'required'));
             return;
         }
 
         $jobId = (int) $job['id'];
         $existing = (new JobApplication())->findAll(['job_id' => $jobId, 'email' => $email], '', 1);
         if (!empty($existing)) {
-            $this->redirect('/jobs/' . $slug . '?error=duplicate');
+            $this->redirect('/jobs/' . $slug . '/apply?error=duplicate');
             return;
         }
 
@@ -74,9 +86,9 @@ class JobController extends Controller
                 'resume_path' => $resumeUrl,
                 'message' => $message ?: null,
             ]);
-            $this->redirect('/jobs/' . $slug . '?applied=1');
+            $this->redirect('/jobs/' . $slug . '/apply?applied=1');
         } catch (\Throwable $e) {
-            $this->redirect('/jobs/' . $slug . '?error=error');
+            $this->redirect('/jobs/' . $slug . '/apply?error=error');
         }
     }
 }

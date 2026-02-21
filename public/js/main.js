@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function setSectionStagger(section) {
         if (!section) return;
         var idx = 0;
-        section.querySelectorAll('.gather-card, .event-card-modern, .moment-item, .lights-content, .lights-image, .prayer-wall-image, .prayer-wall-content, .voice-card, .newsletter-form, .section-sub, .sermon-card, .media-card, .about-pillar, .leader-card, .brand-card, .services-card, .im-new-cta-card, .contact-item, .faq-item, .ministry-card, .job-card, .giving-option').forEach(function(el) {
+        section.querySelectorAll('.gather-card, .event-card-modern, .moment-item, .lights-content, .lights-image, .prayer-wall-image, .prayer-wall-content, .voice-card, .newsletter-form, .section-sub, .sermon-card, .media-card, .about-pillar, .leader-card, .brand-card, .services-card, .im-new-cta-card, .contact-item, .faq-item, .ministry-card, .job-card, .job-apply-card, .job-apply-sidebar-card, .giving-option').forEach(function(el) {
             el.classList.add('stagger-item');
             el.style.setProperty('--stagger', idx++);
         });
@@ -438,5 +438,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
         var initialType = getTypeFromUrl();
         if (initialType !== 'all') applyFilter(initialType);
+    }
+
+    // Job apply form: file input feedback + submit loading
+    var jobApplyForm = document.querySelector('.job-apply-form');
+    if (jobApplyForm) {
+        var fileInput = jobApplyForm.querySelector('#apply-resume');
+        var fileLabel = jobApplyForm.querySelector('.job-apply-file-label');
+        var submitBtn = jobApplyForm.querySelector('.job-apply-submit');
+        if (fileInput && fileLabel) {
+            fileInput.addEventListener('change', function() {
+                var name = this.files && this.files[0] ? this.files[0].name : '';
+                fileLabel.textContent = name || 'Choose file or drag and drop';
+            });
+        }
+        jobApplyForm.addEventListener('submit', function() {
+            if (submitBtn && jobApplyForm.checkValidity()) {
+                submitBtn.disabled = true;
+                var origText = submitBtn.querySelector('span');
+                if (origText) {
+                    origText.textContent = 'Submitting…';
+                }
+            }
+        });
     }
 });
