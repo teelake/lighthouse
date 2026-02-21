@@ -3,7 +3,6 @@ ob_start();
 $baseUrl = rtrim(BASE_URL, '/');
 $sections = $sections ?? [];
 $imNewIntro = ($sections['im_new_intro'] ?? [])['content'] ?? null;
-$whatToExpect = ($sections['im_new_expect'] ?? [])['content'] ?? null;
 $arrive = ($sections['im_new_arrive'] ?? [])['content'] ?? null;
 $service = ($sections['im_new_service'] ?? [])['content'] ?? null;
 $after = ($sections['im_new_after'] ?? [])['content'] ?? null;

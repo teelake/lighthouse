@@ -9,7 +9,14 @@ class SectionController extends BaseController
     private const CONFIG_KEYS = ['hero_config', 'gather_config', 'lights_config', 'prayer_wall_config', 'newsletter_config', 'whats_on_config', 'scriptural_foundation_config', 'core_values_config'];
 
     /** Section keys that have been removed and must not appear in admin */
-    private const OBSOLETE_SECTION_KEYS = [];
+    private const OBSOLETE_SECTION_KEYS = [
+        'im_new_expect',
+        'im_new_arrive_summary',
+        'im_new_service_summary',
+        'im_new_after_summary',
+        'im_new_watch_online',
+        'im_new_connect',
+    ];
 
     public function index()
     {
