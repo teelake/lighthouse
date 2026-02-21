@@ -17,7 +17,7 @@ class SettingController extends BaseController
         $s = new Setting();
         $this->render('admin/settings/social', [
             'social_facebook' => $s->get('social_facebook', ''),
-            'social_instagram' => $s->get('social_instagram', ''),
+            'social_tiktok' => $s->get('social_tiktok', ''),
             'social_youtube' => $s->get('social_youtube', ''),
             'social_twitter' => $s->get('social_twitter', ''),
             'pageHeading' => 'Social Media Links',
@@ -30,7 +30,7 @@ class SettingController extends BaseController
         $this->requireAdmin();
         $s = new Setting();
         $s->set('social_facebook', trim($this->post('social_facebook', '')));
-        $s->set('social_instagram', trim($this->post('social_instagram', '')));
+        $s->set('social_tiktok', trim($this->post('social_tiktok', '')));
         $s->set('social_youtube', trim($this->post('social_youtube', '')));
         $s->set('social_twitter', trim($this->post('social_twitter', '')));
         $this->redirectAdmin('settings/social');
