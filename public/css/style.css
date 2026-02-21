@@ -1750,15 +1750,22 @@ body::before {
 }
 .im-new-steps {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     gap: 1.5rem;
     margin-bottom: 2.5rem;
 }
-@media (max-width: 900px) {
-    .im-new-steps { grid-template-columns: repeat(2, 1fr); }
+.im-new-steps .brand-card-body { font-size: 0.98rem; line-height: 1.75; color: var(--color-muted); margin: 0; }
+.im-new-steps .brand-card-body p { margin: 0 0 1rem; }
+.im-new-steps .brand-card-body p:last-child { margin-bottom: 0; }
+.im-new-next-steps-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
 }
-@media (max-width: 600px) {
-    .im-new-steps { grid-template-columns: 1fr; }
+.im-new-form-centered {
+    margin-left: auto;
+    margin-right: auto;
 }
 .im-new-cta-section {
     display: grid;

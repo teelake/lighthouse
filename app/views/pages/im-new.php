@@ -4,17 +4,14 @@ $baseUrl = rtrim(BASE_URL, '/');
 $sections = $sections ?? [];
 $imNewIntro = ($sections['im_new_intro'] ?? [])['content'] ?? null;
 $whatToExpect = ($sections['im_new_expect'] ?? [])['content'] ?? null;
-$_arrive = trim((string)(($sections['im_new_arrive_summary'] ?? [])['content'] ?? ''));
-$arriveSummary = $_arrive !== '' ? $_arrive : 'Upon arrival, you\'ll find plenty of parking and our friendly greeters will guide you every step of the way. Our team will help with children\'s check-in—just ask anyone wearing a Welcome Team badge.';
-$_service = trim((string)(($sections['im_new_service_summary'] ?? [])['content'] ?? ''));
-$serviceSummary = $_service !== '' ? $_service : 'Experience 2–3 hours of heartfelt worship and an inspiring, gospel-centered message. Participate at your comfort level—sing, clap, reflect, or simply soak it all in.';
-$_after = trim((string)(($sections['im_new_after_summary'] ?? [])['content'] ?? ''));
-$afterSummary = $_after !== '' ? $_after : 'Hang around and meet our church family! Our Connection Team will help you take your next steps. Stop by the Welcome Station for a special gift.';
-$watchOnlineCopy = $sections['im_new_watch_online']['content'] ?? 'Can\'t join in person? Browse our archived teachings and sermons from anywhere.';
-$connectCopy = $sections['im_new_connect']['content'] ?? 'Join us for newcomers\' lunch, small group registration, and getting connected. Stop by the Welcome Station after service.';
+$arrive = ($sections['im_new_arrive'] ?? [])['content'] ?? null;
+$service = ($sections['im_new_service'] ?? [])['content'] ?? null;
+$after = ($sections['im_new_after'] ?? [])['content'] ?? null;
+$whatToExpectBullets = ($sections['im_new_what_to_expect'] ?? [])['content'] ?? null;
 $registered = $_GET['registered'] ?? null;
 $regError = $_GET['error'] ?? null;
 $imNewIntroImage = $imNewIntroImage ?? '';
+[$watchUrl, $watchExt] = watch_online_url();
 ?>
 <?php $imNewHeroImg = page_hero_image('im-new'); ?>
 <section class="section im-new-page" data-animate>
@@ -35,7 +32,7 @@ $imNewIntroImage = $imNewIntroImage ?? '';
                 <div class="im-new-intro-text">
                     <h2 class="about-section-title">We're Glad You're Here</h2>
                     <div class="about-story-body">
-                        <?= rich_content($imNewIntro ?? 'At Lighthouse, you\'re not just welcome—you\'re celebrated. No matter where you are in life or your faith journey, there\'s a place for you here. Whether you\'re exploring faith for the first time or looking for a church home, we\'re here to walk with you.') ?>
+                        <?= rich_content($imNewIntro ?? 'At LightHouse, you\'re not just welcome—you\'re celebrated. No matter where you are in life or your faith journey, there\'s a place for you here. Our vibrant, authentic community is ready to embrace you, encourage you, and walk with you every step of the way. Is this your first time? We\'d love to connect with you! Feel free to visit as often as you like—no strings attached. Just come as you are and experience a warm, inviting space where you can discover more about God and build lasting relationships.') ?>
                     </div>
                 </div>
             </div>
@@ -43,7 +40,7 @@ $imNewIntroImage = $imNewIntroImage ?? '';
             <div class="im-new-intro-text-only">
                 <h2 class="about-section-title">We're Glad You're Here</h2>
                 <div class="about-story-body">
-                    <?= rich_content($imNewIntro ?? 'At Lighthouse, you\'re not just welcome—you\'re celebrated. No matter where you are in life or your faith journey, there\'s a place for you here. Whether you\'re exploring faith for the first time or looking for a church home, we\'re here to walk with you.') ?>
+                    <?= rich_content($imNewIntro ?? 'At LightHouse, you\'re not just welcome—you\'re celebrated. No matter where you are in life or your faith journey, there\'s a place for you here. Our vibrant, authentic community is ready to embrace you, encourage you, and walk with you every step of the way. Is this your first time? We\'d love to connect with you! Feel free to visit as often as you like—no strings attached. Just come as you are and experience a warm, inviting space where you can discover more about God and build lasting relationships.') ?>
                 </div>
             </div>
             <?php endif; ?>
@@ -54,56 +51,47 @@ $imNewIntroImage = $imNewIntroImage ?? '';
             <div class="brand-card stagger-item">
                 <span class="brand-card-num">1</span>
                 <h3 class="brand-card-title">When You Arrive</h3>
-                <p class="brand-card-text"><?= rich_preview($arriveSummary, 140) ?></p>
+                <div class="brand-card-body"><?= rich_content($arrive ?? '<p>This is LightHouse, You are welcome! Upon arrival, you\'ll find plenty of parking spaces, and our friendly greeters will be there to guide you every step of the way. Whether it\'s your first visit or your hundredth, we want you to feel completely at ease.</p><p>If you\'re visiting with children, our team will help you check them into our secure, age-appropriate classes designed to engage and inspire young hearts. Unsure where to go? Just ask anyone wearing a "Welcome Team" badge—they\'re here to assist you!</p>') ?></div>
             </div>
             <div class="brand-card stagger-item">
                 <span class="brand-card-num">2</span>
                 <h3 class="brand-card-title">In The Service</h3>
-                <p class="brand-card-text"><?= rich_preview($serviceSummary, 140) ?></p>
+                <div class="brand-card-body"><?= rich_content($service ?? '<p>Our service experience is uplifting, engaging, and designed to help you connect with God. Expect 2 to 3 hours of heartfelt worship with dynamic music and a mix of contemporary and multicultural songs reflecting our global community.</p><p>You\'ll also hear an inspiring, gospel-centered message that\'s relevant to your everyday life. Whether you\'re new to faith or have been walking with Jesus for years, you\'ll leave refreshed and equipped for the week ahead.</p><p>Feel free to participate at your comfort level—sing, clap, reflect, or simply soak it all in. We\'re here to create a space for everyone to encounter God in their unique way.</p>') ?></div>
             </div>
             <div class="brand-card stagger-item">
                 <span class="brand-card-num">3</span>
                 <h3 class="brand-card-title">After The Service</h3>
-                <p class="brand-card-text"><?= rich_preview($afterSummary, 140) ?></p>
+                <div class="brand-card-body"><?= rich_content($after ?? '<p>After the service, we\'d love for you to hang around and meet our church family! Our Connection Team is available to answer any questions and help you take your next steps, whether that\'s learning more about the church, joining a small group, or simply finding a place to belong.</p><p>Stop by the Welcome Station located near the entrance to receive a special gift as our way of saying thank you for visiting. If you\'re curious about faith, exploring your next steps, or just want to meet new friends, we\'re excited to journey with you at The LightHouse!</p>') ?></div>
             </div>
         </div>
 
-        <div class="im-new-cta-section">
-            <div class="im-new-cta-card stagger-item">
-                <h3 class="im-new-cta-title">Plan Your Visit</h3>
-                <div class="im-new-cta-body"><?= rich_content($whatToExpect ?? 'Join us Sunday at 10:00 AM or Thursday at 6:00 PM. We meet at Holiday Inn & Suites, 980 Parkland Drive, Halifax.') ?></div>
-                <a href="<?= $baseUrl ?>/contact" class="btn btn-watch btn-sm">Get Directions</a>
-            </div>
-            <div class="im-new-cta-card stagger-item">
-                <h3 class="im-new-cta-title">Watch Online</h3>
-                <p><?= htmlspecialchars(strip_tags($watchOnlineCopy)) ?></p>
-                <?php [$watchUrl, $watchExt] = watch_online_url(); ?>
-                <a href="<?= htmlspecialchars($watchUrl) ?>" class="btn btn-accent btn-sm"<?= $watchExt ? ' target="_blank" rel="noopener noreferrer"' : '' ?>>Watch Media</a>
-            </div>
-            <div class="im-new-cta-card stagger-item">
-                <h3 class="im-new-cta-title">Connect with Us</h3>
-                <p><?= htmlspecialchars(strip_tags($connectCopy)) ?></p>
-                <a href="<?= $baseUrl ?>/contact" class="btn btn-accent btn-sm">Get Connected</a>
-            </div>
+        <?php if ($whatToExpectBullets): ?>
+        <div class="im-new-expect-section">
+            <h3 class="im-new-section-title">What You'll Experience</h3>
+            <div class="im-new-expect-list"><?= rich_content($whatToExpectBullets) ?></div>
         </div>
+        <?php endif; ?>
 
         <h3 class="im-new-section-title">Next Steps</h3>
         <div class="im-new-next-steps">
-            <p><strong>Connect with Us</strong> — Join us for newcomers' lunch, small group registration, and getting connected.</p>
+            <p><strong>Connect with Us</strong> — Join us for newcomers' lunch, small group registration, and getting connected. Stop by the Welcome Station after service.</p>
             <p><strong>Explore Our Ministries</strong> — Discover specific ministry pages for deeper involvement.</p>
         </div>
-        <div class="about-cta">
-            <a href="<?= $baseUrl ?>/services" class="btn btn-watch">Our Gatherings</a>
-            <a href="<?= $baseUrl ?>/small-groups" class="btn btn-accent">Find a Small Group</a>
-            <a href="<?= $baseUrl ?>/ministries" class="btn btn-accent">Explore Ministries</a>
-            <a href="<?= $baseUrl ?>/contact" class="btn btn-accent">Contact Us</a>
+        <div class="im-new-next-steps-ctas">
+            <a href="<?= $baseUrl ?>/contact" class="btn btn-watch btn-sm">Get Directions</a>
+            <a href="<?= htmlspecialchars($watchUrl) ?>" class="btn btn-accent btn-sm"<?= $watchExt ? ' target="_blank" rel="noopener noreferrer"' : '' ?>>Watch Media</a>
+            <a href="<?= $baseUrl ?>/contact" class="btn btn-accent btn-sm">Get Connected</a>
+            <a href="<?= $baseUrl ?>/services" class="btn btn-accent btn-sm">Our Gatherings</a>
+            <a href="<?= $baseUrl ?>/small-groups" class="btn btn-accent btn-sm">Find a Small Group</a>
+            <a href="<?= $baseUrl ?>/ministries" class="btn btn-accent btn-sm">Explore Ministries</a>
+            <a href="<?= $baseUrl ?>/contact" class="btn btn-accent btn-sm">Contact Us</a>
         </div>
 
         <div class="im-new-faq-cta">
             <p>Have questions about parking, attire, service times, or childcare? <a href="<?= $baseUrl ?>/faq">See our FAQs</a>.</p>
         </div>
 
-        <div class="im-new-visitor-form-section">
+        <div class="im-new-visitor-form-section im-new-form-centered">
             <h3 class="im-new-section-title">First-Time Visitor Registration</h3>
             <p class="im-new-form-intro">We'd love to welcome you! Share your details and we'll reach out with a warm welcome and helpful next steps.</p>
             <?php if ($registered === '1'): ?>
@@ -135,7 +123,7 @@ $imNewIntroImage = $imNewIntroImage ?? '';
                     <label for="visitor-message">Message (optional)</label>
                     <textarea id="visitor-message" name="message" rows="3" placeholder="Any questions or how we can help?"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Register My Visit</button>
+                <button type="submit" class="btn btn-primary">Submit my info</button>
             </form>
         </div>
     </div>
