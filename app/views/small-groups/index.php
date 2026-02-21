@@ -20,7 +20,7 @@ $baseUrl = rtrim(BASE_URL, '/');
                 <div class="ministry-card-body">
                     <h3><?= htmlspecialchars($g['title']) ?></h3>
                     <div class="ministry-card-tagline"><?= rich_content($g['tagline'] ?? '') ?></div>
-                    <span class="link-arrow">Join group →</span>
+                    <span class="link-arrow">Read more →</span>
                 </div>
             </a>
             <?php endforeach; ?>
