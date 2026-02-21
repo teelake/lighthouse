@@ -85,6 +85,21 @@ if (!function_exists('job_type_label')) {
     }
 }
 
+/** Engagement type labels for job applications */
+if (!function_exists('engagement_type_label')) {
+    function engagement_type_label(?string $type): string
+    {
+        $labels = [
+            'full-time' => 'Full-Time',
+            'part-time' => 'Part-Time',
+            'full-time-part-time' => 'Full-Time / Part-Time',
+            'internship' => 'Internship',
+            'volunteer' => 'Volunteer',
+        ];
+        return $labels[$type ?? ''] ?? ucfirst(str_replace('-', ' ', $type ?? ''));
+    }
+}
+
 /**
  * Get hero background image URL for an inner page.
  * About uses about_hero_image; other pages use page_hero_image.
