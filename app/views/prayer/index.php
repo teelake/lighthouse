@@ -7,6 +7,7 @@ $submitted = isset($_GET['submitted']);
 $posted = isset($_GET['posted']);
 $wallError = $_GET['error'] ?? null;
 $isLoggedIn = $isLoggedIn ?? false;
+$canPostOnWall = $canPostOnWall ?? false;
 $wallPosts = $wallPosts ?? [];
 $wallUsers = $wallUsers ?? [];
 $loginUrl = (function_exists('admin_url') ? admin_url('login') : $baseUrl . '/admin/login') . '?redirect=' . urlencode('prayer');
@@ -43,6 +44,10 @@ $loginUrl = (function_exists('admin_url') ? admin_url('login') : $baseUrl . '/ad
         <div class="prayer-msg prayer-msg--error" role="alert">
             <p>Something went wrong. Please try again.</p>
         </div>
+        <?php elseif ($wallError === 'not_member'): ?>
+        <div class="prayer-msg prayer-msg--error" role="alert">
+            <p>The Prayer Wall is for church members only. <a href="<?= $baseUrl ?>/im-new">Get connected</a> with us to join as a member.</p>
+        </div>
         <?php endif; ?>
 
         <div class="prayer-grid">
@@ -67,8 +72,8 @@ $loginUrl = (function_exists('admin_url') ? admin_url('login') : $baseUrl . '/ad
             </div>
             <div class="prayer-wall-card">
                 <h2 class="about-section-title">Prayer Wall</h2>
-                <p class="prayer-desc">A space for church members to post prayer points and invite others to pray. Share openly or anonymously.</p>
-                <?php if ($isLoggedIn): ?>
+                <p class="prayer-desc">A space for church members to post prayer points and invite others to pray. You can share openly or post anonymously—either way, the church family stands with you.</p>
+                <?php if ($canPostOnWall): ?>
                 <form class="prayer-wall-form" action="<?= $baseUrl ?>/prayer-wall/post" method="post">
                     <?= csrf_field() ?>
                     <div class="form-group">
@@ -77,12 +82,14 @@ $loginUrl = (function_exists('admin_url') ? admin_url('login') : $baseUrl . '/ad
                     </div>
                     <div class="form-group form-check">
                         <input type="checkbox" id="wall-anonymous" name="is_anonymous" value="1">
-                        <label for="wall-anonymous">Post anonymously</label>
+                        <label for="wall-anonymous">Post anonymously (your name won't be shown)</label>
                     </div>
                     <button type="submit" class="btn btn-accent">Post to Wall</button>
                 </form>
+                <?php elseif ($isLoggedIn): ?>
+                <p class="prayer-note">The Prayer Wall is for church members only. <a href="<?= $baseUrl ?>/im-new">Get connected</a> with us to join as a member and post prayer points.</p>
                 <?php else: ?>
-                <p class="prayer-note">You must be signed in to post on the Prayer Wall. <a href="<?= htmlspecialchars($loginUrl) ?>">Sign in</a> to post, or <a href="<?= $baseUrl ?>/im-new">get connected</a> if you're new.</p>
+                <p class="prayer-note">You must be a church member to post on the Prayer Wall. <a href="<?= htmlspecialchars($loginUrl) ?>">Sign in</a> if you're already a member, or <a href="<?= $baseUrl ?>/im-new">get connected</a> to join.</p>
                 <?php endif; ?>
             </div>
         </div>
@@ -90,7 +97,7 @@ $loginUrl = (function_exists('admin_url') ? admin_url('login') : $baseUrl . '/ad
         <div id="wall" class="prayer-wall-posts">
             <h2 class="about-section-title">Prayer Wall</h2>
             <?php if (empty($wallPosts)): ?>
-            <p class="prayer-desc">No prayer points yet. <?= $isLoggedIn ? 'Be the first to post above!' : 'Sign in to post a prayer point.' ?></p>
+            <p class="prayer-desc">No prayer points yet. <?= $canPostOnWall ? 'Be the first to post above!' : ($isLoggedIn ? 'The Prayer Wall is for church members.' : 'Sign in as a member to post a prayer point.') ?></p>
             <?php else: ?>
             <div class="prayer-wall-list">
                 <?php foreach ($wallPosts as $p): ?>

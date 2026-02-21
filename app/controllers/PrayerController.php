@@ -11,6 +11,8 @@ class PrayerController extends Controller
     {
         $sections = (new ContentSection())->getAllKeyed();
         $isLoggedIn = isset($_SESSION['user_id']);
+        $userRole = $_SESSION['user_role'] ?? '';
+        $canPostOnWall = $isLoggedIn && $userRole === 'member';
         $wallPosts = (new PrayerWall())->findAll([], 'created_at DESC', 50);
         $users = [];
         if (!empty($wallPosts)) {
@@ -24,6 +26,7 @@ class PrayerController extends Controller
             'pageTitle' => 'Prayer - Lighthouse Global Church',
             'sections' => $sections,
             'isLoggedIn' => $isLoggedIn,
+            'canPostOnWall' => $canPostOnWall,
             'currentUser' => $isLoggedIn ? ['id' => $_SESSION['user_id'], 'name' => $_SESSION['user_name'] ?? '', 'email' => $_SESSION['user_email'] ?? ''] : null,
             'wallPosts' => $wallPosts,
             'wallUsers' => $users,
@@ -42,6 +45,10 @@ class PrayerController extends Controller
             $redir = urlencode('prayer');
             $loginUrl = (function_exists('admin_url') ? admin_url('login') : '/admin/login') . '?redirect=' . $redir;
             $this->redirect($loginUrl);
+        }
+        $userRole = $_SESSION['user_role'] ?? '';
+        if ($userRole !== 'member') {
+            $this->redirect('/prayer?error=not_member');
         }
         if (!csrf_verify()) {
             $this->redirect('/prayer?error=csrf');
