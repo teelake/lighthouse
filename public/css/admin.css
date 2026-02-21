@@ -1100,3 +1100,94 @@
 }
 .job-app-view-empty { margin: 0; color: var(--adm-muted); font-style: italic; }
 .job-app-view-meta .job-app-view-value { color: var(--adm-muted); font-size: 0.875rem; }
+
+/* Job applications filters */
+.job-app-filters {
+    margin-bottom: 1.5rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--adm-border);
+}
+.job-app-filters-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 1rem;
+}
+.job-app-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+.job-app-filter label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--adm-muted);
+}
+.job-app-filter input,
+.job-app-filter select {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8125rem;
+    border: 1px solid var(--adm-border);
+    border-radius: var(--adm-radius-sm);
+    min-width: 140px;
+}
+.job-app-filter-search input { min-width: 160px; }
+.job-app-filter-actions {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+.job-app-filter-actions .btn { flex-shrink: 0; }
+
+/* Job applications pagination */
+.job-app-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--adm-border);
+}
+.job-app-pagination-info {
+    font-size: 0.875rem;
+    color: var(--adm-muted);
+}
+.job-app-pagination-links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.job-app-pagination-link,
+.job-app-pagination-current {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    border-radius: var(--adm-radius-sm);
+    text-decoration: none;
+    color: var(--adm-text);
+    transition: var(--adm-transition);
+}
+.job-app-pagination-link:hover {
+    background: var(--adm-bg);
+    color: var(--adm-accent);
+}
+.job-app-pagination-current {
+    background: var(--adm-sidebar);
+    color: #fff;
+    cursor: default;
+}
+.job-app-pagination-ellipsis {
+    padding: 0 0.25rem;
+    font-size: 0.875rem;
+    color: var(--adm-muted);
+}
