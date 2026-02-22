@@ -5,8 +5,13 @@
     <form method="post" action="<?= admin_url('settings/payment') ?>">
         <?= csrf_field() ?>
         <div class="form-group">
-            <label>PayPal Email</label>
-            <input type="email" name="paypal_email" value="<?= htmlspecialchars($paypal_email ?? 'give@thelighthouseglobal.org') ?>">
+            <label>PayPal Email (for giving)</label>
+            <input type="email" name="paypal_email" value="<?= htmlspecialchars($paypal_email ?? 'give@thelighthouseglobal.org') ?>" placeholder="give@thelighthouseglobal.org">
+        </div>
+        <div class="form-group">
+            <label>PayPal Donate URL</label>
+            <input type="url" name="paypal_donate_url" value="<?= htmlspecialchars($paypal_donate_url ?? '') ?>" placeholder="https://paypal.me/... or your PayPal donate link">
+            <p class="help-text">Direct link for "Give via PayPal" button. Leave blank to show "Contact to Give" instead.</p>
         </div>
         <div class="form-group">
             <label>Stripe Public Key</label>

@@ -1,4 +1,7 @@
 <div class="admin-card">
+    <?php if (!empty($flash ?? '')): ?>
+    <div class="alert alert-success" role="alert"><?= htmlspecialchars($flash) ?></div>
+    <?php endif; ?>
     <div class="admin-page-header">
         <div>
             <a href="<?= admin_url() ?>" class="admin-back-link">← Dashboard</a>

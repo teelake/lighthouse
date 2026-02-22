@@ -12,10 +12,14 @@
             <input type="email" name="email" value="<?= htmlspecialchars(($user ?? [])['email'] ?? '') ?>" <?= $user ? 'readonly' : 'required' ?>>
             <?php if ($user): ?><p class="help-text">Email cannot be changed.</p><?php endif; ?>
         </div>
+        <?php if ($user): ?>
         <div class="form-group">
-            <label>Password <?= $user ? '(leave blank to keep)' : '' ?></label>
-            <input type="password" name="password" <?= $user ? '' : 'required' ?> minlength="6">
+            <label>Password (leave blank to keep)</label>
+            <input type="password" name="password" minlength="6">
         </div>
+        <?php else: ?>
+        <p class="help-text" style="margin: 0 0 1rem; color: var(--adm-muted);">A password will be auto-generated and sent to the user's email.</p>
+        <?php endif; ?>
         <div class="form-group">
             <label>Role</label>
             <select name="role">

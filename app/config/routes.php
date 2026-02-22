@@ -25,6 +25,8 @@ $router->add('GET', 'ministries/{slug}', ['controller' => 'Ministry', 'action' =
 $router->add('GET', 'small-groups', ['controller' => 'SmallGroup', 'action' => 'index']);
 $router->add('GET', 'small-groups/{slug}', ['controller' => 'SmallGroup', 'action' => 'view']);
 $router->add('GET', 'giving', ['controller' => 'Giving', 'action' => 'index']);
+$router->add('POST', 'giving/create-checkout', ['controller' => 'Giving', 'action' => 'createCheckout']);
+$router->add('GET', 'giving/success', ['controller' => 'Giving', 'action' => 'success']);
 $router->add('GET', 'contact', ['controller' => 'Page', 'action' => 'contact']);
 $router->add('GET', 'faq', ['controller' => 'Page', 'action' => 'faq']);
 $router->add('GET', 'im-new', ['controller' => 'Page', 'action' => 'imNew']);

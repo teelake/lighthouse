@@ -97,11 +97,23 @@ class SettingController extends BaseController
         $s->set('footer_config', $config);
         $this->redirectAdmin('settings/footer');
     }
-    public function payment() { $this->requireAdmin(); $s = new Setting(); $this->render('admin/settings/payment', ['paypal_email' => $s->get('paypal_email'), 'stripe_public' => $s->get('stripe_public_key'), 'stripe_secret' => $s->get('stripe_secret_key'), 'pageHeading' => 'Payment Settings', 'currentPage' => 'settings']); }
+    public function payment() {
+        $this->requireAdmin();
+        $s = new Setting();
+        $this->render('admin/settings/payment', [
+            'paypal_email' => $s->get('paypal_email', 'give@thelighthouseglobal.org'),
+            'paypal_donate_url' => $s->get('paypal_donate_url', ''),
+            'stripe_public' => $s->get('stripe_public_key'),
+            'stripe_secret' => $s->get('stripe_secret_key'),
+            'pageHeading' => 'Payment Settings',
+            'currentPage' => 'settings',
+        ]);
+    }
     public function updatePayment() {
         $this->requireAdmin();
         $s = new Setting();
         $s->set('paypal_email', $this->post('paypal_email'));
+        $s->set('paypal_donate_url', trim($this->post('paypal_donate_url', '')));
         $s->set('stripe_public_key', $this->post('stripe_public_key'));
         if ($this->post('stripe_secret_key') !== '') $s->set('stripe_secret_key', $this->post('stripe_secret_key'));
         $this->redirectAdmin('settings/payment');

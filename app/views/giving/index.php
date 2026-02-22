@@ -1,11 +1,17 @@
 <?php
 ob_start();
 $baseUrl = rtrim(BASE_URL, '/');
-$sections = $sections ?? [];
-$givingIntro = $sections['giving_intro']['content'] ?? null;
-$givingWays = $sections['giving_ways']['content'] ?? null;
 $paypalEmail = $paypalEmail ?? 'give@thelighthouseglobal.org';
 $paypalUrl = $paypalUrl ?? '';
+$stripeConfigured = $stripeConfigured ?? false;
+$wallError = $_GET['error'] ?? null;
+$designations = [
+    'General' => 'General Fund',
+    'Teaching' => 'Teaching & Discipleship',
+    'Leadership' => 'Leadership Development',
+    'Missions' => 'Outreach & Missions',
+    'Operations' => 'Ministry Operations',
+];
 ?>
 <section class="section giving-page" data-animate>
     <div class="page-hero page-hero--giving">
@@ -17,64 +23,92 @@ $paypalUrl = $paypalUrl ?? '';
 
     <div class="container giving-content">
         <div class="giving-intro">
-            <h2 class="about-section-title">Partner With Us</h2>
-            <div class="about-story-body">
-                <?= rich_content($givingIntro ?? 'Giving is an act of worship and a covenant partnership in advancing God\'s kingdom. Your generosity supports teaching and discipleship, leadership development, outreach and missions, and ministry operations. Thank you for investing in what God is doing through Lighthouse.') ?>
+            <p class="giving-intro-lead">Giving is an act of worship and a covenant partnership in advancing God's kingdom.</p>
+            <p class="giving-intro-supports">Your generosity supports:</p>
+            <ul class="giving-intro-list">
+                <li>Teaching & discipleship</li>
+                <li>Leadership development</li>
+                <li>Outreach & missions</li>
+                <li>Ministry operations</li>
+            </ul>
+        </div>
+
+        <?php if ($wallError === 'amount'): ?>
+        <div class="giving-msg giving-msg--error" role="alert">
+            <p>Please enter a minimum amount of $0.50 CAD.</p>
+        </div>
+        <?php elseif ($wallError === 'stripe'): ?>
+        <div class="giving-msg giving-msg--error" role="alert">
+            <p>Unable to process payment. Please ensure Stripe is configured in admin settings, or contact us to give via PayPal.</p>
+        </div>
+        <?php elseif ($wallError === 'payment'): ?>
+        <div class="giving-msg giving-msg--error" role="alert">
+            <p>Payment could not be verified. Please try again or contact us.</p>
+        </div>
+        <?php endif; ?>
+
+        <div class="giving-options-grid">
+            <?php if ($stripeConfigured): ?>
+            <div class="giving-option-card giving-option-card--stripe">
+                <div class="giving-option-header">
+                    <span class="giving-option-badge">Online</span>
+                    <h2 class="giving-option-title">Give via Stripe</h2>
+                    <p class="giving-option-desc">Secure payment by credit or debit card. All amounts in Canadian dollars (CAD).</p>
+                </div>
+                <form class="giving-stripe-form" action="<?= $baseUrl ?>/giving/create-checkout" method="post">
+                    <div class="form-row form-row--amount">
+                        <label for="give-amount">Amount (CAD) *</label>
+                        <div class="amount-input-wrap">
+                            <span class="amount-prefix">$</span>
+                            <input type="number" id="give-amount" name="amount" step="0.01" min="0.50" required placeholder="25.00" value="<?= htmlspecialchars($_POST['amount'] ?? '') ?>">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="give-designation">Designation *</label>
+                        <select id="give-designation" name="designation" required>
+                            <?php foreach ($designations as $val => $label): ?>
+                            <option value="<?= htmlspecialchars($val) ?>" <?= ($_POST['designation'] ?? '') === $val ? 'selected' : '' ?>><?= htmlspecialchars($label) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <label for="give-purpose">Purpose (optional)</label>
+                        <input type="text" id="give-purpose" name="purpose" placeholder="e.g. Building fund, special offering" value="<?= htmlspecialchars($_POST['purpose'] ?? '') ?>">
+                    </div>
+                    <div class="form-row">
+                        <label for="give-name">Your name (optional)</label>
+                        <input type="text" id="give-name" name="donor_name" placeholder="For receipt" value="<?= htmlspecialchars($_POST['donor_name'] ?? '') ?>">
+                    </div>
+                    <div class="form-row">
+                        <label for="give-email">Email (optional)</label>
+                        <input type="email" id="give-email" name="donor_email" placeholder="For receipt" value="<?= htmlspecialchars($_POST['donor_email'] ?? '') ?>">
+                    </div>
+                    <button type="submit" class="btn btn-accent btn-giving-submit">Continue to Payment</button>
+                </form>
+            </div>
+            <?php endif; ?>
+
+            <div class="giving-option-card giving-option-card--paypal">
+                <div class="giving-option-header">
+                    <span class="giving-option-badge">PayPal</span>
+                    <h2 class="giving-option-title">Give via PayPal</h2>
+                    <p class="giving-option-desc">Send directly to our giving account.</p>
+                    <p class="giving-option-email"><a href="mailto:<?= htmlspecialchars($paypalEmail) ?>"><?= htmlspecialchars($paypalEmail) ?></a></p>
+                </div>
+                <?php if (!empty($paypalUrl)): ?>
+                <a href="<?= htmlspecialchars($paypalUrl) ?>" target="_blank" rel="noopener" class="btn btn-watch btn-giving-cta">Give via PayPal</a>
+                <?php else: ?>
+                <a href="mailto:<?= htmlspecialchars($paypalEmail) ?>?subject=Giving%20Inquiry" class="btn btn-watch btn-giving-cta">Contact to Give</a>
+                <?php endif; ?>
             </div>
         </div>
 
-        <div class="giving-pillars">
-            <div class="about-pillar stagger-item">
-                <div class="about-pillar-icon" aria-hidden="true">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                </div>
-                <h3 class="about-pillar-title">Teaching & Discipleship</h3>
-                <p class="about-pillar-text">Resources for growing in the Word and walking with Christ.</p>
-            </div>
-            <div class="about-pillar stagger-item">
-                <div class="about-pillar-icon" aria-hidden="true">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                </div>
-                <h3 class="about-pillar-title">Leadership Development</h3>
-                <p class="about-pillar-text">Equipping leaders for ministry and marketplace impact.</p>
-            </div>
-            <div class="about-pillar stagger-item">
-                <div class="about-pillar-icon" aria-hidden="true">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                </div>
-                <h3 class="about-pillar-title">Outreach & Missions</h3>
-                <p class="about-pillar-text">Taking the light to communities and nations.</p>
-            </div>
+        <div class="giving-note">
+            <p>For other giving platforms (bank transfer, etc.), please contact us at <a href="mailto:<?= htmlspecialchars($paypalEmail) ?>"><?= htmlspecialchars($paypalEmail) ?></a> or <a href="mailto:info@thelighthouseglobal.org">info@thelighthouseglobal.org</a>.</p>
         </div>
 
-        <div class="giving-ways">
-            <h2 class="about-section-title">Ways to Give</h2>
-            <div class="giving-options">
-                <div class="giving-option stagger-item">
-                    <h3>Online (Stripe)</h3>
-                    <p>Give securely via credit or debit card. Configured in admin settings.</p>
-                    <a href="<?= $baseUrl ?>/" class="btn btn-accent">Give Online</a>
-                </div>
-                <div class="giving-option stagger-item">
-                    <h3>PayPal</h3>
-                    <p>Send directly to <?= htmlspecialchars($paypalEmail) ?></p>
-                    <?php if (!empty($paypalUrl)): ?>
-                    <a href="<?= htmlspecialchars($paypalUrl) ?>" target="_blank" rel="noopener" class="btn btn-watch">Give via PayPal</a>
-                    <?php else: ?>
-                    <a href="mailto:<?= htmlspecialchars($paypalEmail) ?>?subject=Giving%20Inquiry" class="btn btn-watch">Contact to Give</a>
-                    <?php endif; ?>
-                </div>
-                <div class="giving-option stagger-item">
-                    <h3>In Person</h3>
-                    <p>Offerings are received during Sunday and Thursday services.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="giving-note"><?= rich_content($givingWays ?? 'For bank transfers or other giving methods, please contact us at ' . htmlspecialchars($paypalEmail) . '.') ?></div>
-
-        <div class="about-cta">
-            <a href="<?= $baseUrl ?>/contact" class="btn btn-accent">Contact Us</a>
+        <div class="giving-cta">
+            <a href="<?= $baseUrl ?>/contact" class="btn btn-outline-dark">Contact Us</a>
         </div>
     </div>
 </section>
