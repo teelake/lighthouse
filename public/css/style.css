@@ -2223,7 +2223,7 @@ body::before {
 
 /* Giving page */
 .giving-page { padding-top: 0; }
-.giving-content { padding: 3rem 1.5rem 4rem; max-width: 960px; margin: 0 auto; }
+.giving-content { padding: 3rem 1.5rem 4rem; max-width: 1120px; margin: 0 auto; }
 .giving-intro { margin-bottom: 2.5rem; }
 .giving-intro-lead { font-size: 1.2rem; line-height: 1.7; color: var(--color-dark); margin: 0 0 1rem; font-weight: 500; }
 .giving-intro-supports { font-size: 1rem; font-weight: 600; margin: 0 0 0.5rem; color: var(--color-dark); }
@@ -2232,10 +2232,16 @@ body::before {
 .giving-msg--error { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
 .giving-options-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: 1fr;
     gap: 2rem;
     margin-bottom: 2.5rem;
-    align-items: start; /* Cards size to content; PayPal no longer stretches to match Stripe */
+    align-items: start;
+}
+.giving-options-grid--two {
+    grid-template-columns: 1.4fr 1fr; /* Stripe wider; PayPal compact */
+}
+@media (max-width: 768px) {
+    .giving-options-grid--two { grid-template-columns: 1fr; }
 }
 .giving-option-card {
     background: #fff;
@@ -2259,6 +2265,18 @@ body::before {
 .giving-option-email { margin: 0.5rem 0 0; font-size: 1rem; }
 .giving-option-email a { color: var(--color-primary-on-light); font-weight: 600; text-decoration: underline; }
 .giving-stripe-form .form-row { margin-bottom: 1.25rem; }
+.giving-stripe-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+.giving-stripe-form-row .form-row { margin-bottom: 0; }
+@media (max-width: 600px) {
+    .giving-stripe-form-row { grid-template-columns: 1fr; }
+    .giving-stripe-form-row .form-row { margin-bottom: 1.25rem; }
+    .giving-stripe-form-row .form-row:last-child { margin-bottom: 0; }
+}
 .giving-stripe-form label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.35rem; color: var(--color-dark); }
 .giving-stripe-form input, .giving-stripe-form select {
     width: 100%; padding: 0.75rem 1rem; border: 2px solid rgba(26,26,26,0.12); border-radius: var(--radius-sm);
@@ -2272,16 +2290,27 @@ body::before {
 .form-row--amount input { border: none !important; flex: 1; }
 .btn-giving-submit { width: 100%; margin-top: 0.5rem; padding: 0.9rem 1.5rem; font-size: 1rem; }
 .btn-giving-cta { display: block; text-align: center; padding: 0.9rem 1.5rem; }
-.giving-note { margin: 0 0 2rem; font-size: 0.95rem; color: var(--color-muted); line-height: 1.7; }
-.giving-note a { color: var(--color-primary-on-light); text-decoration: underline; }
-.giving-cta { text-align: center; }
-/* Contact Us on light background: use dark text for visibility */
-.giving-cta .btn-outline {
+/* Footer: other giving options + Contact Us – below both cards, compact */
+.giving-footer {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    background: var(--color-bg-warm);
+    border-radius: var(--radius);
+    border: 1px solid rgba(255,225,0,0.2);
+}
+.giving-footer-text {
+    margin: 0 0 1rem;
+    font-size: 0.95rem;
+    color: var(--color-muted);
+    line-height: 1.6;
+}
+.giving-footer-text a { color: var(--color-primary-on-light); text-decoration: underline; }
+.giving-footer .btn-outline {
     background: transparent;
     color: var(--color-primary-on-light);
     border: 2px solid var(--color-primary);
 }
-.giving-cta .btn-outline:hover {
+.giving-footer .btn-outline:hover {
     background: var(--color-gold-bg);
     color: var(--color-dark);
     border-color: var(--color-primary-on-light);

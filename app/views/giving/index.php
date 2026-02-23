@@ -52,7 +52,7 @@ $designations = [
         </div>
         <?php endif; ?>
 
-        <div class="giving-options-grid">
+        <div class="giving-options-grid<?= $stripeConfigured ? ' giving-options-grid--two' : '' ?>">
             <?php if ($stripeConfigured): ?>
             <div class="giving-option-card giving-option-card--stripe">
                 <div class="giving-option-header">
@@ -69,25 +69,29 @@ $designations = [
                             <input type="number" id="give-amount" name="amount" step="0.01" min="0.50" required placeholder="25.00" value="<?= htmlspecialchars($_POST['amount'] ?? '') ?>">
                         </div>
                     </div>
-                    <div class="form-row">
-                        <label for="give-designation">Designation *</label>
-                        <select id="give-designation" name="designation" required>
-                            <?php foreach ($designations as $val => $label): ?>
-                            <option value="<?= htmlspecialchars($val) ?>" <?= ($_POST['designation'] ?? '') === $val ? 'selected' : '' ?>><?= htmlspecialchars($label) ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                    <div class="giving-stripe-form-row">
+                        <div class="form-row">
+                            <label for="give-designation">Designation *</label>
+                            <select id="give-designation" name="designation" required>
+                                <?php foreach ($designations as $val => $label): ?>
+                                <option value="<?= htmlspecialchars($val) ?>" <?= ($_POST['designation'] ?? '') === $val ? 'selected' : '' ?>><?= htmlspecialchars($label) ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <label for="give-purpose">Purpose (optional)</label>
+                            <input type="text" id="give-purpose" name="purpose" placeholder="e.g. Building fund, special offering" value="<?= htmlspecialchars($_POST['purpose'] ?? '') ?>">
+                        </div>
                     </div>
-                    <div class="form-row">
-                        <label for="give-purpose">Purpose (optional)</label>
-                        <input type="text" id="give-purpose" name="purpose" placeholder="e.g. Building fund, special offering" value="<?= htmlspecialchars($_POST['purpose'] ?? '') ?>">
-                    </div>
-                    <div class="form-row">
-                        <label for="give-name">Your name (optional)</label>
-                        <input type="text" id="give-name" name="donor_name" placeholder="For receipt" value="<?= htmlspecialchars($_POST['donor_name'] ?? '') ?>">
-                    </div>
-                    <div class="form-row">
-                        <label for="give-email">Email (optional)</label>
-                        <input type="email" id="give-email" name="donor_email" placeholder="For receipt" value="<?= htmlspecialchars($_POST['donor_email'] ?? '') ?>">
+                    <div class="giving-stripe-form-row">
+                        <div class="form-row">
+                            <label for="give-name">Your name (optional)</label>
+                            <input type="text" id="give-name" name="donor_name" placeholder="For receipt" value="<?= htmlspecialchars($_POST['donor_name'] ?? '') ?>">
+                        </div>
+                        <div class="form-row">
+                            <label for="give-email">Email (optional)</label>
+                            <input type="email" id="give-email" name="donor_email" placeholder="For receipt" value="<?= htmlspecialchars($_POST['donor_email'] ?? '') ?>">
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-accent btn-giving-submit">Continue to Payment</button>
                 </form>
@@ -109,11 +113,8 @@ $designations = [
             </div>
         </div>
 
-        <div class="giving-note">
-            <p>For other giving platforms (bank transfer, etc.), please contact us at <a href="mailto:<?= htmlspecialchars($paypalEmail) ?>"><?= htmlspecialchars($paypalEmail) ?></a> or <a href="mailto:info@thelighthouseglobal.org">info@thelighthouseglobal.org</a>.</p>
-        </div>
-
-        <div class="giving-cta">
+        <div class="giving-footer">
+            <p class="giving-footer-text">For other giving platforms (bank transfer, etc.), please contact us at <a href="mailto:<?= htmlspecialchars($paypalEmail) ?>"><?= htmlspecialchars($paypalEmail) ?></a> or <a href="mailto:info@thelighthouseglobal.org">info@thelighthouseglobal.org</a>.</p>
             <a href="<?= $baseUrl ?>/contact" class="btn btn-outline">Contact Us</a>
         </div>
     </div>
