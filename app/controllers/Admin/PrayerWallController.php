@@ -101,7 +101,7 @@ class PrayerWallController extends BaseController
         }
         $request = trim($this->post('request', ''));
         $isAnonymous = (int) $this->post('is_anonymous', 0);
-        if ($request === '') {
+        if ($request === '' || $request === '<p><br></p>') {
             $this->redirectAdmin('prayer-wall?error=empty');
         }
         try {
@@ -206,10 +206,16 @@ class PrayerWallController extends BaseController
 
     public function deletePost()
     {
-        $this->requireAdmin();
+        $this->requireAuth();
         if (!csrf_verify()) return $this->redirectAdmin('prayer-wall');
         $id = (int)($this->params['id'] ?? 0);
-        if ($id) (new PrayerWall())->delete($id);
+        if (!$id) $this->redirectAdmin('prayer-wall');
+        $post = (new PrayerWall())->find($id);
+        if (!$post) $this->redirectAdmin('prayer-wall');
+        $role = $_SESSION['user_role'] ?? '';
+        $canDelete = $role === 'admin' || ($role === 'member' && ($post['user_id'] ?? 0) == ($_SESSION['user_id'] ?? 0));
+        if (!$canDelete) $this->unauthorized();
+        (new PrayerWall())->delete($id);
         $this->redirectAdmin('prayer-wall');
     }
 }

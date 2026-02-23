@@ -39,7 +39,10 @@ class DashboardController extends BaseController
             'donations_total' => $this->safeDonationTotal(),
         ];
 
-        $upcomingEvents = (new Event())->findAll(['is_published' => 1], 'event_date ASC', 5);
+        $role = $_SESSION['user_role'] ?? 'member';
+        $upcomingEvents = $role === 'member'
+            ? (new Event())->findUpcoming(5)
+            : (new Event())->findAll(['is_published' => 1], 'event_date ASC', 5);
         $latestNewsletter = (new NewsletterSubscriber())->findAll([], 'subscribed_at DESC', 8);
         $latestJobApps = (new JobApplication())->findAll([], 'created_at DESC', 8);
         $latestVisitors = $isAdmin ? (new FirstTimeVisitor())->findAll([], 'created_at DESC', 8) : [];
@@ -91,11 +94,15 @@ class DashboardController extends BaseController
             }
         }
 
+        $ministries = $role === 'member' ? (new Ministry())->findAll(['is_published' => 1], 'title ASC', 20) : [];
+
         $this->render('admin/dashboard/index', [
             'pageTitle' => 'Dashboard',
             'pageHeading' => 'Dashboard',
             'currentPage' => 'dashboard',
-            'role' => $_SESSION['user_role'] ?? 'member',
+            'role' => $role,
+            'userName' => $_SESSION['user_name'] ?? 'User',
+            'ministries' => $ministries,
             'stats' => $stats,
             'upcomingEvents' => $upcomingEvents,
             'latestNewsletter' => $latestNewsletter,

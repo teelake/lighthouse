@@ -10,6 +10,8 @@ $prayerUsers = isset($prayerUsers) ? $prayerUsers : [];
 $isEditor = isset($isEditor) ? $isEditor : false;
 $isAdmin = isset($isAdmin) ? $isAdmin : false;
 $isMember = isset($role) && $role === 'member';
+$userName = $userName ?? 'User';
+$ministries = $ministries ?? [];
 $chartMonths = isset($chartMonths) ? $chartMonths : [];
 $chartSubscribers = isset($chartSubscribers) ? $chartSubscribers : [];
 $chartApplications = isset($chartApplications) ? $chartApplications : [];
@@ -34,26 +36,36 @@ function dash_time_ago($date) {
                 <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M24 8L8 16v16h32V16L24 8z"/><path d="M24 16v16"/><path d="M8 16h32"/></svg>
             </div>
             <div>
+                <?php if ($isMember): ?>
+                <h2 class="dash-hero-title">Welcome, <?= htmlspecialchars($userName) ?>!</h2>
+                <p class="dash-hero-desc">Your member dashboard. Connect with your church family, share prayer points, and stay up to date.</p>
+                <?php elseif ($isEditor && !$isAdmin): ?>
+                <h2 class="dash-hero-title">Content Management</h2>
+                <p class="dash-hero-desc">Create and manage church content, events, ministries, and more.</p>
+                <?php else: ?>
                 <h2 class="dash-hero-title">Lighthouse Admin</h2>
                 <p class="dash-hero-desc">Manage your church content, events, and community from one place.</p>
+                <?php endif; ?>
             </div>
         </div>
     </div>
 
     <!-- KPI row - at a glance -->
     <div class="dash-kpi">
-        <a href="<?= admin_url('events') ?>" class="dash-kpi-card">
+        <a href="<?= $isMember ? (rtrim(BASE_URL, '/') . '/events') : admin_url('events') ?>" class="dash-kpi-card">
             <span class="dash-kpi-value"><?= (int)(isset($stats['events']) ? $stats['events'] : 0) ?></span>
             <span class="dash-kpi-label">Events</span>
         </a>
-        <a href="<?= admin_url('ministries') ?>" class="dash-kpi-card">
+        <a href="<?= $isMember ? (rtrim(BASE_URL, '/') . '/ministries') : admin_url('ministries') ?>" class="dash-kpi-card">
             <span class="dash-kpi-value"><?= (int)(isset($stats['ministries']) ? $stats['ministries'] : 0) ?></span>
             <span class="dash-kpi-label">Ministries</span>
         </a>
+        <?php if (!$isMember): ?>
         <a href="<?= admin_url('media') ?>" class="dash-kpi-card">
             <span class="dash-kpi-value"><?= (int)(isset($stats['media']) ? $stats['media'] : 0) ?></span>
             <span class="dash-kpi-label">Media</span>
         </a>
+        <?php endif; ?>
         <?php if ($isMember) { ?>
         <a href="<?= admin_url('prayer-wall') ?>" class="dash-kpi-card dash-kpi-accent">
             <span class="dash-kpi-value"><?= (int)(isset($stats['prayer_wall']) ? $stats['prayer_wall'] : 0) ?></span>
@@ -274,14 +286,38 @@ function dash_time_ago($date) {
             <div class="dash-widget">
                 <div class="dash-widget-head">
                     <h2 class="dash-widget-title">Upcoming Events</h2>
-                    <a href="<?= admin_url('events') ?>" class="dash-widget-link">All</a>
+                    <a href="<?= $isMember ? (rtrim(BASE_URL, '/') . '/events') : admin_url('events') ?>" class="dash-widget-link">All</a>
                 </div>
                 <ul class="dash-list dash-list-events">
                     <?php foreach ($upcomingEvents as $e) { ?>
                     <li class="dash-list-item">
+                        <?php if ($isMember): ?>
+                        <a href="<?= rtrim(BASE_URL, '/') ?>/events/<?= htmlspecialchars($e['slug'] ?? '') ?>" class="dash-list-link">
+                            <span class="dash-list-main"><?= htmlspecialchars(isset($e['title']) ? $e['title'] : '') ?></span>
+                            <span class="dash-list-meta"><?= htmlspecialchars(isset($e['event_date']) ? $e['event_date'] : '') ?></span>
+                        </a>
+                        <?php else: ?>
                         <a href="<?= admin_url('events/' . (isset($e['id']) ? $e['id'] : '') . '/edit') ?>" class="dash-list-link">
                             <span class="dash-list-main"><?= htmlspecialchars(isset($e['title']) ? $e['title'] : '') ?></span>
                             <span class="dash-list-meta"><?= htmlspecialchars(isset($e['event_date']) ? $e['event_date'] : '') ?></span>
+                        </a>
+                        <?php endif; ?>
+                    </li>
+                    <?php } ?>
+                </ul>
+            </div>
+            <?php } ?>
+            <?php if ($isMember && !empty($ministries)) { ?>
+            <div class="dash-widget">
+                <div class="dash-widget-head">
+                    <h2 class="dash-widget-title">Ministries</h2>
+                    <a href="<?= rtrim(BASE_URL, '/') ?>/ministries" class="dash-widget-link">All</a>
+                </div>
+                <ul class="dash-list dash-list-events">
+                    <?php foreach ($ministries as $m) { ?>
+                    <li class="dash-list-item">
+                        <a href="<?= rtrim(BASE_URL, '/') ?>/ministries/<?= htmlspecialchars($m['slug'] ?? '') ?>" class="dash-list-link">
+                            <span class="dash-list-main"><?= htmlspecialchars($m['title'] ?? '') ?></span>
                         </a>
                     </li>
                     <?php } ?>
