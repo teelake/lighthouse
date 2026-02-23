@@ -30,6 +30,10 @@ class GivingController extends Controller
             $this->redirect('/giving');
             return;
         }
+        if (!csrf_verify()) {
+            $this->redirect('/giving?error=csrf');
+            return;
+        }
         $baseUrl = rtrim(BASE_URL ?? '', '/');
         $amount = (float) ($this->post('amount', 0));
         $designation = trim($this->post('designation', 'General'));

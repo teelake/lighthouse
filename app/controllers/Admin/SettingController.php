@@ -104,7 +104,7 @@ class SettingController extends BaseController
             'paypal_email' => $s->get('paypal_email', 'give@thelighthouseglobal.org'),
             'paypal_donate_url' => $s->get('paypal_donate_url', ''),
             'stripe_public' => $s->get('stripe_public_key'),
-            'stripe_secret' => $s->get('stripe_secret_key'),
+            'stripe_secret_is_set' => $s->get('stripe_secret_key', '') !== '',
             'pageHeading' => 'Payment Settings',
             'currentPage' => 'settings',
         ]);

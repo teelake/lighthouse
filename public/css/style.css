@@ -1987,6 +1987,10 @@ body::before {
 
 /* Contact page */
 .contact-page { padding-top: 0; }
+.page-hero--giving {
+    background: linear-gradient(135deg, var(--color-dark) 0%, #1e2a3a 50%, #252525 100%);
+    background-image: radial-gradient(ellipse 120% 80% at 50% 0%, rgba(255,225,0,0.12), transparent 60%), linear-gradient(135deg, var(--color-dark) 0%, #252525 100%);
+}
 .page-hero--contact {
     background: linear-gradient(135deg, var(--color-dark) 0%, #1e2a3a 50%, #252525 100%);
     background-image: radial-gradient(ellipse 120% 80% at 50% 0%, rgba(255,225,0,0.12), transparent 60%), linear-gradient(135deg, var(--color-dark) 0%, #252525 100%);
@@ -2219,22 +2223,56 @@ body::before {
 
 /* Giving page */
 .giving-page { padding-top: 0; }
-.giving-content { padding: 3rem 1.5rem 4rem; }
-.giving-intro { max-width: 720px; margin-bottom: 2.5rem; }
-.giving-pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
-.giving-ways { margin-bottom: 2rem; }
-.giving-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-.giving-option {
-    background: var(--color-bg-warm);
-    border: 2px solid rgba(255,225,0,0.2);
+.giving-content { padding: 3rem 1.5rem 4rem; max-width: 960px; margin: 0 auto; }
+.giving-intro { margin-bottom: 2.5rem; }
+.giving-intro-lead { font-size: 1.2rem; line-height: 1.7; color: var(--color-dark); margin: 0 0 1rem; font-weight: 500; }
+.giving-intro-supports { font-size: 1rem; font-weight: 600; margin: 0 0 0.5rem; color: var(--color-dark); }
+.giving-intro-list { margin: 0 0 0 1.25rem; padding: 0; list-style: disc; color: var(--color-muted); line-height: 1.8; }
+.giving-msg { padding: 1rem 1.25rem; border-radius: var(--radius); margin-bottom: 1.5rem; }
+.giving-msg--error { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+.giving-options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 2.5rem; }
+.giving-option-card {
+    background: #fff;
+    border: 2px solid rgba(255,225,0,0.25);
     border-radius: var(--radius);
     padding: 2rem;
     transition: var(--transition);
+    box-shadow: var(--shadow);
 }
-.giving-option:hover { border-color: rgba(255,225,0,0.4); }
-.giving-option h3 { margin: 0 0 0.5rem; font-family: var(--font-heading); font-size: 1.15rem; color: var(--color-dark); }
-.giving-option p { margin: 0 0 1rem; font-size: 0.95rem; color: var(--color-muted); }
+.giving-option-card:hover { border-color: rgba(255,225,0,0.5); }
+.giving-option-card--stripe { }
+.giving-option-card--paypal { display: flex; flex-direction: column; }
+.giving-option-header { margin-bottom: 1.5rem; }
+.giving-option-badge { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-primary-on-light); background: var(--color-gold-bg); padding: 0.25rem 0.6rem; border-radius: 4px; margin-bottom: 0.75rem; }
+.giving-option-title { margin: 0 0 0.5rem; font-family: var(--font-heading); font-size: 1.35rem; color: var(--color-dark); }
+.giving-option-desc { margin: 0 0 0.5rem; font-size: 0.95rem; color: var(--color-muted); line-height: 1.5; }
+.giving-option-email { margin: 0.5rem 0 0; font-size: 1rem; }
+.giving-option-email a { color: var(--color-primary-on-light); font-weight: 600; text-decoration: underline; }
+.giving-stripe-form .form-row { margin-bottom: 1.25rem; }
+.giving-stripe-form label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.35rem; color: var(--color-dark); }
+.giving-stripe-form input, .giving-stripe-form select {
+    width: 100%; padding: 0.75rem 1rem; border: 2px solid rgba(26,26,26,0.12); border-radius: var(--radius-sm);
+    font-size: 1rem; font-family: var(--font-sans);
+}
+.giving-stripe-form input:focus, .giving-stripe-form select:focus {
+    outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(255,225,0,0.25);
+}
+.form-row--amount .amount-input-wrap { display: flex; align-items: center; border: 2px solid rgba(26,26,26,0.12); border-radius: var(--radius-sm); overflow: hidden; }
+.form-row--amount .amount-prefix { padding: 0.75rem 1rem; background: var(--color-bg-warm); font-weight: 600; color: var(--color-muted); }
+.form-row--amount input { border: none !important; flex: 1; }
+.btn-giving-submit { width: 100%; margin-top: 0.5rem; padding: 0.9rem 1.5rem; font-size: 1rem; }
+.btn-giving-cta { display: block; text-align: center; padding: 0.9rem 1.5rem; }
 .giving-note { margin: 0 0 2rem; font-size: 0.95rem; color: var(--color-muted); line-height: 1.7; }
+.giving-note a { color: var(--color-primary-on-light); text-decoration: underline; }
+.giving-cta { text-align: center; }
+/* Giving success page */
+.giving-success-page { padding: 4rem 1.5rem; min-height: 50vh; display: flex; align-items: center; }
+.giving-success-content { max-width: 480px; margin: 0 auto; }
+.giving-success-card { background: #fff; border: 2px solid rgba(255,225,0,0.3); border-radius: var(--radius); padding: 3rem; text-align: center; box-shadow: var(--shadow); }
+.giving-success-icon { color: #22c55e; margin-bottom: 1rem; }
+.giving-success-title { margin: 0 0 0.5rem; font-family: var(--font-heading); font-size: 2rem; color: var(--color-dark); }
+.giving-success-amount { margin: 0 0 1rem; font-size: 1.5rem; font-weight: 700; color: var(--color-primary-on-light); }
+.giving-success-message { margin: 0 0 1.5rem; color: var(--color-muted); line-height: 1.6; }
 
 /* Prayer page */
 .prayer-page { padding-top: 0; }

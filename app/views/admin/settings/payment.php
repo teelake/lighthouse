@@ -19,7 +19,7 @@
         </div>
         <div class="form-group">
             <label>Stripe Secret Key</label>
-            <input type="password" name="stripe_secret_key" placeholder="<?= !empty($stripe_secret) ? '•••••••• (set, leave blank to keep)' : 'sk_...' ?>">
+            <input type="password" name="stripe_secret_key" placeholder="<?= !empty($stripe_secret_is_set) ? '•••••••• (set, leave blank to keep)' : 'sk_...' ?>">
             <p class="help-text">Leave blank to keep current value.</p>
         </div>
         <div class="form-actions">

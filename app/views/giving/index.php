@@ -41,6 +41,10 @@ $designations = [
         <div class="giving-msg giving-msg--error" role="alert">
             <p>Unable to process payment. Please ensure Stripe is configured in admin settings, or contact us to give via PayPal.</p>
         </div>
+        <?php elseif ($wallError === 'csrf'): ?>
+        <div class="giving-msg giving-msg--error" role="alert">
+            <p>Invalid request. Please try again.</p>
+        </div>
         <?php elseif ($wallError === 'payment'): ?>
         <div class="giving-msg giving-msg--error" role="alert">
             <p>Payment could not be verified. Please try again or contact us.</p>
@@ -56,6 +60,7 @@ $designations = [
                     <p class="giving-option-desc">Secure payment by credit or debit card. All amounts in Canadian dollars (CAD).</p>
                 </div>
                 <form class="giving-stripe-form" action="<?= $baseUrl ?>/giving/create-checkout" method="post">
+                    <?= csrf_field() ?>
                     <div class="form-row form-row--amount">
                         <label for="give-amount">Amount (CAD) *</label>
                         <div class="amount-input-wrap">
@@ -108,7 +113,7 @@ $designations = [
         </div>
 
         <div class="giving-cta">
-            <a href="<?= $baseUrl ?>/contact" class="btn btn-outline-dark">Contact Us</a>
+            <a href="<?= $baseUrl ?>/contact" class="btn btn-outline">Contact Us</a>
         </div>
     </div>
 </section>

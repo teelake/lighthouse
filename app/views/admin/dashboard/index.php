@@ -70,6 +70,10 @@ function dash_time_ago($date) {
             <span class="dash-kpi-value"><?= (int)(isset($stats['visitors']) ? $stats['visitors'] : 0) ?></span>
             <span class="dash-kpi-label">Visitors</span>
         </a>
+        <a href="<?= admin_url('donations') ?>" class="dash-kpi-card">
+            <span class="dash-kpi-value">$<?= number_format($stats['donations_total'] ?? 0, 0) ?></span>
+            <span class="dash-kpi-label">Donations</span>
+        </a>
         <?php } ?>
     </div>
 

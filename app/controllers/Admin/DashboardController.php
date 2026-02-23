@@ -15,6 +15,7 @@ use App\Models\NewsletterSubscriber;
 use App\Models\FirstTimeVisitor;
 use App\Models\PrayerRequest;
 use App\Models\PrayerWall;
+use App\Models\Donation;
 use App\Models\User;
 
 class DashboardController extends BaseController
@@ -34,6 +35,8 @@ class DashboardController extends BaseController
             'prayer_requests' => (new PrayerRequest())->count(),
             'prayer_wall' => (new PrayerWall())->count(),
             'visitors' => (new FirstTimeVisitor())->count(),
+            'donations' => $this->safeDonationCount(),
+            'donations_total' => $this->safeDonationTotal(),
         ];
 
         $upcomingEvents = (new Event())->findAll(['is_published' => 1], 'event_date ASC', 5);
@@ -107,5 +110,24 @@ class DashboardController extends BaseController
             'chartApplications' => $chartApplications,
             'chartVisitors' => $chartVisitors,
         ]);
+    }
+
+    private function safeDonationCount(): int
+    {
+        try {
+            return (new Donation())->count();
+        } catch (\Throwable $e) {
+            return 0;
+        }
+    }
+
+    private function safeDonationTotal(): float
+    {
+        try {
+            $r = (new Donation())->query("SELECT COALESCE(SUM(amount_cents), 0) as total FROM donations");
+            return ((int)($r[0]['total'] ?? 0)) / 100;
+        } catch (\Throwable $e) {
+            return 0;
+        }
     }
 }
