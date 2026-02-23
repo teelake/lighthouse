@@ -148,6 +148,8 @@ $router->add('GET', $adm . '/prayer-wall', ['controller' => 'Admin\PrayerWall', 
 $router->add('POST', $adm . '/prayer-wall/post', ['controller' => 'Admin\PrayerWall', 'action' => 'wallPost']);
 $router->add('GET', $adm . '/prayer-wall/requests/{id}', ['controller' => 'Admin\PrayerWall', 'action' => 'viewRequest']);
 $router->add('GET', $adm . '/prayer-wall/posts/{id}', ['controller' => 'Admin\PrayerWall', 'action' => 'viewPost']);
+$router->add('GET', $adm . '/prayer-wall/posts/{id}/edit', ['controller' => 'Admin\PrayerWall', 'action' => 'editPost']);
+$router->add('POST', $adm . '/prayer-wall/posts/{id}', ['controller' => 'Admin\PrayerWall', 'action' => 'updatePost']);
 $router->add('POST', $adm . '/prayer-wall/requests/{id}/delete', ['controller' => 'Admin\PrayerWall', 'action' => 'deleteRequest']);
 $router->add('POST', $adm . '/prayer-wall/posts/{id}/delete', ['controller' => 'Admin\PrayerWall', 'action' => 'deletePost']);
 

@@ -13,4 +13,12 @@ class Event extends Model
         $stmt->execute([$slug]);
         return $stmt->fetch() ?: null;
     }
+
+    /** Upcoming events only (event_date >= today) */
+    public function findUpcoming(int $limit = 10): array
+    {
+        $stmt = $this->db->prepare("SELECT * FROM `{$this->table}` WHERE is_published = 1 AND event_date >= CURDATE() ORDER BY event_date ASC LIMIT " . (int) $limit);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC) ?: [];
+    }
 }

@@ -21,9 +21,17 @@ class PrayerWallController extends BaseController
         $this->showManagementView();
     }
 
+    private const PER_PAGE = 15;
+
     private function showMemberWall(): void
     {
-        $posts = (new PrayerWall())->findAll([], 'created_at DESC', 50);
+        $page = max(1, (int)($_GET['page'] ?? 1));
+        $offset = ($page - 1) * self::PER_PAGE;
+        $result = (new PrayerWall())->findPaginated('created_at DESC', self::PER_PAGE, $offset);
+        $posts = $result['rows'];
+        $total = $result['total'];
+        $totalPages = max(1, (int) ceil($total / self::PER_PAGE));
+
         $users = [];
         if (!empty($posts)) {
             $userIds = array_unique(array_filter(array_column($posts, 'user_id')));
@@ -41,13 +49,24 @@ class PrayerWallController extends BaseController
             'users' => $users,
             'posted' => isset($_GET['posted']),
             'error' => $_GET['error'] ?? null,
+            'page' => $page,
+            'totalPages' => $totalPages,
+            'total' => $total,
+            'perPage' => self::PER_PAGE,
+            'currentUserId' => $_SESSION['user_id'] ?? 0,
         ]);
     }
 
     private function showManagementView(): void
     {
+        $page = max(1, (int)($_GET['page'] ?? 1));
+        $offset = ($page - 1) * self::PER_PAGE;
+        $result = (new PrayerWall())->findPaginated('created_at DESC', self::PER_PAGE, $offset);
+        $posts = $result['rows'];
+        $total = $result['total'];
+        $totalPages = max(1, (int) ceil($total / self::PER_PAGE));
+
         $requests = (new PrayerRequest())->findAll([], 'created_at DESC', 50);
-        $posts = (new PrayerWall())->findAll([], 'created_at DESC', 50);
         $users = [];
         if (!empty($posts)) {
             $userIds = array_unique(array_filter(array_column($posts, 'user_id')));
@@ -64,6 +83,10 @@ class PrayerWallController extends BaseController
             'requests' => $requests,
             'posts' => $posts,
             'users' => $users,
+            'page' => $page,
+            'totalPages' => $totalPages,
+            'total' => $total,
+            'perPage' => self::PER_PAGE,
         ]);
     }
 
@@ -111,7 +134,7 @@ class PrayerWallController extends BaseController
 
     public function viewPost()
     {
-        $this->requireEditor();
+        $this->requireAuth();
         $id = (int)($this->params['id'] ?? 0);
         if (!$id) $this->redirectAdmin('prayer-wall');
         $post = (new PrayerWall())->find($id);
@@ -121,14 +144,55 @@ class PrayerWallController extends BaseController
             $u = (new User())->find($post['user_id']);
             $author = $u['name'] ?? $u['email'] ?? 'Unknown';
         }
+        $role = $_SESSION['user_role'] ?? '';
+        $canEdit = $role === 'member' && ($post['user_id'] ?? 0) == ($_SESSION['user_id'] ?? 0);
         $this->render('admin/prayer-wall/view-post', [
             'pageTitle' => 'Prayer Wall Post',
             'pageHeading' => 'Prayer Wall Post',
             'currentPage' => 'prayer-wall',
             'post' => $post,
             'author' => $author,
-            'isAdmin' => ($_SESSION['user_role'] ?? '') === 'admin',
+            'isAdmin' => $role === 'admin',
+            'canEdit' => $canEdit,
         ]);
+    }
+
+    public function editPost()
+    {
+        $this->requireAuth();
+        if (($_SESSION['user_role'] ?? '') !== 'member') $this->unauthorized();
+        $id = (int)($this->params['id'] ?? 0);
+        if (!$id) $this->redirectAdmin('prayer-wall');
+        $post = (new PrayerWall())->find($id);
+        if (!$post || ($post['user_id'] ?? 0) != ($_SESSION['user_id'] ?? 0)) {
+            $this->redirectAdmin('prayer-wall');
+        }
+        $this->render('admin/prayer-wall/edit-post', [
+            'pageTitle' => 'Edit Prayer',
+            'pageHeading' => 'Edit Prayer',
+            'currentPage' => 'prayer-wall',
+            'post' => $post,
+        ]);
+    }
+
+    public function updatePost()
+    {
+        $this->requireAuth();
+        if (($_SESSION['user_role'] ?? '') !== 'member') $this->unauthorized();
+        if (!csrf_verify()) $this->redirectAdmin('prayer-wall?error=csrf');
+        $id = (int)($this->params['id'] ?? 0);
+        if (!$id) $this->redirectAdmin('prayer-wall');
+        $post = (new PrayerWall())->find($id);
+        if (!$post || ($post['user_id'] ?? 0) != ($_SESSION['user_id'] ?? 0)) {
+            $this->redirectAdmin('prayer-wall');
+        }
+        $request = trim($this->post('request', ''));
+        $isAnonymous = (int) $this->post('is_anonymous', 0);
+        if ($request === '' || $request === '<p><br></p>') {
+            $this->redirectAdmin('prayer-wall/posts/' . $id . '/edit?error=empty');
+        }
+        (new PrayerWall())->update($id, ['request' => $request, 'is_anonymous' => $isAnonymous]);
+        $this->redirectAdmin('prayer-wall?updated=1');
     }
 
     public function deleteRequest()
