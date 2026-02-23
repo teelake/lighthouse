@@ -13,8 +13,9 @@ $designations = [
     'Operations' => 'Ministry Operations',
 ];
 ?>
+<?php $givingHeroImg = page_hero_image('giving'); ?>
 <section class="section giving-page" data-animate>
-    <div class="page-hero page-hero--giving">
+    <div class="page-hero page-hero--giving<?= page_hero_classes($givingHeroImg) ?>"<?= page_hero_style($givingHeroImg) ?>>
         <div class="container">
             <h1 class="page-hero-title">Giving & Partnership</h1>
             <p class="page-hero-sub">Your generosity advances the kingdom</p>
