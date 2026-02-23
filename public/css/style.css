@@ -2377,18 +2377,6 @@ body::before {
 .prayer-note a { color: var(--color-primary-on-light); text-decoration: none; }
 .prayer-note a:hover { text-decoration: underline; }
 
-/* Member portal banner */
-.member-portal-banner {
-    background: var(--color-gold-bg);
-    border-top: 1px solid rgba(255,225,0,0.3);
-    padding: 0.5rem 1.5rem;
-    font-size: 0.9rem;
-    color: var(--color-muted);
-    text-align: center;
-}
-.member-portal-banner span { font-weight: 600; color: var(--color-primary-on-light); }
-.members-portal .main-content { padding-top: 110px; }
-
 /* Ministries page */
 .ministries-page { padding-top: 0; }
 .ministries-content { padding: 3rem 1.5rem 4rem; }

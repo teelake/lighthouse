@@ -9,6 +9,7 @@ $latestPrayerPosts = isset($latestPrayerPosts) ? $latestPrayerPosts : [];
 $prayerUsers = isset($prayerUsers) ? $prayerUsers : [];
 $isEditor = isset($isEditor) ? $isEditor : false;
 $isAdmin = isset($isAdmin) ? $isAdmin : false;
+$isMember = isset($role) && $role === 'member';
 $chartMonths = isset($chartMonths) ? $chartMonths : [];
 $chartSubscribers = isset($chartSubscribers) ? $chartSubscribers : [];
 $chartApplications = isset($chartApplications) ? $chartApplications : [];
@@ -53,6 +54,12 @@ function dash_time_ago($date) {
             <span class="dash-kpi-value"><?= (int)(isset($stats['media']) ? $stats['media'] : 0) ?></span>
             <span class="dash-kpi-label">Media</span>
         </a>
+        <?php if ($isMember) { ?>
+        <a href="<?= admin_url('prayer-wall') ?>" class="dash-kpi-card dash-kpi-accent">
+            <span class="dash-kpi-value"><?= (int)(isset($stats['prayer_wall']) ? $stats['prayer_wall'] : 0) ?></span>
+            <span class="dash-kpi-label">Prayer Wall</span>
+        </a>
+        <?php } ?>
         <?php if ($isAdmin) { ?>
         <a href="<?= admin_url('prayer-wall') ?>" class="dash-kpi-card dash-kpi-accent">
             <span class="dash-kpi-value"><?= (int)(isset($stats['prayer_requests']) ? $stats['prayer_requests'] : 0) + (int)(isset($stats['prayer_wall']) ? $stats['prayer_wall'] : 0) ?></span>

@@ -53,7 +53,7 @@ $greeting = date('G') < 12 ? 'Good morning' : (date('G') < 17 ? 'Good afternoon'
                 <span class="nav-text">Dashboard</span>
             </a>
             <?php if ($role === 'member'): ?>
-            <a href="<?= rtrim(BASE_URL, '/') ?>/members/prayer-wall" class="nav-item" data-tooltip="Prayer Wall">
+            <a href="<?= admin_url('prayer-wall') ?>" class="nav-item <?= ($currentPage ?? '') === 'prayer-wall' ? 'active' : '' ?>" data-tooltip="Prayer Wall">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M12 6v6"/><path d="M9 9h6"/></svg>
                 <span class="nav-text">Prayer Wall</span>
             </a>

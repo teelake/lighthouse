@@ -31,8 +31,6 @@ $router->add('GET', 'contact', ['controller' => 'Page', 'action' => 'contact']);
 $router->add('GET', 'faq', ['controller' => 'Page', 'action' => 'faq']);
 $router->add('GET', 'im-new', ['controller' => 'Page', 'action' => 'imNew']);
 $router->add('GET', 'prayer', ['controller' => 'Prayer', 'action' => 'index']);
-$router->add('GET', 'members/prayer-wall', ['controller' => 'Member', 'action' => 'prayerWall']);
-$router->add('POST', 'members/prayer-wall/post', ['controller' => 'Member', 'action' => 'wallPost']);
 $router->add('GET', 'jobs', ['controller' => 'Job', 'action' => 'index']);
 $router->add('GET', 'jobs/{slug}/apply', ['controller' => 'Job', 'action' => 'applyForm']);
 $router->add('GET', 'jobs/{slug}', ['controller' => 'Job', 'action' => 'view']);
@@ -147,6 +145,7 @@ $router->add('GET', $adm . '/subscribers/compose', ['controller' => 'Admin\Subsc
 $router->add('POST', $adm . '/subscribers/send-mass', ['controller' => 'Admin\Subscriber', 'action' => 'sendMass']);
 $router->add('GET', $adm . '/contact-report', ['controller' => 'Admin\ContactReport', 'action' => 'index']);
 $router->add('GET', $adm . '/prayer-wall', ['controller' => 'Admin\PrayerWall', 'action' => 'index']);
+$router->add('POST', $adm . '/prayer-wall/post', ['controller' => 'Admin\PrayerWall', 'action' => 'wallPost']);
 $router->add('POST', $adm . '/prayer-wall/requests/{id}/delete', ['controller' => 'Admin\PrayerWall', 'action' => 'deleteRequest']);
 $router->add('POST', $adm . '/prayer-wall/posts/{id}/delete', ['controller' => 'Admin\PrayerWall', 'action' => 'deletePost']);
 

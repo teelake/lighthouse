@@ -41,7 +41,7 @@ $submitted = isset($_GET['submitted']);
                     </div>
                     <button type="submit" class="btn btn-watch">Submit Request</button>
                 </form>
-                <p class="prayer-note" style="margin-top: 1.5rem;">Church members can access the <a href="<?= $baseUrl ?>/members/prayer-wall">Prayer Wall</a>—a digital space to post prayer points and pray with other members. <a href="<?= (function_exists('admin_url') ? admin_url('login') : $baseUrl . '/admin/login') ?>?redirect=members/prayer-wall">Sign in</a> as a member to participate.</p>
+                <p class="prayer-note" style="margin-top: 1.5rem;">Church members can access the <a href="<?= (function_exists('admin_url') ? admin_url('login') : $baseUrl . '/admin/login') ?>?redirect=<?= urlencode(defined('ADMIN_PATH') ? ADMIN_PATH . '/prayer-wall' : 'admin/prayer-wall') ?>">Prayer Wall</a> in the member dashboard—a digital space to post prayer points and pray with other members. <a href="<?= (function_exists('admin_url') ? admin_url('login') : $baseUrl . '/admin/login') ?>?redirect=<?= urlencode(defined('ADMIN_PATH') ? ADMIN_PATH . '/prayer-wall' : 'admin/prayer-wall') ?>">Sign in</a> as a member to participate.</p>
             </div>
         </div>
     </div>

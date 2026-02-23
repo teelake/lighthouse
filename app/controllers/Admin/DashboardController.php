@@ -95,6 +95,7 @@ class DashboardController extends BaseController
             'pageTitle' => 'Dashboard',
             'pageHeading' => 'Dashboard',
             'currentPage' => 'dashboard',
+            'role' => $_SESSION['user_role'] ?? 'member',
             'stats' => $stats,
             'upcomingEvents' => $upcomingEvents,
             'latestNewsletter' => $latestNewsletter,
