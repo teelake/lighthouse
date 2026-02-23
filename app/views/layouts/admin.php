@@ -52,6 +52,12 @@ $greeting = date('G') < 12 ? 'Good morning' : (date('G') < 17 ? 'Good afternoon'
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
                 <span class="nav-text">Dashboard</span>
             </a>
+            <?php if ($role === 'member'): ?>
+            <a href="<?= rtrim(BASE_URL, '/') ?>/members/prayer-wall" class="nav-item" data-tooltip="Prayer Wall">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M12 6v6"/><path d="M9 9h6"/></svg>
+                <span class="nav-text">Prayer Wall</span>
+            </a>
+            <?php endif; ?>
             <?php if ($isEditor): ?>
             <div class="nav-collapse" data-group="content">
                 <button type="button" class="nav-collapse-trigger" aria-expanded="true" aria-controls="nav-content">
@@ -141,7 +147,6 @@ $greeting = date('G') < 12 ? 'Good morning' : (date('G') < 17 ? 'Good afternoon'
                         </div>
                         <a href="<?= admin_url('profile') ?>" role="menuitem">Edit Profile</a>
                         <a href="<?= admin_url('profile') ?>#password" role="menuitem">Password</a>
-                        <a href="<?= admin_url('profile') ?>#2fa" role="menuitem">Security (2FA)</a>
                         <a href="<?= rtrim(BASE_URL, '/') ?>/" target="_blank" role="menuitem">View Site</a>
                         <a href="<?= admin_url('logout') ?>" role="menuitem" class="profile-menu-logout">Logout</a>
                     </div>

@@ -283,8 +283,8 @@ $mediaTypeLabel = function ($t) {
             <h3 class="prayer-wall-headline"><?= content_text($prayerExtra['headline'] ?? 'Pray With Us') ?></h3>
             <div class="prayer-wall-desc"><?= rich_content($prayerExtra['description'] ?? 'A digital space for church members to post prayer points and invite others to pray with them. You can share openly or post anonymously—either way, the church family stands with you in prayer.') ?></div>
             <div class="prayer-wall-ctas">
-                <a href="<?= $baseUrl ?>/prayer" class="btn btn-prayer-wall btn-primary">Post a Prayer Point</a>
-                <a href="<?= $baseUrl ?>/prayer" class="btn btn-prayer-wall btn-accent">Pray for Others</a>
+                <a href="<?= $baseUrl ?>/members/prayer-wall" class="btn btn-prayer-wall btn-primary">Post a Prayer Point</a>
+                <a href="<?= $baseUrl ?>/members/prayer-wall" class="btn btn-prayer-wall btn-accent">Pray for Others</a>
             </div>
         </div>
     </div>

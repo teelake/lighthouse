@@ -31,13 +31,14 @@ $router->add('GET', 'contact', ['controller' => 'Page', 'action' => 'contact']);
 $router->add('GET', 'faq', ['controller' => 'Page', 'action' => 'faq']);
 $router->add('GET', 'im-new', ['controller' => 'Page', 'action' => 'imNew']);
 $router->add('GET', 'prayer', ['controller' => 'Prayer', 'action' => 'index']);
+$router->add('GET', 'members/prayer-wall', ['controller' => 'Member', 'action' => 'prayerWall']);
+$router->add('POST', 'members/prayer-wall/post', ['controller' => 'Member', 'action' => 'wallPost']);
 $router->add('GET', 'jobs', ['controller' => 'Job', 'action' => 'index']);
 $router->add('GET', 'jobs/{slug}/apply', ['controller' => 'Job', 'action' => 'applyForm']);
 $router->add('GET', 'jobs/{slug}', ['controller' => 'Job', 'action' => 'view']);
 
 // Forms - POST
 $router->add('POST', 'prayer/submit', ['controller' => 'Prayer', 'action' => 'submit']);
-$router->add('POST', 'prayer-wall/post', ['controller' => 'Prayer', 'action' => 'wallPost']);
 $router->add('POST', 'newsletter/subscribe', ['controller' => 'Newsletter', 'action' => 'subscribe']);
 $router->add('POST', 'contact/submit', ['controller' => 'Contact', 'action' => 'submit']);
 $router->add('POST', 'visitor/register', ['controller' => 'Visitor', 'action' => 'register']);
@@ -56,8 +57,6 @@ $router->add('GET', $adm . '/forgot-password', ['controller' => 'Admin\Auth', 'a
 $router->add('POST', $adm . '/forgot-password', ['controller' => 'Admin\Auth', 'action' => 'forgotPassword']);
 $router->add('GET', $adm . '/reset-password', ['controller' => 'Admin\Auth', 'action' => 'resetPassword']);
 $router->add('POST', $adm . '/reset-password', ['controller' => 'Admin\Auth', 'action' => 'resetPassword']);
-$router->add('GET', $adm . '/2fa', ['controller' => 'Admin\Auth', 'action' => 'twoFactor']);
-$router->add('POST', $adm . '/2fa', ['controller' => 'Admin\Auth', 'action' => 'verifyTwoFactor']);
 $router->add('GET', $adm, ['controller' => 'Admin\Dashboard', 'action' => 'index']);
 $router->add('GET', $adm . '/dashboard', ['controller' => 'Admin\Dashboard', 'action' => 'index']);
 
@@ -177,5 +176,4 @@ $router->add('POST', $adm . '/users/{id}', ['controller' => 'Admin\User', 'actio
 $router->add('POST', $adm . '/users/{id}/delete', ['controller' => 'Admin\User', 'action' => 'delete']);
 $router->add('GET', $adm . '/profile', ['controller' => 'Admin\Profile', 'action' => 'index']);
 $router->add('POST', $adm . '/profile', ['controller' => 'Admin\Profile', 'action' => 'update']);
-$router->add('POST', $adm . '/profile/2fa', ['controller' => 'Admin\Profile', 'action' => 'toggle2fa']);
 $router->add('POST', $adm . '/profile/password', ['controller' => 'Admin\Profile', 'action' => 'changePassword']);

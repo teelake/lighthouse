@@ -2,7 +2,6 @@
 namespace App\Controllers\Admin;
 
 use App\Core\Controller;
-use App\Core\Totp;
 use App\Models\User;
 use App\Services\MailService;
 
@@ -57,12 +56,6 @@ class AuthController extends Controller
                 return $this->render('admin/auth/login', ['error' => 'Invalid email or password.']);
             }
             $this->clearFailedAttempts();
-            if (!empty($user['two_factor_enabled']) && !empty($user['two_factor_secret'])) {
-                $_SESSION['auth_2fa_user_id'] = $user['id'];
-                $_SESSION['auth_2fa_email'] = $user['email'];
-                $_SESSION['auth_2fa_redirect'] = $redirectTo;
-                $this->redirect(admin_url('2fa'));
-            }
             $this->completeLogin($user);
             $this->logAuth('Login success', ['email' => $email, 'user_id' => $user['id']]);
             $this->redirect($this->resolveRedirect($redirectTo) ?? admin_url());
@@ -73,48 +66,6 @@ class AuthController extends Controller
             }
         }
         $this->render('admin/auth/login', ['redirect' => $redirectTo]);
-    }
-
-    public function twoFactor()
-    {
-        if (!isset($_SESSION['auth_2fa_user_id'])) {
-            $this->redirect(admin_url('login'));
-        }
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $this->verifyTwoFactor();
-            return;
-        }
-        $this->render('admin/auth/2fa', ['email' => $_SESSION['auth_2fa_email'] ?? '']);
-    }
-
-    public function verifyTwoFactor()
-    {
-        if (!isset($_SESSION['auth_2fa_user_id'])) {
-            $this->redirect(admin_url('login'));
-        }
-        if (!csrf_verify()) {
-            $this->render('admin/auth/2fa', ['email' => $_SESSION['auth_2fa_email'] ?? '', 'error' => 'Invalid request.']);
-            return;
-        }
-        $code = trim($this->post('code', ''));
-        if (!$code) {
-            $this->render('admin/auth/2fa', ['email' => $_SESSION['auth_2fa_email'] ?? '', 'error' => 'Enter your 6-digit code.']);
-            return;
-        }
-        $userId = $_SESSION['auth_2fa_user_id'];
-        $user = (new User())->find($userId);
-        if (!$user || empty($user['two_factor_secret'])) {
-            unset($_SESSION['auth_2fa_user_id'], $_SESSION['auth_2fa_email']);
-            $this->redirect(admin_url('login'));
-        }
-        if (!Totp::verify($user['two_factor_secret'], $code)) {
-            $this->render('admin/auth/2fa', ['email' => $user['email'], 'error' => 'Invalid or expired code. Try again.']);
-            return;
-        }
-        $redirectTo = $_SESSION['auth_2fa_redirect'] ?? '';
-        unset($_SESSION['auth_2fa_user_id'], $_SESSION['auth_2fa_email'], $_SESSION['auth_2fa_redirect']);
-        $this->completeLogin($user);
-        $this->redirect($this->resolveRedirect($redirectTo) ?? admin_url());
     }
 
     public function logout()
