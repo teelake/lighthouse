@@ -18,6 +18,10 @@
         * { box-sizing: border-box; }
         body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: 'Inter', sans-serif; background: #0d0f12; padding: 1.5rem; -webkit-font-smoothing: antialiased; }
         .auth-card { background: #fff; padding: 2.25rem; border-radius: 12px; width: 100%; max-width: 400px; box-shadow: 0 24px 48px rgba(0,0,0,0.2); }
+        @media (max-width: 480px) {
+            body { padding: 1rem; }
+            .auth-card { padding: 1.5rem; }
+        }
         .auth-logo { display: flex; flex-direction: column; align-items: center; margin-bottom: 1.5rem; text-align: center; }
         .auth-logo-img { max-width: 140px; max-height: 64px; object-fit: contain; }
         .auth-logo-text { margin-top: 0.75rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; color: #b08d57; }

@@ -549,6 +549,7 @@ body::before {
     .section-title-bar-inner { padding: 0 1rem; }
     .container { padding: 0 1rem; }
     .container-fluid { padding: 0 1rem; }
+    .section { padding: 2.5rem 0; }
 }
 
 /* Prayer Wall - two-column: image left, dark content block right */
@@ -2336,6 +2337,9 @@ body::before {
 }
 .prayer-success p { margin: 0; font-weight: 600; color: var(--color-primary-on-light); }
 .prayer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+@media (max-width: 380px) {
+    .prayer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+}
 .prayer-submit-card, .prayer-wall-card {
     background: #fff;
     border: 2px solid rgba(255,225,0,0.2);
@@ -3048,4 +3052,9 @@ body::before {
     .bh-footer .footer-contact-ctas { justify-content: center; }
     .bh-footer .footer-brand .footer-social { justify-content: center; }
     .bh-footer .footer-brand .btn-prayer { display: inline-block; }
+}
+@media (max-width: 540px) {
+    .bh-footer .footer-nav { grid-template-columns: 1fr; text-align: center; gap: 1.5rem; }
+    .bh-footer .footer-col { text-align: center; }
+    .bh-footer .footer-contact-ctas { justify-content: center; }
 }
