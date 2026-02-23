@@ -122,6 +122,25 @@ function dash_time_ago($date) {
 
     <div class="dash-layout">
         <div class="dash-main">
+            <?php if ($isMember && !empty($upcomingEvents)) { ?>
+            <div class="dash-widget">
+                <div class="dash-widget-head">
+                    <h2 class="dash-widget-title">Upcoming Events</h2>
+                    <a href="<?= rtrim(BASE_URL, '/') ?>/events" class="dash-widget-link">All</a>
+                </div>
+                <ul class="dash-list dash-list-events">
+                    <?php foreach ($upcomingEvents as $e) { ?>
+                    <li class="dash-list-item">
+                        <a href="<?= rtrim(BASE_URL, '/') ?>/events/<?= htmlspecialchars($e['slug'] ?? '') ?>" class="dash-list-link">
+                            <span class="dash-list-main"><?= htmlspecialchars(isset($e['title']) ? $e['title'] : '') ?></span>
+                            <span class="dash-list-meta"><?= htmlspecialchars(isset($e['event_date']) ? $e['event_date'] : '') ?></span>
+                        </a>
+                    </li>
+                    <?php } ?>
+                </ul>
+            </div>
+            <?php } ?>
+
             <?php if ($isEditor) { ?>
             <div class="dash-widget">
                 <div class="dash-widget-head">

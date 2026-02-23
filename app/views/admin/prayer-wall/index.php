@@ -65,7 +65,7 @@ $buildQuery = function ($overrides = []) {
                     <td><?= htmlspecialchars($p['created_at'] ?? '') ?></td>
                     <td><?= ($p['is_anonymous'] ?? 0) ? 'Anonymous' : htmlspecialchars($users[$p['user_id'] ?? 0] ?? 'Unknown') ?></td>
                     <td>
-                        <a href="<?= admin_url('prayer-wall/posts/' . ($p['id'] ?? '')) ?>" class="admin-table-link"><?php $txt = strip_tags($p['request'] ?? ''); echo htmlspecialchars(mb_strlen($txt) > 80 ? mb_substr($txt, 0, 80) . '...' : $txt); ?></a>
+                        <span style="color: var(--adm-text);"><?php $txt = strip_tags($p['request'] ?? ''); echo htmlspecialchars(mb_strlen($txt) > 50 ? mb_substr($txt, 0, 50) . '...' : $txt); ?></span>
                     </td>
                     <td>
                         <div class="admin-table-actions">
