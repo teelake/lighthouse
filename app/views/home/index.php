@@ -193,7 +193,7 @@ $mediaTypeLabel = function ($t) {
 <?php if ($scripture && !empty(trim($scripture['content'] ?? ''))): ?>
 <section class="section scripture-section" data-animate>
     <div class="container">
-        <blockquote><?= rich_content($scripture['content'] ?? '') ?></blockquote>
+    <?= rich_content($scripture['content'] ?? '') ?>
     </div>
 </section>
 <?php endif; ?>
