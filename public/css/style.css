@@ -498,7 +498,18 @@ body::before {
 
 /* Scripture */
 .scripture-section { background: #fff; padding: 3rem 0; }
-.scripture-section blockquote { margin: 0; font-size: 1.2rem; font-style: italic; color: var(--color-dark); text-align: center; max-width: 700px; margin-left: auto; margin-right: auto; }
+.scripture-section blockquote {
+    margin: 0;
+    font-size: 1.2rem;
+    font-style: normal;
+    color: var(--color-dark);
+    text-align: center;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
+    letter-spacing: 0.02em;
+}
 .scripture-section blockquote::before { content: '"'; color: var(--color-primary); }
 
 /* What's On - events */
