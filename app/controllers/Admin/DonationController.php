@@ -41,11 +41,6 @@ class DonationController extends BaseController
         ]);
     }
 
-    private function get(string $key, string $default = ''): string
-    {
-        return $_GET[$key] ?? $default;
-    }
-
     private function getDesignations(): array
     {
         return [
