@@ -146,6 +146,8 @@ $router->add('POST', $adm . '/subscribers/send-mass', ['controller' => 'Admin\Su
 $router->add('GET', $adm . '/contact-report', ['controller' => 'Admin\ContactReport', 'action' => 'index']);
 $router->add('GET', $adm . '/prayer-wall', ['controller' => 'Admin\PrayerWall', 'action' => 'index']);
 $router->add('POST', $adm . '/prayer-wall/post', ['controller' => 'Admin\PrayerWall', 'action' => 'wallPost']);
+$router->add('GET', $adm . '/prayer-wall/requests/{id}', ['controller' => 'Admin\PrayerWall', 'action' => 'viewRequest']);
+$router->add('GET', $adm . '/prayer-wall/posts/{id}', ['controller' => 'Admin\PrayerWall', 'action' => 'viewPost']);
 $router->add('POST', $adm . '/prayer-wall/requests/{id}/delete', ['controller' => 'Admin\PrayerWall', 'action' => 'deleteRequest']);
 $router->add('POST', $adm . '/prayer-wall/posts/{id}/delete', ['controller' => 'Admin\PrayerWall', 'action' => 'deletePost']);
 

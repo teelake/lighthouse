@@ -886,6 +886,8 @@
     letter-spacing: 0.08em;
 }
 .admin-table tr:hover td { background: var(--adm-bg); }
+.admin-table-link { color: var(--adm-accent); text-decoration: none; }
+.admin-table-link:hover { text-decoration: underline; }
 
 /* Striped table variant */
 .admin-table-striped tbody tr:nth-child(even) td { background: var(--adm-bg); }

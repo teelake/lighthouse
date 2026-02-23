@@ -93,6 +93,44 @@ class PrayerWallController extends BaseController
         }
     }
 
+    public function viewRequest()
+    {
+        $this->requireEditor();
+        $id = (int)($this->params['id'] ?? 0);
+        if (!$id) $this->redirectAdmin('prayer-wall');
+        $request = (new PrayerRequest())->find($id);
+        if (!$request) $this->redirectAdmin('prayer-wall');
+        $this->render('admin/prayer-wall/view-request', [
+            'pageTitle' => 'Prayer Request',
+            'pageHeading' => 'Prayer Request',
+            'currentPage' => 'prayer-wall',
+            'request' => $request,
+            'isAdmin' => ($_SESSION['user_role'] ?? '') === 'admin',
+        ]);
+    }
+
+    public function viewPost()
+    {
+        $this->requireEditor();
+        $id = (int)($this->params['id'] ?? 0);
+        if (!$id) $this->redirectAdmin('prayer-wall');
+        $post = (new PrayerWall())->find($id);
+        if (!$post) $this->redirectAdmin('prayer-wall');
+        $author = 'Anonymous';
+        if (empty($post['is_anonymous']) && !empty($post['user_id'])) {
+            $u = (new User())->find($post['user_id']);
+            $author = $u['name'] ?? $u['email'] ?? 'Unknown';
+        }
+        $this->render('admin/prayer-wall/view-post', [
+            'pageTitle' => 'Prayer Wall Post',
+            'pageHeading' => 'Prayer Wall Post',
+            'currentPage' => 'prayer-wall',
+            'post' => $post,
+            'author' => $author,
+            'isAdmin' => ($_SESSION['user_role'] ?? '') === 'admin',
+        ]);
+    }
+
     public function deleteRequest()
     {
         $this->requireAdmin();
