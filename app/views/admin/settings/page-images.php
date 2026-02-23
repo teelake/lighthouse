@@ -10,7 +10,7 @@
         </div>
     </div>
     <?php if (!empty($error)): ?><div class="alert alert-error"><?= htmlspecialchars($error) ?></div><?php endif; ?>
-    <p style="color: var(--adm-muted); margin: 0 0 1rem;">Hero and content images for inner pages (Believers House style). Upload to add images; leave empty to keep gradient-only heroes.</p>
+    <p style="color: var(--adm-muted); margin: 0 0 1rem;">Hero and content images for inner pages. Upload to add images; leave empty to keep gradient-only heroes.</p>
     <form method="post" action="<?= admin_url('settings/page-images') ?>" enctype="multipart/form-data">
         <?= csrf_field() ?>
         <h3 style="font-size: 1rem; font-weight: 600; margin: 1.5rem 0 0.75rem;">About Page</h3>
@@ -27,7 +27,7 @@
         </div>
         <div class="form-group">
             <label>About Story Image</label>
-            <p class="admin-muted" style="font-size: 0.85rem; margin: 0 0 0.5rem;">Image beside "Our Story" (Believers House style split layout). Recommended: 600×400 or similar.</p>
+            <p class="admin-muted" style="font-size: 0.85rem; margin: 0 0 0.5rem;">Image beside "Our Story" (split layout). Recommended: 600×400 or similar.</p>
             <?php if (!empty($about_story_image ?? '')): ?>
             <div class="admin-image-preview" style="margin-bottom: 0.75rem;">
                 <img src="<?= htmlspecialchars($about_story_image) ?>" alt="" style="max-width: 320px; max-height: 180px; object-fit: contain; border: 1px solid var(--adm-border); border-radius: 6px;">
