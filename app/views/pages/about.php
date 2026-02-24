@@ -102,8 +102,8 @@ $aboutStoryImage = $aboutStoryImage ?? '';
                         </div>
                         <h3 class="about-pillar-card-title">Mission</h3>
                         <div class="about-pillar-card-text">
-                            <font color="white">
-                    <?= rich_content($aboutMission['content'] ?? 'To raise lights that transform nations.') ?></font></div>
+                            
+                    <?= rich_content($aboutMission['content'] ?? 'To raise lights that transform nations.') ?></div>
                     </div>
                     <div class="about-pillar-card about-pillar-card--vision stagger-item">
                         <div class="about-pillar-card-icon">
@@ -111,7 +111,7 @@ $aboutStoryImage = $aboutStoryImage ?? '';
                         </div>
                         <h3 class="about-pillar-card-title">Vision</h3>
                         <div class="about-pillar-card-text">
-                            <font color="white"><?= rich_content($aboutVision['content'] ?? 'A Christ-centered, Spirit-empowered community.') ?></font></div>
+                            <?= rich_content($aboutVision['content'] ?? 'A Christ-centered, Spirit-empowered community.') ?></div>
                     </div>
                 </div>
             </div>
