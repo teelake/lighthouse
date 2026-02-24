@@ -208,19 +208,23 @@ $mediaTypeLabel = function ($t) {
     </div>
     <div class="container">
         <div class="events-grid">
-            <div class="event-card-modern event-card-modern--sunday">
-                <h3><?= content_text($whatsOnExtra['sunday_title'] ?? 'Sunday — Catalysis') ?></h3>
-                <p class="event-time"><?= htmlspecialchars($serviceTimes['sunday'] ?? '10:00 AM') ?></p>
-                <div><?= rich_content($whatsOnExtra['sunday_desc'] ?? 'A catalytic worship experience designed to ignite faith.') ?></div>
-                <a href="<?= $baseUrl ?>/services" class="link-arrow">Join us →</a>
-            </div>
-            <div class="event-card-modern event-card-modern--thursday">
-                <h3><?= content_text($whatsOnExtra['thursday_title'] ?? 'Thursday — The Summit') ?></h3>
-                <p class="event-time"><?= htmlspecialchars($serviceTimes['thursday'] ?? '6:00 PM') ?></p>
-                <div><?= rich_content($whatsOnExtra['thursday_desc'] ?? 'Elevation, encounter, empowerment. Midweek teaching.') ?></div>
-                <a href="<?= $baseUrl ?>/services" class="link-arrow">Join us →</a>
-            </div>
+            <?php
+            $upcomingEvents = $upcomingEvents ?? [];
+            $cardMods = ['sunday', 'thursday', 'sunday'];
+            foreach (array_slice($upcomingEvents, 0, 3) as $i => $e):
+                $mod = $cardMods[$i % 3];
+            ?>
+            <a href="<?= $baseUrl ?>/events/<?= htmlspecialchars($e['slug'] ?? '') ?>" class="event-card-modern event-card-modern--<?= $mod ?>">
+                <h3><?= htmlspecialchars($e['title'] ?? 'Event') ?></h3>
+                <p class="event-time"><?= !empty($e['event_date']) ? date('l, M j', strtotime($e['event_date'])) : '' ?><?= !empty($e['event_time']) ? ' · ' . date('g:i A', strtotime($e['event_time'])) : '' ?></p>
+                <div><?= rich_preview($e['description'] ?? '', 120) ?></div>
+                <span class="link-arrow">View details →</span>
+            </a>
+            <?php endforeach; ?>
         </div>
+        <?php if (empty($upcomingEvents)): ?>
+        <p class="brand-empty" style="text-align: center; margin-top: 1.5rem;">No upcoming events at the moment. <a href="<?= $baseUrl ?>/events">View past events</a> or check back soon.</p>
+        <?php endif; ?>
     </div>
 </section>
 

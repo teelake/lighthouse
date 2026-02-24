@@ -24,6 +24,7 @@ class HomeController extends Controller
 
         $sections = $sectionModel->getAllKeyed();
         $events = $eventModel->findAll(['is_published' => 1], 'event_date ASC, event_time ASC', 6);
+        $upcomingEvents = $eventModel->findUpcoming(3);
         $latestMedia = $mediaModel->findAll(['is_published' => 1], 'published_at DESC, created_at DESC', 3);
         $testimonials = $testimonialModel->findAll(['is_published' => 1], 'sort_order ASC', 12);
         $glimpseGrouped = $glimpseModel->getAllGroupedByRow();
@@ -40,6 +41,7 @@ class HomeController extends Controller
         $this->render('home/index', [
             'sections' => $sections,
             'events' => $events,
+            'upcomingEvents' => $upcomingEvents,
             'latestMedia' => $latestMedia,
             'testimonials' => $testimonials,
             'glimpseRow1' => $glimpseGrouped[1] ?? [],
