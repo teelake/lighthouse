@@ -1484,7 +1484,7 @@ body::before {
 
 .about-page--hop .about-pillars-block {
     padding: 4rem 0;
-    background: #fff;
+    background: var(--color-bg);
 }
 .about-page--hop .about-section-title {
     margin: 0 0 2rem;
@@ -1501,17 +1501,37 @@ body::before {
     gap: 1.5rem;
 }
 .about-page--hop .about-pillar-card {
-    background: #fff;
-    border: 2px solid rgba(166,125,15,0.35);
     border-radius: var(--radius);
-    padding: 2rem;
+    padding: 2.25rem;
     transition: var(--transition);
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.about-page--hop .about-pillar-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+    pointer-events: none;
+}
+.about-page--hop .about-pillar-card--mission {
+    background: #1e3a5f;
+    border: none;
+}
+.about-page--hop .about-pillar-card--mission::before {
+    background: radial-gradient(circle at 80% 20%, rgba(255,225,0,0.15) 0%, transparent 50%);
+}
+.about-page--hop .about-pillar-card--vision {
+    background: #166534;
+    border: none;
+}
+.about-page--hop .about-pillar-card--vision::before {
+    background: radial-gradient(circle at 20% 80%, rgba(255,225,0,0.12) 0%, transparent 50%);
 }
 .about-page--hop .about-pillar-card:hover {
-    border-color: var(--color-brand-accent);
-    box-shadow: 0 8px 30px rgba(166,125,15,0.2);
     transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.2);
 }
 .about-page--hop .about-pillar-card-icon {
     width: 56px;
@@ -1520,24 +1540,30 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(166,125,15,0.12);
+    background: rgba(255,255,255,0.15);
     border-radius: 50%;
-    color: var(--color-brand-accent);
+    color: var(--color-primary);
+    position: relative;
+    z-index: 1;
 }
 .about-page--hop .about-pillar-card-title {
     margin: 0 0 0.5rem;
     font-family: var(--font-heading);
     font-size: 1.15rem;
     font-weight: 700;
-    color: var(--color-brand-black);
+    color: #fff;
+    position: relative;
+    z-index: 1;
 }
 .about-page--hop .about-pillar-card-text p { margin: 0 0 0.5em; }
 .about-page--hop .about-pillar-card-text p:last-child { margin-bottom: 0; }
 .about-page--hop .about-pillar-card-text {
     margin: 0;
     font-size: 0.95rem;
-    line-height: 1.65;
-    color: var(--color-muted);
+    line-height: 1.7;
+    color: rgba(255,255,255,0.92);
+    position: relative;
+    z-index: 1;
 }
 @media (max-width: 900px) {
     .about-page--hop .about-pillars-grid { grid-template-columns: 1fr; }
