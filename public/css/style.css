@@ -524,6 +524,9 @@ body::before {
     transition: var(--transition);
     position: relative;
     overflow: hidden;
+    display: block;
+    text-decoration: none;
+    color: inherit;
 }
 .event-card-modern::before {
     content: '';

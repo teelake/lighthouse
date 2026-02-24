@@ -216,7 +216,11 @@ $mediaTypeLabel = function ($t) {
             ?>
             <a href="<?= $baseUrl ?>/events/<?= htmlspecialchars($e['slug'] ?? '') ?>" class="event-card-modern event-card-modern--<?= $mod ?>">
                 <h3><?= htmlspecialchars($e['title'] ?? 'Event') ?></h3>
-                <p class="event-time"><?= !empty($e['event_date']) ? date('l, M j', strtotime($e['event_date'])) : '' ?><?= !empty($e['event_time']) ? ' · ' . date('g:i A', strtotime($e['event_time'])) : '' ?></p>
+                <p class="event-time"><?php
+                    $datePart = !empty($e['event_date']) ? date('l, M j', strtotime($e['event_date'])) : '';
+                    $timePart = !empty($e['event_time']) ? date('g:i A', strtotime($e['event_time'])) : '';
+                    echo trim($datePart . ($datePart && $timePart ? ' · ' : '') . $timePart) ?: '—';
+                ?></p>
                 <div><?= rich_preview($e['description'] ?? '', 120) ?></div>
                 <span class="link-arrow">View details →</span>
             </a>
