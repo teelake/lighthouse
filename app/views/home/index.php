@@ -208,13 +208,13 @@ $mediaTypeLabel = function ($t) {
     </div>
     <div class="container">
         <div class="events-grid">
-            <div class="event-card-modern">
+            <div class="event-card-modern event-card-modern--sunday">
                 <h3><?= content_text($whatsOnExtra['sunday_title'] ?? 'Sunday — Catalysis') ?></h3>
                 <p class="event-time"><?= htmlspecialchars($serviceTimes['sunday'] ?? '10:00 AM') ?></p>
                 <div><?= rich_content($whatsOnExtra['sunday_desc'] ?? 'A catalytic worship experience designed to ignite faith.') ?></div>
                 <a href="<?= $baseUrl ?>/services" class="link-arrow">Join us →</a>
             </div>
-            <div class="event-card-modern">
+            <div class="event-card-modern event-card-modern--thursday">
                 <h3><?= content_text($whatsOnExtra['thursday_title'] ?? 'Thursday — The Summit') ?></h3>
                 <p class="event-time"><?= htmlspecialchars($serviceTimes['thursday'] ?? '6:00 PM') ?></p>
                 <div><?= rich_content($whatsOnExtra['thursday_desc'] ?? 'Elevation, encounter, empowerment. Midweek teaching.') ?></div>
