@@ -1594,6 +1594,7 @@ body::before {
 .about-page--hop .about-pillar-card--mission {
     background: #1e3a5f;
     border: none;
+    color: #fff;
 }
 .about-page--hop .about-pillar-card--mission::before {
     background: radial-gradient(circle at 80% 20%, rgba(255,225,0,0.15) 0%, transparent 50%);
@@ -1601,6 +1602,7 @@ body::before {
 .about-page--hop .about-pillar-card--vision {
     background: #166534;
     border: none;
+    color: #fff;
 }
 .about-page--hop .about-pillar-card--vision::before {
     background: radial-gradient(circle at 20% 80%, rgba(255,225,0,0.12) 0%, transparent 50%);
@@ -1627,7 +1629,7 @@ body::before {
     font-family: var(--font-heading);
     font-size: 1.15rem;
     font-weight: 700;
-    color: #fff;
+    color: #fff !important;
     position: relative;
     z-index: 1;
 }
@@ -1639,18 +1641,9 @@ body::before {
     margin: 0;
     font-size: 0.95rem;
     line-height: 1.7;
+    color: #fff !important;
     position: relative;
     z-index: 1;
-}
-.about-page--hop .about-pillar-card--mission .about-pillar-card-text,
-.about-page--hop .about-pillar-card--mission .about-pillar-card-text p,
-.about-page--hop .about-pillar-card--mission .about-pillar-card-text div {
-    color: #fff;
-}
-.about-page--hop .about-pillar-card--vision .about-pillar-card-text,
-.about-page--hop .about-pillar-card--vision .about-pillar-card-text p,
-.about-page--hop .about-pillar-card--vision .about-pillar-card-text div {
-    color: #fff;
 }
 .about-page--hop .about-pillar-card-text a {
     color: var(--color-primary);
