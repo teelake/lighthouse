@@ -1641,7 +1641,7 @@ body::before {
     margin: 0;
     font-size: 0.95rem;
     line-height: 1.7;
-    color: white !important;
+    color: red !important;
     position: relative;
     z-index: 1;
 }
