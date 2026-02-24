@@ -555,9 +555,18 @@ body::before {
     position: relative;
     z-index: 1;
 }
+.event-card-modern--sunday .event-time,
+.event-card-modern--sunday p,
+.event-card-modern--sunday div {
+    color: #fefce8;
+}
+.event-card-modern--thursday .event-time,
+.event-card-modern--thursday p,
+.event-card-modern--thursday div {
+    color: #f8fafc;
+}
 .event-card-modern .event-time {
     font-weight: 600;
-    color: rgba(255,255,255,0.9);
     font-size: 0.9rem;
     margin-bottom: 0.5rem;
     position: relative;
@@ -566,7 +575,6 @@ body::before {
 .event-card-modern p,
 .event-card-modern div {
     margin: 0 0 1rem;
-    color: rgba(255,255,255,0.92);
     font-size: 0.95rem;
     position: relative;
     z-index: 1;
@@ -1628,9 +1636,18 @@ body::before {
     margin: 0;
     font-size: 0.95rem;
     line-height: 1.7;
-    color: rgba(255,255,255,0.95);
     position: relative;
     z-index: 1;
+}
+.about-page--hop .about-pillar-card--mission .about-pillar-card-text,
+.about-page--hop .about-pillar-card--mission .about-pillar-card-text p,
+.about-page--hop .about-pillar-card--mission .about-pillar-card-text div {
+    color: #fff;
+}
+.about-page--hop .about-pillar-card--vision .about-pillar-card-text,
+.about-page--hop .about-pillar-card--vision .about-pillar-card-text p,
+.about-page--hop .about-pillar-card--vision .about-pillar-card-text div {
+    color: #fff;
 }
 .about-page--hop .about-pillar-card-text a {
     color: var(--color-primary);
