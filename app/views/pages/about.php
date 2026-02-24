@@ -101,14 +101,14 @@ $aboutStoryImage = $aboutStoryImage ?? '';
                             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5"/></svg>
                         </div>
                         <h3 class="about-pillar-card-title">Mission</h3>
-                        <div class="about-pillar-card-text"><?= rich_content($aboutMission['content'] ?? 'To raise lights that transform nations.') ?></div>
+                        <div class="about-pillar-card-text" style="color: #fff;"><?= rich_content($aboutMission['content'] ?? 'To raise lights that transform nations.') ?></div>
                     </div>
                     <div class="about-pillar-card about-pillar-card--vision stagger-item">
                         <div class="about-pillar-card-icon">
                             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
                         </div>
                         <h3 class="about-pillar-card-title">Vision</h3>
-                        <div class="about-pillar-card-text"><?= rich_content($aboutVision['content'] ?? 'A Christ-centered, Spirit-empowered community.') ?></div>
+                        <div class="about-pillar-card-text" style="color: #fff;"><?= rich_content($aboutVision['content'] ?? 'A Christ-centered, Spirit-empowered community.') ?></div>
                     </div>
                 </div>
             </div>
