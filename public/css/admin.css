@@ -990,6 +990,26 @@
     .quill-editor-wrap .ql-toolbar { flex-wrap: wrap; }
     .quill-editor-wrap .ql-editor { min-height: 150px; }
 }
+
+/* Trix editor - mass email compose */
+.trix-editor-compose {
+    min-height: 280px;
+    font-family: inherit;
+    font-size: 0.9375rem;
+    border: 1px solid var(--adm-border);
+    border-radius: var(--adm-radius-sm);
+    padding: 1rem;
+}
+.trix-editor-compose:focus {
+    outline: none;
+    border-color: var(--adm-accent);
+    box-shadow: 0 0 0 3px var(--adm-accent-glow);
+}
+.trix-editor-compose img { max-width: 100%; height: auto; }
+trix-toolbar .trix-button-group { border-color: var(--adm-border); }
+trix-toolbar .trix-button { border-color: var(--adm-border); }
+trix-toolbar .trix-button.trix-active { background: var(--adm-accent-muted); }
+
 .help-text { font-size: 0.75rem; color: var(--adm-muted); margin-top: 0.25rem; }
 
 /* ========== ALERTS ========== */

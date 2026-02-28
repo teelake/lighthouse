@@ -142,6 +142,7 @@ $router->add('POST', $adm . '/visitors/{id}/delete', ['controller' => 'Admin\Fir
 
 $router->add('GET', $adm . '/subscribers', ['controller' => 'Admin\Subscriber', 'action' => 'index']);
 $router->add('GET', $adm . '/subscribers/compose', ['controller' => 'Admin\Subscriber', 'action' => 'compose']);
+$router->add('POST', $adm . '/subscribers/upload-attachment', ['controller' => 'Admin\Subscriber', 'action' => 'uploadAttachment']);
 $router->add('POST', $adm . '/subscribers/send-mass', ['controller' => 'Admin\Subscriber', 'action' => 'sendMass']);
 $router->add('GET', $adm . '/contact-report', ['controller' => 'Admin\ContactReport', 'action' => 'index']);
 $router->add('GET', $adm . '/prayer-wall', ['controller' => 'Admin\PrayerWall', 'action' => 'index']);

@@ -24,6 +24,9 @@ $greeting = date('G') < 12 ? 'Good morning' : (date('G') < 17 ? 'Good afternoon'
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= rtrim(BASE_URL, '/') ?>/public/css/admin.css">
+    <?php if (!empty($useTrix)): ?>
+    <link rel="stylesheet" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
+    <?php endif; ?>
 </head>
 <body class="admin-body">
     <div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
@@ -153,9 +156,14 @@ $greeting = date('G') < 12 ? 'Good morning' : (date('G') < 17 ? 'Good afternoon'
             <?= $content ?? '' ?>
         </main>
     </div>
+    <?php if (empty($useTrix)): ?>
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.min.js"></script>
     <script src="<?= rtrim(BASE_URL, '/') ?>/public/js/quill-init.js"></script>
+    <?php else: ?>
+    <script src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
+    <script src="<?= rtrim(BASE_URL, '/') ?>/public/js/trix-compose.js"></script>
+    <?php endif; ?>
     <script>
         (function() {
             var sidebar = document.getElementById('admin-sidebar');

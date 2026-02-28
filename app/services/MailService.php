@@ -26,14 +26,18 @@ class MailService
         $fromEmail = $this->setting->get('mail_from_email', $this->setting->get('site_email', 'noreply@example.com'));
         $fromName = $this->setting->get('mail_from_name', 'Lighthouse Global Church');
 
+        $inlineParts = $this->extractInlineAttachments($bodyHtml);
+        $bodyHtml = $inlineParts['html'];
+        $attachments = $inlineParts['attachments'];
+
         if (!empty($smtpHost) && !empty($smtpUser)) {
-            return $this->sendSmtp($to, $toName, $subject, $bodyHtml, $bodyText, $smtpHost, $smtpPort, $smtpUser, $smtpPass, $smtpEnc, $fromEmail, $fromName);
+            return $this->sendSmtp($to, $toName, $subject, $bodyHtml, $bodyText, $smtpHost, $smtpPort, $smtpUser, $smtpPass, $smtpEnc, $fromEmail, $fromName, $attachments);
         }
-        return $this->sendMail($to, $subject, $bodyHtml, $fromEmail, $fromName);
+        return $this->sendMail($to, $subject, $bodyHtml, $fromEmail, $fromName, $attachments);
     }
 
     private function sendSmtp(string $to, string $toName, string $subject, string $bodyHtml, string $bodyText,
-        string $host, int $port, string $user, string $pass, string $enc, string $fromEmail, string $fromName): bool
+        string $host, int $port, string $user, string $pass, string $enc, string $fromEmail, string $fromName, array $attachments = []): bool
     {
         $this->lastError = '';
         $useTls = ($enc === 'tls');
@@ -151,8 +155,31 @@ class MailService
         $headers = "From: " . $this->encodeHeader($fromName, $fromEmail) . "\r\n";
         $headers .= "To: " . ($toName ? $this->encodeHeader($toName, $to) : $to) . "\r\n";
         $headers .= "Subject: =?UTF-8?B?" . base64_encode($subject) . "?=\r\n";
-        $headers .= "MIME-Version: 1.0\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n";
-        $data = $headers . $bodyHtml;
+        $headers .= "MIME-Version: 1.0\r\n";
+
+        if (empty($attachments)) {
+            $headers .= "Content-Type: text/html; charset=UTF-8\r\n\r\n";
+            $data = $headers . $bodyHtml;
+        } else {
+            $boundary = '----=_Part_' . bin2hex(random_bytes(8));
+            $headers .= "Content-Type: multipart/related; boundary=\"{$boundary}\"\r\n\r\n";
+            $data = $headers . "--{$boundary}\r\n";
+            $data .= "Content-Type: text/html; charset=UTF-8\r\n\r\n";
+            $data .= $bodyHtml . "\r\n";
+            foreach ($attachments as $cid => $filepath) {
+                if (!file_exists($filepath)) continue;
+                $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                $mime = finfo_file($finfo, $filepath) ?: 'image/jpeg';
+                finfo_close($finfo);
+                $data .= "--{$boundary}\r\n";
+                $data .= "Content-Type: {$mime}; name=\"{$cid}\"\r\n";
+                $data .= "Content-Transfer-Encoding: base64\r\n";
+                $data .= "Content-ID: <{$cid}>\r\n";
+                $data .= "Content-Disposition: inline; filename=\"{$cid}\"\r\n\r\n";
+                $data .= chunk_split(base64_encode(file_get_contents($filepath))) . "\r\n";
+            }
+            $data .= "--{$boundary}--\r\n";
+        }
         $data = preg_replace('/^\./m', '..', $data);
         $payload = $data . "\r\n";
         $len = strlen($payload);
@@ -183,6 +210,28 @@ class MailService
         return true;
     }
 
+    /**
+     * Extract inline image attachments from HTML (img src pointing to our temp/email uploads).
+     * Returns modified HTML with cid: references and array of cid => filepath.
+     */
+    private function extractInlineAttachments(string $html): array
+    {
+        $attachments = [];
+        $pattern = '/<img[^>]+src=["\']([^"\']*(?:\/public)?\/uploads\/temp\/email\/([a-f0-9]+)\.(jpe?g|png|gif|webp))["\'][^>]*>/i';
+        $html = preg_replace_callback($pattern, function ($m) use (&$attachments) {
+            $fullUrl = $m[1];
+            $cid = $m[2];
+            $ext = $m[3];
+            $filepath = (defined('UPLOAD_PATH') ? UPLOAD_PATH : (ROOT_PATH . '/public/uploads')) . '/temp/email/' . $cid . '.' . $ext;
+            if (file_exists($filepath)) {
+                $attachments[$cid] = $filepath;
+                return str_replace($fullUrl, 'cid:' . $cid, $m[0]);
+            }
+            return $m[0];
+        }, $html);
+        return ['html' => $html, 'attachments' => $attachments];
+    }
+
     private function encodeHeader(string $name, string $email): string
     {
         if ($name) {
@@ -191,14 +240,33 @@ class MailService
         return $email;
     }
 
-    private function sendMail(string $to, string $subject, string $bodyHtml, string $fromEmail, string $fromName): bool
+    private function sendMail(string $to, string $subject, string $bodyHtml, string $fromEmail, string $fromName, array $attachments = []): bool
     {
         $headers = [
             'MIME-Version: 1.0',
-            'Content-type: text/html; charset=UTF-8',
             'From: ' . $fromName . ' <' . $fromEmail . '>',
         ];
-        return @mail($to, $subject, $bodyHtml, implode("\r\n", $headers));
+        if (empty($attachments)) {
+            $headers[] = 'Content-type: text/html; charset=UTF-8';
+            return @mail($to, $subject, $bodyHtml, implode("\r\n", $headers));
+        }
+        $boundary = '----=_Part_' . bin2hex(random_bytes(8));
+        $headers[] = 'Content-Type: multipart/related; boundary="' . $boundary . '"';
+        $body = "--{$boundary}\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n{$bodyHtml}\r\n";
+        foreach ($attachments as $cid => $filepath) {
+            if (!file_exists($filepath)) continue;
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $mime = finfo_file($finfo, $filepath) ?: 'image/jpeg';
+            finfo_close($finfo);
+            $body .= "--{$boundary}\r\n";
+            $body .= "Content-Type: {$mime}; name=\"{$cid}\"\r\n";
+            $body .= "Content-Transfer-Encoding: base64\r\n";
+            $body .= "Content-ID: <{$cid}>\r\n";
+            $body .= "Content-Disposition: inline; filename=\"{$cid}\"\r\n\r\n";
+            $body .= chunk_split(base64_encode(file_get_contents($filepath))) . "\r\n";
+        }
+        $body .= "--{$boundary}--\r\n";
+        return @mail($to, $subject, $body, implode("\r\n", $headers));
     }
 
     public function getLastError(): string
