@@ -1,6 +1,7 @@
 <?php
 ob_start();
 $baseUrl = rtrim(BASE_URL, '/');
+$colorVariants = ['blue', 'green', 'teal', 'amber', 'violet', 'indigo'];
 ?>
 <?php $smallGroupsHeroImg = page_hero_image('small-groups'); ?>
 <section class="section small-groups-page" data-animate>
@@ -14,15 +15,28 @@ $baseUrl = rtrim(BASE_URL, '/');
     <div class="container small-groups-content">
         <p class="small-groups-intro">Connect with others in communities for ages 16–46. Find your people and grow together.</p>
         <?php if (!empty($groups)): ?>
-        <div class="small-groups-grid">
-            <?php foreach ($groups as $g): ?>
-            <a href="<?= $baseUrl ?>/small-groups/<?= htmlspecialchars($g['slug']) ?>" class="ministry-card stagger-item">
-                <div class="ministry-card-body">
-                    <h3><?= htmlspecialchars($g['title']) ?></h3>
-                    <div class="ministry-card-tagline"><?= rich_content($g['tagline'] ?? '') ?></div>
-                    <span class="link-arrow">Read more →</span>
+        <div class="small-groups-grid" role="list">
+            <?php foreach ($groups as $i => $g):
+                $variant = $colorVariants[$i % count($colorVariants)];
+            ?>
+            <article class="small-group-card small-group-card--<?= $variant ?> stagger-item" role="listitem">
+                <div class="small-group-card-inner">
+                    <header class="small-group-card-header">
+                        <h2 class="small-group-card-title"><?= htmlspecialchars($g['title']) ?></h2>
+                        <?php if (!empty($g['tagline'])): ?>
+                        <p class="small-group-card-tagline"><?= rich_content($g['tagline']) ?></p>
+                        <?php endif; ?>
+                        <?php if (!empty($g['target_age'])): ?>
+                        <span class="small-group-card-meta" aria-label="Target age"><?= htmlspecialchars($g['target_age']) ?></span>
+                        <?php endif; ?>
+                    </header>
+                    <?php $desc = trim($g['description'] ?? ''); if ($desc !== ''): ?>
+                    <div class="small-group-card-body">
+                        <?= rich_content($desc) ?>
+                    </div>
+                    <?php endif; ?>
                 </div>
-            </a>
+            </article>
             <?php endforeach; ?>
         </div>
         <?php else: ?>
