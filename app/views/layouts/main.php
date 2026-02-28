@@ -19,10 +19,8 @@
     <header class="site-header" id="site-header">
         <div class="header-inner">
             <a href="<?= rtrim(BASE_URL, '/') ?>/" class="logo">
-                <?php
-                $logoPath = file_exists(PUBLIC_PATH . '/images/lighthouse-logo.png') ? '/public/images/lighthouse-logo.png' : (file_exists(PUBLIC_PATH . '/images/logo.png') ? '/public/images/logo.png' : null);
-                if ($logoPath): ?>
-                <img class="logo-img" src="<?= rtrim(BASE_URL, '/') . $logoPath ?>" alt="Lighthouse Global Church">
+                <?php $logoUrl = site_logo_url(); if ($logoUrl): ?>
+                <img class="logo-img" src="<?= htmlspecialchars($logoUrl) ?>" alt="Lighthouse Global Church">
                 <?php else: ?>
                 <span class="logo-text">LIGHTHOUSE GLOBAL CHURCH</span>
                 <?php endif; ?>
@@ -78,10 +76,8 @@
         <div class="footer-inner">
             <div class="footer-brand">
                 <a href="<?= rtrim(BASE_URL, '/') ?>/" class="logo">
-                    <?php
-                    $logoPath = file_exists(PUBLIC_PATH . '/images/lighthouse-logo.png') ? '/public/images/lighthouse-logo.png' : (file_exists(PUBLIC_PATH . '/images/logo.png') ? '/public/images/logo.png' : null);
-                    if ($logoPath): ?>
-                    <img src="<?= rtrim(BASE_URL, '/') . $logoPath ?>" alt="Lighthouse Global Church">
+                    <?php $logoUrl = site_logo_url(); if ($logoUrl): ?>
+                    <img src="<?= htmlspecialchars($logoUrl) ?>" alt="Lighthouse Global Church">
                     <?php else: ?>
                     <span class="logo-text">LIGHTHOUSE GLOBAL CHURCH</span>
                     <?php endif; ?>

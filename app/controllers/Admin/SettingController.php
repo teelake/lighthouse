@@ -8,8 +8,49 @@ use App\Services\ImageUpload;
 class SettingController extends BaseController
 {
     public function index() { $this->requireAdmin(); $this->redirectAdmin('settings/general'); }
-    public function general() { $this->requireAdmin(); $s = new Setting(); $this->render('admin/settings/general', ['address' => $s->get('site_address'), 'phone' => $s->get('site_phone'), 'email' => $s->get('site_email'), 'watch_online_url' => $s->get('watch_online_url', ''), 'pageHeading' => 'General Settings', 'currentPage' => 'settings']); }
-    public function updateGeneral() { $this->requireAdmin(); $s = new Setting(); $s->set('site_address', $this->post('site_address')); $s->set('site_phone', $this->post('site_phone')); $s->set('site_email', $this->post('site_email')); $s->set('watch_online_url', trim($this->post('watch_online_url', ''))); $this->redirectAdmin('settings/general'); }
+    public function general()
+    {
+        $this->requireAdmin();
+        $s = new Setting();
+        $this->render('admin/settings/general', [
+            'site_logo' => $s->get('site_logo', ''),
+            'address' => $s->get('site_address'),
+            'phone' => $s->get('site_phone'),
+            'email' => $s->get('site_email'),
+            'watch_online_url' => $s->get('watch_online_url', ''),
+            'pageHeading' => 'General Settings',
+            'currentPage' => 'settings',
+        ]);
+    }
+    public function updateGeneral()
+    {
+        $this->requireAdmin();
+        $s = new Setting();
+        $siteLogo = $s->get('site_logo', '');
+        $uploader = new \App\Services\ImageUpload();
+        $uploaded = $uploader->upload('site_logo', 'logo');
+        if ($uploaded !== null) {
+            $siteLogo = $uploaded;
+        } elseif ($uploader->getLastError()) {
+            $this->render('admin/settings/general', [
+                'site_logo' => $siteLogo,
+                'address' => $this->post('site_address'),
+                'phone' => $this->post('site_phone'),
+                'email' => $this->post('site_email'),
+                'watch_online_url' => $this->post('watch_online_url', ''),
+                'error' => $uploader->getLastError(),
+                'pageHeading' => 'General Settings',
+                'currentPage' => 'settings',
+            ]);
+            return;
+        }
+        $s->set('site_logo', $siteLogo);
+        $s->set('site_address', $this->post('site_address'));
+        $s->set('site_phone', $this->post('site_phone'));
+        $s->set('site_email', $this->post('site_email'));
+        $s->set('watch_online_url', trim($this->post('watch_online_url', '')));
+        $this->redirectAdmin('settings/general');
+    }
 
     public function social()
     {

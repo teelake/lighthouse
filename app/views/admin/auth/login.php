@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In - Lighthouse Admin</title>
-    <?php
-    $faviconPath = file_exists(PUBLIC_PATH . '/images/lighthouse-logo.png') ? '/public/images/lighthouse-logo.png' : (file_exists(PUBLIC_PATH . '/images/logo.png') ? '/public/images/logo.png' : null);
-    if ($faviconPath): ?>
-    <link rel="icon" type="image/png" href="<?= rtrim(BASE_URL, '/') . $faviconPath ?>">
+    <?php $faviconUrl = function_exists('site_logo_url') ? site_logo_url() : null; if ($faviconUrl): ?>
+    <link rel="icon" type="image/png" href="<?= htmlspecialchars($faviconUrl) ?>">
     <?php else: ?>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23b08d57' d='M16 4L4 12v12h24V12L16 4z'/%3E%3Cpath fill='none' stroke='%23b08d57' stroke-width='1.5' d='M16 12v12M4 12h24'/%3E%3C/svg%3E">
     <?php endif; ?>
@@ -39,10 +37,8 @@
 <body>
     <div class="auth-card">
         <div class="auth-logo">
-            <?php
-            $logoPath = file_exists(PUBLIC_PATH . '/images/lighthouse-logo.png') ? '/public/images/lighthouse-logo.png' : (file_exists(PUBLIC_PATH . '/images/logo.png') ? '/public/images/logo.png' : null);
-            if ($logoPath): ?>
-            <img src="<?= rtrim(BASE_URL, '/') . $logoPath ?>" alt="Lighthouse" class="auth-logo-img">
+            <?php $logoUrl = function_exists('site_logo_url') ? site_logo_url() : null; if ($logoUrl): ?>
+            <img src="<?= htmlspecialchars($logoUrl) ?>" alt="Lighthouse" class="auth-logo-img">
             <?php else: ?>
             <svg class="auth-logo-img" width="120" height="48" viewBox="0 0 32 32" fill="none" stroke="#b08d57" stroke-width="1.5"><path d="M16 4L4 12v12h24V12L16 4z"/><path d="M16 12v12"/><path d="M4 12h24"/></svg>
             <?php endif; ?>

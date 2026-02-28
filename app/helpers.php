@@ -101,6 +101,29 @@ if (!function_exists('engagement_type_label')) {
 }
 
 /**
+ * Site logo URL for header and footer. Managed from admin General Settings.
+ * Falls back to public/images/lighthouse-logo.png or logo.png when no upload is set.
+ */
+if (!function_exists('site_logo_url')) {
+    function site_logo_url(): ?string
+    {
+        $s = new \App\Models\Setting();
+        $url = $s->get('site_logo', '');
+        if (!empty($url)) {
+            return $url;
+        }
+        $base = rtrim(BASE_URL ?? '', '/');
+        if (file_exists(PUBLIC_PATH . '/images/lighthouse-logo.png')) {
+            return $base . '/public/images/lighthouse-logo.png';
+        }
+        if (file_exists(PUBLIC_PATH . '/images/logo.png')) {
+            return $base . '/public/images/logo.png';
+        }
+        return null;
+    }
+}
+
+/**
  * Get hero background image URL for an inner page.
  * About uses about_hero_image; other pages use page_hero_image.
  */
