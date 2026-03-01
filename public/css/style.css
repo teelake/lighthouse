@@ -1634,18 +1634,29 @@ body::before {
 }
 .about-page--hop .about-pillar-card-text p { margin: 0 0 0.5em; }
 .about-page--hop .about-pillar-card-text p:last-child { margin-bottom: 0; }
-.about-page--hop .about-pillar-card-text,
-.about-page--hop .about-pillar-card-text p,
-.about-page--hop .about-pillar-card-text div {
+.about-page--hop .about-pillar-card-text {
     margin: 0;
     font-size: 0.95rem;
     line-height: 1.7;
-    color: white !important;
+    color: #fff !important;
     position: relative;
     z-index: 1;
 }
+/* Override CMS inline styles (Quill etc.) - force white on all text descendants */
+.about-page--hop .about-pillar-card-text p,
+.about-page--hop .about-pillar-card-text div,
+.about-page--hop .about-pillar-card-text span,
+.about-page--hop .about-pillar-card-text strong,
+.about-page--hop .about-pillar-card-text b,
+.about-page--hop .about-pillar-card-text em,
+.about-page--hop .about-pillar-card-text i,
+.about-page--hop .about-pillar-card-text li,
+.about-page--hop .about-pillar-card-text blockquote,
+.about-page--hop .about-pillar-card-text * {
+    color: #fff !important;
+}
 .about-page--hop .about-pillar-card-text a {
-    color: var(--color-primary);
+    color: var(--color-primary) !important;
 }
 @media (max-width: 900px) {
     .about-page--hop .about-pillars-grid { grid-template-columns: 1fr; }
