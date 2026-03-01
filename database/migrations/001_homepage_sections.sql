@@ -45,7 +45,7 @@ INSERT INTO homepage_moments (image_small, image_wide, alt_small, alt_wide, sort
 
 -- Add new content sections for homepage
 INSERT INTO content_sections (section_key, title, content, extra_data, sort_order) VALUES
-('hero_config', 'Hero Configuration', '', '{"tagline":"A Christ-centered, Spirit-empowered ministry","pillars":["Welcome","Worship","Word"],"bg_image":"https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1920","cta_watch_url":"/media","cta_visit_url":"/im-new"}', 6),
+('hero_config', 'Hero Configuration', '', '{"tagline":"A Christ-centered, Spirit-empowered ministry","pillars":["Welcome","Worship","Word","Witness"],"bg_image":"https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1920","cta_watch_url":"/media","cta_visit_url":"/im-new"}', 6),
 ('gather_config', 'Gather With Us', '', '{"section_title":"Gather With Us","section_sub":"Join us in person or online","sunday_title":"Sunday","sunday_desc":"Catalysis — Worship that ignites faith","thursday_title":"Thursday","thursday_desc":"The Summit — Teaching & prayer"}', 7),
 ('lights_config', 'We Raise Lights', '', '{"headline":"We Raise Lights That Transform Nations","image":"https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?w=900"}', 8),
 ('prayer_wall_config', 'Prayer Wall', '', '{"eyebrow":"Ministry","headline":"Pray With Us","description":"A digital space for church members to post prayer points and invite others to pray with them. You can share openly or post anonymously—either way, the church family stands with you in prayer."}', 9),

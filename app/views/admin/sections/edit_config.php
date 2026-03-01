@@ -10,7 +10,7 @@ $key = $section['section_key'] ?? '';
         <?= csrf_field() ?>
         <?php if ($key === 'hero_config'): ?>
         <div class="form-group"><label>Tagline</label><input type="text" name="tagline" value="<?= htmlspecialchars($d['tagline'] ?? '') ?>"></div>
-        <div class="form-group"><label>Pillars (one per line)</label><textarea name="pillars"><?= htmlspecialchars(implode("\n", $d['pillars'] ?? ['Welcome','Worship','Word'])) ?></textarea></div>
+        <div class="form-group"><label>Pillars (one per line)</label><textarea name="pillars"><?= htmlspecialchars(implode("\n", $d['pillars'] ?? ['Welcome','Worship','Word','Witness'])) ?></textarea></div>
         <div class="form-group">
             <label>Background Image</label>
             <?php if (!empty($d['bg_image'])): ?>

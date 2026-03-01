@@ -18,7 +18,7 @@ $whoWeAre = $sections['who_we_are'] ?? null;
 
 $headline = $hero['content'] ?? 'Raising Lights That Transform Nations';
 $heroTagline = $heroExtra['tagline'] ?? 'A Christ-centered, Spirit-empowered ministry';
-$heroPillars = $heroExtra['pillars'] ?? ['Welcome', 'Worship', 'Word'];
+$heroPillars = $heroExtra['pillars'] ?? ['Welcome', 'Worship', 'Word', 'Witness'];
 $heroBg = !empty($heroBackgroundImage ?? '') ? $heroBackgroundImage : ($heroExtra['bg_image'] ?? 'https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1920');
 [$ctaWatch, $ctaWatchExternal] = watch_online_url();
 $ctaVisit = ltrim($heroExtra['cta_visit_url'] ?? '/im-new', '/');
