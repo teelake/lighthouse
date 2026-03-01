@@ -18,6 +18,10 @@
             <input type="url" name="social_facebook" value="<?= htmlspecialchars($social_facebook ?? '') ?>" placeholder="https://facebook.com/yourpage">
         </div>
         <div class="form-group">
+            <label>Instagram URL</label>
+            <input type="url" name="social_instagram" value="<?= htmlspecialchars($social_instagram ?? '') ?>" placeholder="https://instagram.com/yourhandle">
+        </div>
+        <div class="form-group">
             <label>TikTok URL</label>
             <input type="url" name="social_tiktok" value="<?= htmlspecialchars($social_tiktok ?? '') ?>" placeholder="https://tiktok.com/@yourhandle">
         </div>
