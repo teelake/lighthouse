@@ -179,14 +179,17 @@ CREATE TABLE prayer_requests (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Prayer wall (member posts - requires login)
+-- Prayer wall (public - members and guests can post)
 CREATE TABLE prayer_wall (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    user_id INT UNSIGNED,
+    user_id INT UNSIGNED NULL,
+    author_name VARCHAR(255) NULL,
     request TEXT NOT NULL,
     is_anonymous TINYINT(1) DEFAULT 0,
+    is_archived TINYINT(1) DEFAULT 0,
+    archived_at TIMESTAMP NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 );
 
 -- First-time visitors

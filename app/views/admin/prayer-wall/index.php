@@ -2,7 +2,9 @@
 $requests = $requests ?? [];
 $posts = $posts ?? [];
 $users = $users ?? [];
+$showArchived = $showArchived ?? false;
 $isAdmin = ($_SESSION['user_role'] ?? '') === 'admin';
+$isEditor = in_array($_SESSION['user_role'] ?? '', ['editor', 'admin']);
 $page = (int)($page ?? 1);
 $totalPages = (int)($totalPages ?? 1);
 $total = (int)($total ?? 0);
@@ -12,6 +14,7 @@ $buildQuery = function ($overrides = []) {
     $q = array_filter($q);
     return $q ? '?' . http_build_query($q) : '';
 };
+$baseUrl = rtrim(BASE_URL ?? '', '/');
 ?>
 <div class="admin-card">
     <h2>Prayer Requests</h2>
@@ -50,8 +53,13 @@ $buildQuery = function ($overrides = []) {
 </div>
 
 <div class="admin-card">
-    <h2>Prayer Wall Posts</h2>
-    <p style="color: var(--adm-muted); margin: 0 0 1rem;">Member posts on the Prayer Wall.</p>
+    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+        <div>
+            <h2>Prayer Wall</h2>
+            <p style="color: var(--adm-muted); margin: 0;"><?= $showArchived ? 'Archived posts' : 'Active posts' ?> · <a href="<?= $baseUrl ?>/prayer" target="_blank" rel="noopener">View on site →</a></p>
+        </div>
+        <a href="<?= admin_url('prayer-wall') ?><?= $showArchived ? '' : '?archived=1' ?>" class="btn btn-outline btn-sm"><?= $showArchived ? 'View active' : 'View archived' ?></a>
+    </div>
     <?php if (empty($posts)): ?>
         <p style="color: var(--adm-muted);">No prayer wall posts yet.</p>
     <?php else: ?>
@@ -63,15 +71,28 @@ $buildQuery = function ($overrides = []) {
             <?php foreach ($posts as $p): ?>
                 <tr>
                     <td><?= htmlspecialchars($p['created_at'] ?? '') ?></td>
-                    <td><?= ($p['is_anonymous'] ?? 0) ? 'Anonymous' : htmlspecialchars($users[$p['user_id'] ?? 0] ?? 'Unknown') ?></td>
+                    <td><?= ($p['is_anonymous'] ?? 0) ? 'Anonymous' : htmlspecialchars(trim($p['author_name'] ?? '') ?: ($users[$p['user_id'] ?? 0] ?? 'Guest')) ?></td>
                     <td>
                         <span style="color: var(--adm-text);"><?php $txt = strip_tags($p['request'] ?? ''); echo htmlspecialchars(mb_strlen($txt) > 50 ? mb_substr($txt, 0, 50) . '...' : $txt); ?></span>
                     </td>
                     <td>
-                        <div class="admin-table-actions">
+                        <div class="admin-table-actions" style="flex-wrap: wrap; gap: 0.35rem;">
                             <a href="<?= admin_url('prayer-wall/posts/' . ($p['id'] ?? '')) ?>" class="btn btn-sm btn-outline">View</a>
+                            <?php if ($isEditor): ?>
+                            <?php if ($p['is_archived'] ?? 0): ?>
+                            <form method="post" action="<?= admin_url('prayer-wall/posts/' . ($p['id'] ?? '') . '/unarchive') ?>" style="display:inline;">
+                                <?= csrf_field() ?>
+                                <button type="submit" class="btn btn-sm btn-outline">Unarchive</button>
+                            </form>
+                            <?php else: ?>
+                            <form method="post" action="<?= admin_url('prayer-wall/posts/' . ($p['id'] ?? '') . '/archive') ?>" onsubmit="return confirm('Archive this prayer? It will be hidden from the public wall.');" style="display:inline;">
+                                <?= csrf_field() ?>
+                                <button type="submit" class="btn btn-sm btn-outline">Archive</button>
+                            </form>
+                            <?php endif; ?>
+                            <?php endif; ?>
                             <?php if ($isAdmin): ?>
-                            <form method="post" action="<?= admin_url('prayer-wall/posts/' . ($p['id'] ?? '') . '/delete') ?>" onsubmit="return confirm('Delete this post?');">
+                            <form method="post" action="<?= admin_url('prayer-wall/posts/' . ($p['id'] ?? '') . '/delete') ?>" onsubmit="return confirm('Delete this post?');" style="display:inline;">
                                 <?= csrf_field() ?>
                                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                             </form>

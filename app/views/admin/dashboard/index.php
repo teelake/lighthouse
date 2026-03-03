@@ -66,12 +66,6 @@ function dash_time_ago($date) {
             <span class="dash-kpi-label">Media</span>
         </a>
         <?php endif; ?>
-        <?php if ($isMember) { ?>
-        <a href="<?= admin_url('prayer-wall') ?>" class="dash-kpi-card dash-kpi-accent">
-            <span class="dash-kpi-value"><?= (int)(isset($stats['prayer_wall']) ? $stats['prayer_wall'] : 0) ?></span>
-            <span class="dash-kpi-label">Prayer Wall</span>
-        </a>
-        <?php } ?>
         <?php if ($isAdmin) { ?>
         <a href="<?= admin_url('prayer-wall') ?>" class="dash-kpi-card dash-kpi-accent">
             <span class="dash-kpi-value"><?= (int)(isset($stats['prayer_requests']) ? $stats['prayer_requests'] : 0) + (int)(isset($stats['prayer_wall']) ? $stats['prayer_wall'] : 0) ?></span>
