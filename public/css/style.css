@@ -115,7 +115,7 @@ body::before {
 .logo .logo-img {
     height: 100px;
     width: auto;
-    max-width: 360px;
+    max-width: 420px;
     object-fit: contain;
     transition: filter 0.35s ease;
 }
@@ -220,7 +220,7 @@ body::before {
 
 @media (max-width: 900px) {
     .header-inner { flex-wrap: nowrap; gap: 0.75rem; padding: 0 1rem; justify-content: space-between; }
-    .logo .logo-img { height: 92px; max-width: 300px; }
+    .logo .logo-img { height: 92px; max-width: 340px; }
     .main-nav { flex: none; margin-left: 0; }
     .main-nav { background: #000 !important; }
     .nav-toggle { display: flex; flex-shrink: 0; order: 1; margin-left: auto; }
@@ -297,7 +297,7 @@ body::before {
     .header-social a { min-width: 40px; min-height: 40px; padding: 0.4rem; }
     .header-social svg { width: 16px; height: 16px; }
     .btn-give { padding: 0.45rem 0.85rem; font-size: 0.75rem; min-height: 40px; }
-    .logo .logo-img { height: 80px; max-width: 260px; }
+    .logo .logo-img { height: 80px; max-width: 280px; }
 }
 
 /* Hero - Lighthouse unique: centered, bold, warm + entrance animation */
