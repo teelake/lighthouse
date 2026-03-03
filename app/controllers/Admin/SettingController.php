@@ -14,6 +14,7 @@ class SettingController extends BaseController
         $s = new Setting();
         $this->render('admin/settings/general', [
             'site_logo' => $s->get('site_logo', ''),
+            'site_logo_light' => $s->get('site_logo_light', ''),
             'address' => $s->get('site_address'),
             'phone' => $s->get('site_phone'),
             'email' => $s->get('site_email'),
@@ -27,13 +28,16 @@ class SettingController extends BaseController
         $this->requireAdmin();
         $s = new Setting();
         $siteLogo = $s->get('site_logo', '');
+        $siteLogoLight = $s->get('site_logo_light', '');
         $uploader = new \App\Services\ImageUpload();
+
         $uploaded = $uploader->upload('site_logo', 'logo');
         if ($uploaded !== null) {
             $siteLogo = $uploaded;
         } elseif ($uploader->getLastError()) {
             $this->render('admin/settings/general', [
                 'site_logo' => $siteLogo,
+                'site_logo_light' => $siteLogoLight,
                 'address' => $this->post('site_address'),
                 'phone' => $this->post('site_phone'),
                 'email' => $this->post('site_email'),
@@ -44,7 +48,27 @@ class SettingController extends BaseController
             ]);
             return;
         }
+
+        $uploadedLight = $uploader->upload('site_logo_light', 'logo');
+        if ($uploadedLight !== null) {
+            $siteLogoLight = $uploadedLight;
+        } elseif ($uploader->getLastError()) {
+            $this->render('admin/settings/general', [
+                'site_logo' => $siteLogo,
+                'site_logo_light' => $siteLogoLight,
+                'address' => $this->post('site_address'),
+                'phone' => $this->post('site_phone'),
+                'email' => $this->post('site_email'),
+                'watch_online_url' => $this->post('watch_online_url', ''),
+                'error' => $uploader->getLastError(),
+                'pageHeading' => 'General Settings',
+                'currentPage' => 'settings',
+            ]);
+            return;
+        }
+
         $s->set('site_logo', $siteLogo);
+        $s->set('site_logo_light', $siteLogoLight);
         $s->set('site_address', $this->post('site_address'));
         $s->set('site_phone', $this->post('site_phone'));
         $s->set('site_email', $this->post('site_email'));

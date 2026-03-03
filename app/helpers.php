@@ -124,6 +124,19 @@ if (!function_exists('site_logo_url')) {
 }
 
 /**
+ * Site logo (light variant) for dark backgrounds. Used in header when header is black.
+ * White/light text version. Falls back to null if not set.
+ */
+if (!function_exists('site_logo_light_url')) {
+    function site_logo_light_url(): ?string
+    {
+        $s = new \App\Models\Setting();
+        $url = $s->get('site_logo_light', '');
+        return !empty($url) ? $url : null;
+    }
+}
+
+/**
  * Get hero background image URL for an inner page.
  * About uses about_hero_image; other pages use page_hero_image.
  */

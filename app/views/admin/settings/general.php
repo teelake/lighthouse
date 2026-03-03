@@ -7,8 +7,8 @@
         <?= csrf_field() ?>
         <h3 style="font-size: 1rem; font-weight: 600; margin: 0 0 0.75rem;">Site Logo</h3>
         <div class="form-group">
-            <label>Logo Image</label>
-            <p class="admin-muted" style="font-size: 0.85rem; margin: 0 0 0.5rem;">Used in header and footer. Recommended: PNG with transparent background, height ~48–52px.</p>
+            <label>Logo (for light backgrounds)</label>
+            <p class="admin-muted" style="font-size: 0.85rem; margin: 0 0 0.5rem;">Used when header is white (after scroll) and in footer. Black/dark text on white or transparent background.</p>
             <?php if (!empty($site_logo ?? '')): ?>
             <div class="admin-image-preview" style="margin-bottom: 0.75rem;">
                 <img src="<?= htmlspecialchars($site_logo) ?>" alt="Current logo" style="max-width: 200px; max-height: 64px; object-fit: contain; border: 1px solid var(--adm-border); border-radius: 6px;">
@@ -16,6 +16,17 @@
             </div>
             <?php endif; ?>
             <input type="file" name="site_logo" accept="image/jpeg,image/png,image/avif,image/svg+xml">
+        </div>
+        <div class="form-group" style="margin-top: 1.25rem;">
+            <label>Logo – Light variant (for dark backgrounds)</label>
+            <p class="admin-muted" style="font-size: 0.85rem; margin: 0 0 0.5rem;">Used when header is black (top of page). White or light-coloured text. Transparent or dark background. If not set, the main logo is auto-inverted.</p>
+            <?php if (!empty($site_logo_light ?? '')): ?>
+            <div class="admin-image-preview" style="margin-bottom: 0.75rem;">
+                <img src="<?= htmlspecialchars($site_logo_light) ?>" alt="Current light logo" style="max-width: 200px; max-height: 64px; object-fit: contain; border: 1px solid var(--adm-border); border-radius: 6px; background: #1a1a1a;">
+                <p class="admin-muted" style="font-size: 0.85rem; margin-top: 0.25rem;">Current light logo. Upload to replace.</p>
+            </div>
+            <?php endif; ?>
+            <input type="file" name="site_logo_light" accept="image/jpeg,image/png,image/avif,image/svg+xml">
         </div>
         <h3 style="font-size: 1rem; font-weight: 600; margin: 1.5rem 0 0.75rem;">Contact</h3>
         <div class="form-group">

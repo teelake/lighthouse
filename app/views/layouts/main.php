@@ -19,9 +19,17 @@
     <header class="site-header" id="site-header">
         <div class="header-inner">
             <a href="<?= rtrim(BASE_URL, '/') ?>/" class="logo">
-                <?php $logoUrl = site_logo_url(); if ($logoUrl): ?>
-                <img class="logo-img" src="<?= htmlspecialchars($logoUrl) ?>" alt="Lighthouse Global Church">
-                <?php else: ?>
+                <?php
+                $logoUrl = site_logo_url();
+                $logoLightUrl = site_logo_light_url();
+                if ($logoUrl):
+                    if ($logoLightUrl): ?>
+                <img class="logo-img logo-img--dark" src="<?= htmlspecialchars($logoUrl) ?>" alt="Lighthouse Global Church">
+                <img class="logo-img logo-img--light" src="<?= htmlspecialchars($logoLightUrl) ?>" alt="Lighthouse Global Church">
+                    <?php else: ?>
+                <img class="logo-img logo-img--single" src="<?= htmlspecialchars($logoUrl) ?>" alt="Lighthouse Global Church">
+                    <?php endif;
+                else: ?>
                 <span class="logo-text">LIGHTHOUSE GLOBAL CHURCH</span>
                 <?php endif; ?>
             </a>
@@ -77,8 +85,11 @@
         <div class="footer-inner">
             <div class="footer-brand">
                 <a href="<?= rtrim(BASE_URL, '/') ?>/" class="logo">
-                    <?php $logoUrl = site_logo_url(); if ($logoUrl): ?>
-                    <img src="<?= htmlspecialchars($logoUrl) ?>" alt="Lighthouse Global Church">
+                    <?php
+                    $footerLogoUrl = site_logo_light_url() ?: site_logo_url();
+                    $footerUsesLightVariant = (bool) site_logo_light_url();
+                    if ($footerLogoUrl): ?>
+                    <img src="<?= htmlspecialchars($footerLogoUrl) ?>" alt="Lighthouse Global Church"<?= !$footerUsesLightVariant ? ' class="footer-logo-invert"' : '' ?>>
                     <?php else: ?>
                     <span class="logo-text">LIGHTHOUSE GLOBAL CHURCH</span>
                     <?php endif; ?>
