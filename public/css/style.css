@@ -769,6 +769,8 @@ body::before {
     margin: 0 0 1rem;
     line-height: 1.65;
     color: #333;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 .voice-quote p { margin: 0 0 0.5em; }
 .voice-quote p:last-child { margin-bottom: 0; }
@@ -790,6 +792,57 @@ body::before {
 .voice-carousel-dots .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.35); border: none; cursor: pointer; transition: var(--transition); }
 .voice-carousel-dots .dot:hover { background: rgba(255,255,255,0.6); }
 .voice-carousel-dots .dot.active { background: var(--color-primary); transform: scale(1.2); }
+
+/* Voice section - mobile responsive */
+@media (max-width: 768px) {
+    .voice-section { padding: 3rem 0; }
+    .voice-carousel { margin-top: 1.5rem; }
+    .voice-card { padding: 1.5rem 1.25rem; }
+    .voice-quote { font-size: clamp(0.95rem, 2.5vw, 1.15rem); }
+    .voice-card cite { font-size: 0.85rem; }
+    .voice-carousel .carousel-btn {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+    }
+    .voice-carousel .carousel-prev { left: 0.35rem; }
+    .voice-carousel .carousel-next { right: 0.35rem; }
+    .voice-carousel-dots { padding: 1.25rem 0 0; }
+}
+@media (max-width: 600px) {
+    .voice-section { padding: 2.5rem 0; }
+    .voice-carousel { margin-top: 1.25rem; }
+    .voice-card { padding: 1.25rem 1rem; }
+    .voice-quote { font-size: clamp(0.9rem, 3vw, 1.05rem); line-height: 1.6; }
+    .voice-author { gap: 0.5rem; }
+    .voice-author-photo { width: 36px; height: 36px; }
+    .voice-card cite { font-size: 0.8rem; }
+    .voice-carousel .carousel-btn {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+    }
+    .voice-carousel .carousel-prev { left: 0.25rem; }
+    .voice-carousel .carousel-next { right: 0.25rem; }
+    .voice-carousel-dots { padding: 1rem 0 0; gap: 0.4rem; }
+    .voice-carousel-dots .dot { width: 8px; height: 8px; }
+}
+@media (max-width: 420px) {
+    .voice-section { padding: 2rem 0; }
+    .voice-section .container { padding-left: 0.75rem; padding-right: 0.75rem; }
+    .voice-card { padding: 1rem 0.85rem; }
+    .voice-quote { font-size: 0.9rem; }
+    .voice-carousel .carousel-btn {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+    }
+    .voice-carousel .carousel-prev { left: 0.15rem; }
+    .voice-carousel .carousel-next { right: 0.15rem; }
+}
 
 /* Stay Connected - newsletter */
 .stay-connected-section { background: var(--color-torch-red); color: #fff; padding: 4rem 0; }
