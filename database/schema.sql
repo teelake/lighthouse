@@ -232,7 +232,19 @@ CREATE TABLE gallery (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Testimonials
+-- Online testimonies (user-submitted, no login)
+CREATE TABLE IF NOT EXISTS testimonies (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    content TEXT NOT NULL,
+    author_name VARCHAR(255) NULL,
+    is_anonymous TINYINT(1) DEFAULT 0,
+    is_archived TINYINT(1) DEFAULT 0,
+    archived_at TIMESTAMP NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Testimonials (admin-curated, homepage carousel)
 CREATE TABLE testimonials (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     quote TEXT NOT NULL,

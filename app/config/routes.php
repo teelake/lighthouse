@@ -31,12 +31,14 @@ $router->add('GET', 'contact', ['controller' => 'Page', 'action' => 'contact']);
 $router->add('GET', 'faq', ['controller' => 'Page', 'action' => 'faq']);
 $router->add('GET', 'im-new', ['controller' => 'Page', 'action' => 'imNew']);
 $router->add('GET', 'prayer', ['controller' => 'Prayer', 'action' => 'index']);
+$router->add('GET', 'testimonies', ['controller' => 'Testimony', 'action' => 'index']);
 $router->add('GET', 'jobs', ['controller' => 'Job', 'action' => 'index']);
 $router->add('GET', 'jobs/{slug}/apply', ['controller' => 'Job', 'action' => 'applyForm']);
 $router->add('GET', 'jobs/{slug}', ['controller' => 'Job', 'action' => 'view']);
 
 // Forms - POST
 $router->add('POST', 'prayer/submit', ['controller' => 'Prayer', 'action' => 'submit']);
+$router->add('POST', 'testimonies/submit', ['controller' => 'Testimony', 'action' => 'submit']);
 $router->add('POST', 'newsletter/subscribe', ['controller' => 'Newsletter', 'action' => 'subscribe']);
 $router->add('POST', 'contact/submit', ['controller' => 'Contact', 'action' => 'submit']);
 $router->add('POST', 'visitor/register', ['controller' => 'Visitor', 'action' => 'register']);
@@ -154,6 +156,14 @@ $router->add('GET', $adm . '/prayer-wall/posts/{id}/edit', ['controller' => 'Adm
 $router->add('POST', $adm . '/prayer-wall/posts/{id}', ['controller' => 'Admin\PrayerWall', 'action' => 'updatePost']);
 $router->add('POST', $adm . '/prayer-wall/requests/{id}/delete', ['controller' => 'Admin\PrayerWall', 'action' => 'deleteRequest']);
 $router->add('POST', $adm . '/prayer-wall/posts/{id}/delete', ['controller' => 'Admin\PrayerWall', 'action' => 'deletePost']);
+
+$router->add('GET', $adm . '/testimonies', ['controller' => 'Admin\Testimony', 'action' => 'index']);
+$router->add('GET', $adm . '/testimonies/{id}', ['controller' => 'Admin\Testimony', 'action' => 'view']);
+$router->add('GET', $adm . '/testimonies/{id}/edit', ['controller' => 'Admin\Testimony', 'action' => 'edit']);
+$router->add('POST', $adm . '/testimonies/{id}', ['controller' => 'Admin\Testimony', 'action' => 'update']);
+$router->add('POST', $adm . '/testimonies/{id}/archive', ['controller' => 'Admin\Testimony', 'action' => 'archive']);
+$router->add('POST', $adm . '/testimonies/{id}/unarchive', ['controller' => 'Admin\Testimony', 'action' => 'unarchive']);
+$router->add('POST', $adm . '/testimonies/{id}/delete', ['controller' => 'Admin\Testimony', 'action' => 'delete']);
 
 $router->add('GET', $adm . '/settings', ['controller' => 'Admin\Setting', 'action' => 'index']);
 $router->add('GET', $adm . '/settings/general', ['controller' => 'Admin\Setting', 'action' => 'general']);

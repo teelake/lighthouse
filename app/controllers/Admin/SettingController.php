@@ -128,6 +128,7 @@ class SettingController extends BaseController
                 ['label' => 'Membership & Training', 'url' => '/membership'],
                 ['label' => 'Join the Team', 'url' => '/jobs'],
                 ['label' => 'Prayer Wall', 'url' => '/prayer'],
+                ['label' => 'Testimonies', 'url' => '/testimonies'],
             ]],
             ['title' => 'CONTACT', 'links' => [
                 ['label' => 'Contact Us', 'url' => '/contact'],
