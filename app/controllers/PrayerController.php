@@ -4,6 +4,8 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Models\ContentSection;
 use App\Models\PrayerWall;
+use App\Models\Setting;
+use App\Services\MailService;
 
 class PrayerController extends Controller
 {
@@ -68,9 +70,40 @@ class PrayerController extends Controller
                 'request' => $request,
                 'is_anonymous' => $isAnonymous,
             ]);
+            $this->notifyAdminNewPrayer($request, $isAnonymous, $authorName, $userId);
             $this->redirect('/prayer?submitted=1');
         } catch (\Throwable $e) {
             $this->redirect('/prayer?error=post');
+        }
+    }
+
+    private function notifyAdminNewPrayer(string $request, int $isAnonymous, string $authorName, ?int $userId): void
+    {
+        $setting = new Setting();
+        $to = trim($setting->get('site_email', ''));
+        if (!$to || !filter_var($to, FILTER_VALIDATE_EMAIL)) {
+            return;
+        }
+        $author = $isAnonymous ? 'Anonymous' : ($authorName ?: null);
+        if ($author === null && $userId) {
+            $u = (new \App\Models\User())->find($userId);
+            $author = $u['name'] ?? $u['email'] ?? 'A church member';
+        }
+        $author = $author ?? 'A friend';
+        $adminUrl = function_exists('admin_url') ? admin_url('prayer-wall') : (rtrim(BASE_URL ?? '', '/') . '/' . (defined('ADMIN_PATH') ? ADMIN_PATH : 'admin') . '/prayer-wall');
+        $subject = 'New prayer posted on the Prayer Wall – Lighthouse Global Church';
+        $body = '<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body style="font-family: sans-serif; line-height: 1.6; color: #333;">';
+        $body .= '<h2>New Prayer Posted</h2>';
+        $body .= '<p><strong>Author:</strong> ' . htmlspecialchars($author) . '</p>';
+        $body .= '<p><strong>Prayer:</strong></p>';
+        $body .= '<div style="background: #f8f8f8; padding: 1rem; border-radius: 6px; margin: 0.5rem 0;">' . (function_exists('rich_content') ? rich_content($request) : nl2br(htmlspecialchars(strip_tags($request)))) . '</div>';
+        $body .= '<p><a href="' . htmlspecialchars($adminUrl) . '" style="display: inline-block; background: #d4a017; color: #1a1a1a; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px; font-weight: 600;">View Prayer Wall</a></p>';
+        $body .= '<p style="color: #666; font-size: 0.9rem;">— Lighthouse Global Church</p>';
+        $body .= '</body></html>';
+        try {
+            (new MailService())->send($to, 'Lighthouse Global Church', $subject, $body);
+        } catch (\Throwable $e) {
+            // Log but don't fail the submission
         }
     }
 }
