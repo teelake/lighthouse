@@ -8,23 +8,91 @@ document.addEventListener('DOMContentLoaded', function() {
     const heroBg = document.querySelector('.hero-bg');
 
     // Mobile nav toggle (hamburger to X animation)
+    function setNavOpen(open) {
+        if (!mainNav || !header || !navToggle) return;
+        mainNav.classList.toggle('active', open);
+        header.classList.toggle('nav-open', open);
+        navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open) {
+            var scrollY = window.scrollY;
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.top = '-' + scrollY + 'px';
+            document.body.style.left = '0';
+            document.body.style.right = '0';
+        } else {
+            var scrollY = Math.abs(parseInt(document.body.style.top || '0', 10));
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.left = '';
+            document.body.style.right = '';
+            window.scrollTo(0, scrollY);
+        }
+    }
+    function closeNav() { setNavOpen(false); }
+    function isNavOpen() { return mainNav && mainNav.classList.contains('active'); }
+
     if (navToggle && mainNav && header) {
         navToggle.addEventListener('click', function() {
-            mainNav.classList.toggle('active');
-            header.classList.toggle('nav-open', mainNav.classList.contains('active'));
-            navToggle.setAttribute('aria-expanded', mainNav.classList.contains('active'));
+            setNavOpen(!isNavOpen());
         });
     }
 
-    // Dropdown toggles on mobile
+    // Dropdown toggles on mobile - collapse by default
+    function initMobileDropdowns() {
+        document.querySelectorAll('.main-nav .has-dropdown').forEach(function(parent) {
+            const ul = parent.querySelector('.dropdown');
+            if (ul) {
+                ul.style.display = window.innerWidth <= 900 ? 'none' : '';
+                if (window.innerWidth <= 900) {
+                    parent.classList.remove('expanded');
+                    var link = parent.querySelector('a');
+                    if (link) link.setAttribute('aria-expanded', 'false');
+                }
+            }
+        });
+    }
+    initMobileDropdowns();
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 900) {
+            document.querySelectorAll('.main-nav .has-dropdown .dropdown').forEach(function(ul) {
+                ul.style.display = '';
+            });
+            closeNav();
+        } else {
+            initMobileDropdowns();
+        }
+    });
+
     document.querySelectorAll('.has-dropdown > a').forEach(function(link) {
         link.addEventListener('click', function(e) {
             if (window.innerWidth <= 900) {
                 e.preventDefault();
+                const parent = link.closest('.has-dropdown');
                 const ul = this.nextElementSibling;
-                if (ul) ul.style.display = ul.style.display === 'block' ? 'none' : 'block';
+                if (ul && parent) {
+                    const isOpen = ul.style.display === 'block';
+                    ul.style.display = isOpen ? 'none' : 'block';
+                    parent.classList.toggle('expanded', !isOpen);
+                    link.setAttribute('aria-expanded', !isOpen);
+                }
             }
         });
+    });
+
+    // Close menu when clicking any nav link that navigates (not dropdown parents)
+    document.querySelectorAll('.main-nav a').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            if (window.innerWidth <= 900 && !link.parentElement.classList.contains('has-dropdown')) {
+                closeNav();
+            }
+        });
+    });
+
+    // Close menu on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && isNavOpen()) closeNav();
     });
 
     // Header scroll effect: white bg + black logo when scrolled

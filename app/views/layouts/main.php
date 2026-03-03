@@ -32,7 +32,7 @@
                 <ul>
                     <li><a href="<?= rtrim(BASE_URL, '/') ?>/">Home</a></li>
                     <li class="has-dropdown">
-                        <a href="<?= rtrim(BASE_URL, '/') ?>/about">About</a>
+                        <a href="<?= rtrim(BASE_URL, '/') ?>/about" aria-expanded="false" aria-haspopup="true">About</a>
                         <ul class="dropdown">
                             <li><a href="<?= rtrim(BASE_URL, '/') ?>/about">About Us</a></li>
                             <li><a href="<?= rtrim(BASE_URL, '/') ?>/leadership">Leadership</a></li>
@@ -43,7 +43,7 @@
                     <li><a href="<?= rtrim(BASE_URL, '/') ?>/ministries">Ministries</a></li>
                     <li><a href="<?= rtrim(BASE_URL, '/') ?>/events">Events</a></li>
                     <li class="has-dropdown">
-                        <a href="<?= rtrim(BASE_URL, '/') ?>/im-new">Connect</a>
+                        <a href="<?= rtrim(BASE_URL, '/') ?>/im-new" aria-expanded="false" aria-haspopup="true">Connect</a>
                         <ul class="dropdown">
                             <li><a href="<?= rtrim(BASE_URL, '/') ?>/im-new">I'm New</a></li>
                             <li><a href="<?= rtrim(BASE_URL, '/') ?>/small-groups">Small Groups</a></li>
