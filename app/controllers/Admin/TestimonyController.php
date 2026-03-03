@@ -5,6 +5,7 @@ use App\Models\Testimony;
 
 class TestimonyController extends BaseController
 {
+    private const MAX_WORDS = 300;
     public function index()
     {
         $this->requireEditor();
@@ -68,6 +69,7 @@ class TestimonyController extends BaseController
             'pageHeading' => 'Edit Testimony',
             'currentPage' => 'testimonies',
             'item' => $item,
+            'maxWords' => self::MAX_WORDS,
         ]);
     }
 
@@ -83,6 +85,10 @@ class TestimonyController extends BaseController
         $content = $content === '<p><br></p>' ? '' : $content;
         if ($content === '') {
             $this->redirectAdmin('testimonies/' . $id . '/edit?error=empty');
+            return;
+        }
+        if (str_word_count(strip_tags($content)) > self::MAX_WORDS) {
+            $this->redirectAdmin('testimonies/' . $id . '/edit?error=maxwords');
             return;
         }
         $isAnonymous = (int) $this->post('is_anonymous', 0);

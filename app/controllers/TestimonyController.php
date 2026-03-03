@@ -8,6 +8,7 @@ use App\Models\Testimony;
 class TestimonyController extends Controller
 {
     private const PER_PAGE = 12;
+    private const MAX_WORDS = 300; // SEO-friendly limit for testimonial content
 
     public function index()
     {
@@ -28,6 +29,7 @@ class TestimonyController extends Controller
             'totalPages' => $totalPages,
             'total' => $total,
             'perPage' => self::PER_PAGE,
+            'maxWords' => self::MAX_WORDS,
         ]);
     }
 
@@ -41,6 +43,11 @@ class TestimonyController extends Controller
         $content = $content === '<p><br></p>' ? '' : $content;
         if ($content === '') {
             $this->redirect('/testimonies?error=empty');
+            return;
+        }
+        $wordCount = str_word_count(strip_tags($content));
+        if ($wordCount > self::MAX_WORDS) {
+            $this->redirect('/testimonies?error=maxwords&max=' . self::MAX_WORDS);
             return;
         }
         $isAnonymous = (int) $this->post('is_anonymous', 0);

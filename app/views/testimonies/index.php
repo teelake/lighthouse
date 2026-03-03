@@ -10,6 +10,7 @@ $total = (int)($total ?? 0);
 $perPage = (int)($perPage ?? 12);
 $submitted = isset($_GET['submitted']);
 $error = $_GET['error'] ?? null;
+$maxWords = (int)($maxWords ?? 300);
 $buildQuery = function ($overrides = []) {
     $q = array_merge($_GET, $overrides);
     $q = array_filter($q);
@@ -37,23 +38,28 @@ $buildQuery = function ($overrides = []) {
         <div class="testimonies-msg testimonies-msg--error" role="alert"><p>Please enter your testimony.</p></div>
         <?php elseif ($error === 'post'): ?>
         <div class="testimonies-msg testimonies-msg--error" role="alert"><p>Something went wrong. Please try again.</p></div>
+        <?php elseif ($error === 'maxwords'): ?>
+        <div class="testimonies-msg testimonies-msg--error" role="alert"><p>Your testimony exceeds the maximum of <?= (int)($_GET['max'] ?? 300) ?> words. Please shorten it.</p></div>
         <?php endif; ?>
+
+        <section class="testimonies-intro-section">
+            <div class="testimonies-desc"><?= rich_content($testimoniesIntro ?? 'Share how God has worked in your life. Your story can encourage others. No login required—post openly or anonymously.') ?></div>
+        </section>
 
         <div class="testimonies-grid testimonies-grid--wall">
             <div class="testimonies-submit-card">
                 <h2 class="about-section-title">Share Your Testimony</h2>
-                <div class="testimonies-desc"><?= rich_content($testimoniesIntro ?? 'Share how God has worked in your life. Your story can encourage others. No login required—post openly or anonymously.') ?></div>
                 <form class="testimonies-form" action="<?= $baseUrl ?>/testimonies/submit" method="post">
                     <?= csrf_field() ?>
                     <div class="form-group">
-                        <label for="testimony-content">Your testimony *</label>
+                        <label for="testimony-content">Your testimony * <span class="testimonies-word-count" id="testimony-word-count" aria-live="polite">0 / <?= $maxWords ?> words</span></label>
                         <div class="testimonies-quill-wrap">
-                            <textarea id="testimony-content" name="content" class="rich-editor testimonies-quill-editor" rows="4" required placeholder="Share your story of faith, transformation, or God's goodness..." style="min-height: 180px;"></textarea>
+                            <textarea id="testimony-content" name="content" class="rich-editor testimonies-quill-editor" rows="4" required placeholder="Share your story of faith, transformation, or God's goodness..." style="min-height: 180px;" data-max-words="<?= $maxWords ?>"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="testimony-name">Your name (optional)</label>
-                        <input type="text" id="testimony-name" name="name" placeholder="Leave blank for anonymous">
+                        <input type="text" id="testimony-name" name="name" class="testimonies-name-input" placeholder="Leave blank for anonymous" maxlength="100">
                     </div>
                     <div class="form-group form-check">
                         <input type="checkbox" id="testimony-anonymous" name="is_anonymous" value="1">
@@ -121,10 +127,29 @@ $buildQuery = function ($overrides = []) {
             ]
         }
     });
-    quill.on('text-change', function() { ta.value = quill.root.innerHTML; });
-    document.querySelector('.testimonies-form').addEventListener('submit', function() {
+    function updateWordCount() {
+        var text = (quill.getText() || '').trim();
+        var words = text ? text.split(/\s+/).filter(Boolean).length : 0;
+        var max = parseInt(ta.getAttribute('data-max-words') || '300', 10);
+        var el = document.getElementById('testimony-word-count');
+        if (el) el.textContent = words + ' / ' + max + ' words' + (words > max ? ' (over limit)' : '');
+        return { words: words, max: max };
+    }
+    quill.on('text-change', function() {
         ta.value = quill.root.innerHTML;
+        updateWordCount();
     });
+    var form = document.querySelector('.testimonies-form');
+    form.addEventListener('submit', function(e) {
+        ta.value = quill.root.innerHTML;
+        var c = updateWordCount();
+        if (c.words > c.max) {
+            e.preventDefault();
+            alert('Your testimony exceeds the maximum of ' + c.max + ' words. Please shorten it.');
+            return false;
+        }
+    });
+    updateWordCount();
 })();
 </script>
 <?php

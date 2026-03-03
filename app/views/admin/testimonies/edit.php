@@ -11,6 +11,8 @@ $error = $_GET['error'] ?? null;
     </div>
     <?php if ($error === 'empty'): ?>
     <div class="alert alert-error" style="margin-bottom: 1.5rem;">Please enter the testimony content.</div>
+    <?php elseif ($error === 'maxwords'): ?>
+    <div class="alert alert-error" style="margin-bottom: 1.5rem;">Testimony exceeds the maximum of <?= (int)($maxWords ?? 300) ?> words.</div>
     <?php endif; ?>
     <form method="post" action="<?= admin_url('testimonies/' . ($t['id'] ?? '')) ?>">
         <?= csrf_field() ?>

@@ -2717,6 +2717,8 @@ body::before {
 .testimonies-page { padding-top: 0; }
 .testimonies-content { padding: 3rem 1.5rem 4rem; }
 .testimonies-success { background: var(--color-gold-bg); border: 2px solid rgba(255,225,0,0.4); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 2rem; }
+.testimonies-intro-section { margin-bottom: 2rem; padding: 1.5rem 1.75rem; background: var(--color-bg-warm); border-radius: var(--radius); border: 2px solid rgba(255,225,0,0.15); }
+.testimonies-intro-section .testimonies-desc { margin: 0; }
 .testimonies-success p { margin: 0; font-weight: 600; color: var(--color-primary-on-light); }
 .testimonies-msg { padding: 1rem; border-radius: var(--radius); margin-bottom: 1rem; }
 .testimonies-msg--error { background: #fef2f2; color: #b91c1c; }
@@ -2727,9 +2729,29 @@ body::before {
 .testimonies-desc { margin: 0 0 1.5rem; color: var(--color-muted); font-size: 0.98rem; line-height: 1.65; }
 .testimonies-form .form-group { margin-bottom: 1.25rem; }
 .testimonies-form .form-group label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.35rem; color: var(--color-dark); }
-.testimonies-form input[type="text"] { width: 100%; padding: 0.75rem 1rem; border: 2px solid rgba(26,26,26,0.1); border-radius: var(--radius-sm); font-family: var(--font-sans); font-size: 1rem; color: var(--color-dark); background: #fff; transition: var(--transition); }
-.testimonies-form input[type="text"]:focus { outline: none; border-color: var(--color-primary); }
-.testimonies-form input[type="text"]::placeholder { color: var(--color-muted); opacity: 0.8; }
+.testimonies-word-count { font-weight: 400; font-size: 0.85rem; color: var(--color-muted); }
+.testimonies-form input[type="text"],
+.testimonies-form .testimonies-name-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid rgba(26,26,26,0.1);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: var(--color-dark);
+    background: #fff;
+    transition: var(--transition);
+}
+.testimonies-form input[type="text"]:focus,
+.testimonies-form .testimonies-name-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+.testimonies-form input[type="text"]::placeholder,
+.testimonies-form .testimonies-name-input::placeholder {
+    color: var(--color-muted);
+    opacity: 0.8;
+}
 .testimonies-quill-wrap { margin-bottom: 0; }
 .testimonies-quill-wrap .quill-editor-wrap, .testimonies-quill-editor-wrap { background: #fff; border: 2px solid rgba(26,26,26,0.1); border-radius: var(--radius-sm); min-height: 180px; }
 .testimonies-quill-editor-wrap .ql-container { border: none; font-family: var(--font-sans); font-size: 1rem; }
