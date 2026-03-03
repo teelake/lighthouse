@@ -2125,15 +2125,15 @@ body::before {
     transform: translateY(-4px);
 }
 .services-card--thursday {
-    background: #92400e;
+    background: #0e7490;
     border: 2px solid rgba(255,255,255,0.15);
 }
 .services-card--thursday::before {
-    background: radial-gradient(circle at 15% 85%, rgba(255,225,0,0.15) 0%, transparent 45%);
+    background: radial-gradient(circle at 15% 85%, rgba(255,225,0,0.18) 0%, transparent 45%);
 }
 .services-card--thursday:hover {
     border-color: rgba(255,255,255,0.3);
-    box-shadow: 0 12px 40px rgba(146,64,14,0.4);
+    box-shadow: 0 12px 40px rgba(14,116,144,0.45);
     transform: translateY(-4px);
 }
 .services-card-day {
