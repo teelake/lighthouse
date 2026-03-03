@@ -44,6 +44,8 @@ class DonationController extends BaseController
     private function getDesignations(): array
     {
         return [
+            'Tithes' => 'Tithes',
+            'Offering' => 'Offering',
             'General' => 'General Fund',
             'Teaching' => 'Teaching & Discipleship',
             'Leadership' => 'Leadership Development',
