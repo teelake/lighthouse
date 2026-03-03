@@ -127,7 +127,7 @@ class SettingController extends BaseController
                 ['label' => 'Small Groups', 'url' => '/small-groups'],
                 ['label' => 'Membership & Training', 'url' => '/membership'],
                 ['label' => 'Join the Team', 'url' => '/jobs'],
-                ['label' => 'Prayer', 'url' => '/prayer'],
+                ['label' => 'Prayer Wall', 'url' => '/prayer'],
             ]],
             ['title' => 'CONTACT', 'links' => [
                 ['label' => 'Contact Us', 'url' => '/contact'],

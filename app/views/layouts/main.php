@@ -57,7 +57,7 @@
                             <li><a href="<?= rtrim(BASE_URL, '/') ?>/small-groups">Small Groups</a></li>
                             <li><a href="<?= rtrim(BASE_URL, '/') ?>/membership">Membership & Training</a></li>
                             <li><a href="<?= rtrim(BASE_URL, '/') ?>/jobs">Join the Team</a></li>
-                            <li><a href="<?= rtrim(BASE_URL, '/') ?>/prayer">Prayer</a></li>
+                            <li><a href="<?= rtrim(BASE_URL, '/') ?>/prayer">Prayer Wall</a></li>
                         </ul>
                     </li>
                     <li><a href="<?= rtrim(BASE_URL, '/') ?>/media">Media</a></li>
@@ -103,7 +103,7 @@
                 $footerCols = $footerData['columns'] ?? [
                     ['title' => 'ABOUT', 'links' => [['label' => 'About Us', 'url' => '/about'], ['label' => 'Leadership', 'url' => '/leadership'], ['label' => 'FAQ', 'url' => '/about#about-faqs']]],
                     ['title' => 'GATHERINGS', 'links' => [['label' => 'Services', 'url' => '/services'], ['label' => 'Events', 'url' => '/events'], ['label' => 'Ministries', 'url' => '/ministries'], ['label' => 'Media', 'url' => '/media']]],
-                    ['title' => 'GET INVOLVED', 'links' => [['label' => "I'm New", 'url' => '/im-new'], ['label' => 'Small Groups', 'url' => '/small-groups'], ['label' => 'Membership & Training', 'url' => '/membership'], ['label' => 'Join the Team', 'url' => '/jobs'], ['label' => 'Prayer', 'url' => '/prayer']]],
+                    ['title' => 'GET INVOLVED', 'links' => [['label' => "I'm New", 'url' => '/im-new'], ['label' => 'Small Groups', 'url' => '/small-groups'], ['label' => 'Membership & Training', 'url' => '/membership'], ['label' => 'Join the Team', 'url' => '/jobs'], ['label' => 'Prayer Wall', 'url' => '/prayer']]],
                     ['title' => 'CONTACT', 'links' => [['label' => 'Contact Us', 'url' => '/contact'], ['label' => 'Giving', 'url' => '/giving']]],
                 ];
                 ?>
