@@ -119,9 +119,9 @@ body::before {
     object-fit: contain;
     transition: filter 0.35s ease;
 }
-/* Black-text logo: invert to white on dark header for visibility */
+/* Black-text logo on white bg: invert on dark header so white bg blends to black, text becomes white */
 .site-header:not(.header-scrolled) .logo .logo-img {
-    filter: brightness(0) invert(1);
+    filter: invert(1);
 }
 .site-header.header-scrolled .logo .logo-img {
     filter: none;
