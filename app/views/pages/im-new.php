@@ -45,22 +45,49 @@ $imNewIntroImage = $imNewIntroImage ?? '';
             <?php endif; ?>
         </div>
 
-        <h2 class="about-section-title">What to Expect</h2>
+        <div class="im-new-steps-section">
+            <p class="im-new-steps-eyebrow">Your First Visit</p>
+            <h2 class="about-section-title">What to Expect</h2>
+        </div>
         <div class="im-new-steps">
-            <div class="brand-card stagger-item">
-                <span class="brand-card-num">1</span>
-                <h3 class="brand-card-title">When You Arrive</h3>
-                <div class="brand-card-body"><?= rich_content($arrive ?? '<p>This is LightHouse, You are welcome! Upon arrival, you\'ll find plenty of parking spaces, and our friendly greeters will be there to guide you every step of the way. Whether it\'s your first visit or your hundredth, we want you to feel completely at ease.</p><p>If you\'re visiting with children, our team will help you check them into our secure, age-appropriate classes designed to engage and inspire young hearts. Unsure where to go? Just ask anyone wearing a "Welcome Team" badge—they\'re here to assist you!</p>') ?></div>
+            <div class="im-new-step stagger-item">
+                <div class="im-new-step-top">
+                    <div class="im-new-step-icon-wrap">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <span class="im-new-step-num">01</span>
+                </div>
+                <div class="im-new-step-body">
+                    <h3 class="im-new-step-title">When You Arrive</h3>
+                    <div class="im-new-step-content"><?= rich_content($arrive ?? '<p>This is LightHouse, You are welcome! Upon arrival, you\'ll find plenty of parking spaces, and our friendly greeters will be there to guide you every step of the way. Whether it\'s your first visit or your hundredth, we want you to feel completely at ease.</p><p>If you\'re visiting with children, our team will help you check them into our secure, age-appropriate classes designed to engage and inspire young hearts. Unsure where to go? Just ask anyone wearing a "Welcome Team" badge—they\'re here to assist you!</p>') ?></div>
+                    <span class="im-new-step-tag">Getting Started</span>
+                </div>
             </div>
-            <div class="brand-card stagger-item">
-                <span class="brand-card-num">2</span>
-                <h3 class="brand-card-title">In The Service</h3>
-                <div class="brand-card-body"><?= rich_content($service ?? '<p>Our service experience is uplifting, engaging, and designed to help you connect with God. Expect 2 to 3 hours of heartfelt worship with dynamic music and a mix of contemporary and multicultural songs reflecting our global community.</p><p>You\'ll also hear an inspiring, gospel-centered message that\'s relevant to your everyday life. Whether you\'re new to faith or have been walking with Jesus for years, you\'ll leave refreshed and equipped for the week ahead.</p><p>Feel free to participate at your comfort level—sing, clap, reflect, or simply soak it all in. We\'re here to create a space for everyone to encounter God in their unique way.</p>') ?></div>
+            <div class="im-new-step stagger-item">
+                <div class="im-new-step-top">
+                    <div class="im-new-step-icon-wrap">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                    </div>
+                    <span class="im-new-step-num">02</span>
+                </div>
+                <div class="im-new-step-body">
+                    <h3 class="im-new-step-title">In The Service</h3>
+                    <div class="im-new-step-content"><?= rich_content($service ?? '<p>Our service experience is uplifting, engaging, and designed to help you connect with God. Expect 2 to 3 hours of heartfelt worship with dynamic music and a mix of contemporary and multicultural songs reflecting our global community.</p><p>You\'ll also hear an inspiring, gospel-centered message that\'s relevant to your everyday life. Whether you\'re new to faith or have been walking with Jesus for years, you\'ll leave refreshed and equipped for the week ahead.</p><p>Feel free to participate at your comfort level—sing, clap, reflect, or simply soak it all in. We\'re here to create a space for everyone to encounter God in their unique way.</p>') ?></div>
+                    <span class="im-new-step-tag">Worship &amp; Word</span>
+                </div>
             </div>
-            <div class="brand-card stagger-item">
-                <span class="brand-card-num">3</span>
-                <h3 class="brand-card-title">After The Service</h3>
-                <div class="brand-card-body"><?= rich_content($after ?? '<p>After the service, we\'d love for you to hang around and meet our church family! Our Connection Team is available to answer any questions and help you take your next steps, whether that\'s learning more about the church, joining a small group, or simply finding a place to belong.</p><p>Stop by the Welcome Station located near the entrance to receive a special gift as our way of saying thank you for visiting. If you\'re curious about faith, exploring your next steps, or just want to meet new friends, we\'re excited to journey with you at The LightHouse!</p>') ?></div>
+            <div class="im-new-step stagger-item">
+                <div class="im-new-step-top">
+                    <div class="im-new-step-icon-wrap">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <span class="im-new-step-num">03</span>
+                </div>
+                <div class="im-new-step-body">
+                    <h3 class="im-new-step-title">After The Service</h3>
+                    <div class="im-new-step-content"><?= rich_content($after ?? '<p>After the service, we\'d love for you to hang around and meet our church family! Our Connection Team is available to answer any questions and help you take your next steps, whether that\'s learning more about the church, joining a small group, or simply finding a place to belong.</p><p>Stop by the Welcome Station located near the entrance to receive a special gift as our way of saying thank you for visiting. If you\'re curious about faith, exploring your next steps, or just want to meet new friends, we\'re excited to journey with you at The LightHouse!</p>') ?></div>
+                    <span class="im-new-step-tag">Connect &amp; Grow</span>
+                </div>
             </div>
         </div>
 
@@ -88,6 +115,19 @@ $imNewIntroImage = $imNewIntroImage ?? '';
 
         <div class="im-new-faq-cta">
             <p>Have questions about parking, attire, service times, or childcare? <a href="<?= $baseUrl ?>/faq">See our FAQs</a>.</p>
+        </div>
+
+        <div class="im-new-member-cta">
+            <div class="im-new-member-cta-inner">
+                <div class="im-new-member-cta-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>
+                </div>
+                <div>
+                    <h3 class="im-new-member-cta-title">Ready to Join the Family?</h3>
+                    <p class="im-new-member-cta-desc">Create your member account to access the Prayer Wall, view upcoming events, connect with church life, and more — all in one place.</p>
+                </div>
+                <a href="<?= $baseUrl ?>/register" class="btn btn-primary im-new-member-cta-btn">Become a Member</a>
+            </div>
         </div>
 
         <div class="im-new-visitor-form-section im-new-form-centered">
