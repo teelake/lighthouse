@@ -11,6 +11,7 @@ $isEditor = isset($isEditor) ? $isEditor : false;
 $isAdmin = isset($isAdmin) ? $isAdmin : false;
 $isMember = isset($role) && $role === 'member';
 $userName = $userName ?? 'User';
+$isWelcome = ($isMember && isset($_GET['welcome']) && $_GET['welcome'] === '1');
 $ministries = $ministries ?? [];
 $chartMonths = isset($chartMonths) ? $chartMonths : [];
 $chartSubscribers = isset($chartSubscribers) ? $chartSubscribers : [];
@@ -29,6 +30,12 @@ function dash_time_ago($date) {
 }
 ?>
 <div class="dash">
+    <?php if ($isWelcome): ?>
+    <div class="dash-welcome-banner" role="alert">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <span>Welcome to Lighthouse, <strong><?= htmlspecialchars($userName) ?></strong>! Your account is ready. Explore your dashboard below.</span>
+    </div>
+    <?php endif; ?>
     <!-- Welcome hero (dashboard only) -->
     <div class="dash-hero">
         <div class="dash-hero-content">

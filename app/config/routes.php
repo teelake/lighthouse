@@ -36,6 +36,10 @@ $router->add('GET', 'jobs', ['controller' => 'Job', 'action' => 'index']);
 $router->add('GET', 'jobs/{slug}/apply', ['controller' => 'Job', 'action' => 'applyForm']);
 $router->add('GET', 'jobs/{slug}', ['controller' => 'Job', 'action' => 'view']);
 
+// Member self-registration
+$router->add('GET', 'register', ['controller' => 'Register', 'action' => 'index']);
+$router->add('POST', 'register', ['controller' => 'Register', 'action' => 'store']);
+
 // Forms - POST
 $router->add('POST', 'prayer/submit', ['controller' => 'Prayer', 'action' => 'submit']);
 $router->add('POST', 'testimonies/submit', ['controller' => 'Testimony', 'action' => 'submit']);

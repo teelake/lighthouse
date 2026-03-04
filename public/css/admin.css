@@ -562,6 +562,21 @@
 /* ========== DASHBOARD ========== */
 .dash { max-width: 1280px; }
 
+.dash-welcome-banner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: var(--adm-radius-sm);
+    padding: 0.875rem 1.25rem;
+    margin-bottom: 1.25rem;
+    color: #166534;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+.dash-welcome-banner svg { flex-shrink: 0; color: #16a34a; }
+
 .dash-hero {
     background: linear-gradient(135deg, rgba(184,141,87,0.08) 0%, rgba(184,141,87,0.02) 50%, transparent 100%);
     border: 1px solid rgba(184,141,87,0.15);
