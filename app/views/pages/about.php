@@ -56,6 +56,40 @@ $aboutStoryImage = $aboutStoryImage ?? '';
             </div>
         </div>
 
+        <?php
+        $scripturalConfig = $sections['scriptural_foundation_config'] ?? null;
+        $scripturalData = [];
+        if (!empty($scripturalConfig['extra_data'])) {
+            $scripturalData = is_string($scripturalConfig['extra_data']) ? json_decode($scripturalConfig['extra_data'], true) : $scripturalConfig['extra_data'];
+        }
+        $scripturalData = is_array($scripturalData) ? $scripturalData : [];
+        $scriptureBlocks = [];
+        for ($i = 1; $i <= 3; $i++) {
+            $ref = trim($scripturalData["scripture_{$i}_ref"] ?? '');
+            $desc = trim($scripturalData["scripture_{$i}_desc"] ?? '');
+            if ($ref !== '' || $desc !== '') $scriptureBlocks[] = ['ref' => $ref, 'desc' => $desc];
+        }
+        if (empty($scriptureBlocks)) {
+            $scriptureBlocks = [
+                ['ref' => 'Isaiah 42:5–11', 'desc' => 'God forms His people to be a light—opening blind eyes and setting captives free.'],
+                ['ref' => 'Isaiah 2:2–4', 'desc' => 'The house of the Lord is established as a center of instruction and transformation for nations.'],
+            ];
+        }
+        ?>
+        <div class="about-scriptural-block">
+            <div class="container">
+                <h2 class="about-scriptural-title">Our Scriptural Foundation</h2>
+                <div class="about-scriptural-list">
+                    <?php foreach ($scriptureBlocks as $block): ?>
+                    <div class="about-scriptural-item">
+                        <cite class="about-scriptural-ref"><?= htmlspecialchars($block['ref']) ?></cite>
+                        <div class="about-scriptural-desc"><?= rich_content($block['desc']) ?></div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+
         <div class="about-pillars-block">
             <div class="container">
                 <span class="about-eyebrow">Where Lights Gather</span>
