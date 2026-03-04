@@ -124,7 +124,7 @@ $imNewIntroImage = $imNewIntroImage ?? '';
                 </div>
                 <div>
                     <h3 class="im-new-member-cta-title">Ready to Join the Family?</h3>
-                    <p class="im-new-member-cta-desc">Create your member account to access the Prayer Wall, view upcoming events, connect with church life, and more — all in one place.</p>
+                    <p class="im-new-member-cta-desc">Create your free member account and become part of our growing church family. Stay connected with upcoming events, explore ministries, and take your next steps in faith — all from one place.</p>
                 </div>
                 <a href="<?= $baseUrl ?>/register" class="btn btn-primary im-new-member-cta-btn">Become a Member</a>
             </div>

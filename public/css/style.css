@@ -2103,11 +2103,11 @@ body::before {
     font-size: 3rem;
     font-weight: 800;
     line-height: 1;
-    color: var(--color-gold-soft);
-    color: rgba(255,225,0,0.15);
+    color: var(--color-primary-on-light);
     letter-spacing: -0.04em;
     margin-left: auto;
     user-select: none;
+    opacity: 0.45;
 }
 .im-new-step-body {
     display: flex;
