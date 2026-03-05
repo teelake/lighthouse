@@ -42,7 +42,7 @@ $designations = [
         </div>
         <?php elseif ($wallError === 'stripe'): ?>
         <div class="giving-msg giving-msg--error" role="alert">
-            <p>Unable to process payment. Please ensure Stripe is configured in admin settings, or contact us to give via PayPal.</p>
+            <p>Unable to process payment. Please ensure Stripe is configured in admin settings, or give via Interac e-Transfer.</p>
         </div>
         <?php elseif ($wallError === 'csrf'): ?>
         <div class="giving-msg giving-msg--error" role="alert">
@@ -100,18 +100,30 @@ $designations = [
             </div>
             <?php endif; ?>
 
-            <div class="giving-option-card giving-option-card--paypal">
+            <div class="giving-option-card giving-option-card--interac">
                 <div class="giving-option-header">
-                    <span class="giving-option-badge">PayPal</span>
-                    <h2 class="giving-option-title">Give via PayPal</h2>
-                    <p class="giving-option-desc">Send directly to our giving account.</p>
-                    <p class="giving-option-email"><a href="mailto:<?= htmlspecialchars($paypalEmail) ?>"><?= htmlspecialchars($paypalEmail) ?></a></p>
+                    <span class="giving-option-badge">Interac e-Transfer</span>
+                    <h2 class="giving-option-title">Give via Interac</h2>
+                    <p class="giving-option-desc">Use your bank's online or mobile app to send an e-Transfer directly to us.</p>
                 </div>
-                <?php if (!empty($paypalUrl)): ?>
-                <a href="<?= htmlspecialchars($paypalUrl) ?>" target="_blank" rel="noopener" class="btn btn-watch btn-giving-cta">Give via PayPal</a>
-                <?php else: ?>
-                <a href="mailto:<?= htmlspecialchars($paypalEmail) ?>?subject=Giving%20Inquiry" class="btn btn-watch btn-giving-cta">Contact to Give</a>
-                <?php endif; ?>
+                <div class="giving-interac-steps">
+                    <p class="giving-interac-step">
+                        <span class="giving-interac-step-num">1</span>
+                        Open your bank's app or website and select <strong>Send Interac e-Transfer</strong>.
+                    </p>
+                    <p class="giving-interac-step">
+                        <span class="giving-interac-step-num">2</span>
+                        Enter the email below as the recipient — this is our account.
+                    </p>
+                    <div class="giving-interac-account">
+                        <span class="giving-interac-account-label">Send to</span>
+                        <span class="giving-interac-account-email"><?= htmlspecialchars($paypalEmail) ?></span>
+                    </div>
+                    <p class="giving-interac-step">
+                        <span class="giving-interac-step-num">3</span>
+                        In the message field, include your name and what you are giving for (e.g. <em>Tithes</em>, <em>Offering</em>).
+                    </p>
+                </div>
             </div>
         </div>
 
