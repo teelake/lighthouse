@@ -91,28 +91,22 @@ $buildQuery = function ($overrides = []) {
                 <?php else: ?>
                 <div class="prayer-wall-list">
                     <?php foreach ($posts as $p):
-                        $author   = ($p['is_anonymous'] ?? 0) ? 'Anonymous' : (trim($p['author_name'] ?? '') ?: ($authors[$p['user_id'] ?? 0] ?? 'A friend'));
-                        $title    = trim($p['title'] ?? '');
-                        $rawText  = strip_tags($p['request'] ?? '');
-                        $excerpt  = mb_strlen($rawText) > 180 ? mb_substr($rawText, 0, 180) . '…' : $rawText;
-                        $hasMore  = mb_strlen($rawText) > 180;
-                        $dateStr  = date('M j, Y', strtotime($p['created_at'] ?? 'now'));
+                        $author  = ($p['is_anonymous'] ?? 0) ? 'Anonymous' : (trim($p['author_name'] ?? '') ?: ($authors[$p['user_id'] ?? 0] ?? 'A friend'));
+                        $title   = trim($p['title'] ?? '');
+                        $rawText = strip_tags($p['request'] ?? '');
+                        $excerpt = mb_strlen($rawText) > 180 ? mb_substr($rawText, 0, 180) . '…' : $rawText;
+                        $dateStr = date('M j, Y', strtotime($p['created_at'] ?? 'now'));
                     ?>
-                    <article class="prayer-wall-item">
+                    <a href="<?= $baseUrl ?>/prayer/<?= (int)$p['id'] ?>" class="prayer-wall-item">
                         <?php if ($title): ?>
                         <h3 class="prayer-wall-item-title"><?= htmlspecialchars($title) ?></h3>
                         <?php endif; ?>
                         <p class="prayer-wall-item-excerpt"><?= htmlspecialchars($excerpt) ?></p>
-                        <?php if ($hasMore): ?>
-                        <div class="prayer-wall-item-full" hidden><?= rich_content($p['request'] ?? '') ?: nl2br(htmlspecialchars($p['request'] ?? '')) ?></div>
-                        <?php endif; ?>
                         <div class="prayer-wall-item-footer">
                             <p class="prayer-wall-item-meta"><?= htmlspecialchars($author) ?> · <?= $dateStr ?></p>
-                            <?php if ($hasMore): ?>
-                            <button type="button" class="prayer-wall-read-more">Read full prayer ↓</button>
-                            <?php endif; ?>
+                            <span class="prayer-wall-read-more">Read prayer →</span>
                         </div>
-                    </article>
+                    </a>
                     <?php endforeach; ?>
                 </div>
                 <?php if ($totalPages > 1): ?>
@@ -172,20 +166,6 @@ $buildQuery = function ($overrides = []) {
     });
     document.querySelector('.prayer-wall-form').addEventListener('submit', function() {
         ta.value = quill.root.innerHTML;
-    });
-
-    // Read-more toggle for prayer cards
-    document.querySelectorAll('.prayer-wall-read-more').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            var item    = this.closest('.prayer-wall-item');
-            var excerpt = item.querySelector('.prayer-wall-item-excerpt');
-            var full    = item.querySelector('.prayer-wall-item-full');
-            if (!full) return;
-            var expanded = !full.hidden;
-            full.hidden    = expanded;
-            excerpt.hidden = !expanded;
-            this.textContent = expanded ? 'Read full prayer ↓' : 'Show less ↑';
-        });
     });
 })();
 </script>

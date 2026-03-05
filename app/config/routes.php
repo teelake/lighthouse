@@ -31,6 +31,7 @@ $router->add('GET', 'contact', ['controller' => 'Page', 'action' => 'contact']);
 $router->add('GET', 'faq', ['controller' => 'Page', 'action' => 'faq']);
 $router->add('GET', 'im-new', ['controller' => 'Page', 'action' => 'imNew']);
 $router->add('GET', 'prayer', ['controller' => 'Prayer', 'action' => 'index']);
+$router->add('GET', 'prayer/{id}', ['controller' => 'Prayer', 'action' => 'view']);
 $router->add('GET', 'testimonies', ['controller' => 'Testimony', 'action' => 'index']);
 $router->add('GET', 'jobs', ['controller' => 'Job', 'action' => 'index']);
 $router->add('GET', 'jobs/{slug}/apply', ['controller' => 'Job', 'action' => 'applyForm']);

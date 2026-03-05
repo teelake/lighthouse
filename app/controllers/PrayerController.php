@@ -80,6 +80,43 @@ class PrayerController extends Controller
         }
     }
 
+    public function view()
+    {
+        $id   = (int)($this->params['id'] ?? 0);
+        if (!$id) {
+            $this->redirect('/prayer');
+            return;
+        }
+
+        $post = (new PrayerWall())->find($id);
+        if (!$post || !empty($post['is_archived'])) {
+            $this->redirect('/prayer');
+            return;
+        }
+
+        $author = 'Anonymous';
+        if (empty($post['is_anonymous'])) {
+            if (trim($post['author_name'] ?? '')) {
+                $author = $post['author_name'];
+            } elseif (!empty($post['user_id'])) {
+                $u = (new \App\Models\User())->find($post['user_id']);
+                $author = $u['name'] ?? $u['email'] ?? 'A friend';
+            } else {
+                $author = 'A friend';
+            }
+        }
+
+        $title = trim($post['title'] ?? '') ?: 'Prayer Request';
+
+        $this->render('prayer/view', [
+            'pageTitle'       => $title . ' — Prayer Wall | Lighthouse Global Church',
+            'pageDescription' => 'Read and pray along with this prayer shared on the Lighthouse Global Church Prayer Wall.',
+            'post'            => $post,
+            'author'          => $author,
+            'title'           => $title,
+        ]);
+    }
+
     private function notifyAdminNewPrayer(string $title, string $request, int $isAnonymous, string $authorName, ?int $userId): void
     {
         $setting = new Setting();
