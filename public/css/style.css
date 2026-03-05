@@ -1631,52 +1631,94 @@ body::before {
 }
 
 /* Our Scriptural Foundation - same layout as Our Mission had: centered, black bg, gold accents */
+/* ── Scriptural Foundation – 2-column card layout ── */
 .about-page--hop .about-scriptural-block {
     background: var(--color-brand-black);
     color: #fff;
-    padding: 4rem 0;
+    padding: 5rem 0;
+    position: relative;
+    overflow: hidden;
+}
+.about-scriptural-bg-glow {
+    position: absolute;
+    top: -160px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 600px;
+    background: radial-gradient(ellipse at center, rgba(176,141,87,0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+.about-page--hop .about-scriptural-header {
     text-align: center;
+    margin-bottom: 3rem;
 }
 .about-page--hop .about-scriptural-title {
-    margin: 0 0 1rem;
     font-family: var(--font-heading);
-    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-size: clamp(1.6rem, 3vw, 2.25rem);
     font-weight: 700;
     color: var(--color-brand-gold);
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0.5rem 0 0;
 }
-.about-page--hop .about-scriptural-list {
-    max-width: 680px;
-    margin: 0 auto;
-    text-align: center;
+.about-page--hop .about-scriptural-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.75rem;
+    position: relative;
+    z-index: 1;
 }
-.about-page--hop .about-scriptural-item {
-    margin-bottom: 1.5rem;
+.about-page--hop .about-scriptural-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(176,141,87,0.18);
+    border-radius: 14px;
+    padding: 2.75rem 2.25rem 2.25rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s ease, background 0.3s ease;
 }
-.about-page--hop .about-scriptural-item:last-child {
-    margin-bottom: 0;
+.about-page--hop .about-scriptural-card:hover {
+    border-color: rgba(176,141,87,0.45);
+    background: rgba(255,255,255,0.06);
+}
+/* Large decorative opening quote */
+.about-scriptural-card-quote {
+    position: absolute;
+    top: 0.5rem;
+    left: 1.5rem;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 7rem;
+    line-height: 1;
+    color: var(--color-brand-gold);
+    opacity: 0.1;
+    pointer-events: none;
+    user-select: none;
 }
 .about-page--hop .about-scriptural-ref {
-    display: block;
+    display: inline-flex;
+    align-items: center;
     font-family: var(--font-heading);
-    font-size: 1.1rem;
+    font-size: 0.875rem;
     font-weight: 700;
-    color: var(--color-brand-gold);
+    color: var(--color-brand-black);
     font-style: normal;
-    margin-bottom: 0.35rem;
+    background: var(--color-brand-gold);
+    padding: 0.3rem 0.9rem;
+    border-radius: 100px;
+    letter-spacing: 0.03em;
+    margin-bottom: 1.5rem;
 }
-.about-page--hop .about-scriptural-desc p { margin: 0 0 0.5em; }
-.about-page--hop .about-scriptural-desc p:last-child { margin-bottom: 0; }
-.about-page--hop .about-scriptural-desc {
-    margin: 0 0 1.5rem;
-    font-size: 1.05rem;
-    line-height: 1.75;
-    color: rgba(255,255,255,0.9);
+.about-page--hop .about-scriptural-text {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: rgba(255,255,255,0.85);
 }
-.about-page--hop .about-scriptural-item:last-child .about-scriptural-desc {
-    margin-bottom: 0;
+.about-page--hop .about-scriptural-text p { margin: 0 0 0.85em; }
+.about-page--hop .about-scriptural-text p:last-child { margin-bottom: 0; }
+@media (max-width: 768px) {
+    .about-page--hop .about-scriptural-block { padding: 3.5rem 0; }
+    .about-page--hop .about-scriptural-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+    .about-page--hop .about-scriptural-card { padding: 2.25rem 1.5rem 1.75rem; }
+    .about-scriptural-card-quote { font-size: 5rem; }
 }
 
 .about-page--hop .about-pillars-block {

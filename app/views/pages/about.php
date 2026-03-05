@@ -77,13 +77,18 @@ $aboutStoryImage = $aboutStoryImage ?? '';
         }
         ?>
         <div class="about-scriptural-block">
+            <div class="about-scriptural-bg-glow" aria-hidden="true"></div>
             <div class="container">
-                <h2 class="about-scriptural-title">Our Scriptural Foundation</h2>
-                <div class="about-scriptural-list">
+                <div class="about-scriptural-header">
+                    <span class="about-eyebrow about-eyebrow--light">The Word</span>
+                    <h2 class="about-scriptural-title">Our Scriptural Foundation</h2>
+                </div>
+                <div class="about-scriptural-grid">
                     <?php foreach ($scriptureBlocks as $block): ?>
-                    <div class="about-scriptural-item">
+                    <div class="about-scriptural-card stagger-item">
+                        <span class="about-scriptural-card-quote" aria-hidden="true">&ldquo;</span>
                         <cite class="about-scriptural-ref"><?= htmlspecialchars($block['ref']) ?></cite>
-                        <div class="about-scriptural-desc"><?= rich_content($block['desc']) ?></div>
+                        <div class="about-scriptural-text"><?= rich_content($block['desc']) ?></div>
                     </div>
                     <?php endforeach; ?>
                 </div>
