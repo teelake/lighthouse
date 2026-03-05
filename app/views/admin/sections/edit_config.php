@@ -50,13 +50,31 @@ $key = $section['section_key'] ?? '';
         <div class="form-group"><label>Thursday Title</label><input type="text" name="thursday_title" value="<?= htmlspecialchars($d['thursday_title'] ?? 'Thursday') ?>"></div>
         <div class="form-group"><label>Thursday Description</label><textarea name="thursday_desc"><?= htmlspecialchars($d['thursday_desc'] ?? '') ?></textarea></div>
         <?php elseif ($key === 'scriptural_foundation_config'): ?>
-        <p style="color: var(--adm-muted); margin: 0 0 1rem;">Scripture blocks shown in the "Our Scriptural Foundation" section on the About page. Leave reference/description empty to hide a block.</p>
-        <div class="form-group"><label>Scripture 1 Reference</label><input type="text" name="scripture_1_ref" value="<?= htmlspecialchars($d['scripture_1_ref'] ?? '') ?>" placeholder="e.g. Isaiah 42:5–11"></div>
-        <div class="form-group"><label>Scripture 1 Description</label><textarea name="scripture_1_desc" rows="3"><?= htmlspecialchars($d['scripture_1_desc'] ?? '') ?></textarea></div>
-        <div class="form-group"><label>Scripture 2 Reference</label><input type="text" name="scripture_2_ref" value="<?= htmlspecialchars($d['scripture_2_ref'] ?? '') ?>" placeholder="e.g. Isaiah 2:2–4"></div>
-        <div class="form-group"><label>Scripture 2 Description</label><textarea name="scripture_2_desc" rows="3"><?= htmlspecialchars($d['scripture_2_desc'] ?? '') ?></textarea></div>
-        <div class="form-group"><label>Scripture 3 Reference (optional)</label><input type="text" name="scripture_3_ref" value="<?= htmlspecialchars($d['scripture_3_ref'] ?? '') ?>" placeholder="e.g. Matthew 5:14"></div>
-        <div class="form-group"><label>Scripture 3 Description (optional)</label><textarea name="scripture_3_desc" rows="3"><?= htmlspecialchars($d['scripture_3_desc'] ?? '') ?></textarea></div>
+        <p style="color: var(--adm-muted); margin: 0 0 1.5rem;">Scripture blocks shown in the "Our Scriptural Foundation" section on the About page. Each block appears as its own column. Leave both fields empty on a block to hide it.</p>
+        <div style="border: 1px solid var(--adm-border); border-radius: 10px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem;">
+            <h4 style="margin: 0 0 1rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--adm-muted);">Column 1</h4>
+            <div class="form-group"><label>Scripture Reference</label><input type="text" name="scripture_1_ref" value="<?= htmlspecialchars($d['scripture_1_ref'] ?? '') ?>" placeholder="e.g. Isaiah 42:5–11"></div>
+            <div class="form-group">
+                <label>Full Bible Text</label>
+                <textarea name="scripture_1_desc" class="rich-editor" rows="8"><?= htmlspecialchars($d['scripture_1_desc'] ?? '') ?></textarea>
+            </div>
+        </div>
+        <div style="border: 1px solid var(--adm-border); border-radius: 10px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem;">
+            <h4 style="margin: 0 0 1rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--adm-muted);">Column 2</h4>
+            <div class="form-group"><label>Scripture Reference</label><input type="text" name="scripture_2_ref" value="<?= htmlspecialchars($d['scripture_2_ref'] ?? '') ?>" placeholder="e.g. Isaiah 2:2–4"></div>
+            <div class="form-group">
+                <label>Full Bible Text</label>
+                <textarea name="scripture_2_desc" class="rich-editor" rows="8"><?= htmlspecialchars($d['scripture_2_desc'] ?? '') ?></textarea>
+            </div>
+        </div>
+        <div style="border: 1px solid var(--adm-border); border-radius: 10px; padding: 1.25rem 1.5rem; margin-bottom: 1rem;">
+            <h4 style="margin: 0 0 1rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--adm-muted);">Column 3 <span style="font-weight: 400; text-transform: none;">(optional)</span></h4>
+            <div class="form-group"><label>Scripture Reference</label><input type="text" name="scripture_3_ref" value="<?= htmlspecialchars($d['scripture_3_ref'] ?? '') ?>" placeholder="e.g. Matthew 5:14"></div>
+            <div class="form-group">
+                <label>Full Bible Text</label>
+                <textarea name="scripture_3_desc" class="rich-editor" rows="8"><?= htmlspecialchars($d['scripture_3_desc'] ?? '') ?></textarea>
+            </div>
+        </div>
         <?php elseif ($key === 'core_values_config'): ?>
         <p style="color: var(--adm-muted); margin: 0 0 1rem;">Core values displayed in a grid on the About page. Each value has a title and description. Leave a row empty to hide it.</p>
         <?php for ($i = 1; $i <= 5; $i++): ?>
