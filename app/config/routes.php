@@ -152,6 +152,7 @@ $router->add('POST', $adm . '/subscribers/upload-attachment', ['controller' => '
 $router->add('POST', $adm . '/subscribers/send-mass', ['controller' => 'Admin\Subscriber', 'action' => 'sendMass']);
 $router->add('GET', $adm . '/contact-report', ['controller' => 'Admin\ContactReport', 'action' => 'index']);
 $router->add('GET', $adm . '/prayer-wall', ['controller' => 'Admin\PrayerWall', 'action' => 'index']);
+$router->add('POST', $adm . '/prayer-wall/post', ['controller' => 'Admin\PrayerWall', 'action' => 'postWall']);
 $router->add('POST', $adm . '/prayer-wall/posts/{id}/archive', ['controller' => 'Admin\PrayerWall', 'action' => 'archivePost']);
 $router->add('POST', $adm . '/prayer-wall/posts/{id}/unarchive', ['controller' => 'Admin\PrayerWall', 'action' => 'unarchivePost']);
 $router->add('GET', $adm . '/prayer-wall/requests/{id}', ['controller' => 'Admin\PrayerWall', 'action' => 'viewRequest']);
