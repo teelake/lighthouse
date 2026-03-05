@@ -49,8 +49,13 @@ class PrayerController extends Controller
             $this->redirect('/prayer?error=csrf');
             return;
         }
+        $title   = mb_substr(trim($this->post('title', '')), 0, 100);
         $request = trim($this->post('request', ''));
         $request = $request === '<p><br></p>' ? '' : $request;
+        if ($title === '') {
+            $this->redirect('/prayer?error=empty_title');
+            return;
+        }
         if ($request === '') {
             $this->redirect('/prayer?error=empty');
             return;
@@ -59,25 +64,23 @@ class PrayerController extends Controller
         $authorName = $isAnonymous ? '' : trim($this->post('name', ''));
 
         $userId = $_SESSION['user_id'] ?? null;
-        if ($userId === null) {
-            $userId = null;
-        }
 
         try {
             (new PrayerWall())->create([
-                'user_id' => $userId,
-                'author_name' => $authorName ?: null,
-                'request' => $request,
+                'title'        => $title,
+                'user_id'      => $userId,
+                'author_name'  => $authorName ?: null,
+                'request'      => $request,
                 'is_anonymous' => $isAnonymous,
             ]);
-            $this->notifyAdminNewPrayer($request, $isAnonymous, $authorName, $userId);
+            $this->notifyAdminNewPrayer($title, $request, $isAnonymous, $authorName, $userId);
             $this->redirect('/prayer?submitted=1');
         } catch (\Throwable $e) {
             $this->redirect('/prayer?error=post');
         }
     }
 
-    private function notifyAdminNewPrayer(string $request, int $isAnonymous, string $authorName, ?int $userId): void
+    private function notifyAdminNewPrayer(string $title, string $request, int $isAnonymous, string $authorName, ?int $userId): void
     {
         $setting = new Setting();
         $to = trim($setting->get('site_email', ''));
@@ -95,6 +98,9 @@ class PrayerController extends Controller
         $body = '<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body style="font-family: sans-serif; line-height: 1.6; color: #333;">';
         $body .= '<h2>New Prayer Posted</h2>';
         $body .= '<p><strong>Author:</strong> ' . htmlspecialchars($author) . '</p>';
+        if ($title) {
+            $body .= '<p><strong>Subject:</strong> ' . htmlspecialchars($title) . '</p>';
+        }
         $body .= '<p><strong>Prayer:</strong></p>';
         $body .= '<div style="background: #f8f8f8; padding: 1rem; border-radius: 6px; margin: 0.5rem 0;">' . (function_exists('rich_content') ? rich_content($request) : nl2br(htmlspecialchars(strip_tags($request)))) . '</div>';
         $body .= '<p><a href="' . htmlspecialchars($adminUrl) . '" style="display: inline-block; background: #d4a017; color: #1a1a1a; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px; font-weight: 600;">View Prayer Wall</a></p>';

@@ -34,6 +34,8 @@ $buildQuery = function ($overrides = []) {
         <?php endif; ?>
         <?php if ($error === 'csrf'): ?>
         <div class="prayer-msg prayer-msg--error" role="alert"><p>Invalid request. Please try again.</p></div>
+        <?php elseif ($error === 'empty_title'): ?>
+        <div class="prayer-msg prayer-msg--error" role="alert"><p>Please enter a title or subject for your prayer.</p></div>
         <?php elseif ($error === 'empty'): ?>
         <div class="prayer-msg prayer-msg--error" role="alert"><p>Please enter your prayer.</p></div>
         <?php elseif ($error === 'post'): ?>
@@ -47,7 +49,25 @@ $buildQuery = function ($overrides = []) {
                 <form class="prayer-wall-form" action="<?= $baseUrl ?>/prayer/submit" method="post">
                     <?= csrf_field() ?>
                     <div class="form-group">
-                        <label for="prayer-request">Your prayer *</label>
+                        <label for="prayer-title">
+                            Subject / Title *
+                            <span class="prayer-char-hint">(<span id="prayer-title-count">0</span>/100)</span>
+                        </label>
+                        <input
+                            type="text"
+                            id="prayer-title"
+                            name="title"
+                            maxlength="100"
+                            required
+                            placeholder="e.g. Prayer for healing, Breakthrough needed…"
+                            oninput="document.getElementById('prayer-title-count').textContent = this.value.length"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="prayer-request">
+                            Your prayer *
+                            <span class="prayer-char-hint">(<span id="prayer-word-count">0</span>/500 words)</span>
+                        </label>
                         <div class="prayer-quill-wrap">
                             <textarea id="prayer-request" name="request" class="rich-editor prayer-quill-editor" rows="4" required placeholder="Share your prayer need..." style="min-height: 160px;"></textarea>
                         </div>
@@ -71,11 +91,27 @@ $buildQuery = function ($overrides = []) {
                 <?php else: ?>
                 <div class="prayer-wall-list">
                     <?php foreach ($posts as $p):
-                        $author = ($p['is_anonymous'] ?? 0) ? 'Anonymous' : (trim($p['author_name'] ?? '') ?: ($authors[$p['user_id'] ?? 0] ?? 'A friend'));
+                        $author   = ($p['is_anonymous'] ?? 0) ? 'Anonymous' : (trim($p['author_name'] ?? '') ?: ($authors[$p['user_id'] ?? 0] ?? 'A friend'));
+                        $title    = trim($p['title'] ?? '');
+                        $rawText  = strip_tags($p['request'] ?? '');
+                        $excerpt  = mb_strlen($rawText) > 180 ? mb_substr($rawText, 0, 180) . '…' : $rawText;
+                        $hasMore  = mb_strlen($rawText) > 180;
+                        $dateStr  = date('M j, Y', strtotime($p['created_at'] ?? 'now'));
                     ?>
                     <article class="prayer-wall-item">
-                        <div class="prayer-wall-item-text"><?= rich_content($p['request'] ?? '') ?: nl2br(htmlspecialchars($p['request'] ?? '')) ?></div>
-                        <p class="prayer-wall-item-meta"><?= htmlspecialchars($author) ?> · <?= date('M j, Y', strtotime($p['created_at'] ?? 'now')) ?></p>
+                        <?php if ($title): ?>
+                        <h3 class="prayer-wall-item-title"><?= htmlspecialchars($title) ?></h3>
+                        <?php endif; ?>
+                        <p class="prayer-wall-item-excerpt"><?= htmlspecialchars($excerpt) ?></p>
+                        <?php if ($hasMore): ?>
+                        <div class="prayer-wall-item-full" hidden><?= rich_content($p['request'] ?? '') ?: nl2br(htmlspecialchars($p['request'] ?? '')) ?></div>
+                        <?php endif; ?>
+                        <div class="prayer-wall-item-footer">
+                            <p class="prayer-wall-item-meta"><?= htmlspecialchars($author) ?> · <?= $dateStr ?></p>
+                            <?php if ($hasMore): ?>
+                            <button type="button" class="prayer-wall-read-more">Read full prayer ↓</button>
+                            <?php endif; ?>
+                        </div>
                     </article>
                     <?php endforeach; ?>
                 </div>
@@ -100,6 +136,7 @@ $buildQuery = function ($overrides = []) {
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.min.js"></script>
 <script>
 (function() {
+    // Quill rich editor + word counter
     if (typeof Quill === 'undefined') return;
     var ta = document.getElementById('prayer-request');
     if (!ta) return;
@@ -122,9 +159,33 @@ $buildQuery = function ($overrides = []) {
             ]
         }
     });
-    quill.on('text-change', function() { ta.value = quill.root.innerHTML; });
+    var wordCountEl = document.getElementById('prayer-word-count');
+    var MAX_WORDS = 500;
+    function countWords(str) { return str.trim() ? str.trim().split(/\s+/).length : 0; }
+    quill.on('text-change', function() {
+        ta.value = quill.root.innerHTML;
+        if (wordCountEl) {
+            var words = countWords(quill.getText());
+            wordCountEl.textContent = words;
+            wordCountEl.style.color = words > MAX_WORDS ? '#b91c1c' : '';
+        }
+    });
     document.querySelector('.prayer-wall-form').addEventListener('submit', function() {
         ta.value = quill.root.innerHTML;
+    });
+
+    // Read-more toggle for prayer cards
+    document.querySelectorAll('.prayer-wall-read-more').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var item    = this.closest('.prayer-wall-item');
+            var excerpt = item.querySelector('.prayer-wall-item-excerpt');
+            var full    = item.querySelector('.prayer-wall-item-full');
+            if (!full) return;
+            var expanded = !full.hidden;
+            full.hidden    = expanded;
+            excerpt.hidden = !expanded;
+            this.textContent = expanded ? 'Read full prayer ↓' : 'Show less ↑';
+        });
     });
 })();
 </script>
