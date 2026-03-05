@@ -64,7 +64,7 @@ $aboutStoryImage = $aboutStoryImage ?? '';
         }
         $scripturalData = is_array($scripturalData) ? $scripturalData : [];
         $scriptureBlocks = [];
-        for ($i = 1; $i <= 3; $i++) {
+        for ($i = 1; $i <= 2; $i++) {
             $ref = trim($scripturalData["scripture_{$i}_ref"] ?? '');
             $desc = trim($scripturalData["scripture_{$i}_desc"] ?? '');
             if ($ref !== '' || $desc !== '') $scriptureBlocks[] = ['ref' => $ref, 'desc' => $desc];

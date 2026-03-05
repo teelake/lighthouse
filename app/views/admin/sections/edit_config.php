@@ -67,14 +67,6 @@ $key = $section['section_key'] ?? '';
                 <textarea name="scripture_2_desc" class="rich-editor" rows="8"><?= htmlspecialchars($d['scripture_2_desc'] ?? '') ?></textarea>
             </div>
         </div>
-        <div style="border: 1px solid var(--adm-border); border-radius: 10px; padding: 1.25rem 1.5rem; margin-bottom: 1rem;">
-            <h4 style="margin: 0 0 1rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--adm-muted);">Column 3 <span style="font-weight: 400; text-transform: none;">(optional)</span></h4>
-            <div class="form-group"><label>Scripture Reference</label><input type="text" name="scripture_3_ref" value="<?= htmlspecialchars($d['scripture_3_ref'] ?? '') ?>" placeholder="e.g. Matthew 5:14"></div>
-            <div class="form-group">
-                <label>Full Bible Text</label>
-                <textarea name="scripture_3_desc" class="rich-editor" rows="8"><?= htmlspecialchars($d['scripture_3_desc'] ?? '') ?></textarea>
-            </div>
-        </div>
         <?php elseif ($key === 'core_values_config'): ?>
         <p style="color: var(--adm-muted); margin: 0 0 1rem;">Core values displayed in a grid on the About page. Each value has a title and description. Leave a row empty to hide it.</p>
         <?php for ($i = 1; $i <= 5; $i++): ?>
