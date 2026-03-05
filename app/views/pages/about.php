@@ -80,7 +80,6 @@ $aboutStoryImage = $aboutStoryImage ?? '';
             <div class="about-scriptural-bg-glow" aria-hidden="true"></div>
             <div class="container">
                 <div class="about-scriptural-header">
-                    <span class="about-eyebrow about-eyebrow--light">The Word</span>
                     <h2 class="about-scriptural-title">Our Scriptural Foundation</h2>
                 </div>
                 <div class="about-scriptural-grid">
