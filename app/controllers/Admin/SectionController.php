@@ -16,6 +16,7 @@ class SectionController extends BaseController
         'im_new_after_summary',
         'im_new_watch_online',
         'im_new_connect',
+        'about_values',
     ];
 
     public function index()
