@@ -2525,7 +2525,8 @@ body::before {
 .academy-form-grid .form-group select:focus { outline: none; border-color: var(--color-primary); }
 @keyframes academy-select-pulse { 0%,100% { border-color: var(--color-primary); box-shadow: 0 0 0 0 rgba(212,160,23,0); } 50% { border-color: var(--color-primary); box-shadow: 0 0 0 5px rgba(212,160,23,0.25); } }
 .academy-select-highlight { animation: academy-select-pulse 0.7s ease 2; }
-.membership-join-btn { margin-top: 1rem; font-size: 0.9rem; }
+.membership-join-btn { margin-top: 1rem; font-size: 0.9rem; color: var(--color-primary-on-light); }
+.membership-join-btn:hover { background: var(--color-gold-bg); color: var(--color-dark); }
 .academy-signup-btn { margin-top: 0.5rem; padding-left: 2rem; padding-right: 2rem; }
 @media (max-width: 640px) { .academy-form-grid { grid-template-columns: 1fr; } }
 
