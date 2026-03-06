@@ -1848,55 +1848,101 @@ body::before {
     .about-page--hop .about-pillars-grid { grid-template-columns: 1fr; }
 }
 
-/* Core Values - card layout matching Mission/Vision pillars */
+/* ── Core Values — two-section gradient cards ───────────────────────────── */
 .about-page--hop .about-core-values-block {
     padding: 4rem 0;
-    background: #fff;
+    background: #f5f6fa;
 }
 .about-page--hop .about-core-values-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 1.5rem;
+    align-items: start;
 }
+
+/* Card shell */
 .about-page--hop .about-value-card {
-    background: #fff;
-    border: 2px solid rgba(166,125,15,0.35);
-    border-radius: var(--radius);
-    padding: 2rem;
-    text-align: center;
-    transition: var(--transition);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 .about-page--hop .about-value-card:hover {
-    border-color: var(--color-brand-accent);
-    box-shadow: 0 8px 30px rgba(166,125,15,0.2);
-    transform: translateY(-4px);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.16);
 }
+
+/* Coloured top section */
+.about-page--hop .about-value-card-top {
+    padding: 2rem 1.5rem 1.75rem;
+    text-align: center;
+    color: #fff;
+}
+
+/* Icon bubble */
 .about-page--hop .about-value-card-icon {
-    width: 56px;
-    height: 56px;
-    margin: 0 auto 1rem;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1.1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(166,125,15,0.12);
+    background: rgba(255,255,255,0.20);
     border-radius: 50%;
-    color: var(--color-brand-accent);
+    color: #fff;
 }
+.about-page--hop .about-value-card-icon svg { stroke: #ffd166; }
+
+/* Title inside coloured top */
 .about-page--hop .about-value-card-title {
     margin: 0 0 0.5rem;
     font-family: var(--font-heading);
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     font-weight: 700;
-    color: var(--color-brand-black);
+    color: #fff;
 }
-.about-page--hop .about-value-card-desc p { margin: 0 0 0.5em; }
-.about-page--hop .about-value-card-desc p:last-child { margin-bottom: 0; }
-.about-page--hop .about-value-card-desc {
+
+/* Tagline inside coloured top */
+.about-page--hop .about-value-card-tagline {
     margin: 0;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.88);
+}
+
+/* Optional white bottom section */
+.about-page--hop .about-value-card-bottom {
+    background: #fff;
+    padding: 1.25rem 1.5rem 1.5rem;
+    text-align: center;
+    border-top: none;
+}
+.about-page--hop .about-value-card-bottom-title {
+    margin: 0 0 0.4rem;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+}
+.about-page--hop .about-value-card-bottom-text {
+    margin: 0;
+    font-size: 0.88rem;
     line-height: 1.65;
     color: var(--color-muted);
 }
+
+/* ── Gradient colour variants ─────────────────────────────────────────── */
+.about-value-card--blue   .about-value-card-top { background: linear-gradient(145deg, #5b9cf6 0%, #3b5bdb 100%); }
+.about-value-card--orange .about-value-card-top { background: linear-gradient(145deg, #ff8c42 0%, #e63c2f 100%); }
+.about-value-card--green  .about-value-card-top { background: linear-gradient(145deg, #56c96e 0%, #2d8a4e 100%); }
+.about-value-card--purple .about-value-card-top { background: linear-gradient(145deg, #b06cf5 0%, #6c3fc5 100%); }
+.about-value-card--teal   .about-value-card-top { background: linear-gradient(145deg, #2ecad8 0%, #0090a8 100%); }
+
+/* Bottom title colour matches card variant */
+.about-value-card--blue   .about-value-card-bottom-title { color: #3b5bdb; }
+.about-value-card--orange .about-value-card-bottom-title { color: #e63c2f; }
+.about-value-card--green  .about-value-card-bottom-title { color: #2d8a4e; }
+.about-value-card--purple .about-value-card-bottom-title { color: #6c3fc5; }
+.about-value-card--teal   .about-value-card-bottom-title { color: #0090a8; }
 
 .about-page--hop .about-beliefs-block {
     background: var(--color-brand-black);

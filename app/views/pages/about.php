@@ -127,17 +127,27 @@ $aboutStoryImage = $aboutStoryImage ?? '';
             $coreValuesData = is_string($coreValuesConfig['extra_data']) ? json_decode($coreValuesConfig['extra_data'], true) : $coreValuesConfig['extra_data'];
         }
         $coreValuesData = is_array($coreValuesData) ? $coreValuesData : [];
+        // Auto-cycle palette when color = 'auto' or not set
+        $cvAutoPalette = ['blue', 'orange', 'green', 'purple', 'teal'];
         $coreValuesList = [];
+        $paletteIdx = 0;
         for ($i = 1; $i <= 5; $i++) {
-            $title = trim($coreValuesData["value_{$i}_title"] ?? '');
-            $desc = trim($coreValuesData["value_{$i}_desc"] ?? '');
-            if ($title !== '' || $desc !== '') $coreValuesList[] = ['title' => $title ?: 'Value ' . $i, 'desc' => $desc];
+            $title  = trim($coreValuesData["value_{$i}_title"]  ?? '');
+            $desc   = trim($coreValuesData["value_{$i}_desc"]   ?? '');
+            $detail = trim($coreValuesData["value_{$i}_detail"] ?? '');
+            $color  = trim($coreValuesData["value_{$i}_color"]  ?? 'auto');
+            if ($title === '' && $desc === '') continue;
+            if ($color === 'auto' || $color === '') {
+                $color = $cvAutoPalette[$paletteIdx % count($cvAutoPalette)];
+            }
+            $coreValuesList[] = ['title' => $title ?: 'Value ' . $i, 'desc' => $desc, 'detail' => $detail, 'color' => $color];
+            $paletteIdx++;
         }
         if (empty($coreValuesList)) {
             $coreValuesList = [
-                ['title' => 'Audacity', 'desc' => 'Faith that dares the impossible.'],
-                ['title' => 'Hospitality', 'desc' => 'Warmth, service, and belonging.'],
-                ['title' => 'Leadership', 'desc' => 'Responsibility, influence, and stewardship.'],
+                ['title' => 'Audacity',     'desc' => 'Faith that dares the impossible.',          'detail' => '', 'color' => 'blue'],
+                ['title' => 'Hospitality',  'desc' => 'Warmth, service, and belonging.',            'detail' => '', 'color' => 'orange'],
+                ['title' => 'Leadership',   'desc' => 'Responsibility, influence, and stewardship.','detail' => '', 'color' => 'green'],
             ];
         }
         ?>
@@ -147,12 +157,24 @@ $aboutStoryImage = $aboutStoryImage ?? '';
                 <h2 class="about-section-title">Core Values</h2>
                 <div class="about-core-values-grid">
                     <?php foreach ($coreValuesList as $v): ?>
-                    <div class="about-value-card stagger-item">
-                        <div class="about-value-card-icon" aria-hidden="true">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <div class="about-value-card about-value-card--<?= htmlspecialchars($v['color']) ?> stagger-item">
+                        <!-- Coloured top section -->
+                        <div class="about-value-card-top">
+                            <div class="about-value-card-icon" aria-hidden="true">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            </div>
+                            <h3 class="about-value-card-title"><?= content_text($v['title']) ?></h3>
+                            <?php if ($v['desc'] !== ''): ?>
+                            <p class="about-value-card-tagline"><?= htmlspecialchars($v['desc']) ?></p>
+                            <?php endif; ?>
                         </div>
-                        <h3 class="about-value-card-title"><?= content_text($v['title']) ?></h3>
-                        <div class="about-value-card-desc"><?= rich_content($v['desc']) ?></div>
+                        <!-- Optional white bottom section — only renders when detail text is filled -->
+                        <?php if ($v['detail'] !== ''): ?>
+                        <div class="about-value-card-bottom">
+                            <h4 class="about-value-card-bottom-title"><?= content_text($v['title']) ?></h4>
+                            <p class="about-value-card-bottom-text"><?= htmlspecialchars($v['detail']) ?></p>
+                        </div>
+                        <?php endif; ?>
                     </div>
                     <?php endforeach; ?>
                 </div>

@@ -68,12 +68,44 @@ $key = $section['section_key'] ?? '';
             </div>
         </div>
         <?php elseif ($key === 'core_values_config'): ?>
-        <p style="color: var(--adm-muted); margin: 0 0 1rem;">Core values displayed in a grid on the About page. Each value has a title and description. Leave a row empty to hide it.</p>
-        <?php for ($i = 1; $i <= 5; $i++): ?>
-        <div style="padding: 1rem 0; border-bottom: 1px solid var(--adm-border);">
-            <h4 style="font-size: 0.9rem; margin: 0 0 0.75rem; color: var(--adm-muted);">Value <?= $i ?></h4>
-            <div class="form-group"><label>Title</label><input type="text" name="value_<?= $i ?>_title" value="<?= htmlspecialchars($d["value_{$i}_title"] ?? '') ?>" placeholder="e.g. Audacity"></div>
-            <div class="form-group"><label>Description</label><input type="text" name="value_<?= $i ?>_desc" value="<?= htmlspecialchars($d["value_{$i}_desc"] ?? '') ?>" placeholder="e.g. Faith that dares the impossible."></div>
+        <p style="color: var(--adm-muted); margin: 0 0 1.25rem;">Core values displayed in a card grid on the About page. Each card has a coloured top (icon + tagline) and an optional white section for expanded text. Leave a row's title empty to hide that card.</p>
+        <?php
+        $colorOptions = [
+            'auto'   => 'Auto (cycle palette)',
+            'blue'   => 'Blue',
+            'orange' => 'Orange',
+            'green'  => 'Green',
+            'purple' => 'Purple',
+            'teal'   => 'Teal',
+        ];
+        $colorSwatches = ['auto'=>'#4f8ef7','blue'=>'#4f8ef7','orange'=>'#ff7c4d','green'=>'#4caf50','purple'=>'#9c27b0','teal'=>'#00bcd4'];
+        for ($i = 1; $i <= 5; $i++): ?>
+        <div style="padding: 1.25rem 0; border-bottom: 1px solid var(--adm-border);">
+            <h4 style="font-size: 0.9rem; margin: 0 0 1rem; color: var(--adm-muted); text-transform: uppercase; letter-spacing: 0.06em;">Value <?= $i ?></h4>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                <div class="form-group" style="margin:0;">
+                    <label>Title</label>
+                    <input type="text" name="value_<?= $i ?>_title" value="<?= htmlspecialchars($d["value_{$i}_title"] ?? '') ?>" placeholder="e.g. Audacity">
+                </div>
+                <div class="form-group" style="margin:0;">
+                    <label>Card Colour</label>
+                    <select name="value_<?= $i ?>_color">
+                        <?php foreach ($colorOptions as $val => $label):
+                            $sel = ($d["value_{$i}_color"] ?? 'auto') === $val ? 'selected' : '';
+                        ?>
+                        <option value="<?= $val ?>" <?= $sel ?>><?= $label ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" style="margin-top:0.75rem;">
+                <label>Short Tagline <span style="font-weight:400;color:var(--adm-muted);">(shown on coloured section)</span></label>
+                <input type="text" name="value_<?= $i ?>_desc" value="<?= htmlspecialchars($d["value_{$i}_desc"] ?? '') ?>" placeholder="e.g. Faith that dares the impossible.">
+            </div>
+            <div class="form-group" style="margin-top:0.75rem; margin-bottom:0;">
+                <label>Expanded Text <span style="font-weight:400;color:var(--adm-muted);">(optional — shows white section below card colour)</span></label>
+                <textarea name="value_<?= $i ?>_detail" rows="3" placeholder="Optional: a fuller description, verse, or elaboration. Leave blank to hide the white section."><?= htmlspecialchars($d["value_{$i}_detail"] ?? '') ?></textarea>
+            </div>
         </div>
         <?php endfor; ?>
         <?php endif; ?>
