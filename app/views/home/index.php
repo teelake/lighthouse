@@ -212,9 +212,12 @@ $mediaTypeLabel = function ($t) {
             $upcomingEvents = $upcomingEvents ?? [];
             $cardMods = ['sunday', 'thursday', 'sunday'];
             foreach (array_slice($upcomingEvents, 0, 3) as $i => $e):
-                $mod = $cardMods[$i % 3];
+                $mod      = $cardMods[$i % 3];
+                $hasImage = !empty($e['image']);
+                $imgStyle = $hasImage ? ' style="background-image:url(\'' . htmlspecialchars($e['image']) . '\')"' : '';
             ?>
-            <a href="<?= $baseUrl ?>/events/<?= htmlspecialchars($e['slug'] ?? '') ?>" class="event-card-modern event-card-modern--<?= $mod ?>">
+            <a href="<?= $baseUrl ?>/events/<?= htmlspecialchars($e['slug'] ?? '') ?>"
+               class="event-card-modern event-card-modern--<?= $mod ?><?= $hasImage ? ' event-card-modern--has-image' : '' ?>"<?= $imgStyle ?>>
                 <h3><?= htmlspecialchars($e['title'] ?? 'Event') ?></h3>
                 <p class="event-time"><?php
                     $datePart = !empty($e['event_date']) ? date('l, M j', strtotime($e['event_date'])) : '';

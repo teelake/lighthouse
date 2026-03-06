@@ -604,16 +604,25 @@ body::before {
     pointer-events: none;
 }
 .event-card-modern--sunday {
-    background: #1e40af;
+    background-color: #1e40af;
 }
 .event-card-modern--sunday::before {
     background: radial-gradient(circle at 85% 15%, rgba(255,225,0,0.2) 0%, transparent 45%);
 }
 .event-card-modern--thursday {
-    background: #92400e;
+    background-color: #92400e;
 }
 .event-card-modern--thursday::before {
     background: radial-gradient(circle at 15% 85%, rgba(255,225,0,0.15) 0%, transparent 45%);
+}
+/* Image variant: override with photo + dark gradient overlay */
+.event-card-modern--has-image {
+    background-size: cover;
+    background-position: center;
+}
+.event-card-modern--has-image::before {
+    opacity: 1;
+    background: linear-gradient(160deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.72) 100%);
 }
 .event-card-modern:hover {
     transform: translateY(-4px);
@@ -2512,13 +2521,11 @@ body::before {
 .academy-form-grid .form-group textarea:focus { outline: none; border-color: var(--color-primary); }
 .academy-form-grid .form-group textarea { resize: vertical; min-height: 90px; }
 .form-optional { font-weight: 400; color: var(--color-muted); font-size: 0.85em; }
-.academy-radio-group { display: flex; flex-direction: column; gap: 0.65rem; }
-.academy-radio-item { display: flex; align-items: flex-start; gap: 0; cursor: pointer; }
-.academy-radio-item input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
-.academy-radio-box { display: flex; flex-direction: column; gap: 0.1rem; padding: 0.75rem 1rem; border: 2px solid rgba(26,26,26,0.12); border-radius: var(--radius-sm); width: 100%; transition: var(--transition); cursor: pointer; }
-.academy-radio-item input[type="radio"]:checked + .academy-radio-box { border-color: var(--color-primary); background: var(--color-gold-bg); }
-.academy-radio-box strong { font-size: 0.95rem; color: var(--color-dark); }
-.academy-radio-box em { font-size: 0.82rem; color: var(--color-muted); font-style: normal; }
+.academy-form-grid .form-group select { width: 100%; padding: 0.75rem 1rem; border: 2px solid rgba(26,26,26,0.12); border-radius: var(--radius-sm); font-family: var(--font-sans); font-size: 1rem; color: var(--color-dark); background: #fff; transition: var(--transition); box-sizing: border-box; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.9rem center; padding-right: 2.5rem; }
+.academy-form-grid .form-group select:focus { outline: none; border-color: var(--color-primary); }
+@keyframes academy-select-pulse { 0%,100% { border-color: var(--color-primary); box-shadow: 0 0 0 0 rgba(212,160,23,0); } 50% { border-color: var(--color-primary); box-shadow: 0 0 0 5px rgba(212,160,23,0.25); } }
+.academy-select-highlight { animation: academy-select-pulse 0.7s ease 2; }
+.membership-join-btn { margin-top: 1rem; font-size: 0.9rem; }
 .academy-signup-btn { margin-top: 0.5rem; padding-left: 2rem; padding-right: 2rem; }
 @media (max-width: 640px) { .academy-form-grid { grid-template-columns: 1fr; } }
 

@@ -30,6 +30,7 @@ $membershipIntro = $sections['membership_intro']['content'] ?? null;
                 </div>
                 <h3 class="about-pillar-title">Pharos Membership Academy</h3>
                 <div class="about-pillar-text"><?= rich_content($sections['membership_pharos']['content'] ?? 'A foundational pathway for identity, doctrine, values, and belonging.') ?></div>
+                <button type="button" class="btn btn-outline membership-join-btn" data-academy="membership">Join this Academy →</button>
             </div>
             <div class="about-pillar stagger-item">
                 <div class="about-pillar-icon" aria-hidden="true">
@@ -37,6 +38,7 @@ $membershipIntro = $sections['membership_intro']['content'] ?? null;
                 </div>
                 <h3 class="about-pillar-title">Pharos Leadership Academy</h3>
                 <div class="about-pillar-text"><?= rich_content($sections['membership_leadership']['content'] ?? 'Leadership development for ministry, marketplace, and societal influence.') ?></div>
+                <button type="button" class="btn btn-outline membership-join-btn" data-academy="leadership">Join this Academy →</button>
             </div>
             <div class="about-pillar stagger-item">
                 <div class="about-pillar-icon" aria-hidden="true">
@@ -44,6 +46,7 @@ $membershipIntro = $sections['membership_intro']['content'] ?? null;
                 </div>
                 <h3 class="about-pillar-title">Pharos Discipleship Academy</h3>
                 <div class="about-pillar-text"><?= rich_content($sections['membership_discipleship']['content'] ?? 'Deep spiritual formation focused on Christlikeness, discipline, and deployment.') ?></div>
+                <button type="button" class="btn btn-outline membership-join-btn" data-academy="discipleship">Join this Academy →</button>
             </div>
         </div>
 
@@ -89,30 +92,13 @@ $membershipIntro = $sections['membership_intro']['content'] ?? null;
                         <input type="tel" id="acad-phone" name="phone" placeholder="+1 (000) 000-0000" value="<?= htmlspecialchars($_GET['phone'] ?? '') ?>">
                     </div>
                     <div class="form-group">
-                        <label>Which Academy? *</label>
-                        <div class="academy-radio-group">
-                            <label class="academy-radio-item">
-                                <input type="radio" name="academy" value="membership" required>
-                                <span class="academy-radio-box">
-                                    <strong>Pharos Membership Academy</strong>
-                                    <em>Identity, doctrine, values & belonging</em>
-                                </span>
-                            </label>
-                            <label class="academy-radio-item">
-                                <input type="radio" name="academy" value="leadership">
-                                <span class="academy-radio-box">
-                                    <strong>Pharos Leadership Academy</strong>
-                                    <em>Ministry, marketplace & societal influence</em>
-                                </span>
-                            </label>
-                            <label class="academy-radio-item">
-                                <input type="radio" name="academy" value="discipleship">
-                                <span class="academy-radio-box">
-                                    <strong>Pharos Discipleship Academy</strong>
-                                    <em>Spiritual formation, Christlikeness & deployment</em>
-                                </span>
-                            </label>
-                        </div>
+                        <label for="acad-academy">Which Academy? *</label>
+                        <select id="acad-academy" name="academy" required>
+                            <option value="" disabled selected>— Select an academy —</option>
+                            <option value="membership">Pharos Membership Academy</option>
+                            <option value="leadership">Pharos Leadership Academy</option>
+                            <option value="discipleship">Pharos Discipleship Academy</option>
+                        </select>
                     </div>
                     <div class="form-group academy-form-full">
                         <label for="acad-message">Anything else you'd like us to know? <span class="form-optional">(optional)</span></label>
@@ -125,6 +111,28 @@ $membershipIntro = $sections['membership_intro']['content'] ?? null;
         </div>
     </div>
 </section>
+<script>
+(function () {
+    document.querySelectorAll('.membership-join-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var academy = this.dataset.academy;
+            var section = document.getElementById('academy-signup');
+            var select  = document.getElementById('acad-academy');
+            if (!section || !select) return;
+
+            // Set the dropdown value
+            select.value = academy;
+
+            // Smooth scroll to the form section
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // Briefly highlight the select to draw attention
+            select.classList.add('academy-select-highlight');
+            setTimeout(function () { select.classList.remove('academy-select-highlight'); }, 1400);
+        });
+    });
+})();
+</script>
 <?php
 $content = ob_get_clean();
 $pageTitle = $pageTitle ?? 'Membership & Training - Lighthouse Global Church';
