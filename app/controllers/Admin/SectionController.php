@@ -86,7 +86,13 @@ class SectionController extends BaseController
             'newsletter_config' => ['eyebrow', 'title', 'note'],
             'whats_on_config' => ['sunday_title', 'sunday_desc', 'thursday_title', 'thursday_desc'],
             'scriptural_foundation_config' => ['scripture_1_ref', 'scripture_1_desc', 'scripture_2_ref', 'scripture_2_desc', 'scripture_3_ref', 'scripture_3_desc'],
-            'core_values_config' => ['value_1_title', 'value_1_desc', 'value_2_title', 'value_2_desc', 'value_3_title', 'value_3_desc', 'value_4_title', 'value_4_desc', 'value_5_title', 'value_5_desc'],
+            'core_values_config' => [
+                'value_1_title', 'value_1_desc', 'value_1_color', 'value_1_detail',
+                'value_2_title', 'value_2_desc', 'value_2_color', 'value_2_detail',
+                'value_3_title', 'value_3_desc', 'value_3_color', 'value_3_detail',
+                'value_4_title', 'value_4_desc', 'value_4_color', 'value_4_detail',
+                'value_5_title', 'value_5_desc', 'value_5_color', 'value_5_detail',
+            ],
         ];
         $fields = $map[$key] ?? [];
         $out = [];
