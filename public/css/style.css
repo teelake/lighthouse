@@ -3707,7 +3707,7 @@ body::before {
 }
 
 /* Event detail page */
-.event-detail-page .container { max-width: 800px; padding-top: 2rem; }
+.event-detail-page .container { max-width: 800px; padding-top: 2.5rem; }
 .event-detail-back {
     display: inline-block;
     margin-bottom: 1.5rem;
@@ -3717,18 +3717,22 @@ body::before {
     transition: var(--transition);
 }
 .event-detail-back:hover { color: var(--color-primary-dark); }
-.event-detail-image {
-    border-radius: var(--radius);
-    overflow: hidden;
-    margin-bottom: 2rem;
-    box-shadow: var(--shadow);
+
+/* Event flier image — full natural dimensions, nothing cropped */
+.event-detail-hero {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto 0;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+    line-height: 0;
 }
-.event-detail-image img {
+.event-detail-hero img {
     width: 100%;
     height: auto;
     display: block;
-    aspect-ratio: 16/9;
-    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.14);
 }
 
 /* Ministry detail page */

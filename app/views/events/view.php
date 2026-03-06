@@ -3,14 +3,19 @@ ob_start();
 $baseUrl = rtrim(BASE_URL, '/');
 ?>
 <section class="section event-detail-page">
-    <div class="container">
+
+    <div class="container" style="max-width:800px;">
         <a href="<?= $baseUrl ?>/events" class="event-detail-back">← All Events</a>
-        <?php if (!empty($event['image'])): ?>
-        <div class="event-detail-image">
-            <img src="<?= htmlspecialchars($event['image']) ?>" alt="<?= htmlspecialchars($event['title']) ?>" loading="eager">
-        </div>
-        <?php endif; ?>
-        <article class="event-detail-body">
+    </div>
+
+    <?php if (!empty($event['image'])): ?>
+    <div class="event-detail-hero">
+        <img src="<?= htmlspecialchars($event['image']) ?>" alt="<?= htmlspecialchars($event['title']) ?>" loading="eager">
+    </div>
+    <?php endif; ?>
+
+    <div class="container">
+        <article class="event-detail-body" <?= !empty($event['image']) ? 'style="padding-top:2rem;"' : '' ?>>
             <h1><?= htmlspecialchars($event['title']) ?></h1>
             <?php
             $isTba    = empty($event['event_date']);
