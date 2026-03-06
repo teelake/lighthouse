@@ -22,7 +22,7 @@ class EventController extends BaseController
     public function store()
     {
         $this->requireEditor();
-        $slug = strtolower(preg_replace('/[^a-z0-9]+/i', '-', trim($this->post('title', ''))));
+        $slug     = strtolower(preg_replace('/[^a-z0-9]+/i', '-', trim($this->post('title', ''))));
         $imageUrl = '';
         $uploader = new ImageUpload();
         $uploaded = $uploader->upload('image', 'events');
@@ -31,15 +31,17 @@ class EventController extends BaseController
             $this->render('admin/events/form', ['event' => null, 'error' => $uploader->getLastError(), 'pageHeading' => 'Add Event', 'currentPage' => 'events']);
             return;
         }
+        [$eventDate, $eventEndDate, $eventTime] = $this->resolveDates();
         (new Event())->create([
-            'title' => $this->post('title'),
-            'slug' => $slug,
-            'description' => $this->post('description'),
-            'event_date' => $this->post('event_date') ?: null,
-            'event_time' => $this->post('event_time') ?: null,
-            'location' => $this->post('location'),
-            'image' => $imageUrl ?: null,
-            'is_published' => 1,
+            'title'          => $this->post('title'),
+            'slug'           => $slug,
+            'description'    => $this->post('description'),
+            'event_date'     => $eventDate,
+            'event_end_date' => $eventEndDate,
+            'event_time'     => $eventTime,
+            'location'       => $this->post('location'),
+            'image'          => $imageUrl ?: null,
+            'is_published'   => 1,
         ]);
         $this->redirectAdmin('events');
     }
@@ -67,15 +69,39 @@ class EventController extends BaseController
             $this->render('admin/events/form', ['event' => $event, 'error' => $uploader->getLastError(), 'pageHeading' => 'Edit Event', 'currentPage' => 'events']);
             return;
         }
+        [$eventDate, $eventEndDate, $eventTime] = $this->resolveDates();
         (new Event())->update($id, [
-            'title' => $this->post('title'),
-            'description' => $this->post('description'),
-            'event_date' => $this->post('event_date') ?: null,
-            'event_time' => $this->post('event_time') ?: null,
-            'location' => $this->post('location'),
-            'image' => $imageUrl ?: null,
+            'title'          => $this->post('title'),
+            'description'    => $this->post('description'),
+            'event_date'     => $eventDate,
+            'event_end_date' => $eventEndDate,
+            'event_time'     => $eventTime,
+            'location'       => $this->post('location'),
+            'image'          => $imageUrl ?: null,
         ]);
         $this->redirectAdmin('events');
+    }
+
+    /** Resolve date fields from the date_type radio selection */
+    private function resolveDates(): array
+    {
+        $type = $this->post('date_type', 'single');
+        switch ($type) {
+            case 'tba':
+                return [null, null, null];
+            case 'range':
+                return [
+                    $this->post('event_date_range_start') ?: null,
+                    $this->post('event_end_date') ?: null,
+                    null,
+                ];
+            default: // single
+                return [
+                    $this->post('event_date') ?: null,
+                    null,
+                    $this->post('event_time') ?: null,
+                ];
+        }
     }
 
     public function delete()

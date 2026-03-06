@@ -624,6 +624,19 @@ body::before {
     opacity: 1;
     background: linear-gradient(160deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.72) 100%);
 }
+/* "Coming Soon" label inside homepage event cards */
+.event-card-tba-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.65rem;
+    border-radius: 100px;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.4);
+    color: #fff;
+}
 .event-card-modern:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 40px rgba(0,0,0,0.2);
@@ -3656,6 +3669,26 @@ body::before {
     font-weight: 600;
     color: var(--color-primary-on-light);
     margin-bottom: 0.5rem;
+}
+/* "Coming Soon" badge on the events listing page */
+.event-card-coming-soon {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.65rem;
+    border-radius: 100px;
+    background: #fef9c3;
+    color: #854d0e;
+    margin-bottom: 0.5rem;
+}
+/* "Coming Soon" in event detail page meta row */
+.event-detail-coming-soon {
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--color-primary-on-light);
 }
 .event-card-event-body h3 {
     margin: 0 0 0.5rem;

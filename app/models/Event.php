@@ -14,10 +14,27 @@ class Event extends Model
         return $stmt->fetch() ?: null;
     }
 
-    /** Upcoming events only (event_date >= today) */
+    /**
+     * Upcoming events — includes all three types:
+     *   - Coming Soon (no date)
+     *   - Single date >= today
+     *   - Date range where end date >= today (catches ongoing multi-day events)
+     * Coming-soon events are sorted to the end; dated events sorted by start date ASC.
+     */
     public function findUpcoming(int $limit = 10): array
     {
-        $stmt = $this->db->prepare("SELECT * FROM `{$this->table}` WHERE is_published = 1 AND event_date >= CURDATE() ORDER BY event_date ASC LIMIT " . (int) $limit);
+        $sql = "SELECT * FROM `{$this->table}`
+                WHERE is_published = 1
+                  AND (
+                    event_date IS NULL
+                    OR event_date >= CURDATE()
+                    OR (event_end_date IS NOT NULL AND event_end_date >= CURDATE())
+                  )
+                ORDER BY
+                    CASE WHEN event_date IS NULL THEN 1 ELSE 0 END ASC,
+                    event_date ASC
+                LIMIT " . (int)$limit;
+        $stmt = $this->db->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC) ?: [];
     }

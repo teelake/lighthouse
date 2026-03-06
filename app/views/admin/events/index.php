@@ -14,9 +14,23 @@
         <thead><tr><th>Title</th><th>Date</th><th>Location</th><th>Action</th></tr></thead>
         <tbody>
         <?php foreach ($events ?? [] as $e): ?>
+        <?php
+            $eDateDisplay = format_event_date(
+                $e['event_date'] ?? null,
+                $e['event_end_date'] ?? null,
+                $e['event_time'] ?? null
+            );
+            $isTba = empty($e['event_date']);
+        ?>
         <tr>
             <td><?= htmlspecialchars($e['title'] ?? '') ?></td>
-            <td><?= htmlspecialchars($e['event_date'] ?? '') ?></td>
+            <td>
+                <?php if ($isTba): ?>
+                <span style="display:inline-block;font-size:0.75rem;font-weight:700;padding:0.15rem 0.55rem;border-radius:100px;background:#fef9c3;color:#854d0e;">Coming Soon</span>
+                <?php else: ?>
+                <?= htmlspecialchars($eDateDisplay) ?>
+                <?php endif; ?>
+            </td>
             <td><?= htmlspecialchars($e['location'] ?? '—') ?></td>
             <td>
                 <div class="admin-table-actions">

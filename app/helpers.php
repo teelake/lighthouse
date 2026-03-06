@@ -195,6 +195,60 @@ if (!function_exists('full_image_url')) {
     }
 }
 
+/**
+ * Format an event's date for display, handling all three event types:
+ *   - Coming Soon: both start and end are null
+ *   - Single date: start set, end null
+ *   - Date range: both start and end set
+ *
+ * @param string|null $startDate  event_date value
+ * @param string|null $endDate    event_end_date value
+ * @param string|null $time       event_time value (used for single date only)
+ * @param bool        $long       true = long weekday format (e.g. "Saturday, October 5, 2025")
+ */
+if (!function_exists('format_event_date')) {
+    function format_event_date(?string $startDate, ?string $endDate = null, ?string $time = null, bool $long = false): string
+    {
+        if (empty($startDate)) {
+            return 'Coming Soon';
+        }
+
+        $start = new \DateTime($startDate);
+
+        // Date range
+        if (!empty($endDate) && $endDate !== $startDate) {
+            $end = new \DateTime($endDate);
+            $sY  = $start->format('Y');
+            $eY  = $end->format('Y');
+            $sM  = $start->format('n');
+            $eM  = $end->format('n');
+
+            if ($sY === $eY && $sM === $eM) {
+                // Same month: Oct 3 – 5, 2025
+                return $start->format('M j') . ' – ' . $end->format('j, Y');
+            }
+            if ($sY === $eY) {
+                // Same year, different month: Oct 3 – Nov 5, 2025
+                return $start->format('M j') . ' – ' . $end->format('M j, Y');
+            }
+            // Different years: Dec 28, 2025 – Jan 2, 2026
+            return $start->format('M j, Y') . ' – ' . $end->format('M j, Y');
+        }
+
+        // Single date
+        $fmt = $long
+            ? $start->format('l, F j, Y')
+            : $start->format('M j, Y');
+
+        if (!empty($time)) {
+            $t    = \DateTime::createFromFormat('H:i:s', $time) ?: \DateTime::createFromFormat('H:i', $time);
+            $fmt .= $t ? ' · ' . $t->format('g:i A') : '';
+        }
+
+        return $fmt;
+    }
+}
+
 if (!function_exists('svg_icon')) {
     function svg_icon(string $name, int $size = 20): string
     {

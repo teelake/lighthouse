@@ -12,14 +12,24 @@ $baseUrl = rtrim(BASE_URL, '/');
         <?php endif; ?>
         <article class="event-detail-body">
             <h1><?= htmlspecialchars($event['title']) ?></h1>
-            <?php if (!empty($event['event_date']) || !empty($event['location'])): ?>
+            <?php
+            $isTba    = empty($event['event_date']);
+            $dateText = format_event_date($event['event_date'] ?? null, $event['event_end_date'] ?? null, $event['event_time'] ?? null, true);
+            ?>
+            <?php if ($isTba || !empty($event['location'])): ?>
             <div class="event-detail-meta">
-                <?php if (!empty($event['event_date'])): ?>
-                <span><?= date('l, F j, Y', strtotime($event['event_date'])) ?><?= !empty($event['event_time']) ? ' at ' . date('g:i A', strtotime($event['event_time'])) : '' ?></span>
+                <?php if ($isTba): ?>
+                <span class="event-detail-coming-soon">Coming Soon — date to be announced</span>
+                <?php else: ?>
+                <span><?= htmlspecialchars($dateText) ?></span>
                 <?php endif; ?>
                 <?php if (!empty($event['location'])): ?>
                 <span><?= htmlspecialchars($event['location']) ?></span>
                 <?php endif; ?>
+            </div>
+            <?php elseif (!$isTba): ?>
+            <div class="event-detail-meta">
+                <span><?= htmlspecialchars($dateText) ?></span>
             </div>
             <?php endif; ?>
             <div class="event-detail-desc"><?= rich_content($event['description'] ?? '') ?></div>
