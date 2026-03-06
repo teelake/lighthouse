@@ -20,6 +20,7 @@ $router->add('GET', 'events/{slug}', ['controller' => 'Event', 'action' => 'view
 $router->add('GET', 'media', ['controller' => 'Media', 'action' => 'index']);
 $router->add('GET', 'media/{slug}', ['controller' => 'Media', 'action' => 'view']);
 $router->add('GET', 'membership', ['controller' => 'Page', 'action' => 'membership']);
+$router->add('POST', 'membership/register', ['controller' => 'Page', 'action' => 'membershipRegister']);
 $router->add('GET', 'ministries', ['controller' => 'Ministry', 'action' => 'index']);
 $router->add('GET', 'ministries/{slug}', ['controller' => 'Ministry', 'action' => 'view']);
 $router->add('GET', 'small-groups', ['controller' => 'SmallGroup', 'action' => 'index']);
@@ -140,6 +141,9 @@ $router->add('POST', $adm . '/jobs/{id}', ['controller' => 'Admin\Job', 'action'
 $router->add('POST', $adm . '/jobs/{id}/delete', ['controller' => 'Admin\Job', 'action' => 'delete']);
 $router->add('GET', $adm . '/job-applications/{id}', ['controller' => 'Admin\JobApplication', 'action' => 'view']);
 $router->add('GET', $adm . '/job-applications', ['controller' => 'Admin\JobApplication', 'action' => 'index']);
+$router->add('GET', $adm . '/academy-registrations', ['controller' => 'Admin\AcademyRegistration', 'action' => 'index']);
+$router->add('GET', $adm . '/academy-registrations/{id}', ['controller' => 'Admin\AcademyRegistration', 'action' => 'view']);
+$router->add('POST', $adm . '/academy-registrations/{id}/delete', ['controller' => 'Admin\AcademyRegistration', 'action' => 'delete']);
 $router->add('GET', $adm . '/visitors', ['controller' => 'Admin\FirstTimeVisitor', 'action' => 'index']);
 $router->add('GET', $adm . '/visitors/create', ['controller' => 'Admin\FirstTimeVisitor', 'action' => 'create']);
 $router->add('POST', $adm . '/visitors', ['controller' => 'Admin\FirstTimeVisitor', 'action' => 'store']);

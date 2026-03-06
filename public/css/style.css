@@ -2493,6 +2493,34 @@ body::before {
 .membership-page { padding-top: 0; }
 .membership-content { padding: 3rem 1.5rem 4rem; }
 .membership-intro { max-width: 720px; margin-bottom: 2.5rem; }
+/* Academy sign-up section */
+.academy-signup-section { margin-top: 3.5rem; padding-top: 3rem; border-top: 2px solid rgba(255,225,0,0.18); }
+.academy-signup-header { max-width: 620px; margin-bottom: 2rem; }
+.academy-signup-sub { margin: 0.5rem 0 0; color: var(--color-muted); font-size: 0.98rem; line-height: 1.6; }
+.academy-signup-success { display: flex; align-items: flex-start; gap: 1rem; background: var(--color-gold-bg); border: 2px solid rgba(212,160,23,0.35); border-radius: var(--radius); padding: 1.5rem; max-width: 600px; }
+.academy-signup-success svg { flex-shrink: 0; color: var(--color-primary-on-light); margin-top: 0.1rem; }
+.academy-signup-success strong { display: block; font-size: 1.05rem; margin-bottom: 0.25rem; color: var(--color-dark); }
+.academy-signup-success p { margin: 0; color: var(--color-muted); font-size: 0.95rem; }
+.academy-signup-error { background: #fef2f2; color: #b91c1c; border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.25rem; max-width: 600px; font-size: 0.95rem; }
+.academy-signup-form { max-width: 720px; }
+.academy-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.5rem; }
+.academy-form-full { grid-column: 1 / -1; }
+.academy-form-grid .form-group label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.35rem; color: var(--color-dark); }
+.academy-form-grid .form-group input,
+.academy-form-grid .form-group textarea { width: 100%; padding: 0.75rem 1rem; border: 2px solid rgba(26,26,26,0.12); border-radius: var(--radius-sm); font-family: var(--font-sans); font-size: 1rem; color: var(--color-dark); background: #fff; transition: var(--transition); box-sizing: border-box; }
+.academy-form-grid .form-group input:focus,
+.academy-form-grid .form-group textarea:focus { outline: none; border-color: var(--color-primary); }
+.academy-form-grid .form-group textarea { resize: vertical; min-height: 90px; }
+.form-optional { font-weight: 400; color: var(--color-muted); font-size: 0.85em; }
+.academy-radio-group { display: flex; flex-direction: column; gap: 0.65rem; }
+.academy-radio-item { display: flex; align-items: flex-start; gap: 0; cursor: pointer; }
+.academy-radio-item input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+.academy-radio-box { display: flex; flex-direction: column; gap: 0.1rem; padding: 0.75rem 1rem; border: 2px solid rgba(26,26,26,0.12); border-radius: var(--radius-sm); width: 100%; transition: var(--transition); cursor: pointer; }
+.academy-radio-item input[type="radio"]:checked + .academy-radio-box { border-color: var(--color-primary); background: var(--color-gold-bg); }
+.academy-radio-box strong { font-size: 0.95rem; color: var(--color-dark); }
+.academy-radio-box em { font-size: 0.82rem; color: var(--color-muted); font-style: normal; }
+.academy-signup-btn { margin-top: 0.5rem; padding-left: 2rem; padding-right: 2rem; }
+@media (max-width: 640px) { .academy-form-grid { grid-template-columns: 1fr; } }
 
 /* About page - beliefs & FAQs */
 .about-beliefs { max-width: 720px; margin-bottom: 2.5rem; }
