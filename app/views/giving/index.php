@@ -109,11 +109,11 @@ $designations = [
                 <div class="giving-interac-steps">
                     <p class="giving-interac-step">
                         <span class="giving-interac-step-num">1</span>
-                        Open your bank's app or website and select <strong>Send Interac e-Transfer</strong>.
+                        <span class="giving-interac-step-text">Open your bank's app or website and select<br><strong>Send Interac e-Transfer</strong>.</span>
                     </p>
                     <p class="giving-interac-step">
                         <span class="giving-interac-step-num">2</span>
-                        Enter the email below as the recipient — this is our account.
+                        <span class="giving-interac-step-text">Enter the email below as the recipient — this is our account.</span>
                     </p>
                     <div class="giving-interac-account">
                         <span class="giving-interac-account-label">Send to</span>
@@ -121,7 +121,7 @@ $designations = [
                     </div>
                     <p class="giving-interac-step">
                         <span class="giving-interac-step-num">3</span>
-                        In the message field, include your name and what you are giving for (e.g. <em>Tithes</em>, <em>Offering</em>).
+                        <span class="giving-interac-step-text">In the message field, include your name and what you are giving for (e.g. <em>Tithes</em>, <em>Offering</em>).</span>
                     </p>
                 </div>
             </div>
