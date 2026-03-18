@@ -87,11 +87,11 @@
             <div class="footer-brand">
                 <a href="<?= rtrim(BASE_URL, '/') ?>/" class="logo">
                     <?php
-                    // Footer bg is always black – use light logo when available, else invert main logo
-                    $footerLogoLight = site_logo_light_url();
-                    $footerLogoUrl = $footerLogoLight ?: site_logo_url();
+                    // Footer: dedicated footer logo if set, else light logo, else main logo (inverted)
+                    $footerLogoUrl = site_logo_footer_url() ?: site_logo_light_url() ?: site_logo_url();
+                    $useInvert = !site_logo_footer_url() && !site_logo_light_url();
                     if ($footerLogoUrl): ?>
-                    <img src="<?= htmlspecialchars($footerLogoUrl) ?>" alt="Lighthouse Global Church"<?= !$footerLogoLight ? ' class="footer-logo-invert"' : '' ?>>
+                    <img src="<?= htmlspecialchars($footerLogoUrl) ?>" alt="Lighthouse Global Church"<?= $useInvert ? ' class="footer-logo-invert"' : '' ?>>
                     <?php else: ?>
                     <span class="logo-text">LIGHTHOUSE GLOBAL CHURCH</span>
                     <?php endif; ?>

@@ -137,6 +137,19 @@ if (!function_exists('site_logo_light_url')) {
 }
 
 /**
+ * Footer logo. Optional. If set, used only in the site footer. Can be different from header logos.
+ * Falls back to null if not set (caller should use site_logo_light_url or site_logo_url with invert).
+ */
+if (!function_exists('site_logo_footer_url')) {
+    function site_logo_footer_url(): ?string
+    {
+        $s = new \App\Models\Setting();
+        $url = $s->get('site_logo_footer', '');
+        return !empty($url) ? $url : null;
+    }
+}
+
+/**
  * Get hero background image URL for an inner page.
  * About uses about_hero_image; other pages use page_hero_image.
  */
