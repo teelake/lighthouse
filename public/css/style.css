@@ -129,7 +129,7 @@ body::before {
 .site-header.header-scrolled .logo .logo-img--single { filter: none; }
 .logo-text { font-size: 1.1rem; font-weight: 700; color: var(--color-primary); letter-spacing: 0.02em; transition: color 0.35s ease; }
 .site-header.header-scrolled .logo-text { color: var(--color-dark); }
-.header-actions { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+.header-actions { display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0; margin-left: 0.5rem; }
 .header-social { display: flex; align-items: center; gap: 0.5rem; }
 .header-social { margin-left: 0.25rem; }
 .header-social a { color: rgba(255,255,255,0.85); padding: 0.35rem; transition: var(--transition); }
@@ -143,10 +143,10 @@ body::before {
 .site-header.nav-open .nav-toggle span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
 .site-header.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
 .site-header.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-.main-nav { flex: 1; min-width: 0; margin-left: 0.75rem; margin-right: 0.5rem; }
+.main-nav { flex: 1; min-width: 0; margin-left: 0.75rem; margin-right: 0.5rem; display: flex; align-items: center; }
 .main-nav ul { display: flex; align-items: center; gap: 0.25rem; list-style: none; margin: 0; padding: 0; flex-wrap: nowrap !important; flex-shrink: 0; }
-.main-nav ul li { flex-shrink: 0; }
-.main-nav a { text-decoration: none; color: #fff; padding: 0.4rem 0.5rem; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.35s ease; white-space: nowrap; }
+.main-nav ul li { flex-shrink: 0; display: flex; align-items: center; }
+.main-nav a { text-decoration: none; color: #fff; padding: 0.4rem 0.5rem; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.35s ease; white-space: nowrap; line-height: 1.2; display: inline-flex; align-items: center; }
 .main-nav a:hover { color: var(--color-primary); }
 .site-header.header-scrolled .main-nav a { color: var(--color-dark); }
 .site-header.header-scrolled .main-nav a:hover { color: var(--color-primary-on-light); }
@@ -198,6 +198,7 @@ body::before {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
     background: transparent !important;
     color: #fff !important;
     text-decoration: none;
@@ -233,6 +234,7 @@ body::before {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
     background: var(--color-primary) !important;
     color: var(--color-dark) !important;
     text-decoration: none;
