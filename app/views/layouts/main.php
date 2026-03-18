@@ -33,6 +33,7 @@
                 <span class="logo-text">LIGHTHOUSE GLOBAL CHURCH</span>
                 <?php endif; ?>
             </a>
+            <div class="header-nav-actions">
             <button class="nav-toggle" aria-label="Menu" aria-expanded="false" type="button">
                 <span></span><span></span><span></span>
             </button>
@@ -68,6 +69,7 @@
             <div class="header-actions">
                 <a href="<?= rtrim(BASE_URL, '/') ?>/membership" class="btn-member">Join</a>
                 <a href="<?= rtrim(BASE_URL, '/') ?>/giving" class="btn-give">Give</a>
+            </div>
             </div>
         </div>
     </header>
