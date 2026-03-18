@@ -26,6 +26,7 @@ $defaultCols = [
 ];
 $cols = $footer_columns ?? $defaultCols;
 $tagline = $footer_tagline ?? 'Join us. Grow with us. Shine with us.';
+$copyright = $footer_copyright ?? '© {{year}} Lighthouse Global Church. All Rights Reserved.';
 ?>
 <div class="admin-card">
     <div class="admin-page-header">
@@ -45,6 +46,11 @@ $tagline = $footer_tagline ?? 'Join us. Grow with us. Shine with us.';
         <div class="form-group">
             <label>Footer Tagline</label>
             <input type="text" name="footer_tagline" value="<?= htmlspecialchars($tagline) ?>" placeholder="Join us. Grow with us. Shine with us.">
+        </div>
+        <div class="form-group">
+            <label>Copyright Text</label>
+            <input type="text" name="footer_copyright" value="<?= htmlspecialchars($copyright) ?>" placeholder="© {{year}} Lighthouse Global Church. All Rights Reserved.">
+            <p class="admin-muted" style="font-size: 0.85rem; margin-top: 0.25rem;">Use <code>{{year}}</code> for the current year (e.g. 2026).</p>
         </div>
         <?php foreach ($cols as $ci => $col): ?>
         <div class="footer-col-editor" style="border: 1px solid var(--adm-border); border-radius: 8px; padding: 1.25rem; margin-bottom: 1rem;">

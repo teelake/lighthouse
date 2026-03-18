@@ -134,6 +134,7 @@ class SettingController extends BaseController
         $json = $s->get('footer_config', '');
         $data = $json ? json_decode($json, true) : null;
         $tagline = $data['tagline'] ?? 'Join us. Grow with us. Shine with us.';
+        $copyright = $data['copyright'] ?? '© {{year}} Lighthouse Global Church. All Rights Reserved.';
         $cols = $data['columns'] ?? [
             ['title' => 'ABOUT', 'links' => [
                 ['label' => 'About Us', 'url' => '/about'],
@@ -161,6 +162,7 @@ class SettingController extends BaseController
         ];
         $this->render('admin/settings/footer', [
             'footer_tagline' => $tagline,
+            'footer_copyright' => $copyright,
             'footer_columns' => $cols,
             'pageHeading' => 'Footer Configuration',
             'currentPage' => 'settings',
@@ -172,6 +174,7 @@ class SettingController extends BaseController
         $this->requireAdmin();
         $s = new Setting();
         $tagline = trim($this->post('footer_tagline', 'Join us. Grow with us. Shine with us.'));
+        $copyright = trim($this->post('footer_copyright', '© {{year}} Lighthouse Global Church. All Rights Reserved.'));
         $cols = [];
         for ($i = 0; $i < 4; $i++) {
             $title = trim($this->post("footer_col_{$i}_title", ''));
@@ -185,7 +188,7 @@ class SettingController extends BaseController
             }
             $cols[] = ['title' => $title, 'links' => $links];
         }
-        $config = json_encode(['tagline' => $tagline, 'columns' => $cols]);
+        $config = json_encode(['tagline' => $tagline, 'copyright' => $copyright, 'columns' => $cols]);
         $s->set('footer_config', $config);
         $this->redirectAdmin('settings/footer');
     }
