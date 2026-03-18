@@ -72,6 +72,17 @@ class ImageUpload
         $basename = bin2hex(random_bytes(8)) . '.' . $ext;
         $filepath = $imageDir . '/' . $basename;
 
+        // PNG with transparency: bypass GD for small files to preserve alpha (logos, icons)
+        if ($ext === 'png' && $detectedMime === 'image/png') {
+            $size = @getimagesize($file['tmp_name']);
+            if ($size && ($size[0] ?? 0) <= 800 && ($size[1] ?? 0) <= 800) {
+                if (move_uploaded_file($file['tmp_name'], $filepath)) {
+                    $webPath = '/uploads/images/' . $subdir . '/' . date('Y') . '/' . $basename;
+                    return rtrim(BASE_URL, '/') . $webPath;
+                }
+            }
+        }
+
         if ($ext === 'svg') {
             // SVG: validate (strip scripts), then move
             $content = file_get_contents($file['tmp_name']);
@@ -131,6 +142,12 @@ class ImageUpload
             return false;
         }
 
+        // Preserve PNG/WebP transparency (GD strips alpha by default)
+        if (in_array($ext, ['png'], true) || ($ext === 'webp' && function_exists('imagewebp'))) {
+            imagealphablending($img, false);
+            imagesavealpha($img, true);
+        }
+
         $max = self::MAX_DIMENSION;
         if ($w > $max || $h > $max) {
             $ratio = min($max / $w, $max / $h);
@@ -145,6 +162,10 @@ class ImageUpload
             $img = $resized;
             $w = $nw;
             $h = $nh;
+            if (in_array($ext, ['png'], true)) {
+                imagealphablending($img, false);
+                imagesavealpha($img, true);
+            }
         }
 
         $saved = false;
