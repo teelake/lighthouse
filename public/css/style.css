@@ -3936,8 +3936,16 @@ body::before {
 /* Footer - Believers House multi-column */
 .site-footer { width: 100%; background: var(--color-dark); color: #fff; padding: 4rem 1.5rem 2rem; overflow-x: hidden; }
 .footer-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 2fr; grid-template-rows: auto auto; gap: 2rem 3rem; align-items: start; }
-.footer-brand .logo { display: inline-flex; }
-.footer-brand .logo img { height: 80px; max-width: 320px; object-fit: contain; }
+.footer-brand .logo { display: inline-flex; align-items: flex-start; }
+.footer-brand .logo img {
+    height: 100px;
+    max-width: 360px;
+    width: auto;
+    min-width: 120px;
+    object-fit: contain;
+    object-position: left top;
+    display: block;
+}
 .footer-brand .logo img.footer-logo-invert { filter: invert(1); }
 .footer-social-wrap { margin: 1rem 0; }
 .footer-social-label { display: block; font-family: var(--font-heading); font-size: 0.8rem; color: rgba(255,255,255,0.6); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
