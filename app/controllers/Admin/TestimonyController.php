@@ -19,11 +19,12 @@ class TestimonyController extends BaseController
         $page = max(1, (int)($_GET['page'] ?? 1));
         $offset = ($page - 1) * self::PER_PAGE;
         $showArchived = isset($_GET['archived']);
-        $result = (new Testimony())->findPaginated('created_at DESC', self::PER_PAGE, $offset, $showArchived ? 'only' : true);
+        $search = trim($_GET['search'] ?? '');
+        $filters = $search !== '' ? ['search' => $search] : [];
+        $result = (new Testimony())->findPaginatedFiltered($filters, 'created_at DESC', self::PER_PAGE, $offset, $showArchived ? 'only' : true);
         $items = $result['rows'];
         $total = $result['total'];
         $totalPages = max(1, (int) ceil($total / self::PER_PAGE));
-        $baseUrl = rtrim(BASE_URL ?? '', '/');
 
         $this->render('admin/testimonies/index', [
             'pageTitle' => 'Online Testimonies',
@@ -31,11 +32,11 @@ class TestimonyController extends BaseController
             'currentPage' => 'testimonies',
             'items' => $items,
             'showArchived' => $showArchived,
+            'search' => $search,
             'page' => $page,
             'totalPages' => $totalPages,
             'total' => $total,
             'perPage' => self::PER_PAGE,
-            'baseUrl' => $baseUrl,
         ]);
     }
 

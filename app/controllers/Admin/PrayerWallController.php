@@ -13,7 +13,7 @@ class PrayerWallController extends BaseController
 
     public function index()
     {
-        $this->requireLogin();
+        $this->requireAuth();
         $role = $_SESSION['user_role'] ?? '';
 
         if ($role === 'member') {
@@ -65,7 +65,7 @@ class PrayerWallController extends BaseController
     // ── Member: post to prayer wall ─────────────────────────────────────────
     public function postWall()
     {
-        $this->requireLogin();
+        $this->requireAuth();
         if (!csrf_verify()) $this->redirectAdmin('prayer-wall?error=csrf');
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') $this->redirectAdmin('prayer-wall');
 
@@ -107,7 +107,12 @@ class PrayerWallController extends BaseController
         $total  = $result['total'];
         $totalPages = max(1, (int) ceil($total / self::PER_PAGE));
 
-        $requests = (new PrayerRequest())->findAll([], 'created_at DESC', 50);
+        $requests = [];
+        try {
+            $requests = (new PrayerRequest())->findAll([], 'created_at DESC', 50);
+        } catch (\Throwable $e) {
+            error_log('PrayerWall admin: prayer_requests fetch failed: ' . $e->getMessage());
+        }
         $users = [];
         if (!empty($posts)) {
             $userIds = array_unique(array_filter(array_column($posts, 'user_id')));
@@ -174,7 +179,7 @@ class PrayerWallController extends BaseController
 
     public function viewPost()
     {
-        $this->requireLogin();
+        $this->requireAuth();
         $id = (int)($this->params['id'] ?? 0);
         if (!$id) $this->redirectAdmin('prayer-wall');
         $post = (new PrayerWall())->find($id);
@@ -219,7 +224,7 @@ class PrayerWallController extends BaseController
 
     public function editPost()
     {
-        $this->requireLogin();
+        $this->requireAuth();
         $id = (int)($this->params['id'] ?? 0);
         if (!$id) $this->redirectAdmin('prayer-wall');
         $post = (new PrayerWall())->find($id);
@@ -243,7 +248,7 @@ class PrayerWallController extends BaseController
 
     public function updatePost()
     {
-        $this->requireLogin();
+        $this->requireAuth();
         if (!csrf_verify()) $this->redirectAdmin('prayer-wall?error=csrf');
         $id = (int)($this->params['id'] ?? 0);
         if (!$id) $this->redirectAdmin('prayer-wall');
@@ -289,7 +294,7 @@ class PrayerWallController extends BaseController
 
     public function deletePost()
     {
-        $this->requireLogin();
+        $this->requireAuth();
         if (!csrf_verify()) return $this->redirectAdmin('prayer-wall');
         $id = (int)($this->params['id'] ?? 0);
         if (!$id) $this->redirectAdmin('prayer-wall');

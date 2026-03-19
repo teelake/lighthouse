@@ -1,13 +1,13 @@
 <?php
 $items = $items ?? [];
 $showArchived = $showArchived ?? false;
+$search = $search ?? '';
 $isAdmin = ($_SESSION['user_role'] ?? '') === 'admin';
 $isEditor = in_array($_SESSION['user_role'] ?? '', ['editor', 'admin']);
 $page = (int)($page ?? 1);
 $totalPages = (int)($totalPages ?? 1);
 $total = (int)($total ?? 0);
 $perPage = (int)($perPage ?? 15);
-$baseUrl = $baseUrl ?? rtrim(BASE_URL ?? '', '/');
 $buildQuery = function ($overrides = []) {
     $q = array_merge($_GET, $overrides);
     $q = array_filter($q);
@@ -18,12 +18,18 @@ $buildQuery = function ($overrides = []) {
     <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
         <div>
             <h2>Online Testimonies</h2>
-            <p style="color: var(--adm-muted); margin: 0;"><?= $showArchived ? 'Archived' : 'Published' ?> · <a href="<?= $baseUrl ?>/testimonies" target="_blank" rel="noopener">View on site →</a></p>
+            <p style="color: var(--adm-muted); margin: 0;"><?= $showArchived ? 'Archived' : 'Published' ?> · Manage all testimonies from here</p>
         </div>
-        <a href="<?= admin_url('testimonies') ?><?= $showArchived ? '' : '?archived=1' ?>" class="btn btn-outline btn-sm"><?= $showArchived ? 'View published' : 'View archived' ?></a>
+        <a href="<?= admin_url('testimonies') ?><?= $buildQuery($showArchived ? [] : ['archived' => 1]) ?>" class="btn btn-outline btn-sm"><?= $showArchived ? 'View published' : 'View archived' ?></a>
     </div>
+    <form method="get" action="<?= admin_url('testimonies') ?>" class="admin-search-form" style="margin-bottom: 1.25rem;">
+        <?php if ($showArchived): ?><input type="hidden" name="archived" value="1"><?php endif; ?>
+        <input type="search" name="search" value="<?= htmlspecialchars($search) ?>" placeholder="Search by content or author..." style="max-width: 280px; padding: 0.5rem 0.75rem; border: 2px solid var(--adm-border); border-radius: var(--adm-radius-sm); font-size: 0.9rem;">
+        <button type="submit" class="btn btn-outline btn-sm">Search</button>
+        <?php if ($search !== ''): ?><a href="<?= admin_url('testimonies') ?><?= $showArchived ? '?archived=1' : '' ?>" class="btn btn-outline btn-sm">Clear</a><?php endif; ?>
+    </form>
     <?php if (empty($items)): ?>
-        <p style="color: var(--adm-muted);">No testimonies yet.</p>
+        <p style="color: var(--adm-muted);"><?= $search !== '' ? 'No testimonies match your search.' : 'No testimonies yet.' ?></p>
     <?php else: ?>
         <table class="admin-table">
             <thead>
