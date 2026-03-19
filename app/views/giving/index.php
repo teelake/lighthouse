@@ -25,17 +25,6 @@ $designations = [
     </div>
 
     <div class="container giving-content">
-        <div class="giving-intro">
-            <p class="giving-intro-lead">Giving is an act of worship and a covenant partnership in advancing God's kingdom.</p>
-            <p class="giving-intro-supports">Your generosity supports:</p>
-            <ul class="giving-intro-list">
-                <li>Teaching & discipleship</li>
-                <li>Leadership development</li>
-                <li>Outreach & missions</li>
-                <li>Ministry operations</li>
-            </ul>
-        </div>
-
         <?php if ($wallError === 'amount'): ?>
         <div class="giving-msg giving-msg--error" role="alert">
             <p>Please enter a minimum amount of $0.50 CAD.</p>
@@ -95,7 +84,7 @@ $designations = [
                             <input type="email" id="give-email" name="donor_email" placeholder="For receipt" value="<?= htmlspecialchars($_POST['donor_email'] ?? '') ?>">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-accent btn-giving-submit">Continue to Payment</button>
+                    <button type="submit" class="btn btn-accent btn-giving-submit">Give</button>
                 </form>
             </div>
             <?php endif; ?>
@@ -125,6 +114,17 @@ $designations = [
                     </p>
                 </div>
             </div>
+        </div>
+
+        <div class="giving-intro giving-intro--below">
+            <p class="giving-intro-lead">Giving is an act of worship and a covenant partnership in advancing God's kingdom.</p>
+            <p class="giving-intro-supports">Your generosity supports:</p>
+            <ul class="giving-intro-list">
+                <li>Teaching & discipleship</li>
+                <li>Leadership development</li>
+                <li>Outreach & missions</li>
+                <li>Ministry operations</li>
+            </ul>
         </div>
 
         <div class="giving-footer">

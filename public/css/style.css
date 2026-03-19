@@ -2872,6 +2872,8 @@ body::before {
 .giving-page { padding-top: 0; }
 .giving-content { padding: 3rem 1.5rem 4rem; max-width: 1120px; margin: 0 auto; }
 .giving-intro { margin-bottom: 2.5rem; }
+.giving-intro--below { margin-top: 2.5rem; margin-bottom: 0; padding-top: 2rem; border-top: 1px solid rgba(212,160,23,0.2); }
+.giving-intro--below .giving-intro-lead { font-size: 1rem; }
 .giving-intro-lead { font-size: 1.2rem; line-height: 1.7; color: var(--color-dark); margin: 0 0 1rem; font-weight: 500; }
 .giving-intro-supports { font-size: 1rem; font-weight: 600; margin: 0 0 0.5rem; color: var(--color-dark); }
 .giving-intro-list { margin: 0 0 0 1.25rem; padding: 0; list-style: disc; color: var(--color-muted); line-height: 1.8; }

@@ -4,14 +4,11 @@
     <p style="color: var(--adm-muted); margin: 0 0 1rem;">Giving and donation configuration.</p>
     <form method="post" action="<?= admin_url('settings/payment') ?>">
         <?= csrf_field() ?>
+        <input type="hidden" name="paypal_donate_url" value="<?= htmlspecialchars($paypal_donate_url ?? '') ?>">
         <div class="form-group">
-            <label>PayPal Email (for giving)</label>
+            <label>Interac e-Transfer Email (for giving)</label>
             <input type="email" name="paypal_email" value="<?= htmlspecialchars($paypal_email ?? 'give@thelighthouseglobal.org') ?>" placeholder="give@thelighthouseglobal.org">
-        </div>
-        <div class="form-group">
-            <label>PayPal Donate URL</label>
-            <input type="url" name="paypal_donate_url" value="<?= htmlspecialchars($paypal_donate_url ?? '') ?>" placeholder="https://paypal.me/... or your PayPal donate link">
-            <p class="help-text">Direct link for "Give via PayPal" button. Leave blank to show "Contact to Give" instead.</p>
+            <p class="help-text">Email address where people send Interac e-Transfers. Shown on the giving page.</p>
         </div>
         <div class="form-group">
             <label>Stripe Public Key</label>
