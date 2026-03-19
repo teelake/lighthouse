@@ -1551,13 +1551,6 @@ body::before {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    min-height: 600px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-@media (max-width: 768px) {
-    .page-hero--has-image { min-height: 280px; }
 }
 .page-hero--has-image::before {
     display: none;
@@ -3996,7 +3989,7 @@ body::before {
 }
 
 /* Main content */
-.main-content { width: 100%; min-height: 50vh; overflow-x: hidden; padding-top: 160px; }
+.main-content { width: 100%; min-height: 50vh; overflow-x: hidden; padding-top: 140px; }
 
 /* Footer - Believers House multi-column */
 .site-footer { width: 100%; background: var(--color-dark); color: #fff; padding: 4rem 1.5rem 2rem; overflow-x: hidden; }
