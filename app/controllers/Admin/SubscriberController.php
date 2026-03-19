@@ -49,6 +49,7 @@ class SubscriberController extends BaseController
             echo json_encode(['error' => 'Upload failed']);
             exit;
         }
+        \App\Services\ImageUpload::optimizeFile($path);
         $webPath = '/public/uploads/temp/email/' . $basename;
         $url = rtrim(BASE_URL, '/') . $webPath;
         echo json_encode(['url' => $url, 'cid' => $cid]);

@@ -8,7 +8,7 @@
  */
 $currentUrl = $currentUrl ?? null;
 $required = $required ?? false;
-$accept = 'image/jpeg,image/png,image/avif,image/svg+xml';
+$accept = 'image/jpeg,image/png,image/avif,image/webp,image/svg+xml';
 ?>
 <div class="form-group">
     <label><?= htmlspecialchars($label) ?></label>

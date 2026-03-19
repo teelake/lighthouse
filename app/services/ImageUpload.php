@@ -2,8 +2,12 @@
 namespace App\Services;
 
 /**
- * Image upload with validation and optimization.
- * Accepted types: jpg, jpeg, png, avif, svg
+ * Image upload with validation, compression, and optimization.
+ * All uploads (backend + frontend) are compressed without visible quality loss.
+ * - JPEG: quality 88, progressive encoding, EXIF stripped
+ * - PNG: max compression (9), alpha preserved
+ * - WebP/AVIF: optimized quality
+ * - SVG: validated (scripts stripped)
  */
 class ImageUpload
 {
@@ -11,12 +15,17 @@ class ImageUpload
         'image/jpeg',
         'image/png',
         'image/avif',
+        'image/webp',
         'image/svg+xml',
     ];
-    private const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'avif', 'svg'];
+    private const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'avif', 'webp', 'svg'];
     private const MAX_DIMENSION = 2400;
-    private const JPEG_QUALITY = 92;
-    private const PNG_COMPRESSION = 6;
+    /** JPEG quality 85–90: visually lossless, ~30–50% smaller than 95+ */
+    private const JPEG_QUALITY = 88;
+    /** PNG compression 9: max lossless compression */
+    private const PNG_COMPRESSION = 9;
+    private const WEBP_QUALITY = 88;
+    private const AVIF_QUALITY = 85;
 
     /** @var string|null */
     private $lastError;
@@ -45,18 +54,16 @@ class ImageUpload
         $mime = $file['type'] ?? '';
 
         if (!in_array($ext, self::ALLOWED_EXTENSIONS, true)) {
-            $this->lastError = 'Invalid file type. Allowed: jpg, jpeg, png, avif, svg';
+            $this->lastError = 'Invalid file type. Allowed: jpg, jpeg, png, avif, webp, svg';
             return null;
         }
 
-        // Verify MIME (finfo is more reliable)
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $detectedMime = finfo_file($finfo, $file['tmp_name']);
         finfo_close($finfo);
 
-        $allowedMimes = self::ALLOWED_MIMES;
-        if (!in_array($detectedMime, $allowedMimes, true)) {
-            $this->lastError = 'Invalid file type. Allowed: jpg, jpeg, png, avif, svg';
+        if (!in_array($detectedMime, self::ALLOWED_MIMES, true)) {
+            $this->lastError = 'Invalid file type. Allowed: jpg, jpeg, png, avif, webp, svg';
             return null;
         }
 
@@ -72,19 +79,7 @@ class ImageUpload
         $basename = bin2hex(random_bytes(8)) . '.' . $ext;
         $filepath = $imageDir . '/' . $basename;
 
-        // PNG with transparency: bypass GD for small files to preserve alpha (logos, icons)
-        if ($ext === 'png' && $detectedMime === 'image/png') {
-            $size = @getimagesize($file['tmp_name']);
-            if ($size && ($size[0] ?? 0) <= 800 && ($size[1] ?? 0) <= 800) {
-                if (move_uploaded_file($file['tmp_name'], $filepath)) {
-                    $webPath = '/uploads/images/' . $subdir . '/' . date('Y') . '/' . $basename;
-                    return rtrim(BASE_URL, '/') . $webPath;
-                }
-            }
-        }
-
         if ($ext === 'svg') {
-            // SVG: validate (strip scripts), then move
             $content = file_get_contents($file['tmp_name']);
             if ($content === false) {
                 $this->lastError = 'Failed to read SVG file.';
@@ -99,7 +94,6 @@ class ImageUpload
                 return null;
             }
         } else {
-            // Raster: optimize and save
             $result = $this->optimizeAndSave($file['tmp_name'], $filepath, $ext, $detectedMime);
             if (!$result) {
                 return null;
@@ -107,27 +101,18 @@ class ImageUpload
         }
 
         $webPath = '/uploads/images/' . $subdir . '/' . date('Y') . '/' . $basename;
-        $fullUrl = rtrim(BASE_URL, '/') . $webPath;
-        return $fullUrl;
+        return rtrim(BASE_URL ?? '', '/') . $webPath;
     }
 
+    /**
+     * Optimize raster image: resize if oversized, compress, strip EXIF, progressive JPEG.
+     */
     private function optimizeAndSave(string $tmpPath, string $destPath, string $ext, string $mime): bool
     {
-        $img = null;
-        if (in_array($mime, ['image/jpeg', 'image/png'], true)) {
-            $img = $mime === 'image/jpeg' ? @imagecreatefromjpeg($tmpPath) : @imagecreatefrompng($tmpPath);
-        } elseif ($mime === 'image/avif' && function_exists('imagecreatefromavif')) {
-            $img = @imagecreatefromavif($tmpPath);
-        } elseif ($mime === 'image/webp' && function_exists('imagecreatefromwebp')) {
-            $img = @imagecreatefromwebp($tmpPath);
-        }
-
+        $img = $this->loadImage($tmpPath, $mime);
         if (!$img) {
-            // Fallback: copy as-is if GD can't read (e.g. AVIF on older PHP)
             if (in_array($ext, ['avif'], true) && !function_exists('imagecreatefromavif')) {
-                if (move_uploaded_file($tmpPath, $destPath)) {
-                    return true;
-                }
+                return @copy($tmpPath, $destPath);
             }
             $this->lastError = 'Could not process image. Try a different format.';
             return false;
@@ -135,15 +120,108 @@ class ImageUpload
 
         $w = imagesx($img);
         $h = imagesy($img);
-
         if ($w <= 0 || $h <= 0) {
             imagedestroy($img);
             $this->lastError = 'Invalid image dimensions.';
             return false;
         }
 
-        // Preserve PNG/WebP transparency (GD strips alpha by default)
-        if (in_array($ext, ['png'], true) || ($ext === 'webp' && function_exists('imagewebp'))) {
+        if (in_array($ext, ['png', 'webp'], true)) {
+            imagealphablending($img, false);
+            imagesavealpha($img, true);
+        }
+
+        if ($w > self::MAX_DIMENSION || $h > self::MAX_DIMENSION) {
+            $ratio = min(self::MAX_DIMENSION / $w, self::MAX_DIMENSION / $h);
+            $nw = (int) round($w * $ratio);
+            $nh = (int) round($h * $ratio);
+            $resized = imagescale($img, $nw, $nh);
+            imagedestroy($img);
+            if (!$resized) {
+                $this->lastError = 'Failed to resize image.';
+                return false;
+            }
+            $img = $resized;
+            if (in_array($ext, ['png', 'webp'], true)) {
+                imagealphablending($img, false);
+                imagesavealpha($img, true);
+            }
+        }
+
+        if ($ext === 'jpg' || $ext === 'jpeg') {
+            imageinterlace($img, 1);
+            $saved = imagejpeg($img, $destPath, self::JPEG_QUALITY);
+        } elseif ($ext === 'png') {
+            $saved = imagepng($img, $destPath, self::PNG_COMPRESSION);
+        } elseif ($ext === 'avif' && function_exists('imageavif')) {
+            $saved = imageavif($img, $destPath, self::AVIF_QUALITY);
+        } elseif ($ext === 'webp' && function_exists('imagewebp')) {
+            $saved = imagewebp($img, $destPath, self::WEBP_QUALITY);
+        } else {
+            $saved = imagejpeg($img, $destPath, self::JPEG_QUALITY);
+        }
+
+        imagedestroy($img);
+        if (!$saved) {
+            $this->lastError = 'Failed to save image.';
+            return false;
+        }
+        return true;
+    }
+
+    private function loadImage(string $path, string $mime)
+    {
+        if ($mime === 'image/jpeg') {
+            return @imagecreatefromjpeg($path);
+        }
+        if ($mime === 'image/png') {
+            return @imagecreatefrompng($path);
+        }
+        if ($mime === 'image/webp' && function_exists('imagecreatefromwebp')) {
+            return @imagecreatefromwebp($path);
+        }
+        if ($mime === 'image/avif' && function_exists('imagecreatefromavif')) {
+            return @imagecreatefromavif($path);
+        }
+        if ($mime === 'image/gif') {
+            return @imagecreatefromgif($path);
+        }
+        return null;
+    }
+
+    /**
+     * Optimize an image file in-place. Use for uploads outside ImageUpload (e.g. email attachments).
+     * Strips EXIF, compresses, and resizes if needed.
+     */
+    public static function optimizeFile(string $filepath): bool
+    {
+        if (!is_file($filepath)) {
+            return false;
+        }
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mime = finfo_file($finfo, $filepath);
+        finfo_close($finfo);
+
+        $ext = strtolower(pathinfo($filepath, PATHINFO_EXTENSION));
+        $rasterMimes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+        if (!in_array($mime, $rasterMimes, true)) {
+            return true;
+        }
+
+        $uploader = new self();
+        $img = $uploader->loadImage($filepath, $mime);
+        if (!$img) {
+            return true;
+        }
+
+        $w = imagesx($img);
+        $h = imagesy($img);
+        if ($w <= 0 || $h <= 0) {
+            imagedestroy($img);
+            return false;
+        }
+
+        if (in_array($ext, ['png', 'webp', 'gif'], true)) {
             imagealphablending($img, false);
             imagesavealpha($img, true);
         }
@@ -156,13 +234,10 @@ class ImageUpload
             $resized = imagescale($img, $nw, $nh);
             imagedestroy($img);
             if (!$resized) {
-                $this->lastError = 'Failed to resize image.';
                 return false;
             }
             $img = $resized;
-            $w = $nw;
-            $h = $nh;
-            if (in_array($ext, ['png'], true)) {
+            if (in_array($ext, ['png', 'webp', 'gif'], true)) {
                 imagealphablending($img, false);
                 imagesavealpha($img, true);
             }
@@ -170,22 +245,17 @@ class ImageUpload
 
         $saved = false;
         if ($ext === 'jpg' || $ext === 'jpeg') {
-            $saved = imagejpeg($img, $destPath, self::JPEG_QUALITY);
+            imageinterlace($img, 1);
+            $saved = imagejpeg($img, $filepath, self::JPEG_QUALITY);
         } elseif ($ext === 'png') {
-            $saved = imagepng($img, $destPath, self::PNG_COMPRESSION);
-        } elseif ($ext === 'avif' && function_exists('imageavif')) {
-            $saved = imageavif($img, $destPath, 85);
+            $saved = imagepng($img, $filepath, self::PNG_COMPRESSION);
         } elseif ($ext === 'webp' && function_exists('imagewebp')) {
-            $saved = imagewebp($img, $destPath, 90);
+            $saved = imagewebp($img, $filepath, self::WEBP_QUALITY);
+        } elseif ($ext === 'gif') {
+            $saved = imagegif($img, $filepath);
         }
-
         imagedestroy($img);
-
-        if (!$saved) {
-            $this->lastError = 'Failed to save image.';
-            return false;
-        }
-        return true;
+        return $saved;
     }
 
     private function getUploadErrorMessage(int $code): string
@@ -207,9 +277,6 @@ class ImageUpload
         return $this->lastError;
     }
 
-    /**
-     * Resolve image value: use new upload if present, else keep existing (for edits).
-     */
     public static function resolve(string $formFieldName, string $existingValue, string $subdir = 'general'): string
     {
         $uploader = new self();
