@@ -5,14 +5,14 @@
     <div class="admin-page-header">
         <div>
             <a href="<?= admin_url() ?>" class="admin-back-link">← Dashboard</a>
-            <h2>Users</h2>
+            <h2>Staff</h2>
         </div>
         <div>
             <a href="<?= admin_url('users/export') ?>" class="btn btn-outline">Export</a>
             <a href="<?= admin_url('users/create') ?>" class="btn btn-primary">Add User</a>
         </div>
     </div>
-    <p style="color: var(--adm-muted); margin: 0 0 1rem;">Manage admin, editor, and member accounts.</p>
+    <p style="color: var(--adm-muted); margin: 0 0 1rem;">Manage admin and editor accounts with backend access.</p>
     <table class="admin-table">
         <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Action</th></tr></thead>
         <tbody>
@@ -35,7 +35,7 @@
             </td>
         </tr>
         <?php endforeach; ?>
-        <?php if (empty($users)): ?><tr><td colspan="5">No users.</td></tr><?php endif; ?>
+        <?php if (empty($users)): ?><tr><td colspan="5">No staff accounts.</td></tr><?php endif; ?>
         </tbody>
     </table>
 </div>

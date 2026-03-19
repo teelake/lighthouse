@@ -1,5 +1,6 @@
 <div class="admin-card">
-    <h2><?= $user ? 'Edit User' : 'Add User' ?></h2>
+    <a href="<?= ($user ?? [])['role'] === 'member' ? admin_url('members') : admin_url('users') ?>" class="admin-back-link">← <?= (($user ?? [])['role'] ?? '') === 'member' ? 'Members' : 'Staff' ?></a>
+    <h2><?= $user ? ($pageHeading ?? 'Edit User') : 'Add Staff' ?></h2>
     <?php if (!empty($error)): ?><div class="alert alert-error"><?= htmlspecialchars($error) ?></div><?php endif; ?>
     <form method="post" action="<?= $user ? admin_url('users/' . $user['id']) : admin_url('users') ?>">
         <?= csrf_field() ?>
@@ -23,10 +24,17 @@
         <div class="form-group">
             <label>Role</label>
             <select name="role">
-                <option value="member" <?= (($user ?? [])['role'] ?? '') === 'member' ? 'selected' : '' ?>>Member</option>
-                <option value="editor" <?= (($user ?? [])['role'] ?? '') === 'editor' ? 'selected' : '' ?>>Editor</option>
-                <option value="admin" <?= (($user ?? [])['role'] ?? '') === 'admin' ? 'selected' : '' ?>>Admin</option>
+                <?php $currentRole = ($user ?? [])['role'] ?? 'editor'; ?>
+                <?php if ($currentRole === 'member'): ?>
+                <option value="member" selected>Member</option>
+                <option value="editor">Editor</option>
+                <option value="admin">Admin</option>
+                <?php else: ?>
+                <option value="editor" <?= $currentRole === 'editor' ? 'selected' : '' ?>>Editor</option>
+                <option value="admin" <?= $currentRole === 'admin' ? 'selected' : '' ?>>Admin</option>
+                <?php endif; ?>
             </select>
+            <?php if ($currentRole === 'member'): ?><p class="help-text">Change to Editor or Admin to promote to staff.</p><?php endif; ?>
         </div>
         <div class="form-group">
             <label><input type="checkbox" name="is_active" value="1" <?= !empty(($user ?? [])['is_active']) ? 'checked' : '' ?>> Active</label>

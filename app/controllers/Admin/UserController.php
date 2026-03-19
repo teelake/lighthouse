@@ -9,9 +9,9 @@ class UserController extends BaseController
     public function export()
     {
         $this->requireAdmin();
-        $users = (new User())->findAll([], 'name ASC', 10000);
+        $users = (new User())->findStaff('name ASC', 10000);
         header('Content-Type: text/csv; charset=utf-8');
-        header('Content-Disposition: attachment; filename="users-' . date('Y-m-d') . '.csv"');
+        header('Content-Disposition: attachment; filename="staff-' . date('Y-m-d') . '.csv"');
         $out = fopen('php://output', 'w');
         fprintf($out, chr(0xEF) . chr(0xBB) . chr(0xBF));
         fputcsv($out, ['Name', 'Email', 'Role', 'Active', 'Created At']);
@@ -31,13 +31,13 @@ class UserController extends BaseController
     public function index()
     {
         $this->requireAdmin();
-        $users = (new User())->findAll([], 'name ASC');
+        $users = (new User())->findStaff('name ASC');
         $flash = $_SESSION['user_create_flash'] ?? null;
         unset($_SESSION['user_create_flash']);
         $this->render('admin/users/index', [
             'users' => $users,
             'flash' => $flash,
-            'pageHeading' => 'Users',
+            'pageHeading' => 'Staff',
             'currentPage' => 'users',
         ]);
     }
@@ -45,7 +45,7 @@ class UserController extends BaseController
     public function create()
     {
         $this->requireAdmin();
-        $this->render('admin/users/form', ['user' => null, 'pageHeading' => 'Add User', 'currentPage' => 'users']);
+        $this->render('admin/users/form', ['user' => null, 'pageHeading' => 'Add Staff', 'currentPage' => 'users']);
     }
 
     public function store()
@@ -116,7 +116,8 @@ class UserController extends BaseController
         $id = $this->params['id'] ?? 0;
         $user = (new User())->find($id);
         if (!$user) throw new \Exception('Not found', 404);
-        $this->render('admin/users/form', ['user' => $user, 'pageHeading' => 'Edit User', 'currentPage' => 'users']);
+        $heading = (($user['role'] ?? '') === 'member') ? 'Edit Member' : 'Edit Staff';
+        $this->render('admin/users/form', ['user' => $user, 'pageHeading' => $heading, 'currentPage' => 'users']);
     }
 
     public function update()
@@ -139,7 +140,8 @@ class UserController extends BaseController
             $data['password'] = password_hash($password, PASSWORD_DEFAULT);
         }
         (new User())->update($id, $data);
-        $this->redirectAdmin('users');
+        $redirectTo = ($data['role'] ?? '') === 'member' ? 'members' : 'users';
+        $this->redirectAdmin($redirectTo);
     }
 
     public function delete()
