@@ -4,7 +4,10 @@
             <a href="<?= admin_url() ?>" class="admin-back-link">← Dashboard</a>
             <h2>Newsletter Subscribers</h2>
         </div>
-        <a href="<?= admin_url('subscribers/compose') ?>" class="btn btn-primary">Send Mass Email</a>
+        <div>
+            <a href="<?= admin_url('subscribers/export') ?>" class="btn btn-outline">Export</a>
+            <a href="<?= admin_url('subscribers/compose') ?>" class="btn btn-primary">Send Mass Email</a>
+        </div>
     </div>
     <p style="color: var(--adm-muted); margin: 0 0 1rem;">People who have signed up for the church newsletter.</p>
     <?php if (empty($subscribers ?? [])): ?>

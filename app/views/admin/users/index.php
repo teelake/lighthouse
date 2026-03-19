@@ -7,7 +7,10 @@
             <a href="<?= admin_url() ?>" class="admin-back-link">← Dashboard</a>
             <h2>Users</h2>
         </div>
-        <a href="<?= admin_url('users/create') ?>" class="btn btn-primary">Add User</a>
+        <div>
+            <a href="<?= admin_url('users/export') ?>" class="btn btn-outline">Export</a>
+            <a href="<?= admin_url('users/create') ?>" class="btn btn-primary">Add User</a>
+        </div>
     </div>
     <p style="color: var(--adm-muted); margin: 0 0 1rem;">Manage admin, editor, and member accounts.</p>
     <table class="admin-table">

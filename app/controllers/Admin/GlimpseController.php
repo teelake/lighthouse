@@ -73,11 +73,13 @@ class GlimpseController extends BaseController
             $this->render('admin/glimpse/form', ['slide' => $slide, 'error' => $u->getLastError(), 'pageHeading' => 'Edit Glimpse Slide', 'currentPage' => 'glimpse']);
             return;
         }
+        $postedSort = $this->post('sort_order');
+        $sortOrder = (array_key_exists('sort_order', $_POST) && $postedSort !== '') ? (int) $postedSort : (int)($slide['sort_order'] ?? 0);
         (new GlimpseSlide())->update($id, [
             'image_url' => $img,
             'label' => trim($this->post('label', '')),
             'row' => (int) $this->post('row', 1),
-            'sort_order' => (int) $this->post('sort_order', 0),
+            'sort_order' => $sortOrder,
         ]);
         $this->redirectAdmin('glimpse');
     }

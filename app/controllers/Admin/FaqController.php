@@ -56,10 +56,12 @@ class FaqController extends BaseController
             $this->render('admin/faqs/form', ['faq' => $item, 'error' => 'Question is required.', 'pageHeading' => 'Edit FAQ', 'currentPage' => 'faqs']);
             return;
         }
+        $postedSort = $this->post('sort_order');
+        $sortOrder = (array_key_exists('sort_order', $_POST) && $postedSort !== '') ? (int) $postedSort : (int)($item['sort_order'] ?? 0);
         (new Faq())->update($id, [
             'question' => $question,
             'answer' => $answer,
-            'sort_order' => (int) $this->post('sort_order', 0),
+            'sort_order' => $sortOrder,
         ]);
         $this->redirectAdmin('faqs');
     }

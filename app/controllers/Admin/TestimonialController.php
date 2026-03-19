@@ -63,11 +63,13 @@ class TestimonialController extends BaseController
             $this->render('admin/testimonials/form', ['testimonial' => $item, 'error' => $u->getLastError(), 'pageHeading' => 'Edit Testimonial', 'currentPage' => 'testimonials']);
             return;
         }
+        $postedSort = $this->post('sort_order');
+        $sortOrder = (array_key_exists('sort_order', $_POST) && $postedSort !== '') ? (int) $postedSort : (int)($item['sort_order'] ?? 0);
         (new Testimonial())->update($id, [
             'quote' => trim($this->post('quote', '')),
             'author_name' => trim($this->post('author_name', '')),
             'author_photo' => $photo,
-            'sort_order' => (int) $this->post('sort_order', 0),
+            'sort_order' => $sortOrder,
             'is_published' => $this->post('is_published') ? 1 : 0,
         ]);
         $this->redirectAdmin('testimonials');

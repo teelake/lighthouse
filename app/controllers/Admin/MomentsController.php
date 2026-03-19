@@ -88,12 +88,14 @@ class MomentsController extends BaseController
             $this->render('admin/moments/form', ['moment' => $moment, 'error' => $u2->getLastError(), 'pageHeading' => 'Edit Moment', 'currentPage' => 'moments']);
             return;
         }
+        $postedSort = $this->post('sort_order');
+        $sortOrder = (array_key_exists('sort_order', $_POST) && $postedSort !== '') ? (int) $postedSort : (int)($moment['sort_order'] ?? 0);
         (new HomepageMoment())->update($id, [
             'image_small' => $small,
             'image_wide' => $wide,
             'alt_small' => trim($this->post('alt_small', '')),
             'alt_wide' => trim($this->post('alt_wide', '')),
-            'sort_order' => (int) $this->post('sort_order', 0),
+            'sort_order' => $sortOrder,
         ]);
         $this->redirectAdmin('moments');
     }

@@ -56,6 +56,27 @@ class SubscriberController extends BaseController
         exit;
     }
 
+    public function export()
+    {
+        $this->requireAdmin();
+        $subscribers = (new NewsletterSubscriber())->findAll([], 'subscribed_at DESC', 10000);
+        header('Content-Type: text/csv; charset=utf-8');
+        header('Content-Disposition: attachment; filename="subscribers-' . date('Y-m-d') . '.csv"');
+        $out = fopen('php://output', 'w');
+        fprintf($out, chr(0xEF) . chr(0xBB) . chr(0xBF));
+        fputcsv($out, ['First Name', 'Last Name', 'Email', 'Subscribed At']);
+        foreach ($subscribers as $s) {
+            fputcsv($out, [
+                $s['first_name'] ?? '',
+                $s['last_name'] ?? '',
+                $s['email'] ?? '',
+                $s['subscribed_at'] ?? '',
+            ]);
+        }
+        fclose($out);
+        exit;
+    }
+
     public function index()
     {
         $this->requireAdmin();

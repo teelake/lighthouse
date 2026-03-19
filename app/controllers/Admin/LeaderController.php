@@ -64,12 +64,14 @@ class LeaderController extends BaseController
             $this->render('admin/leaders/form', ['leader' => $leader, 'error' => $u->getLastError(), 'pageHeading' => 'Edit Leader', 'currentPage' => 'leaders']);
             return;
         }
+        $postedSort = $this->post('sort_order');
+        $sortOrder = (array_key_exists('sort_order', $_POST) && $postedSort !== '') ? (int) $postedSort : (int)($leader['sort_order'] ?? 0);
         (new Leader())->update($id, [
             'name' => trim($this->post('name', '')),
             'title' => trim($this->post('title', '')),
             'photo' => $photo,
             'bio' => trim($this->post('bio', '')),
-            'sort_order' => (int) $this->post('sort_order', 0),
+            'sort_order' => $sortOrder,
             'is_published' => $this->post('is_published') ? 1 : 0,
         ]);
         $this->redirectAdmin('leaders');

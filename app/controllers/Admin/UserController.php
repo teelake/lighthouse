@@ -6,6 +6,28 @@ use App\Services\MailService;
 
 class UserController extends BaseController
 {
+    public function export()
+    {
+        $this->requireAdmin();
+        $users = (new User())->findAll([], 'name ASC', 10000);
+        header('Content-Type: text/csv; charset=utf-8');
+        header('Content-Disposition: attachment; filename="users-' . date('Y-m-d') . '.csv"');
+        $out = fopen('php://output', 'w');
+        fprintf($out, chr(0xEF) . chr(0xBB) . chr(0xBF));
+        fputcsv($out, ['Name', 'Email', 'Role', 'Active', 'Created At']);
+        foreach ($users as $u) {
+            fputcsv($out, [
+                $u['name'] ?? '',
+                $u['email'] ?? '',
+                $u['role'] ?? '',
+                !empty($u['is_active']) ? 'Yes' : 'No',
+                $u['created_at'] ?? '',
+            ]);
+        }
+        fclose($out);
+        exit;
+    }
+
     public function index()
     {
         $this->requireAdmin();

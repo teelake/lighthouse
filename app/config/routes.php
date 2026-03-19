@@ -152,7 +152,8 @@ $router->add('POST', $adm . '/visitors/{id}', ['controller' => 'Admin\FirstTimeV
 $router->add('POST', $adm . '/visitors/{id}/delete', ['controller' => 'Admin\FirstTimeVisitor', 'action' => 'delete']);
 
 $router->add('GET', $adm . '/subscribers', ['controller' => 'Admin\Subscriber', 'action' => 'index']);
-$router->add('GET', $adm . '/subscribers/compose', ['controller' => 'Admin\Subscriber', 'action' => 'compose']);
+    $router->add('GET', $adm . '/subscribers/export', ['controller' => 'Admin\Subscriber', 'action' => 'export']);
+    $router->add('GET', $adm . '/subscribers/compose', ['controller' => 'Admin\Subscriber', 'action' => 'compose']);
 $router->add('POST', $adm . '/subscribers/upload-attachment', ['controller' => 'Admin\Subscriber', 'action' => 'uploadAttachment']);
 $router->add('POST', $adm . '/subscribers/send-mass', ['controller' => 'Admin\Subscriber', 'action' => 'sendMass']);
 $router->add('GET', $adm . '/contact-report', ['controller' => 'Admin\ContactReport', 'action' => 'index']);
@@ -194,7 +195,8 @@ $router->add('POST', $adm . '/settings/email', ['controller' => 'Admin\Setting',
 
 // Admin - Users (admin role only)
 $router->add('GET', $adm . '/users', ['controller' => 'Admin\User', 'action' => 'index']);
-$router->add('GET', $adm . '/users/create', ['controller' => 'Admin\User', 'action' => 'create']);
+    $router->add('GET', $adm . '/users/export', ['controller' => 'Admin\User', 'action' => 'export']);
+    $router->add('GET', $adm . '/users/create', ['controller' => 'Admin\User', 'action' => 'create']);
 $router->add('POST', $adm . '/users', ['controller' => 'Admin\User', 'action' => 'store']);
 $router->add('GET', $adm . '/users/{id}/edit', ['controller' => 'Admin\User', 'action' => 'edit']);
 $router->add('POST', $adm . '/users/{id}', ['controller' => 'Admin\User', 'action' => 'update']);
