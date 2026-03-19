@@ -119,7 +119,7 @@ body::before {
     object-fit: contain;
     transition: filter 0.35s ease;
 }
-.header-nav-center { flex: 1; display: flex; justify-content: center; align-items: center; min-width: 0; padding: 0 1rem; }
+.header-nav-center { flex: 1; display: flex; justify-content: center; align-items: center; min-width: 0; padding: 0 0.5rem 0 1rem; }
 /* Dual logos: light variant on dark header, dark variant on white header */
 .site-header:not(.header-scrolled) .logo .logo-img--dark { display: none; }
 .site-header:not(.header-scrolled) .logo .logo-img--light { display: block; }
@@ -130,8 +130,15 @@ body::before {
 .site-header.header-scrolled .logo .logo-img--single { filter: none; }
 .logo-text { font-size: 1.1rem; font-weight: 700; color: var(--color-primary); letter-spacing: 0.02em; transition: color 0.35s ease; }
 .site-header.header-scrolled .logo-text { color: var(--color-dark); }
-.header-nav-actions { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; margin-left: auto; }
+.header-nav-actions { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; margin-left: auto; }
 .header-actions { display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0; }
+/* Header social - between nav and CTAs on desktop */
+.header-social { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; padding: 0 0.5rem; }
+.header-social a { color: rgba(255,255,255,0.85); padding: 0.25rem; transition: color 0.2s ease; display: flex; align-items: center; justify-content: center; }
+.header-social a:hover { color: var(--color-primary); }
+.site-header.header-scrolled .header-social a { color: rgba(26,26,26,0.75); }
+.site-header.header-scrolled .header-social a:hover { color: var(--color-primary-on-light); }
+.header-social svg { width: 20px; height: 20px; display: block; }
 .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 12px; min-width: 48px; min-height: 48px; flex-direction: column; justify-content: center; gap: 6px; transition: var(--transition); -webkit-tap-highlight-color: transparent; }
 .nav-toggle span { display: block; width: 24px; height: 2px; background: #fff; margin: 0; transition: transform 0.3s ease, opacity 0.3s ease; }
 .site-header.header-scrolled .nav-toggle span { background: var(--color-dark); }
