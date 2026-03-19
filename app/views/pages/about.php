@@ -171,7 +171,6 @@ $aboutStoryImage = $aboutStoryImage ?? '';
                         <!-- Optional white bottom section — only renders when detail text is filled -->
                         <?php if ($v['detail'] !== ''): ?>
                         <div class="about-value-card-bottom">
-                            <h4 class="about-value-card-bottom-title"><?= content_text($v['title']) ?></h4>
                             <p class="about-value-card-bottom-text"><?= htmlspecialchars($v['detail']) ?></p>
                         </div>
                         <?php endif; ?>
