@@ -18,6 +18,7 @@
     </button>
     <header class="site-header" id="site-header">
         <div class="header-inner">
+            <div class="logo-wrap">
             <a href="<?= rtrim(BASE_URL, '/') ?>/" class="logo">
                 <?php
                 $logoUrl = site_logo_url();
@@ -33,6 +34,7 @@
                 <span class="logo-text">LIGHTHOUSE GLOBAL CHURCH</span>
                 <?php endif; ?>
             </a>
+            </div>
             <?php
             $sHeader = new \App\Models\Setting();
             $hFb = $sHeader->get('social_facebook', ''); $hIg = $sHeader->get('social_instagram', ''); $hYt = $sHeader->get('social_youtube', ''); $hTw = $sHeader->get('social_twitter', ''); $hTk = $sHeader->get('social_tiktok', '');
