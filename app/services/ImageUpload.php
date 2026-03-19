@@ -30,7 +30,10 @@ class ImageUpload
     /** @var string|null */
     private $lastError;
 
-    public function upload(string $formFieldName, string $subdir = 'general'): ?string
+    /** Inner page hero dimensions (1920×600) */
+    public const HERO_SIZE = [1920, 600];
+
+    public function upload(string $formFieldName, string $subdir = 'general', array $options = []): ?string
     {
         $this->lastError = null;
         $file = $_FILES[$formFieldName] ?? null;
@@ -94,7 +97,8 @@ class ImageUpload
                 return null;
             }
         } else {
-            $result = $this->optimizeAndSave($file['tmp_name'], $filepath, $ext, $detectedMime);
+            $cropTo = $options['cropTo'] ?? null;
+            $result = $this->optimizeAndSave($file['tmp_name'], $filepath, $ext, $detectedMime, $cropTo);
             if (!$result) {
                 return null;
             }
@@ -105,9 +109,10 @@ class ImageUpload
     }
 
     /**
-     * Optimize raster image: resize if oversized, compress, strip EXIF, progressive JPEG.
+     * Optimize raster image: resize if oversized, optionally crop to exact dimensions, compress.
+     * @param array|null $cropTo [width, height] to crop and resize to (e.g. [1920, 600] for hero)
      */
-    private function optimizeAndSave(string $tmpPath, string $destPath, string $ext, string $mime): bool
+    private function optimizeAndSave(string $tmpPath, string $destPath, string $ext, string $mime, ?array $cropTo = null): bool
     {
         $img = $this->loadImage($tmpPath, $mime);
         if (!$img) {
@@ -131,7 +136,19 @@ class ImageUpload
             imagesavealpha($img, true);
         }
 
-        if ($w > self::MAX_DIMENSION || $h > self::MAX_DIMENSION) {
+        if ($cropTo && count($cropTo) >= 2) {
+            $targetW = (int) $cropTo[0];
+            $targetH = (int) $cropTo[1];
+            if ($targetW > 0 && $targetH > 0) {
+                $img = $this->cropToSize($img, $w, $h, $targetW, $targetH, $ext);
+                if (!$img) {
+                    $this->lastError = 'Failed to crop image.';
+                    return false;
+                }
+                $w = $targetW;
+                $h = $targetH;
+            }
+        } elseif ($w > self::MAX_DIMENSION || $h > self::MAX_DIMENSION) {
             $ratio = min(self::MAX_DIMENSION / $w, self::MAX_DIMENSION / $h);
             $nw = (int) round($w * $ratio);
             $nh = (int) round($h * $ratio);
@@ -142,6 +159,8 @@ class ImageUpload
                 return false;
             }
             $img = $resized;
+            $w = $nw;
+            $h = $nh;
             if (in_array($ext, ['png', 'webp'], true)) {
                 imagealphablending($img, false);
                 imagesavealpha($img, true);
@@ -167,6 +186,34 @@ class ImageUpload
             return false;
         }
         return true;
+    }
+
+    /**
+     * Crop and resize image to exact dimensions (center crop, cover).
+     */
+    private function cropToSize($img, int $srcW, int $srcH, int $targetW, int $targetH, string $ext)
+    {
+        $scale = max($targetW / $srcW, $targetH / $srcH);
+        $cropW = (int) round($targetW / $scale);
+        $cropH = (int) round($targetH / $scale);
+        $cropW = min($cropW, $srcW);
+        $cropH = min($cropH, $srcH);
+        $srcX = (int) round(($srcW - $cropW) / 2);
+        $srcY = (int) round(($srcH - $cropH) / 2);
+        $srcX = max(0, min($srcX, $srcW - $cropW));
+        $srcY = max(0, min($srcY, $srcH - $cropH));
+
+        $out = imagecreatetruecolor($targetW, $targetH);
+        if (!$out) return null;
+        if (in_array($ext, ['png', 'webp'], true)) {
+            imagealphablending($out, false);
+            imagesavealpha($out, true);
+            $trans = imagecolorallocatealpha($out, 0, 0, 0, 127);
+            imagefill($out, 0, 0, $trans);
+        }
+        $ok = imagecopyresampled($out, $img, 0, 0, $srcX, $srcY, $targetW, $targetH, $cropW, $cropH);
+        imagedestroy($img);
+        return $ok ? $out : null;
     }
 
     private function loadImage(string $path, string $mime)

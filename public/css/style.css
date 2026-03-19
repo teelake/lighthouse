@@ -1531,6 +1531,13 @@ body::before {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media (max-width: 768px) {
+    .page-hero--has-image { min-height: 280px; }
 }
 .page-hero--has-image::before {
     display: none;

@@ -292,9 +292,11 @@ class SettingController extends BaseController
             'im_new_intro_image' => $s->get('im_new_intro_image', ''),
             'page_hero_image' => $s->get('page_hero_image', ''),
         ];
+        $heroKeys = ['about_hero_image', 'page_hero_image'];
         foreach (['about_hero_image', 'about_story_image', 'im_new_intro_image', 'page_hero_image'] as $key) {
             $u = new ImageUpload();
-            $uploaded = $u->upload($key, 'pages');
+            $opts = in_array($key, $heroKeys, true) ? ['cropTo' => ImageUpload::HERO_SIZE] : [];
+            $uploaded = $u->upload($key, 'pages', $opts);
             if ($uploaded !== null) $imgs[$key] = $uploaded;
             elseif ($u->getLastError()) {
                 $this->render('admin/settings/page-images', array_merge($imgs, ['error' => $u->getLastError(), 'pageHeading' => 'Page Images', 'currentPage' => 'settings']));

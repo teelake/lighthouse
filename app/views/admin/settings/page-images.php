@@ -16,7 +16,7 @@
         <h3 style="font-size: 1rem; font-weight: 600; margin: 1.5rem 0 0.75rem;">About Page</h3>
         <div class="form-group">
             <label>About Hero Image</label>
-            <p class="admin-muted" style="font-size: 0.85rem; margin: 0 0 0.5rem;">Background image for the About page hero section. Recommended: 1920×600 or wider.</p>
+            <p class="admin-muted" style="font-size: 0.85rem; margin: 0 0 0.5rem;">Background image for the About page hero. Automatically resized to 1920×600.</p>
             <?php if (!empty($about_hero_image ?? '')): ?>
             <div class="admin-image-preview" style="margin-bottom: 0.75rem;">
                 <img src="<?= htmlspecialchars($about_hero_image) ?>" alt="" style="max-width: 320px; max-height: 120px; object-fit: cover; border: 1px solid var(--adm-border); border-radius: 6px;">
@@ -51,7 +51,7 @@
         <h3 style="font-size: 1rem; font-weight: 600; margin: 1.5rem 0 0.75rem;">Other Inner Pages</h3>
         <div class="form-group">
             <label>Page Hero Image (Shared)</label>
-            <p class="admin-muted" style="font-size: 0.85rem; margin: 0 0 0.5rem;">Optional background for Services, Contact, Giving, I'm New, Leadership, FAQ, Ministries, Events, Small Groups, Jobs, Prayer, Media, Membership. Leave empty for gradient-only.</p>
+            <p class="admin-muted" style="font-size: 0.85rem; margin: 0 0 0.5rem;">Optional background for inner pages. Automatically resized to 1920×600. Leave empty for gradient-only.</p>
             <?php if (!empty($page_hero_image ?? '')): ?>
             <div class="admin-image-preview" style="margin-bottom: 0.75rem;">
                 <img src="<?= htmlspecialchars($page_hero_image) ?>" alt="" style="max-width: 320px; max-height: 120px; object-fit: cover; border: 1px solid var(--adm-border); border-radius: 6px;">
