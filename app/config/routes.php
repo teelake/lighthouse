@@ -197,6 +197,8 @@ $router->add('POST', $adm . '/settings/email', ['controller' => 'Admin\Setting',
 $router->add('GET', $adm . '/users', ['controller' => 'Admin\User', 'action' => 'index']);
 $router->add('GET', $adm . '/users/export', ['controller' => 'Admin\User', 'action' => 'export']);
 $router->add('GET', $adm . '/members', ['controller' => 'Admin\Member', 'action' => 'index']);
+$router->add('GET', $adm . '/members/create', ['controller' => 'Admin\Member', 'action' => 'create']);
+$router->add('POST', $adm . '/members', ['controller' => 'Admin\Member', 'action' => 'store']);
 $router->add('GET', $adm . '/members/export', ['controller' => 'Admin\Member', 'action' => 'export']);
 $router->add('GET', $adm . '/users/create', ['controller' => 'Admin\User', 'action' => 'create']);
 $router->add('POST', $adm . '/users', ['controller' => 'Admin\User', 'action' => 'store']);
