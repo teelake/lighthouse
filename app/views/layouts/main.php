@@ -92,7 +92,7 @@
                 <span></span><span></span><span></span>
             </button>
             <div class="header-actions">
-                <a href="<?= rtrim(BASE_URL, '/') ?>/membership" class="btn-member">Join</a>
+                <a href="<?= rtrim(BASE_URL, '/') ?>/membership" class="btn-member">Join Us</a>
                 <a href="<?= rtrim(BASE_URL, '/') ?>/giving" class="btn-give">Give</a>
             </div>
             </div>
