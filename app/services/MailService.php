@@ -23,7 +23,7 @@ class MailService
         $smtpUser = $this->setting->get('smtp_user', '');
         $smtpPass = $this->setting->get('smtp_pass', '');
         $smtpEnc = strtolower($this->setting->get('smtp_encryption', 'tls'));
-        $fromEmail = $this->setting->get('mail_from_email', $this->setting->get('site_email', 'noreply@example.com'));
+        $fromEmail = $this->setting->get('mail_from_email', $this->setting->get('site_email', 'noreply@thelighthouseglobal.org'));
         $fromName = $this->setting->get('mail_from_name', 'Lighthouse Global Church');
 
         $inlineParts = $this->extractInlineAttachments($bodyHtml);
@@ -91,7 +91,7 @@ class MailService
 
         try {
         $read(); // greeting
-        $write("EHLO " . ($_SERVER['SERVER_NAME'] ?? 'localhost'));
+        $write("EHLO " . ($_SERVER['SERVER_NAME'] ?? 'thelighthouseglobal.org'));
         $consumeMultiLine();
         if ($useTls && !$useSsl) {
             $write("STARTTLS");
@@ -105,7 +105,7 @@ class MailService
                 $this->lastError = 'TLS handshake failed';
                 return false;
             }
-            $write("EHLO " . ($_SERVER['SERVER_NAME'] ?? 'localhost'));
+            $write("EHLO " . ($_SERVER['SERVER_NAME'] ?? 'thelighthouseglobal.org'));
             $consumeMultiLine();
         }
         $write("AUTH LOGIN");
