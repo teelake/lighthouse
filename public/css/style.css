@@ -2619,8 +2619,9 @@ body::before {
 .membership-page { padding-top: 0; }
 .membership-content { padding: 3rem 1.5rem 4rem; }
 .membership-intro { max-width: 720px; margin-bottom: 2.5rem; }
-/* Academy sign-up section */
+/* Academy sign-up section - when first, no top border; when after content, top border */
 .academy-signup-section { margin-top: 3.5rem; padding-top: 3rem; border-top: 2px solid rgba(255,225,0,0.18); }
+.membership-content > .academy-signup-section:first-child { margin-top: 0; padding-top: 0; border-top: none; margin-bottom: 3rem; padding-bottom: 3rem; border-bottom: 2px solid rgba(255,225,0,0.18); }
 .academy-signup-header { max-width: 620px; margin-bottom: 2rem; }
 .academy-signup-sub { margin: 0.5rem 0 0; color: var(--color-muted); font-size: 0.98rem; line-height: 1.6; }
 .academy-signup-success { display: flex; align-items: flex-start; gap: 1rem; background: var(--color-gold-bg); border: 2px solid rgba(212,160,23,0.35); border-radius: var(--radius); padding: 1.5rem; max-width: 600px; }
