@@ -22,6 +22,42 @@ $imNewIntroImage = $imNewIntroImage ?? '';
     </div>
 
     <div class="container im-new-content">
+        <div class="im-new-visitor-form-section im-new-form-centered">
+            <h3 class="im-new-section-title">First-Time Visitor Registration</h3>
+            <p class="im-new-form-intro">We'd love to welcome you! Share your details and we'll reach out with a warm welcome and helpful next steps.</p>
+            <?php if ($registered === '1'): ?>
+            <div class="im-new-msg im-new-msg--success">Thank you for registering! We're excited to connect with you. Check your email for a welcome message.</div>
+            <?php elseif ($regError): ?>
+            <div class="im-new-msg im-new-msg--error"><?= $regError === 'required' ? 'Please fill in first name, last name, and email.' : 'Something went wrong. Please try again.' ?></div>
+            <?php endif; ?>
+            <form class="im-new-visitor-form" action="<?= $baseUrl ?>/visitor/register" method="post">
+                <?= csrf_field() ?>
+                <div class="im-new-form-row">
+                    <div class="form-group">
+                        <label for="visitor-first">First Name <span aria-hidden="true">*</span></label>
+                        <input type="text" id="visitor-first" name="first_name" required maxlength="255">
+                    </div>
+                    <div class="form-group">
+                        <label for="visitor-last">Last Name <span aria-hidden="true">*</span></label>
+                        <input type="text" id="visitor-last" name="last_name" required maxlength="255">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="visitor-email">Email <span aria-hidden="true">*</span></label>
+                    <input type="email" id="visitor-email" name="email" required maxlength="255">
+                </div>
+                <div class="form-group">
+                    <label for="visitor-phone">Phone</label>
+                    <input type="tel" id="visitor-phone" name="phone" maxlength="50">
+                </div>
+                <div class="form-group">
+                    <label for="visitor-message">Message (optional)</label>
+                    <textarea id="visitor-message" name="message" rows="3" placeholder="Any questions or how we can help?"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit my info</button>
+            </form>
+        </div>
+
         <div class="im-new-intro-block <?= !empty($imNewIntroImage) ? 'im-new-intro-block--with-image' : '' ?>">
             <?php if (!empty($imNewIntroImage)): ?>
             <div class="im-new-intro-grid">
@@ -128,42 +164,6 @@ $imNewIntroImage = $imNewIntroImage ?? '';
                 </div>
                 <a href="<?= $baseUrl ?>/register" class="btn btn-primary im-new-member-cta-btn">Become a Member</a>
             </div>
-        </div>
-
-        <div class="im-new-visitor-form-section im-new-form-centered">
-            <h3 class="im-new-section-title">First-Time Visitor Registration</h3>
-            <p class="im-new-form-intro">We'd love to welcome you! Share your details and we'll reach out with a warm welcome and helpful next steps.</p>
-            <?php if ($registered === '1'): ?>
-            <div class="im-new-msg im-new-msg--success">Thank you for registering! We're excited to connect with you. Check your email for a welcome message.</div>
-            <?php elseif ($regError): ?>
-            <div class="im-new-msg im-new-msg--error"><?= $regError === 'required' ? 'Please fill in first name, last name, and email.' : 'Something went wrong. Please try again.' ?></div>
-            <?php endif; ?>
-            <form class="im-new-visitor-form" action="<?= $baseUrl ?>/visitor/register" method="post">
-                <?= csrf_field() ?>
-                <div class="im-new-form-row">
-                    <div class="form-group">
-                        <label for="visitor-first">First Name <span aria-hidden="true">*</span></label>
-                        <input type="text" id="visitor-first" name="first_name" required maxlength="255">
-                    </div>
-                    <div class="form-group">
-                        <label for="visitor-last">Last Name <span aria-hidden="true">*</span></label>
-                        <input type="text" id="visitor-last" name="last_name" required maxlength="255">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="visitor-email">Email <span aria-hidden="true">*</span></label>
-                    <input type="email" id="visitor-email" name="email" required maxlength="255">
-                </div>
-                <div class="form-group">
-                    <label for="visitor-phone">Phone</label>
-                    <input type="tel" id="visitor-phone" name="phone" maxlength="50">
-                </div>
-                <div class="form-group">
-                    <label for="visitor-message">Message (optional)</label>
-                    <textarea id="visitor-message" name="message" rows="3" placeholder="Any questions or how we can help?"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit my info</button>
-            </form>
         </div>
     </div>
 </section>

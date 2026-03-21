@@ -37,8 +37,14 @@ UPDATE small_groups SET image = REPLACE(REPLACE(image, '/new/public/', '/'), '/n
 -- Job applications (resume_path - may be full URL)
 UPDATE job_applications SET resume_path = REPLACE(REPLACE(resume_path, '/new/public/', '/'), '/new/', '/') WHERE resume_path LIKE '%/new/%';
 
--- Jobs (image)
-UPDATE jobs SET image = REPLACE(REPLACE(image, '/new/public/', '/'), '/new/', '/') WHERE image LIKE '%/new/%';
-
 -- Navigation menu (url)
 UPDATE navigation_menu SET url = REPLACE(REPLACE(url, '/new/public/', '/'), '/new/', '/') WHERE url LIKE '%/new/%';
+
+-- Gallery (image)
+UPDATE gallery SET image = REPLACE(REPLACE(image, '/new/public/', '/'), '/new/', '/') WHERE image LIKE '%/new/%';
+
+-- Media speakers (photo)
+UPDATE media_speakers SET photo = REPLACE(REPLACE(photo, '/new/public/', '/'), '/new/', '/') WHERE photo LIKE '%/new/%';
+
+-- Testimonials (author_photo)
+UPDATE testimonials SET author_photo = REPLACE(REPLACE(author_photo, '/new/public/', '/'), '/new/', '/') WHERE author_photo LIKE '%/new/%';
