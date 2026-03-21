@@ -12,6 +12,7 @@
             <?php endif; ?>
             <input type="file" name="image_url" accept="image/jpeg,image/png,image/avif,image/svg+xml" <?= !$hasImage ? 'required' : '' ?>>
             <p class="admin-muted" style="font-size: 0.85rem; margin-top: 0.25rem;"><?= $hasImage ? 'Upload to replace.' : 'Required.' ?> JPG, JPEG, PNG, AVIF, SVG.</p>
+            <p class="admin-muted" style="font-size: 0.8rem; margin-top: 0.35rem;">For best results, use landscape images (e.g. 640×440 px or 16:9). Portrait images will be cropped to fit.</p>
         </div>
         <div class="form-group">
             <label>Label</label>

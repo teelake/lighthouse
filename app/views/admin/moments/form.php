@@ -12,6 +12,7 @@
             <?php endif; ?>
             <input type="file" name="image_small" accept="image/jpeg,image/png,image/avif,image/svg+xml" <?= !$hasSmall ? 'required' : '' ?>>
             <p class="admin-muted" style="font-size: 0.85rem; margin-top: 0.25rem;"><?= $hasSmall ? 'Upload to replace.' : 'Required.' ?> JPG, JPEG, PNG, AVIF, SVG.</p>
+            <p class="admin-muted" style="font-size: 0.8rem; margin-top: 0.35rem;">For best results, use landscape images (e.g. 600×400 px). Portrait images will be cropped to fit.</p>
         </div>
         <div class="form-group">
             <label>Wide Image</label>
@@ -20,6 +21,7 @@
             <?php endif; ?>
             <input type="file" name="image_wide" accept="image/jpeg,image/png,image/avif,image/svg+xml" <?= !$hasWide ? 'required' : '' ?>>
             <p class="admin-muted" style="font-size: 0.85rem; margin-top: 0.25rem;"><?= $hasWide ? 'Upload to replace.' : 'Required.' ?> JPG, JPEG, PNG, AVIF, SVG.</p>
+            <p class="admin-muted" style="font-size: 0.8rem; margin-top: 0.35rem;">For best results, use landscape images (e.g. 1200×400 px). Portrait images will be cropped to fit.</p>
         </div>
         <div class="form-group">
             <label>Alt (small)</label>
