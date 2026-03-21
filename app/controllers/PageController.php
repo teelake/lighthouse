@@ -68,11 +68,11 @@ class PageController extends Controller
             return;
         }
 
-        $fullName = trim($this->post('full_name', ''));
-        $email    = trim($this->post('email', ''));
-        $phone    = trim($this->post('phone', ''));
+        $fullName = mb_substr(trim($this->post('full_name', '')), 0, 255);
+        $email    = mb_substr(trim($this->post('email', '')), 0, 255);
+        $phone    = mb_substr(trim($this->post('phone', '')), 0, 50);
         $academy  = trim($this->post('academy', ''));
-        $message  = trim($this->post('message', ''));
+        $message  = mb_substr(trim($this->post('message', '')), 0, 2000);
 
         $valid = ['membership', 'leadership', 'discipleship'];
 

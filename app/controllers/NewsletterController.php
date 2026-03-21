@@ -8,8 +8,8 @@ class NewsletterController extends Controller
 {
     public function subscribe()
     {
-        $name = trim($this->post('name') ?? '');
-        $email = trim($this->post('email') ?? '');
+        $name = mb_substr(trim($this->post('name') ?? ''), 0, 255);
+        $email = mb_substr(trim($this->post('email') ?? ''), 0, 255);
         if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $this->redirect(rtrim(BASE_URL ?? '/', '/') . '/?newsletter=invalid');
             return;

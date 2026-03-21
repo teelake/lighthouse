@@ -74,7 +74,7 @@ $buildQuery = function ($overrides = []) {
                     </div>
                     <div class="form-group">
                         <label for="prayer-name">Your name (optional)</label>
-                        <input type="text" id="prayer-name" name="name" placeholder="Leave blank for anonymous">
+                        <input type="text" id="prayer-name" name="name" maxlength="255" placeholder="Leave blank for anonymous">
                     </div>
                     <div class="form-group form-check">
                         <input type="checkbox" id="prayer-anonymous" name="is_anonymous" value="1">

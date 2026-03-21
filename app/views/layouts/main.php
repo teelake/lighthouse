@@ -5,6 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="<?= htmlspecialchars($pageDescription ?? 'Lighthouse Global Church - A Christ-centered, Spirit-empowered ministry equipping believers for life, leadership, and global impact.') ?>">
     <title><?= htmlspecialchars($pageTitle ?? 'Lighthouse Global Church') ?></title>
+    <?php $faviconUrl = function_exists('site_logo_url') ? site_logo_url() : null; if ($faviconUrl): ?>
+    <link rel="icon" type="image/png" href="<?= htmlspecialchars($faviconUrl) ?>">
+    <?php else: ?>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23ffe100' d='M16 4L4 12v12h24V12L16 4z'/%3E%3Cpath fill='none' stroke='%23ffe100' stroke-width='1.5' d='M16 12v12M4 12h24'/%3E%3C/svg%3E">
+    <?php endif; ?>
+    <link rel="canonical" href="<?= htmlspecialchars($pageCanonical ?? (function_exists('current_canonical_url') ? current_canonical_url() : rtrim(BASE_URL, '/') . '/')) ?>">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<?= htmlspecialchars($pageTitle ?? 'Lighthouse Global Church') ?>">
+    <meta property="og:description" content="<?= htmlspecialchars($pageDescription ?? 'Lighthouse Global Church - A Christ-centered, Spirit-empowered ministry equipping believers for life, leadership, and global impact.') ?>">
+    <meta property="og:url" content="<?= htmlspecialchars($pageCanonical ?? (function_exists('current_canonical_url') ? current_canonical_url() : rtrim(BASE_URL, '/') . '/')) ?>">
+    <meta property="og:site_name" content="Lighthouse Global Church">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?= htmlspecialchars($pageTitle ?? 'Lighthouse Global Church') ?>">
+    <meta name="twitter:description" content="<?= htmlspecialchars($pageDescription ?? 'Lighthouse Global Church - A Christ-centered, Spirit-empowered ministry equipping believers for life, leadership, and global impact.') ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">

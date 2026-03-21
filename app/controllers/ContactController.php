@@ -14,10 +14,10 @@ class ContactController extends Controller
             $this->redirect(rtrim(BASE_URL ?? '/', '/') . '/contact?msg=error');
             return;
         }
-        $name = trim($this->post('name') ?? '');
-        $email = trim($this->post('email') ?? '');
-        $subject = trim($this->post('subject') ?? '');
-        $message = trim($this->post('message') ?? '');
+        $name = mb_substr(trim($this->post('name') ?? ''), 0, 255);
+        $email = mb_substr(trim($this->post('email') ?? ''), 0, 255);
+        $subject = mb_substr(trim($this->post('subject') ?? ''), 0, 255);
+        $message = mb_substr(trim($this->post('message') ?? ''), 0, 2000);
         if (!$name || !$email || !filter_var($email, FILTER_VALIDATE_EMAIL) || !$message) {
             $this->redirect(rtrim(BASE_URL ?? '/', '/') . '/contact?msg=invalid');
             return;

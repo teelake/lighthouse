@@ -2,6 +2,21 @@
 /**
  * Global helper functions
  */
+if (!function_exists('current_canonical_url')) {
+    /**
+     * Full canonical URL for the current request (no query string).
+     * Use for canonical link, og:url. Controllers can override via $pageCanonical.
+     */
+    function current_canonical_url(): string
+    {
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+        $host = $_SERVER['HTTP_HOST'] ?? '';
+        $uri = $_SERVER['REQUEST_URI'] ?? '/';
+        $path = (strpos($uri, '?') !== false) ? substr($uri, 0, strpos($uri, '?')) : $uri;
+        return $protocol . '://' . $host . $path;
+    }
+}
+
 if (!function_exists('admin_url')) {
     function admin_url(string $path = ''): string
     {

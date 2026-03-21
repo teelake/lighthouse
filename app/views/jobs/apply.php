@@ -137,7 +137,7 @@ $jobTypeLabel = htmlspecialchars(job_type_label($job['type'] ?? ''));
                             <legend class="job-apply-legend">Additional information</legend>
                             <div class="job-apply-field">
                                 <label for="apply-message">Cover letter or message <span class="job-apply-optional">(optional)</span></label>
-                                <textarea id="apply-message" name="message" rows="5" placeholder="Tell us about yourself, your experience, and why you're interested in this role…" minlength="0"><?= htmlspecialchars($_POST['message'] ?? '') ?></textarea>
+                                <textarea id="apply-message" name="message" rows="5" maxlength="5000" placeholder="Tell us about yourself, your experience, and why you're interested in this role…"><?= htmlspecialchars($_POST['message'] ?? '') ?></textarea>
                             </div>
                         </fieldset>
 

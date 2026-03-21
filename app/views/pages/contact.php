@@ -53,7 +53,7 @@ $mapSrc = !empty($mapEmbedUrl) ? $mapEmbedUrl : 'https://www.google.com/maps/emb
                     </div>
                     <div class="contact-form-field">
                         <label for="contact-message">Message <span aria-hidden="true">*</span></label>
-                        <textarea id="contact-message" name="message" required rows="5" placeholder="How can we help?"></textarea>
+                        <textarea id="contact-message" name="message" required rows="5" maxlength="2000" placeholder="How can we help?"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary contact-form-submit">
                         <span>Send Message</span>

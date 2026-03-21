@@ -44,13 +44,13 @@ class JobController extends Controller
             return;
         }
 
-        $firstName = trim($this->post('first_name', ''));
-        $lastName = trim($this->post('last_name', ''));
-        $email = trim($this->post('email', ''));
-        $phone = trim($this->post('phone', ''));
+        $firstName = mb_substr(trim($this->post('first_name', '')), 0, 255);
+        $lastName = mb_substr(trim($this->post('last_name', '')), 0, 255);
+        $email = mb_substr(trim($this->post('email', '')), 0, 255);
+        $phone = mb_substr(trim($this->post('phone', '')), 0, 50);
         $ageRange = trim($this->post('age_range', ''));
         $engagementType = trim($this->post('engagement_type', ''));
-        $message = trim($this->post('message', ''));
+        $message = mb_substr(trim($this->post('message', '')), 0, 5000);
 
         if (!$firstName || !$lastName || !$email || !$phone || !$ageRange || !$engagementType) {
             $this->redirect('/jobs/' . $slug . '/apply?error=required');

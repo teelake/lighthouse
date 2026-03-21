@@ -7,6 +7,10 @@ if (!$router instanceof App\Core\Router) throw new Exception('Router not availab
 
 // === PUBLIC ROUTES ===
 
+// SEO - sitemap and robots
+$router->add('GET', 'sitemap.xml', ['controller' => 'Sitemap', 'action' => 'index']);
+$router->add('GET', 'robots.txt', ['controller' => 'Sitemap', 'action' => 'robots']);
+
 // Home
 $router->add('GET', '', ['controller' => 'Home', 'action' => 'index']);
 $router->add('GET', 'home', ['controller' => 'Home', 'action' => 'index']);

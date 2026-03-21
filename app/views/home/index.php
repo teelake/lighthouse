@@ -363,9 +363,9 @@ $mediaTypeLabel = function ($t) {
             <div class="newsletter-note"><?= rich_content($newsletterExtra['note'] ?? 'Receive event updates, teachings, community highlights, and important church announcements.') ?></div>
             <form class="newsletter-form newsletter-inline js-newsletter-form" action="<?= $baseUrl ?>/newsletter/subscribe" method="post">
                 <label for="newsletter-name" class="sr-only">Full name</label>
-                <input id="newsletter-name" type="text" name="name" placeholder="Full name" autocomplete="name" required aria-label="Full name">
+                <input id="newsletter-name" type="text" name="name" maxlength="255" placeholder="Full name" autocomplete="name" required aria-label="Full name">
                 <label for="newsletter-email" class="sr-only">Email address</label>
-                <input id="newsletter-email" type="email" name="email" placeholder="Email address" required aria-label="Email address">
+                <input id="newsletter-email" type="email" name="email" maxlength="255" placeholder="Email address" required aria-label="Email address">
                 <button type="submit" class="newsletter-submit">Join Newsletter</button>
             </form>
             <p class="newsletter-trust">No spam. Unsubscribe anytime.</p>

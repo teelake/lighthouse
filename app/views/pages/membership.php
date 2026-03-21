@@ -47,15 +47,15 @@ $membershipIntro = $sections['membership_intro']['content'] ?? null;
                 <div class="academy-form-grid">
                     <div class="form-group">
                         <label for="acad-name">Full Name *</label>
-                        <input type="text" id="acad-name" name="full_name" required placeholder="Your full name" value="<?= htmlspecialchars($_GET['full_name'] ?? '') ?>">
+                        <input type="text" id="acad-name" name="full_name" required maxlength="255" placeholder="Your full name" value="<?= htmlspecialchars($_GET['full_name'] ?? '') ?>">
                     </div>
                     <div class="form-group">
                         <label for="acad-email">Email Address *</label>
-                        <input type="email" id="acad-email" name="email" required placeholder="your@email.com" value="<?= htmlspecialchars($_GET['email'] ?? '') ?>">
+                        <input type="email" id="acad-email" name="email" required maxlength="255" placeholder="your@email.com" value="<?= htmlspecialchars($_GET['email'] ?? '') ?>">
                     </div>
                     <div class="form-group">
                         <label for="acad-phone">Phone Number <span class="form-optional">(optional)</span></label>
-                        <input type="tel" id="acad-phone" name="phone" placeholder="+1 (000) 000-0000" value="<?= htmlspecialchars($_GET['phone'] ?? '') ?>">
+                        <input type="tel" id="acad-phone" name="phone" maxlength="50" placeholder="+1 (000) 000-0000" value="<?= htmlspecialchars($_GET['phone'] ?? '') ?>">
                     </div>
                     <div class="form-group">
                         <label for="acad-academy">Which Academy? *</label>
@@ -68,7 +68,7 @@ $membershipIntro = $sections['membership_intro']['content'] ?? null;
                     </div>
                     <div class="form-group academy-form-full">
                         <label for="acad-message">Anything else you'd like us to know? <span class="form-optional">(optional)</span></label>
-                        <textarea id="acad-message" name="message" rows="3" placeholder="Tell us a little about yourself…"><?= htmlspecialchars($_GET['message'] ?? '') ?></textarea>
+                        <textarea id="acad-message" name="message" rows="3" maxlength="2000" placeholder="Tell us a little about yourself…"><?= htmlspecialchars($_GET['message'] ?? '') ?></textarea>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-accent academy-signup-btn">Sign Me Up →</button>
