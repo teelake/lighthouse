@@ -185,18 +185,36 @@ document.addEventListener('DOMContentLoaded', function() {
     // Scroll-in animations: add animate-in when section enters viewport
     const animatedSections = document.querySelectorAll('[data-animate]');
     animatedSections.forEach(setSectionStagger);
+
+    function markAnimateIn(el) {
+        if (!el || el.classList.contains('animate-in')) return;
+        el.classList.add('animate-in');
+        el.querySelectorAll('.section-title').forEach(function(t) { t.classList.add('reveal-ready'); });
+    }
+
     const animObserver = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
-                entry.target.querySelectorAll('.section-title').forEach(function(el) {
-                    el.classList.add('reveal-ready');
-                });
+                markAnimateIn(entry.target);
                 animObserver.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-    animatedSections.forEach(function(el) { animObserver.observe(el); });
+    }, { threshold: 0.05, rootMargin: '80px 0px -50px 0px' });
+
+    // Immediately show sections already in view on load (fixes hero/content hidden until scroll)
+    function checkInitialView() {
+        var vh = window.innerHeight;
+        animatedSections.forEach(function(el) {
+            var r = el.getBoundingClientRect();
+            if (r.bottom > 0 && r.top < vh - 50) {
+                markAnimateIn(el);
+                animObserver.unobserve(el);
+            } else {
+                animObserver.observe(el);
+            }
+        });
+    }
+    checkInitialView();
 
     // Moments carousel
     const carousel = document.querySelector('.moments-carousel');
